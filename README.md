@@ -12,6 +12,17 @@ A 股 / 港股 / B 股红利股的本地研究工具：红利股票池 → 个�
 
 到 [Releases](https://github.com/Faithink/shouxilao/releases) 下载（Mac / Windows / 安卓），或者按下面「使用」从源码运行。
 
+## 联系与反馈
+
+| | |
+|---|---|
+| 开发者微信 | `wind126` |
+| 微信公众号 | 快乐收息佬（`happyshouxilao`） |
+| 小红书 | 收息佬（`happyshouxilao`） |
+| 邮件 | shouxilao@foxmail.com |
+
+使用中遇到问题、想要新功能，也可以直接提 [Issue](https://github.com/Faithink/shouxilao/issues)。
+
 ## 本地运行
 
 需要 Python 3.9+：

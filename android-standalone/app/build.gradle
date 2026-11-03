@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+    id 'com.chaquo.python'
+}
+
+def appVersion = file('../../VERSION').text.trim()
+def vparts = appVersion.split('\\.')
+def appVersionCode = vparts[0].toInteger() * 10000 + vparts[1].toInteger() * 100 + vparts[2].toInteger()
+
+android {
+    namespace 'com.shouxi.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.shouxi.app"
+        minSdk 24
+        targetSdk 34
+        versionCode appVersionCode
+        versionName appVersion
+
+        ndk {
+            // 真机用 arm64;云端模拟器测试用 -Pabis=x86_64
+            abiFilters.addAll(((project.findProperty('abis') ?: 'arm64-v8a') as String).split(','))
+        }
+        python {
+            version "3.12"
+            buildPython "python3"
+            pip {
+                install "certifi"
+                install "pypinyin"
+                install "segno"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

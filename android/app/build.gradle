@@ -1,0 +1,28 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.shouxi.shell'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.shouxi.shell"
+        minSdk 24
+        targetSdk 34
+        versionCode 152
+        versionName "1.5.2"
+    }
+
+    buildTypes {
+        // 个人侧载用:release 也用 debug 签名,装得上;不上架应用商店
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

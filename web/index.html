@@ -1,0 +1,1654 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<script>try{var __t=localStorage.getItem("theme");if(__t==="dark"||__t==="light")document.documentElement.dataset.theme=__t}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="收息佬">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="/manifest.webmanifest">
+<title>收息佬 · 股息攒得好，退休晚不了</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#f9f8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1319" media="(prefers-color-scheme: dark)">
+<style>
+:root{
+  color-scheme:light;--tl-g:#22c55e;--tl-y:#fbbf24;--tl-r:#ef4444;
+  --bg:#f9f8f4;--card:#ffffff;--ink:#1f2430;--mute:#7e8493;--line:#ebe8e1;--accent:#9a7229;--accent-ink:#fff;--seg:#ebe8df;--bad:#cf5a4f;--serif:Georgia,"Noto Serif SC","Source Han Serif SC","Songti SC",STSong,serif;
+  --heavy:#0b6b4f;--heavy-bg:#d7f3e7;--buy:#168a3c;--buy-bg:#e1f5e7;--hold:#8a6a00;--hold-bg:#fbf0cc;
+  --high:#b25000;--high-bg:#fde5cd;--profit:#b42318;--profit-bg:#fde0dc;--none-bg:#f4f2ec;
+  --c1:#cfae6f;--c2:#6f8fc4;--c3:#8b7fb8;--zb0:#17c28a;--zb1:#6fd46b;--zb2:#f7cf45;--zb3:#fb923c;--zb4:#f0524f;--st-def:#4f86e3;--st-fin:#9a80e6;--st-gro:#3fae80;--st-cyc:#f08c4a;--shadow:0 1px 2px rgba(31,36,48,.05),0 2px 8px rgba(31,36,48,.04);--shadow-lg:0 12px 32px rgba(16,24,40,.16);
+  --hdr:rgba(249,248,244,.88);
+}
+:root[data-theme="dark"]{
+  --bg:#0c1018;--card:#131a24;--ink:#e3e8f2;--mute:#8a94a8;--line:#242c3b;--accent:#c9a96e;--accent-ink:#1b1405;--seg:#1a2233;--serif:Georgia,"Noto Serif SC","Source Han Serif SC","Songti SC",STSong,serif;
+  --heavy:#56d4a8;--heavy-bg:#12382d;--buy:#5fd07a;--buy-bg:#16341f;--hold:#e3c354;--hold-bg:#392f0f;
+  --high:#f0a35e;--high-bg:#3d2610;--profit:#ff8a80;--profit-bg:#40201d;--none-bg:#1a2233;
+  --c1:#c9a96e;--c2:#7f9fd6;--c3:#a89cd6;--bad:#ef7f76;--shadow:0 1px 2px rgba(0,0,0,.4);--shadow-lg:0 12px 32px rgba(0,0,0,.5);
+  --hdr:rgba(19,26,36,.85);
+color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1018;--card:#131a24;--ink:#e3e8f2;--mute:#8a94a8;--line:#242c3b;--accent:#c9a96e;--accent-ink:#1b1405;--seg:#1a2233;--serif:Georgia,"Noto Serif SC","Source Han Serif SC","Songti SC",STSong,serif;
+  --heavy:#56d4a8;--heavy-bg:#12382d;--buy:#5fd07a;--buy-bg:#16341f;--hold:#e3c354;--hold-bg:#392f0f;
+  --high:#f0a35e;--high-bg:#3d2610;--profit:#ff8a80;--profit-bg:#40201d;--none-bg:#1a2233;
+  --c1:#c9a96e;--c2:#7f9fd6;--c3:#a89cd6;--bad:#ef7f76;--shadow:0 1px 2px rgba(0,0,0,.4);--shadow-lg:0 12px 32px rgba(0,0,0,.5);
+  --hdr:rgba(19,26,36,.85);
+color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+td,.kpi .v,.big,.vt,.node b,.lt{font-variant-numeric:tabular-nums}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+
+/* ---- 页头 ---- */
+header{display:flex;align-items:center;gap:18px;padding:10px 28px;background:var(--hdr);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none!important;margin-right:6px}
+.brand img{width:40px;height:40px;border-radius:11px;object-fit:cover;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .2s}
+.brand:hover img{transform:rotate(-6deg) scale(1.06)}
+.brand b{display:block;font-family:var(--serif);color:var(--accent);font-size:21px;letter-spacing:2px;line-height:1.1;font-weight:700}
+.brand small{display:block;font-size:11px;color:var(--mute);letter-spacing:.5px}
+header nav{display:flex;gap:4px;background:none;padding:0}
+header nav button{border:0;background:none;padding:7px 18px;border-radius:99px;font-size:13.5px;font-weight:500;color:var(--mute);cursor:pointer;transition:all .15s}
+header nav button:hover{color:var(--ink)}
+header nav button.on{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent);box-shadow:none;font-weight:600}
+.spacer{flex:1}
+.mute{color:var(--mute)}
+main{max-width:1280px;margin:0 auto;padding:22px 28px 40px}
+.foot{max-width:1280px;margin:0 auto;padding:6px 28px 36px;font-size:12px;color:var(--mute);text-align:center}
+
+/* ---- 卡片、按钮、表单 ---- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card h2{font-size:15px;margin:0 0 12px;letter-spacing:.2px}
+.card h3{font-size:13px;margin:14px 0 8px;color:var(--mute);font-weight:600}
+button.btn,.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 13px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;box-shadow:var(--shadow)}
+button.btn:hover{border-color:var(--accent);color:var(--accent)}
+button.btn:disabled{opacity:.55;cursor:default}
+button.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+button.btn.primary:hover{filter:brightness(1.07);color:var(--accent-ink)}
+button.btn.sm{padding:2px 9px;font-size:12px}
+input,select{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 10px;border-radius:9px;font-size:13px;font-family:inherit;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+input[type=number]{width:110px}
+.filters{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.crumb{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin:0 0 14px}
+.crumb a{color:var(--mute);font-weight:500}.crumb a:hover{color:var(--accent);text-decoration:none}.crumb b{color:var(--ink)}
+.ph{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 14px}
+.ph h2{margin:0;font-size:22px;letter-spacing:.3px}
+
+/* ---- 表格 ---- */
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child,.l{text-align:left}
+th{font-size:12px;color:var(--mute);font-weight:600;cursor:pointer;user-select:none;letter-spacing:.3px;transition:color .15s}
+th:hover{color:var(--ink)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.row{cursor:pointer;transition:background .12s}
+tbody tr.row:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+tbody tr.row td:first-child b{font-size:14.5px}
+.tablewrap{overflow-x:auto}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600}
+.s-重仓区{background:var(--heavy-bg);color:var(--heavy)}
+.s-买入区{background:var(--buy-bg);color:var(--buy)}
+.s-持有区{background:var(--hold-bg);color:var(--hold)}
+.s-偏高{background:var(--high-bg);color:var(--high)}
+.s-止盈区{background:var(--profit-bg);color:var(--profit)}
+.badge.s-重仓区{background:var(--zb0);color:#04382a}.badge.s-买入区{background:var(--zb1);color:#173d0d}.badge.s-持有区{background:var(--zb2);color:#4a3800}.badge.s-偏高{background:var(--zb3);color:#4a2200}.badge.s-止盈区{background:var(--zb4);color:#fff}
+.badge.held{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.s-无足够数据{background:var(--none-bg);color:var(--mute)}
+
+/* ---- 布局 ---- */
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 15px;border-radius:99px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;box-shadow:var(--shadow)}
+.chip:hover{transform:translateY(-1px)}
+.chip.on{box-shadow:0 0 0 2px var(--accent)}
+.toprow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.toprow #fq{flex:1;min-width:180px;max-width:360px}
+.seg .mkn{margin-left:5px;font-size:11.5px;opacity:.55;font-weight:400}
+.indstrip{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin:-4px 0 14px;padding:2px 28px 6px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)}
+.indstrip::-webkit-scrollbar{display:none}.indstrip .chip{flex:none;padding:3px 12px;font-size:12px;color:var(--mute);box-shadow:none}.indstrip .chip.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent)}
+@media(max-width:620px){.toprow{gap:8px}.toprow #fq{max-width:none;min-width:0;width:100%;flex:1 1 100%}.indstrip .chip{padding:6px 13px;font-size:13px}}.chips.sm{margin-top:-4px}.chips.sm .chip{padding:3px 12px;font-size:12px;color:var(--mute);box-shadow:none}.chips.sm .chip.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);box-shadow:none}
+.panel{position:fixed;top:60px;right:20px;z-index:30;width:min(600px,calc(100vw - 32px));max-height:80vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow-lg)}
+.panel[hidden]{display:none}
+
+/* ---- 体检 ---- */
+.lights{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.lt{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;border:1px solid var(--line);font-size:13px;background:var(--card)}
+.lt b{font-weight:700}.lt span{color:var(--mute);font-size:12px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none;vertical-align:middle}
+.dot.g{background:var(--tl-g);box-shadow:0 0 0 2px color-mix(in srgb,var(--tl-g) 28%,transparent)}.dot.y{background:var(--tl-y);box-shadow:0 0 0 2px color-mix(in srgb,var(--tl-y) 32%,transparent)}.dot.r{background:var(--tl-r);box-shadow:0 0 0 2px color-mix(in srgb,var(--tl-r) 28%,transparent)}.dot.na{background:transparent;border:1.5px solid var(--mute)}
+.dots .dot{width:13px;height:13px}
+.dots{display:flex;gap:4px;justify-content:center}
+.hgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:12px}
+.hc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;border-top:4px solid var(--c,var(--line));background:var(--card)}
+.hc.g{--c:var(--tl-g)}.hc.y{--c:var(--tl-y)}.hc.r{--c:var(--tl-r)}.hc.na{--c:var(--mute)}
+.hc h4{margin:0;font-size:13px;display:flex;align-items:center;gap:6px}
+.hc h4 em{margin-left:auto;font-style:normal;font-size:12px;color:var(--mute);font-weight:400}
+.hc .big{font-size:22px;font-weight:800;margin:2px 0 4px}
+.hc .why{font-size:12px;color:var(--mute);margin-top:6px;line-height:1.5}
+.sqs{display:flex;gap:3px;margin-top:4px;align-items:center;font-size:11px;color:var(--mute);white-space:nowrap}.sqs span{margin-left:4px}
+.sq{width:16px;height:10px;border-radius:2px;background:var(--none-bg)}.sq.g{background:var(--c1)}.sq.r{background:var(--bad)}
+.gauge{margin:8px 0 2px}.gauge .gl{font-size:12px;margin-bottom:6px}
+.gbar{position:relative;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--zb0) 0 40%,var(--zb2) 40% 75%,var(--zb4) 75% 100%)}
+.gbar i{position:absolute;top:-4px;width:3px;height:18px;background:var(--ink);border-radius:2px;transform:translateX(-50%);box-shadow:0 0 0 1.5px var(--card)}
+.gs{display:flex;justify-content:space-between;font-size:10px;color:var(--mute);margin-top:2px}
+
+/* ---- 结论横幅、价格位置 ---- */
+.verdict{display:flex;gap:18px;align-items:center;padding:14px 20px;border-radius:12px;margin:12px 0;flex-wrap:wrap}
+.verdict .vt{font-size:25px;font-weight:800;white-space:nowrap;letter-spacing:.3px}
+.verdict .vd{font-size:13px;flex:1;min-width:220px;color:var(--ink);line-height:1.65}
+.pbar{position:relative;height:10px;width:150px;border-radius:5px;margin:6px 0 2px;background:linear-gradient(90deg,var(--zb0) 0 20%,var(--zb1) 20% 40%,var(--zb2) 40% 60%,var(--zb3) 60% 80%,var(--zb4) 80% 100%)}
+.pbar i{position:absolute;top:-4px;width:3px;height:18px;background:var(--ink);border-radius:2px;transform:translateX(-50%);box-shadow:0 0 0 1.5px var(--card)}
+.pend{display:flex;justify-content:space-between;font-size:10px;color:var(--mute);width:150px}
+.warn{color:var(--high);font-size:12px}
+details.card>summary,details>summary{cursor:pointer;font-weight:600;font-size:14px}
+@media(max-width:900px){.g4,.g3{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}main{padding:16px 14px 30px}header{padding:10px 14px;gap:10px}.foot{padding:6px 14px 28px}.nodes{grid-template-columns:1fr 1fr!important}}
+@media(max-width:560px){.brand small,#updated{display:none}.brand b{font-size:15px}header .btn{padding:5px 9px;font-size:12px}.ph h2{font-size:19px}.verdict .vt{font-size:21px}.hc[style*="span 2"]{grid-column:auto!important}}
+.tabbar,.msort,.mind,.mprice{display:none}
+@media(max-width:620px){
+ header nav{display:none}
+ header{padding:8px 14px}
+ .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--hdr);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-top:1px solid var(--line);padding:4px 6px calc(4px + env(safe-area-inset-bottom))}
+ .tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:none;color:var(--mute);font-size:11px;font-weight:500;padding:6px 0;min-height:50px;font-family:inherit;cursor:pointer}
+ .tabbar button svg{width:23px;height:23px}
+ .tabbar button.on{color:var(--accent)}
+ main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+ .foot{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+ input,select{font-size:16px}
+ .card{padding:14px 12px}
+ .chip{padding:8px 14px}.chips.sm .chip{padding:6px 12px;font-size:13px}
+ button.btn{min-height:40px}button.btn.sm{min-height:32px}
+ .filters{gap:8px}.filters .sub{display:none}
+ #fq{width:100%!important}
+ .msort,.mind{display:block;width:calc(50% - 4px)}
+ .chips.sm{display:none}
+ .mprice{display:inline}
+ table.pool,table.pool tbody{display:block;width:100%}
+ table.pool thead{display:none}
+ table.pool tr.row{display:grid;grid-template-columns:42px minmax(0,1fr) auto;grid-template-areas:"fav name yield" "fav verdict verdict" "fav dots buy";align-items:center;column-gap:6px;row-gap:8px;padding:12px 2px;border-bottom:1px solid var(--line)}
+ table.pool tr.row td{display:block;border:0;padding:0;text-align:left;white-space:normal}
+ table.pool td.favtd{grid-area:fav;align-self:start;width:auto;text-align:center!important}
+ table.pool td:nth-child(2){grid-area:name;max-width:none}
+ table.pool tr.row td:nth-child(3){display:none}
+ table.pool td:nth-child(4){grid-area:yield;text-align:right;font-size:21px;line-height:1.1}
+ table.pool td:nth-child(5){grid-area:verdict;min-width:0}
+ table.pool td:nth-child(6){grid-area:dots}
+ table.pool td:nth-child(7){grid-area:buy;text-align:right}
+ table.pool .dots{justify-content:flex-start;gap:6px}table.pool .dot{width:14px;height:14px}
+ table.pool .vtd .pbar,table.pool .vtd .pend{margin-left:0;width:100%;max-width:240px}
+ table.pool .badge{font-size:12.5px!important;padding:2px 10px!important}
+ .ph{margin-bottom:10px}
+}
+@media(min-width:621px){
+ table.pool th:nth-child(n+3),table.pool td:nth-child(n+3){text-align:center}
+ table.pool .vtd .pbar,table.pool .vtd .pend{margin-left:auto;margin-right:auto}
+ table.pool .vtd .pbar{margin-top:6px}
+}
+button.fav{-webkit-tap-highlight-color:transparent}
+@media(max-width:620px){button.fav{font-size:27px;padding:6px 8px;min-width:42px;min-height:42px}input:not([type=checkbox]),select{min-height:42px}.seg button{padding:9px 20px}}
+html{-webkit-text-size-adjust:100%}
+button,.chip,.tabbar button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media (display-mode:standalone){header{padding-top:calc(10px + env(safe-area-inset-top))}}
+
+.badge{white-space:nowrap}
+button.fav{border:0;background:none;cursor:pointer;font-size:20px;line-height:1;color:var(--mute);padding:2px 4px;transition:transform .12s,color .12s}
+button.fav:hover{color:#f0a800;transform:scale(1.18)}button.fav.on{color:#f0a800}
+.favtd{width:36px;padding-right:0!important;text-align:center!important}
+.pick{display:inline-block;margin-left:6px;padding:0 6px;border:1px solid currentColor;color:var(--hold);border-radius:6px;font-size:10.5px;font-weight:600;vertical-align:1px}
+.vtd .pbar,.vtd .pend{margin-left:auto}
+.seg{display:inline-flex;gap:2px;background:var(--seg);padding:3px;border-radius:11px}
+.seg button{border:0;background:none;padding:6px 18px;border-radius:8px;cursor:pointer;color:var(--mute);font-size:13.5px;font-family:inherit}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow);font-weight:600}
+.stag{display:inline-block;padding:1px 9px;border-radius:99px;font-size:12px;font-weight:600;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);vertical-align:1px}
+.lcls{display:flex;flex-direction:column;gap:2px;line-height:1.3}.lcls em{font-style:normal;font-size:11px;color:var(--mute)}
+.sdot{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none}
+.stackbar{display:flex;height:34px;border-radius:10px;overflow:hidden;margin:10px 0 4px;background:var(--none-bg)}
+.stackbar div{display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.alist{display:flex;flex-direction:column}
+.arow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.arow:last-child{border-bottom:0}
+.arow.slim{grid-template-columns:minmax(0,1.2fr) minmax(0,2.4fr) 48px;padding:6px 0}
+.an{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.an .sub{flex-basis:100%;padding-left:18px}
+.atrack{position:relative;height:10px;border-radius:5px;background:var(--none-bg)}
+.atrack i{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
+.atrack u{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);text-decoration:none}
+.av{display:flex;flex-direction:column;align-items:flex-end;line-height:1.35}.av b{font-size:16px}
+@media(max-width:620px){.arow{grid-template-columns:1fr 1fr;grid-template-areas:"n v" "b b"}.arow .an{grid-area:n}.arow .ab{grid-area:b}.arow .av{grid-area:v}.arow.slim{grid-template-columns:90px 1fr 40px;grid-template-areas:none}.arow.slim>*{grid-area:auto!important}}
+.lsteps{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.lstep{flex:1;min-width:150px;background:var(--none-bg);border-radius:12px;padding:12px 14px;color:var(--ink);text-decoration:none!important;display:block}
+a.lstep:hover{outline:2px solid var(--accent)}
+.lstep b{font-size:15px;margin-left:8px}.lstep p{margin:6px 0 0;font-size:12.5px;color:var(--mute);line-height:1.5}
+.circ{display:inline-flex;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.larrow{align-self:center;color:var(--mute);font-size:18px}
+/* 知识页：核心 → 目录 → 小节 */
+.sec{padding:20px 22px}.sec-hd{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px}
+.snum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin-top:1px}
+.snum.n2{font-size:12px;letter-spacing:-.5px}.tocg a.tl b.n2{font-size:10px;letter-spacing:-.5px}
+@media(max-width:620px){#simchart{overflow-x:auto}#simchart svg{min-width:560px}}
+.l2.sim{display:flex;flex-direction:column;align-items:stretch;gap:20px}.sim .lout{order:-1;display:flex;align-items:center;gap:8px 32px;flex-wrap:wrap;padding:16px 22px}
+.sim .lout .bigy{margin:0;font-size:36px;white-space:nowrap}.sim .lout .lres{display:flex;flex-direction:column;gap:2px;min-width:220px;flex:1}
+.sim .ctrl{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 32px}
+#sec-8 .legend{margin-top:22px}
+@media(max-width:620px){.sim .ctrl{grid-template-columns:1fr 1fr;gap:16px 18px}.sim .lout .bigy{font-size:30px}}
+.sec-hd h2{font-size:19px;margin:0;line-height:1.3;letter-spacing:.2px}.lead{margin:4px 0 0;font-size:14.5px;font-weight:500;line-height:1.55}
+.grp{display:flex;align-items:center;gap:10px;margin:30px 2px 12px;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:1.5px}.grp::after{content:"";flex:1;height:1px;background:var(--line)}
+.tocg{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.tocg .tgl{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:1px;margin-bottom:6px}
+.tocg a.tl{display:flex;align-items:center;gap:8px;padding:5px 0;color:var(--ink);font-size:14px;text-decoration:none!important}.tocg a.tl:hover{color:var(--accent)}
+.tocg a.tl b{flex:none;width:20px;height:20px;border-radius:50%;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);font-size:11.5px;display:flex;align-items:center;justify-content:center}
+@media(max-width:620px){.tocg{grid-template-columns:1fr 1fr}.sec{padding:16px 14px}.sec-hd h2{font-size:17px}}
+.hero{border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 9%,var(--card)),var(--card))}
+.hero .kick{font-size:12px;letter-spacing:1px;color:var(--accent);font-weight:600}
+.hero .big{font-size:22px;line-height:1.45;font-weight:700;margin:6px 0 14px}.hero .big em{font-style:normal;color:var(--accent);white-space:nowrap}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pc{background:var(--none-bg);border-radius:12px;padding:12px 14px}.pc b{font-size:15px}.pc p{margin:6px 0 0;font-size:13px;line-height:1.55;color:var(--mute)}.pc .go{color:var(--accent);font-size:12.5px;display:block;margin-top:6px}
+.hero .demo{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+@media(max-width:620px){.pair{grid-template-columns:1fr}.hero .big{font-size:19px}}
+.formulas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.fm{border:1px dashed var(--line);border-radius:12px;padding:12px 14px;font-size:15px}.fm b{color:var(--accent)}.fm .sub{display:block;margin-top:4px}
+.l2{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center}
+.ctrl{display:flex;flex-direction:column;gap:14px}
+.rg{display:flex;flex-direction:column;gap:6px;font-size:13px}.rg b{font-size:15px;margin:0 2px}
+.rg input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:4px;border:0;padding:0;box-shadow:none;min-height:0!important;outline:none;background:var(--none-bg);cursor:pointer}
+.rg input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.rg input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--accent);border:3px solid var(--card);box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.rgw{position:relative;display:block}.rgw.hasmk{padding-bottom:26px}.rgw .mk{position:absolute;top:-3px;width:2px;height:14px;background:var(--ink);opacity:.55;transform:translateX(-1px);pointer-events:none}.rgw .mk s{position:absolute;top:24px;left:50%;transform:translateX(-50%);text-decoration:none;font-size:11px;font-style:normal;color:var(--mute);white-space:nowrap}
+.base{display:inline-block;line-height:1.7;background:var(--none-bg);border-radius:10px;padding:6px 12px;font-size:12.5px;margin:0 0 12px;color:var(--mute)}.base b{color:var(--ink)}
+.rg input[type=range]:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 30%,transparent)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+.lout{background:var(--none-bg);border-radius:14px;padding:16px 18px}
+.bigy{font-size:40px;font-weight:800;line-height:1.1;margin:2px 0 10px;font-variant-numeric:tabular-nums}
+.lnums{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.lnums div{display:flex;flex-direction:column}.lnums b{font-size:18px}
+.lmsg{margin-top:12px;padding:10px 14px;background:var(--hold-bg);color:var(--ink);border-radius:10px;font-size:13px;line-height:1.65}
+.lad{display:flex;flex-direction:column;gap:2px;margin-top:6px}
+.lrow{display:grid;grid-template-columns:96px 1fr 86px;gap:10px;align-items:center;padding:5px 0}
+#sec-4 .lrow{grid-template-columns:176px 1fr 76px;padding:9px 0}@media(max-width:620px){#sec-4 .lrow{grid-template-columns:104px 1fr 62px}}
+.lad4 .lc{display:grid;grid-template-columns:76px 66px 1fr 72px;gap:10px;align-items:center;padding:8px 0}
+.lad4 .ltrack{height:34px}.lad4 .ltrack i{height:34px;line-height:34px}
+.lc-n{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:15px;flex:none}
+.lc-c{display:flex}.lc-c span{font-size:11.5px;padding:1px 8px;border-radius:99px;background:var(--none-bg);color:var(--mute)}
+.lc-v{font-size:18px;text-align:right}.lc-f{font-size:12px;color:var(--mute);text-align:right;padding-top:4px}
+@media(max-width:620px){.lad4 .lc{grid-template-columns:62px 1fr 58px}.lc-c{display:none}.lad4 .ltrack{height:28px}.lad4 .ltrack i{height:28px;line-height:28px}.lc-v{font-size:15px}}
+.lname{display:flex;align-items:center;gap:7px;font-weight:500}
+.ltrack{display:flex;height:16px;border-radius:5px;overflow:hidden;background:var(--none-bg)}
+.lbase{background:color-mix(in srgb,var(--ink) 16%,var(--card));opacity:1}.lprem{display:block}
+.lval{text-align:right;white-space:nowrap}.lval em{font-style:normal;font-size:11.5px;color:var(--mute);margin-left:4px}
+.sgrid{margin-bottom:6px}
+.scard{border:1px solid var(--line);border-top:4px solid var(--c);border-radius:12px;padding:12px 14px}
+.scap{display:flex;align-items:center;justify-content:space-between}.scap b{font-size:16px;color:var(--c)}.role{font-size:12px;color:var(--mute)}
+.sd{font-size:12.5px;color:var(--mute);line-height:1.55;margin:6px 0}
+.meters{font-size:12px;display:flex;flex-direction:column;gap:3px}.mdots{letter-spacing:2px;color:var(--c);margin-left:6px}.mdots i{font-style:normal;opacity:.2}
+.chipline{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}.chipline span{font-size:11px;padding:1px 7px;border-radius:99px;background:var(--none-bg);color:var(--mute)}
+.mixrow{display:flex;align-items:center;gap:10px;margin:6px 0}.mn{width:52px;font-size:13px;font-weight:600}.mixrow .stackbar{flex:1;margin:0}
+.stackbar.thin{height:26px}
+.mksec{margin:22px 0 10px;font-size:17px}.mksec .sub{font-weight:400;font-size:13px;margin-left:6px}
+.taxrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.taxc{background:var(--none-bg);border-radius:12px;padding:12px 14px}.taxc>b{display:block;font-size:26px;margin:2px 0 8px}
+.taxbar{display:flex;height:12px;border-radius:6px;background:var(--seg);margin-bottom:8px;overflow:hidden}.taxbar i{display:block;height:100%;background:var(--c1)}.taxbar u{display:block;height:100%;background:var(--bad);text-decoration:none}.taxc .bad{color:var(--bad)}
+.tline{display:flex;gap:0;position:relative;margin-top:8px}
+.tline::before{content:"";position:absolute;left:12%;right:12%;top:15px;height:3px;background:var(--line)}
+.tnode{flex:1;text-align:center;position:relative;padding:0 8px}
+.tdot{display:inline-flex;width:32px;height:32px;border-radius:50%;background:var(--c);color:#fff;font-weight:700;align-items:center;justify-content:center;position:relative;z-index:1}
+.tnode b{display:block;margin-top:6px}.tnode p{margin:4px 0 0;font-size:12px;color:var(--mute);line-height:1.5}
+.flow{align-items:stretch;flex-wrap:nowrap}.flow .lstep{min-width:0}.flow .larrow{flex:none}
+details>p.note{margin:6px 0 10px}details{padding:4px 0}
+@media(max-width:620px){.lsteps{flex-direction:column}.larrow{transform:rotate(90deg);align-self:center}.formulas,.l2,.taxrow{grid-template-columns:1fr}.lrow{grid-template-columns:78px 1fr 72px}.tline{flex-direction:column;gap:12px}.tline::before{display:none}.tnode{text-align:left;display:grid;grid-template-columns:40px 1fr;column-gap:8px}.tnode b{margin-top:0}.tnode p{grid-column:2}.tdot{grid-row:span 2}.bigy{font-size:34px}}
+.tlist{display:flex;flex-direction:column;margin-top:4px}
+.trow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) minmax(0,1.1fr);gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.trow:last-child{border-bottom:0}
+.tbar{display:flex;height:12px;border-radius:6px;background:var(--none-bg);overflow:hidden}
+.tbar i{display:block;height:100%}.tbar .tp{background:var(--c1)}.tbar .tpn{background:var(--tl-r)}.tbar .td{background:var(--c2)}
+.tv{display:flex;flex-direction:column;align-items:flex-end;line-height:1.35}.tv b{font-size:16px}
+@media(max-width:620px){.trow{grid-template-columns:1fr auto;grid-template-areas:"n v" "b b"}.trow .tn{grid-area:n}.trow .tbar{grid-area:b}.trow .tv{grid-area:v}}
+.trbars{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.trb{display:grid;grid-template-columns:40px 1fr 62px;gap:10px;align-items:center;font-size:13px}.trb b{text-align:right;font-variant-numeric:tabular-nums}
+.tr0{position:relative;height:14px;border-radius:7px;background:var(--bg)}.tr0::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--mute);opacity:.6}
+.tr0 i{position:absolute;top:0;bottom:0;border-radius:7px}
+.trow.slimr{grid-template-columns:90px 1fr 120px;padding:6px 0}
+.etfgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.etfc{border:1px solid var(--line);border-radius:12px;padding:12px 14px}.etfc b{font-size:15px}.etfc p{margin:6px 0 0;font-size:12.5px;color:var(--mute);line-height:1.6}
+.navdemo{display:flex;flex-direction:column;gap:8px}
+.navrow{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;font-size:13px}
+.navbar{display:flex;height:30px;border-radius:8px;overflow:hidden;background:var(--none-bg)}
+.navbar i,.navbar u{display:flex;align-items:center;justify-content:center;font-style:normal;text-decoration:none;font-size:12px;font-weight:600;white-space:nowrap;color:#fff}
+.navbar i{background:var(--c1)}.navbar u{background:var(--c2);color:#4a3300}
+table.cmp td,table.cmp th{text-align:center}table.cmp td.l,table.cmp th.l{text-align:left}
+.chkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.chk{background:var(--none-bg);border-radius:12px;padding:10px 14px}.chk b{font-size:14px}.chk p{margin:4px 0 0;font-size:12.5px;color:var(--mute);line-height:1.55}
+@media(max-width:620px){.navbar u{font-size:0}.etfgrid,.chkgrid{grid-template-columns:1fr}.trow.slimr{grid-template-columns:70px 1fr 96px}}
+.lbase,.lprem{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11.5px;white-space:nowrap;overflow:hidden;color:#fff}
+.lbase{color:var(--ink)}.lg{display:inline}.sh{display:none}
+.lrow.lhead{font-size:12px;color:var(--mute)}.ltrack0 b{font-weight:500}
+@media(max-width:620px){.lg{display:none}.sh{display:inline}}
+.mech{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap}
+.mech i{align-self:center;color:var(--mute);font-style:normal}
+.ms{flex:1;min-width:120px;background:var(--none-bg);border-radius:12px;padding:10px 12px}.ms span{font-size:12px;color:var(--mute);display:block}.ms b{font-size:19px;display:block;margin:2px 0}.ms em{font-style:normal;font-size:11.5px;color:var(--mute)}
+.ms.hot{background:color-mix(in srgb,#f0a800 18%,transparent)}
+.rescol{display:flex;flex-direction:column;gap:12px}
+.rescard{border-radius:14px;padding:12px 16px;background:var(--none-bg);border-left:5px solid var(--c1)}.rescard.b{border-left-color:var(--c2)}
+.rescard .rt{font-weight:700;margin-bottom:6px}.rn{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:3px 0}.rn b{font-size:19px;font-variant-numeric:tabular-nums}
+.rtax .btn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+@media(max-width:620px){.mech{flex-direction:column}.mech i{transform:rotate(90deg)}}
+.card[id^="sec-"],#toc{scroll-margin-top:72px}
+.tocgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px}
+.tocitem{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;background:var(--none-bg);color:var(--ink);font-size:13.5px;text-decoration:none!important;transition:background .15s,transform .15s}
+.tocitem b{color:var(--accent);font-size:15px}
+.tocitem:hover{background:color-mix(in srgb,var(--accent) 14%,transparent);transform:translateY(-1px)}
+.totop{position:fixed;right:22px;bottom:24px;z-index:15;border:0;border-radius:99px;padding:10px 16px;background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:13px;box-shadow:var(--shadow-lg);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(8px);transition:all .2s;font-family:inherit}
+.totop.show{opacity:1;pointer-events:auto;transform:none}
+@media(max-width:620px){.tocgrid{grid-template-columns:1fr 1fr}.totop{bottom:calc(72px + env(safe-area-inset-bottom));right:14px}}
+.sectitle{margin:24px 2px 8px;font-size:13px;font-weight:700;color:var(--mute);letter-spacing:.6px}
+.prem-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));column-gap:32px}
+.prow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);cursor:default}
+.pgrp{grid-column:1/-1;margin:12px 0 0;font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.5px}.pgrp:first-of-type{margin-top:4px}.prow.base{grid-column:1/-1;background:var(--none-bg);border:0;border-radius:10px;padding:10px 14px;margin-bottom:6px}
+.pn{display:flex;flex-direction:column;font-size:14px;font-weight:500;line-height:1.35}
+.pn em{font-style:normal;font-size:11.5px;font-weight:400;color:var(--mute)}
+.pv{display:flex;align-items:center;gap:10px}
+.pv input{width:80px;text-align:right}
+.pv .unit{color:var(--mute);font-weight:500}
+.res{min-width:74px;text-align:right;color:var(--mute);font-size:13px}.res b{color:var(--ink);font-size:15px}
+@media(max-width:620px){.prem-list{grid-template-columns:1fr}.prow{padding:12px 2px}.prow.base{padding:12px 14px}.pv input{width:92px}.sectitle{margin-top:20px}}
+.ovt input{width:84px}
+.about{display:flex;gap:20px;align-items:flex-start}.about img{width:150px;height:150px;border-radius:14px;background:#fff;border:1px solid var(--line);object-fit:contain}.about p{margin:4px 0}.about h2{margin:0 0 4px;font-size:18px}
+@media(max-width:560px){.about{flex-direction:column;text-align:center}}
+.chip.focus{background:linear-gradient(135deg,#fff3c4,#ffe08a);border-color:#f0c24b;color:#6b4a00;font-weight:700}
+:root[data-theme="dark"] .chip.focus{background:linear-gradient(135deg,#4a3a10,#6b5314);border-color:#a88219;color:#ffe08a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip.focus{background:linear-gradient(135deg,#4a3a10,#6b5314);border-color:#a88219;color:#ffe08a}}
+.chips.sm .chip{flex:none}
+.chip.zero{opacity:.4}
+.star{color:#f0a800;font-size:13px;margin-right:2px}
+tr.row.favrow{background:color-mix(in srgb,#f5b021 9%,transparent)}
+tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
+.kpi .v{font-size:23px;font-weight:700;font-family:var(--serif)}
+.kpi .k{font-size:12px;color:var(--mute)}
+.sub{font-size:12px;color:var(--mute)}
+.zonebar{position:relative;height:30px;border-radius:9px;overflow:hidden;display:flex;margin:26px 0 6px}
+.zonebar div{height:100%}
+.marker{position:absolute;top:-22px;transform:translateX(-50%);font-size:12px;font-weight:700}
+.marker::after{content:"";display:block;width:2px;height:48px;background:var(--ink);margin:0 auto}
+.zlabels{display:flex;font-size:11px;color:var(--mute)}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.months div{text-align:center;padding:5px 0;border-radius:6px;background:var(--none-bg);font-size:12px;color:var(--mute)}
+.months div.on{background:var(--accent);color:var(--accent-ink);font-weight:700}
+.chart{width:100%;height:auto;display:block}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--mute);margin-bottom:4px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);padding:6px 10px;border-radius:8px;font-size:12px;z-index:20;display:none;white-space:pre;box-shadow:var(--shadow-lg)}
+.stkpick{position:relative;min-width:200px}.stkpick input{width:100%}
+.lotrows{display:flex;flex-direction:column;gap:8px;margin-top:12px}.lotrow{display:grid;grid-template-columns:150px 92px 140px 140px 40px;gap:10px;align-items:center}.lotrow input,.lotrow select{width:100%}.lothead{font-size:12px;color:var(--mute);margin-bottom:-4px}
+@media(max-width:620px){.lotrow{grid-template-columns:1.5fr 1fr 1fr 1fr 32px;gap:5px}.lotrow input,.lotrow select{padding:6px 4px;font-size:14px;min-width:0}}
+.fold{padding:0}.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 18px}.fold>summary::-webkit-details-marker{display:none}
+.fold>summary h2{margin:0;font-size:15px;flex:1}.fold>summary h2 .sub{display:none}.fold .sumv{margin-left:auto;font-size:15px}
+.fold[open]>summary{border-bottom:1px solid var(--line)}.foldbody{padding:14px 18px 18px}
+.calgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.cm{border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-height:76px}
+.cm.has{background:color-mix(in srgb,var(--accent) 7%,transparent);border-color:color-mix(in srgb,var(--accent) 28%,var(--line))}
+.cmh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}.cmh b{font-size:14px}.cmh .ct{font-weight:700;font-family:var(--serif)}
+.ci{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--mute);line-height:1.6}.ci i{font-style:normal;font-size:11px;opacity:.8}.ci b{color:var(--ink);font-weight:600;font-family:var(--serif)}
+@media(max-width:700px){.calgrid{grid-template-columns:1fr 1fr}}
+.hchev{color:var(--mute);font-style:normal;font-size:18px;line-height:1;transition:transform .15s;flex:none;width:14px;text-align:center}.fold[open]>summary .hchev,.hrow[open]>summary .hchev{transform:rotate(90deg)}
+.htable{padding:0;overflow:hidden}.hsum{display:grid;grid-template-columns:minmax(120px,1.4fr) .9fr .8fr .8fr 1.1fr .8fr .95fr 1fr 1fr 1fr 16px;gap:10px;align-items:center;padding:12px 18px}
+.hhead{font-size:12px;color:var(--mute);border-bottom:1px solid var(--line);padding-top:8px;padding-bottom:8px}.hsum .r{text-align:right;font-variant-numeric:tabular-nums}
+.hrow{border-bottom:1px solid var(--line);padding:0}.hrow>summary{list-style:none;cursor:pointer}.hrow>summary::-webkit-details-marker{display:none}.hrow>summary{transition:background .12s}.hrow>summary:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.hn{display:flex;flex-direction:column;line-height:1.3}.hn b{font-size:15px}
+.hfoot{font-weight:700;background:var(--none-bg);border-top:1px solid var(--line)}
+.hrow[open]>summary{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.hbody{background:color-mix(in srgb,var(--none-bg) 45%,var(--card));padding:6px 22px 16px;border-top:1px solid var(--line)}.hbody .card{border:0;box-shadow:none;margin:0;padding:6px 0;background:transparent}
+.hbody .pos-head h3,.hbody .pos-head .mute,.hbody .pos-head .stag{display:none}.hbody .pos-head{margin-bottom:2px}.hbody .hline{font-size:13px;color:var(--ink)}.hbody .hline b{font-size:14px}
+.hbody .grid.g4{grid-template-columns:repeat(4,1fr);gap:0;margin:0}.hbody .kpi{background:transparent;box-shadow:none;border:0;border-radius:0;padding:4px 16px;border-left:1px solid var(--line)}.hbody .kpi:first-child{border-left:0;padding-left:0}
+.hbody .kpi .v{font-size:19px}.hbody .kpi .k{font-size:12px}
+.hbody .verdict{padding:9px 14px;margin:12px 0;gap:12px;border-radius:10px}.hbody .verdict .vt{font-size:17px}.hbody .verdict .vd{font-size:12.5px;min-width:200px;line-height:1.55}
+.hbody .nodes{gap:8px;margin:6px 0}.hbody .node{padding:8px 12px;border-radius:10px;background:var(--card)}.hbody .node.hit{background:color-mix(in srgb,var(--accent) 9%,var(--card))}.hbody .node b{font-size:16px}
+.hbody details{margin-top:6px}
+@media(max-width:700px){.hbody .kpi .v{font-size:16px}.hbody .kpi .k{font-size:11.5px}.hbody .kpi{padding:4px 10px}.g4>.card.kpi{padding:12px 14px}.g4>.card.kpi .v{font-size:21px}.g4>.card.kpi .sub{font-size:11.5px}.hbody{padding:4px 14px 14px}.hbody .grid.g4{grid-template-columns:1fr 1fr;gap:8px 0}.hbody .kpi:nth-child(odd){border-left:0;padding-left:0}.hsum{grid-template-columns:minmax(90px,1.4fr) 1fr 1fr 16px;gap:8px;padding:12px 12px}.hsum .hm{display:none}.fold>summary{padding:12px 14px}.foldbody{padding:12px 14px 14px}.fold .sumv.sub{display:none}}
+.mu{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}.mu ol{margin:0;padding-left:20px;line-height:1.85;font-size:13.5px}.mu li{margin-bottom:4px}
+.mu-qr{text-align:center}.mu-qr img{width:156px;height:156px;display:block;margin:0 auto 6px;border:1px solid var(--line);border-radius:12px;padding:6px;background:#fff}.mu-qr code{font-size:12px;color:var(--mute);word-break:break-all}
+@media(max-width:700px){.mu{grid-template-columns:1fr}}
+#main.priv-on .hbody .verdict,#main.priv-on .hbody .nodes{display:none}
+.pbadge{background:var(--none-bg);color:var(--mute)}
+#main.priv-on .tbar,#main.priv-on .atrack,#main.priv-on .stackbar,#main.priv-on .bar{visibility:hidden}
+#main.priv-on .pos,#main.priv-on .neg,#main.priv-on .up,#main.priv-on .dn{color:inherit!important}
+@media(max-width:700px){.ph.hasbtn{display:grid;grid-template-columns:1fr auto;align-items:center;row-gap:4px}.ph.hasbtn h2{grid-column:1;grid-row:1}.ph.hasbtn .privbtn{grid-column:2;grid-row:1;margin-left:0}.ph.hasbtn .sub{grid-column:1/-1;grid-row:2}}
+.privbtn{margin-left:auto;align-self:center;display:inline-flex;align-items:center;justify-content:center;width:44px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--mute);cursor:pointer;box-shadow:var(--shadow);transition:all .15s}.privbtn:hover{color:var(--accent);border-color:var(--accent)}.privbtn.on{background:color-mix(in srgb,var(--accent) 14%,var(--card));border-color:var(--accent);color:var(--accent)}
+.dlg.updlg{width:min(92vw,420px)}.updnotes{margin:0;padding-left:18px;font-size:13px;line-height:1.7;color:var(--ink);max-height:38vh;overflow:auto}.updget{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.updget .btn{text-decoration:none}
+.abt{flex:1;min-width:0}.abver{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 10px}
+.contact{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:6px;font-size:13.5px}.contact li{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.contact li>span{color:var(--mute);min-width:72px}.contact em{font-style:normal;color:var(--mute);font-size:12.5px}
+.chlog>summary{cursor:pointer;font-weight:600;padding:6px 0}.chlogbody{max-height:420px;overflow:auto;padding:4px 2px 2px;font-size:13px;line-height:1.7}
+.chlogbody h3{font-size:15px;margin:16px 0 4px;color:var(--ink)}.chlogbody h4{font-size:13px;margin:8px 0 2px;color:var(--accent)}.chlogbody ul{margin:2px 0 6px;padding-left:18px}.chlogbody p{margin:4px 0;color:var(--mute)}.chlogbody hr{border:0;border-top:1px solid var(--line);margin:10px 0}.chlogbody code{background:var(--none-bg);padding:0 4px;border-radius:4px;font-size:12px}
+.sugg{position:absolute;top:100%;left:0;right:0;z-index:20;margin-top:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lg);max-height:280px;overflow:auto;padding:4px}
+.sugg button{display:flex;justify-content:space-between;align-items:baseline;gap:10px;width:100%;border:0;background:none;padding:8px 10px;border-radius:8px;text-align:left;cursor:pointer;font:inherit;font-size:13px;color:var(--ink)}.sugg button:hover{background:var(--none-bg)}
+.mask{position:fixed;inset:0;z-index:100;background:rgba(20,24,40,.38);display:flex;align-items:center;justify-content:center;padding:16px}
+.dlg{background:var(--card);border-radius:14px;padding:20px 22px;width:min(92vw,360px);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;gap:12px}
+.dlg h3{margin:0;font-size:16px}.dlg p{margin:0;color:var(--mute);font-size:13px;line-height:1.6}
+.dlg label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mute)}.dlg input{width:100%}
+.dlg .acts{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
+.form{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.form[hidden]{display:none}
+.form label{display:flex;flex-direction:column;font-size:12px;color:var(--mute);gap:3px}
+.note{font-size:12px;color:var(--mute);margin-top:8px;line-height:1.6}
+.howto{margin-top:14px}.howto dl{display:grid;grid-template-columns:96px 1fr;gap:10px 16px;margin:0;font-size:13px;line-height:1.65}.howto dt{font-weight:700;color:var(--ink)}.howto dd{margin:0;color:var(--mute)}
+@media(max-width:620px){.howto dl{grid-template-columns:1fr;gap:2px}.howto dd{margin-bottom:10px}}
+.nodes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.node{border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.node b{display:block;font-size:16px}
+.node.hit{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.pos-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.pos-head h3{margin:0;font-size:16px;color:var(--ink)}
+.up{color:#d92d20}.dn{color:#12a150}
+.bar{height:8px;background:var(--none-bg);border-radius:4px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:4px}
+.bar>i.over{background:var(--profit)}
+.empty{padding:36px;text-align:center;color:var(--mute)}
+.hint{background:var(--hold-bg);color:var(--hold);padding:8px 12px;border-radius:8px;font-size:13px;margin-bottom:10px}
+::selection{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+.sec,.hero{--tl-g:var(--c1);--tl-r:var(--bad)}
+.bigy,.lnums b,.lc-v,.taxc>b,.rn b,.av b,.tv b,.res b{font-family:var(--serif)}
+/* ---- 统一：粗条 32px/8px，细条 12px/6px，内嵌块 12px ---- */
+.stackbar,.stackbar.thin,.navbar,.ltrack{height:32px;border-radius:8px}.lad4 .ltrack i{height:32px;line-height:32px}
+.atrack,.tbar,.tr0,.taxbar{height:12px;border-radius:6px}.atrack i,.tr0 i{border-radius:6px}
+.lstep,.pc,.taxc,.etfc,.chk,.ms,.fm,.lout,.rescard,.scard,.base,.tocitem{border-radius:12px}
+.lmsg{background:color-mix(in srgb,var(--accent) 11%,var(--card));border-left:4px solid var(--accent);border-radius:12px;padding:11px 14px;font-size:13.5px}
+.lmsg b{color:var(--ink)}
+.tbar .td{background:var(--c2)}.ms.hot{background:color-mix(in srgb,var(--c1) 14%,transparent)}.navbar u{background:var(--c2);color:#fff}
+.tbar .tp,.navbar i{background:var(--c1)}.tbar .tpn{background:var(--bad)}
+@media(max-width:620px){.lad4 .ltrack,.lad4 .ltrack i{height:28px;line-height:28px}}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="#/" id="home" title="回到首页"><img src="/logo.png" alt="收息佬"><span><b>收息佬</b><small>股息攒得好，退休晚不了</small></span></a>
+  <nav>
+    <button data-tab="pool" class="on">红利股票池</button>
+    <button data-tab="hold">我的持仓</button>
+    <button data-tab="learn">知识</button>
+    <button data-tab="settings">设置</button>
+  </nav>
+  <div class="spacer"></div>
+  <span class="sub" id="updated"></span>
+</header>
+<nav class="tabbar" aria-label="主导航">
+  <button data-tab="pool" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>股票池</span></button>
+  <button data-tab="hold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg><span>持仓</span></button>
+  <button data-tab="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 8h6M9 12h6"/></svg><span>知识</span></button>
+  <button data-tab="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg><span>设置</span></button>
+</nav>
+<main id="main"><div class="card empty" style="text-align:center;color:var(--mute)">正在加载…</div></main>
+<footer class="foot">收息佬 <span id="ver"></span> · 数据来源：东方财富、新浪财经 · 价格可能晚一个交易日 · 仅供研究，不构成投资建议 · <a href="#/">回到首页</a></footer>
+<div class="tip" id="tip"></div>
+
+<script>
+const $ = (s, el=document) => el.querySelector(s);
+const state = { tab:"pool", pool:null, holdings:{settings:{capital:0,maxPct:15},lots:[]}, detail:null,
+  sort:{key:"verdict",dir:1}, f:{q:"",ind:"",st:"focus",minY:0}, cache:{} };
+
+const pct = (x,d=2)=> x==null?"–":(x*100).toFixed(d)+"%";
+const px = x=> x==null?"–":(Math.abs(x)<3&&x!==0?num(x,3):num(x,2));
+const num = (x,d=2)=> x==null?"–":Number(x).toLocaleString("zh-CN",{minimumFractionDigits:d,maximumFractionDigits:d});
+const cny = x => x==null?"–":(Math.abs(x)>=1e4? num(x/1e4,2)+"万" : num(x,0));
+const sgn = x => x>0?"up":x<0?"dn":"";
+const today = () => new Date().toISOString().slice(0,10);
+const dayDiff = (a,b)=> Math.round((new Date(b)-new Date(a))/864e5);
+
+async function api(path, opt){ const r = await fetch(path,opt); if(r.status===401){ location.href="/login"; throw new Error("login"); } if(!r.ok) throw new Error(path); return r.json(); }
+/* 买入要求 = 国债收益率 + 行业风险溢价（个股可单独覆盖）；买入价 = 取「自身历史分位价」与「要求股息率价」中更严格者 */
+const RF_DEF=1.65; // 10年期国债收益率参考值（2026-10中旬约1.64%~1.66%），可在设置里改
+const DEF_PREM={"煤炭":4.5,"油气":4.0,"航运":5.0,"建材":4.0,"电力":2.3,"公用事业":2.5,"消费":2.0,"交通":2.8,"通信":3.0,"银行":3.3,"保险":3.0,"券商":3.5,"汽车":3.5,"医药":2.5,"ETF":2.5,"有色金属":4.5,"建筑":3.0,"制造":3.0,"传媒":3.0};
+const INDS_ALL=()=>Object.keys(DEF_PREM);
+const CYCLICAL=new Set(["煤炭","油气","航运","建材","有色金属","建筑"]); // 分红随景气波动，用近3年平均分红
+const cfg=()=>{const S=state.holdings.settings; return {rf:S.rf??RF_DEF, prem:S.premiums||{}, ov:S.overrides||{}}};
+// 一级大类(列表筛选、设置分组用);二级行业仍是 stocks.csv 里的 industry,买入价溢价按二级行业设
+const IND_GROUPS=[["金融",["银行","券商","保险"]],["能源资源",["煤炭","油气","有色金属"]],["公用事业",["电力","公用事业","通信"]],["交通运输",["交通","航运"]],["消费医药",["消费","医药","传媒"]],["制造建筑",["汽车","制造","建筑","建材"]],["ETF",["ETF"]]];
+const grpOf=ind=>(IND_GROUPS.find(([,l])=>l.includes(ind))||["其他"])[0];
+const premOf=(ind,c=cfg())=>c.prem[ind]??DEF_PREM[ind]??3.0;
+const floorOf=s=>{const c=cfg(); return (c.ov[s.code]??(c.rf+premOf(s.industry,c)))/100};
+function applyZones(s){
+  if(s._d0===undefined){s._d0=s.ttm_dps; s._z0=s.zones&&s.zones.y; s._y0=s.yield}
+  let D=s._d0, y=s._z0; s.normalized=false;
+  if(CYCLICAL.has(s.industry)&&s.avg3_dps>0&&s.zones_avg_y){D=s.avg3_dps; y=s.zones_avg_y; s.normalized=true}
+  const z=s.zones; if(!z||!y||!(D>0)) return s;
+  const f=floorOf(s); s.floor=f; s.ttm_dps=D; s.yield=D/s.price; z.y=y;
+  z.heavy=D/(f+0.01); z.buy=D/f; s.rich=s.price>D/y["50"]; s.histMedY=y["50"]; s.histBuyPx=D/y["70"];
+  z.hold=Math.max(D/y["30"],z.buy*1.1); z.profit=Math.max(D/y["15"],z.hold*1.1);
+  const p=s.price; s.status=p<=z.heavy?"重仓区":p<=z.buy?"买入区":p<=z.hold?"持有区":p<z.profit?"偏高":"止盈区";
+  return s;
+}
+async function getStock(code){ let d=state.cache[code]; if(!d){ d=await api("/api/stock/"+code); state.cache[code]=d } return applyZones(d); }
+/* 移出股票池:服务端拒绝时(持仓里还有记录)直接提示;成功后清理关注、单独设定,并记入「已移出」方便恢复 */
+async function removeStock(s){
+  let r,j; try{ r=await fetch("/api/stocks/"+s.code,{method:"DELETE"}); j=await r.json() }catch(e){ notice("移出失败，请稍后再试"); return false }
+  if(!r.ok){ notice(j.error||"移出失败"); return false }
+  const S=state.holdings.settings;
+  S.favorites=(S.favorites||[]).filter(c=>c!==s.code);
+  if(S.overrides) delete S.overrides[s.code];
+  S.removed=[...(S.removed||[]).filter(x=>x.code!==s.code),{code:s.code,name:s.name,industry:s.industry}];
+  await saveHoldings(); delete state.cache[s.code]; await load(); return true;
+}
+const saveHoldings = () => api("/api/holdings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(state.holdings)});
+
+/* ---------- 结论 ---------- */
+const ORDER={"重仓区":0,"买入区":1,"持有区":2,"偏高":3,"止盈区":4,"无足够数据":5};
+const SN={"重仓区":"低位","买入区":"偏低","持有区":"适中","偏高":"偏高","止盈区":"高位","无足够数据":"数据不足"}; // 内部状态键 → 显示名（只表达价格位置，不含仓位或操作含义）
+const LABEL=SN;
+const GROUPS={s0:{label:"低位",sts:["重仓区"],cls:"s-重仓区"},s1:{label:"偏低",sts:["买入区"],cls:"s-买入区"},s2:{label:"适中",sts:["持有区"],cls:"s-持有区"},
+  s3:{label:"偏高",sts:["偏高"],cls:"s-偏高"},s4:{label:"高位",sts:["止盈区"],cls:"s-止盈区"}};
+// 把价格映射到 5 等分的"便宜→贵"条上，位置 0~1
+function posFrac(price,z){
+  const pts=[0,z.heavy,z.buy,z.hold,z.profit,z.profit*1.3]; let i=0;
+  while(i<4&&price>pts[i+1]) i++;
+  const f=(price-pts[i])/((pts[i+1]-pts[i])||1);
+  return Math.max(0,Math.min(1,(i+Math.max(0,Math.min(1,f)))/5));
+}
+const priceBar=(s,labels)=>s.zones?`<div class="pbar"><i style="left:${(posFrac(s.price,s.zones)*100).toFixed(1)}%"></i></div>${labels?'<div class="pend"><span>便宜</span><span>贵</span></div>':""}`:"–";
+const LVT={g:"良好",y:"留意",r:"警惕",na:"不适用"};
+const dotsOf=s=>{const l=lightsOf(s); return l?`<div class="dots">${Object.keys(HN).map(k=>`<i class="dot ${l[k]}" title="${HN[k]}:${LVT[l[k]]}"></i>`).join("")}</div>`:"–"};
+// 重点关注：价格偏低或低位 + 体检无质量红灯 + 区间可信（股价未大跌）
+const isFocus=s=>!!s.zones&&ORDER[s.status]<=1&&!qRed(s).length&&!distrust(s);
+const distrust=s=>s.zones&&s.zones.buy>s.price*1.5;
+const isRich=s=>!!s.rich&&s.zones&&ORDER[s.status]<=1; // 满足你的要求，但股息率低于它自己近5年的中位水平
+const qRed=s=>redNames(s).filter(n=>n!=="估值"); // 质量类红灯（不含估值）
+const lab=s=>LABEL[s.status]; // 标签只写价格位置；体检红灯、股价大跌用单独的 ⚠ 提醒行
+const HN={div:"分红能力",earn:"盈利质量",stab:"分红稳定",safe:"财务安全",val:"估值"};
+const lightsOf=s=>s.lights||(s.health?Object.fromEntries(Object.entries(s.health.lights).map(([k,v])=>[k,v.lv])):null);
+const redNames=s=>{const l=lightsOf(s); return l?Object.keys(HN).filter(k=>l[k]==="r").map(k=>HN[k]):[]};
+function reason(d){
+  const z=d.zones; if(!z) return "历史数据不足，无法给出区间。";
+  const gap=(d.price/z.buy-1)*100, req=d.ttm_dps/z.buy;
+  let t;
+  if(d.status==="重仓区") t=`价格处于低位：现价 ${px(d.price)} 低于买入价 ${px(z.buy)}，当前股息率 ${pct(d.yield)}，比你的要求（${pct(req,1)}）还高出 1 个点以上。`;
+  else if(d.status==="买入区") t=`价格偏低：现价 ${px(d.price)} 不高于买入价 ${px(z.buy)}，当前股息率 ${pct(d.yield)}，达到了你的要求（${pct(req,1)}）。`;
+  else if(d.status==="持有区") t=`价格适中：现价比买入价 ${px(z.buy)} 高 ${gap.toFixed(0)}%，当前股息率 ${pct(d.yield)}，还没达到你的要求（${pct(req,1)}）。回落到 ${px(z.buy)} 以下才算达标。`;
+  else if(d.status==="偏高") t=`价格偏高：当前股息率 ${pct(d.yield)} 已低于它自己多数时候的水平。`;
+  else t=`价格处于高位：当前股息率 ${pct(d.yield)}，处在它自己近 5 年最低的一档（价格 ≥ ${px(z.profit)}）。`;
+  if(isRich(d)) t+=` 注意：当前股息率 ${pct(d.yield)} 低于它自己近5年的中位水平（${pct(d.histMedY,1)}），按自身历史并不算低。`;
+  if(ORDER[d.status]<=1&&redNames(d).length) t+=` ⚠ 公司体检有红灯：${redNames(d).join("、")}（见下方体检卡），只看价格不够，先看这些再决定。`;
+  if(distrust(d)) t+=" ⚠ 该股股价较历史大幅下跌，区间偏宽，先看盈利是否恶化。";
+  return t;
+}
+
+/* ---------- 税 & 区间 ---------- */
+// 个人所得税差别化： ≤1个月 20%; 1个月~1年 10%; >1年 免税 （按持股期限，卖出时补扣）
+const taxRate = days => days<=31?0.2 : days<=365?0.1 : 0;
+const taxLabel = r => r===0.2?"20%":r===0.1?"10%":"免税";
+/* 港股:持仓页单独成一块,全程用港元计,不算红利税。B 股:价格和分红用美元/港元,持仓页折合人民币,红利税按 10% 估算 */
+const CU={CNY:"元",HKD:"港元",USD:"美元"}, CS={CNY:"",HKD:"HK$",USD:"US$"};
+const cu=d=>CU[d.ccy||"CNY"], mkt=d=>d.market==="hk"?"港股":d.market==="b"?"B 股":"";
+const taxOf=(d,days)=>d.industry==="ETF"?0:d.market==="hk"?0:d.market==="b"?0.1:taxRate(days);
+const fxOf=d=>(d&&d.fx)||1;
+function cnyView(d){const f=fxOf(d); if(f===1||!d) return d;
+  const o={...d,fx_orig:d,price:d.price*f,ttm_dps:d.ttm_dps*f,avg3_dps:(d.avg3_dps||0)*f,histBuyPx:d.histBuyPx==null?d.histBuyPx:d.histBuyPx*f};
+  if(d.zones){o.zones={...d.zones}; ["heavy","buy","hold","profit"].forEach(k=>o.zones[k]*=f)}
+  o.forward=(d.forward||[]).map(x=>({...x,cash:x.cash*f})); o.records=(d.records||[]).map(r=>({...r,cash10:r.cash10*f})); return o}
+
+/* ---------- 图表 ---------- */
+const tip = $("#tip");
+function lineChart(series, labels, o={}){
+  const W=820,H=o.h||240,L=46,R=12,T=10,B=24, n=labels.length;
+  let all=series.flatMap(s=>s.data.filter(v=>v!=null)); let lo=Math.min(...all), hi=Math.max(...all);
+  if(o.zero) lo=Math.min(lo,0); const pad=(hi-lo)*.06||1; lo-=o.zero?0:pad; hi+=pad;
+  const x=i=>L+(W-L-R)*i/(n-1), y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo));
+  const fmt=o.fmt||(v=>num(v,0));
+  let g="";
+  for(let k=0;k<=4;k++){const v=lo+(hi-lo)*k/4;g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--mute)">${fmt(v)}</text>`}
+  let last="";labels.forEach((lb,i)=>{const yr=lb.slice(0,4); if(yr!==last && lb.slice(5)<="03" ){last=yr;g+=`<text x="${x(i)}" y="${H-6}" font-size="11" fill="var(--mute)" text-anchor="middle">${yr}</text>`}});
+  const paths=series.map(s=>{let d="";s.data.forEach((v,i)=>{if(v!=null)d+=(d?"L":"M")+x(i).toFixed(1)+","+y(v).toFixed(1)});
+    return `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.w||2}" ${s.dash?'stroke-dasharray="5 4"':''}/>`}).join("");
+  const id="c"+Math.random().toString(36).slice(2,8);
+  setTimeout(()=>{const svg=document.getElementById(id); if(!svg)return;
+    svg.addEventListener("mousemove",e=>{const r=svg.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W;
+      const i=Math.max(0,Math.min(n-1,Math.round((px-L)/(W-L-R)*(n-1))));
+      tip.style.display="block";tip.style.left=e.clientX+12+"px";tip.style.top=e.clientY+12+"px";
+      tip.textContent=labels[i]+"\n"+series.map(s=>s.name+": "+(s.data[i]==null?"–":(o.tipfmt||fmt)(s.data[i]))).join("\n")});
+    svg.addEventListener("mouseleave",()=>tip.style.display="none")});
+  return `<div class="legend">${series.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join("")}</div>
+  <svg id="${id}" class="chart" viewBox="0 0 ${W} ${H}">${g}${paths}</svg>`;
+}
+function barChart(items, o={}){ // items [{label,v,sub}]
+  const W=820,H=o.h||200,L=46,R=8,T=14,B=26,n=items.length, mx=Math.max(...items.map(i=>i.v),0.0001)*1.1;
+  const bw=(W-L-R)/n, y=v=>T+(H-T-B)*(1-v/mx);
+  let g="";for(let k=0;k<=3;k++){const v=mx*k/3;g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--mute)">${(o.fmt||(v=>num(v,1)))(v)}</text>`}
+  items.forEach((it,i)=>{const x=L+bw*i+bw*.18,w=bw*.64;
+    g+=`<rect x="${x}" y="${y(it.v)}" width="${w}" height="${H-B-y(it.v)}" rx="3" fill="${it.color||"var(--accent)"}" opacity="${it.partial?.5:1}"><title>${it.label}: ${(o.fmt||(v=>num(v,2)))(it.v)}${it.sub?" · "+it.sub:""}</title></rect>
+    <text x="${x+w/2}" y="${H-8}" font-size="11" text-anchor="middle" fill="var(--mute)">${it.label}</text>`});
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}">${g}</svg>`;
+}
+
+/* ---------- 股票池 ---------- */
+const COLS=[["fav",""],["name","名称"],["price","现价"],["yield","股息率"],["verdict","建议 · 价格位置"],["health","体检"],["buy","买入价"]];
+const val=(s,k)=> k==="buy"?(s.zones?s.zones.buy:null) : k==="verdict"?ORDER[s.status]*1000+(distrust(s)?500:0)+(isRich(s)?300:0)+(ORDER[s.status]<=1&&qRed(s).length?400:0)-s.yield*100 : k==="pos"?(s.zones?posFrac(s.price,s.zones):null) : k==="health"?(()=>{const l=lightsOf(s); return l?Object.values(l).reduce((a,v)=>a+(v==="r"?10:v==="y"?1:0),0):99})() : s[k];
+
+const favSet=()=>new Set((state.holdings.settings.favorites||[]).filter(Boolean));
+function setFav(code,on){
+  if(!code) return; // 防止空代码写入
+  const S=state.holdings.settings, f=new Set((S.favorites||[]).filter(Boolean)); on?f.add(code):f.delete(code); S.favorites=[...f]; saveHoldings();
+}
+function toggleFav(code){ const y=scrollY; setFav(code,!favSet().has(code)); renderPool(); scrollTo(0,y); }
+const defaultView=()=>"focus";
+function renderPool(){
+  if(!state.pool) return;
+  // 市场筛选:A 股(含 ETF)/ B 股 / 港股;默认只看 A 股;搜索时跨市场找
+  const mkOf=s=>s.market||"a", mkSel=state.f.mk??(()=>{try{return localStorage.getItem("mk")??"a"}catch(e){return "a"}})(), mkCnt=k=>state.pool.stocks.filter(s=>k===""||mkOf(s)===k).length;
+  const P={...state.pool, stocks:state.pool.stocks.filter(s=>!mkSel||mkOf(s)===mkSel||(state.f.q||"").trim())};
+  const inds=[...new Set(P.stocks.map(s=>s.industry))];
+  const hasMk=mkCnt("b")>0||mkCnt("hk")>0;
+  const {q,ind,st}=state.f, grp=GROUPS[st];
+  const held=new Set(applySells(state.holdings).active.map(l=>l.code)), fav=favSet();
+  const mine=s=>fav.has(s.code)||held.has(s.code);
+  const inGroup=s=>st==="focus"?(mine(s)||isFocus(s)):(!grp||grp.sts.includes(s.status));
+  const q_=()=>state.f.q.trim();
+  const calc=()=>{
+    const ql=q_().toLowerCase();
+    const r=(ql?state.pool.stocks:P.stocks).filter(s=>(!ql||s.name.includes(ql)||s.code.includes(ql)||(s.py||"").includes(ql)||(s.pyfull||"").includes(ql))&&(!ind||grpOf(s.industry)===ind)&&inGroup(s));
+    const {key,dir}=state.sort;
+    r.sort((a,b)=>{const x=val(a,key),y=val(b,key); if(x==null)return 1;if(y==null)return -1; return (typeof x==="string"?x.localeCompare(y,"zh"):x-y)*dir});
+    if(st==="focus"&&key==="verdict") r.sort((a,b)=>mine(b)-mine(a)); // 重点关注里：你关注的/持仓排在前面（稳定排序，其余顺序不变）
+    return r;
+  };
+  let rows=calc(); const {dir}=state.sort;
+  const indList=[...new Set(P.stocks.map(x=>grpOf(x.industry)))].map(g=>[g,P.stocks.filter(x=>grpOf(x.industry)===g&&inGroup(x)).length]).filter(([g,n])=>n>0||g===ind).sort((a,b)=>b[1]-a[1]);
+  const cnt=g=>P.stocks.filter(s=>GROUPS[g].sts.includes(s.status)).length;
+  const emptyMsg=st==="focus"?"暂时没有重点股票。你可以点「全部」挑选，再点列表左侧的 ☆ 加进来。":"没有符合条件的股票。";
+  const rowsHtml=rows=>!rows.length?`<tr><td colspan="7" class="empty">${emptyMsg}</td></tr>`:rows.map(s=>{const z=s.zones,gap=z?(s.price/z.buy-1)*100:0,on=fav.has(s.code);return `<tr class="row${on?" favrow":""}" data-code="${s.code}">
+        <td class="favtd"><button class="fav${on?" on":""}" data-fav="${s.code}" title="${on?"取消关注":"加入我的关注"}" aria-label="${on?"取消关注":"加入我的关注"}">${on?"★":"☆"}</button></td>
+        <td class="l"><b>${s.name}</b>${held.has(s.code)?' <span class="badge held">已持仓</span>':""}${isFocus(s)?'<span class="pick" title="系统精选：价格偏低或低位、体检无质量红灯">精选</span>':""}<div class="sub">${s.code} · ${s.industry}${s.market&&s.market!=="a"?` · ${mkt(s)}（${cu(s)}）`:""}<span class="mprice"> · 现价 ${px(s.price)}</span></div></td>
+        <td>${px(s.price)}</td><td><b>${pct(s.yield)}</b></td>
+        <td class="vtd"><span class="badge s-${s.status}" style="font-size:13px;padding:3px 12px">${lab(s)}</span>${distrust(s)?'<div class="warn">⚠ 股价已大跌，先看盈利</div>':""}${isRich(s)?'<div class="warn">⚠ 低于自身历史中位</div>':""}${ORDER[s.status]<=1&&qRed(s).length?`<div class="warn">⚠ 体检红灯：${qRed(s).join("、")}</div>`:""}${priceBar(s,true)}</td>
+        <td>${dotsOf(s)}</td>
+        <td>${z?`≤ <b>${px(z.buy)}</b><div class="sub">${gap<=0?"已低于买入价":"还需跌 "+(100-z.buy/s.price*100).toFixed(0)+"%"}</div>`:"–"}</td></tr>`}).join("");
+  const sub={focus:"★ 是你关注的（含持仓，排在前面）；带「精选」标签的是系统筛的：价格偏低或低位、体检无质量红灯。看中的点 ☆ 加进来"}[st]||`共 ${P.stocks.length} 只 · ★ 是你的关注，「精选」是系统筛的`;
+  $("#main").innerHTML=`
+  <div class="ph"><h2>红利股票池</h2><span class="sub">${sub}</span></div>
+  <div class="toprow">${hasMk?`<div class="seg" id="mkseg">${[["a","A 股"],["b","B 股"],["hk","港股"],["","全部"]].filter(([k])=>k==="a"||k===""||mkCnt(k)).map(([k,t])=>`<button data-mk="${k}" class="${mkSel===k?"on":""}">${t}<span class="mkn">${mkCnt(k)}</span></button>`).join("")}</div>`:""}<input id="fq" placeholder="搜索 名称 / 代码 / 拼音（如 zgsh）" value="${q}"></div>
+  <div class="chips">
+    <button class="chip focus ${st==="focus"?"on":""}" data-st="focus">★ 重点关注 ${P.stocks.filter(s=>mine(s)||isFocus(s)).length}</button>
+    <button class="chip ${st===""?"on":""}" data-st="">全部 ${P.stocks.length}</button>
+    ${Object.entries(GROUPS).map(([k,g])=>`<button class="chip ${g.cls} ${st===k?"on":""}" data-st="${k}">${g.label} ${cnt(k)}</button>`).join("")}
+  </div>
+  <div class="indstrip" id="indstrip"><button class="chip ${ind===""?"on":""}" data-ind="">全部</button>${indList.map(([i,n])=>`<button class="chip ${ind===i?"on":""}" data-ind="${i}">${i} ${n}</button>`).join("")}</div>
+  <div class="card">
+    <div class="filters">
+      <select class="msort" id="msort">${[["verdict","排序：建议优先"],["yield","排序：股息率 高→低"],["health","排序：体检 好→差"],["name","排序：名称"]].map(([k,t])=>`<option value="${k}" ${state.sort.key===k?"selected":""}>${t}</option>`).join("")}</select>
+      <span class="sub">显示 <span id="cnt">${rows.length}</span> 只 · 点击一行看详情（分红节奏、体检、走势都在详情里）</span>
+    </div>
+    <div class="tablewrap"><table class="pool">
+      <thead><tr>${COLS.map(([k,t])=>k==="fav"?'<th class="favtd"></th>':`<th data-k="${k}" class="${k==="name"?"l":""}">${t}${state.sort.key===k?(dir>0?" ▲":" ▼"):""}</th>`).join("")}</tr></thead>
+      <tbody id="tb">${rowsHtml(rows)}</tbody></table></div>
+  </div>
+  <details class="card fold howto"><summary><h2>怎么看这张表</h2><i class="hchev">›</i></summary>
+    <div class="foldbody"><dl>
+      <dt>股息率</dt><dd>上一财年每股分红 ÷ 现价。煤炭、油气、航运、建材、有色、建筑这类周期股，用近 3 年平均分红，避免高点虚高。ETF、港股、B 股没有统一财年，用最近 365 天已除息的分红合计。</dd>
+      <dt>买入价</dt><dd>每股分红 ÷ 要求股息率。要求股息率 = 10 年期国债收益率 + 行业溢价，可以在「设置」里调整。</dd>
+      <dt>价格位置</dt><dd>条从左到右是「便宜 → 贵」，竖线是现价所在的位置。分五档：低位、偏低、适中、偏高、高位。</dd>
+      <dt>体检五个灯</dt><dd>依次是分红能力、盈利质量、分红稳定、财务安全、估值，各自评级，不合并成总分。A 股、港股、B 股个股有体检（港股限 12 月财年、财务数据完整的公司；B 股与同公司 A 股共用财务数据）；ETF 没有。</dd>
+      <dt>币种</dt><dd>港股、B 股按各自币种显示；「我的持仓」里统一折成人民币。</dd>
+    </dl>
+    <p class="note">以上都是研究用的估算，仅供参考，不构成投资建议。</p></div>
+  </details>`;
+  const bindRows=()=>document.querySelectorAll("tr.row").forEach(tr=>tr.onclick=e=>{const f=e.target.closest("button.fav"); if(f){toggleFav(f.dataset.fav);return} openDetail(tr.dataset.code)});
+  // 只刷新表格，不重建输入框，避免打断中文输入法
+  $("#fq").oninput=e=>{state.f.q=e.target.value;const r=calc();$("#tb").innerHTML=rowsHtml(r);$("#cnt").textContent=r.length;bindRows()};
+  $("#msort").onchange=e=>{const k=e.target.value; state.sort={key:k,dir:k==="yield"?-1:1}; renderPool()};
+  document.querySelectorAll("#mkseg [data-mk]").forEach(c=>c.onclick=()=>{state.f.mk=c.dataset.mk; try{localStorage.setItem("mk",c.dataset.mk)}catch(e){} state.f.ind=""; renderPool()});
+  const strip=$("#indstrip"), on=strip&&strip.querySelector(".chip.on"); if(on&&on.dataset.ind) strip.scrollLeft=on.offsetLeft-strip.clientWidth/2+on.offsetWidth/2;
+  document.querySelectorAll(".chip[data-st]").forEach(c=>c.onclick=()=>{state.f.st=c.dataset.st;renderPool()});
+  document.querySelectorAll(".chip[data-ind]").forEach(c=>c.onclick=()=>{state.f.ind=c.dataset.ind;renderPool()});
+  document.querySelectorAll("th[data-k]").forEach(th=>th.onclick=()=>{const k=th.dataset.k; state.sort=state.sort.key===k?{key:k,dir:-state.sort.dir}:{key:k,dir:["name","verdict","health","buy"].includes(k)?1:-1};renderPool()});
+  bindRows();
+}
+
+/* ---------- 公司体检卡 ---------- */
+function miniBars(items,o={}){
+  const W=260,H=o.h||96,T=14,B=16,L=4,R=4,n=items.length; if(!n) return '<div class="sub">数据不足</div>';
+  const vals=items.map(i=>i.v).concat((o.refs||[]).map(r=>r.v)), mx=Math.max(...vals,0)*1.12||1, mn=Math.min(0,...vals)*1.12;
+  const bw=(W-L-R)/n, y=v=>T+(H-T-B)*(1-(v-mn)/(mx-mn)), fmt=o.fmt||(v=>num(v,1));
+  let g=`<line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--line)"/>`;
+  (o.refs||[]).forEach(r=>g+=`<line x1="${L}" x2="${W-R}" y1="${y(r.v)}" y2="${y(r.v)}" stroke="${r.c}" stroke-dasharray="4 3" stroke-width="1.2"/><text x="${W-R}" y="${y(r.v)-2}" text-anchor="end" font-size="9" fill="${r.c}">${r.t||""}</text>`);
+  items.forEach((it,i)=>{const x=L+bw*i+bw*.16,w=bw*.68,y0=y(0),y1=y(it.v);
+    g+=`<rect x="${x}" y="${Math.min(y0,y1)}" width="${w}" height="${Math.max(1,Math.abs(y1-y0))}" rx="2" fill="${it.c}"><title>${it.l}: ${fmt(it.v)}</title></rect>
+    <text x="${x+w/2}" y="${H-4}" font-size="9" text-anchor="middle" fill="var(--mute)">${it.l}</text>
+    <text x="${x+w/2}" y="${Math.min(y0,y1)-3}" font-size="9" text-anchor="middle" fill="var(--ink)">${fmt(it.v)}</text>`});
+  return `<svg viewBox="0 0 ${W} ${H}" class="chart">${g}</svg>`;
+}
+function miniLine(ser,med,color){
+  if(!ser||ser.length<3) return "";
+  const W=260,H=70,T=6,B=6,vs=ser.map(s=>s[1]), lo=Math.min(...vs,med||1e9),hi=Math.max(...vs,med||0), x=i=>4+(W-8)*i/(ser.length-1), y=v=>T+(H-T-B)*(1-(v-lo)/((hi-lo)||1));
+  const d=ser.map((s,i)=>(i?"L":"M")+x(i).toFixed(1)+","+y(s[1]).toFixed(1)).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" class="chart"><path d="${d}" fill="none" stroke="${color}" stroke-width="1.8"/>${med?`<line x1="4" x2="${W-4}" y1="${y(med)}" y2="${y(med)}" stroke="var(--mute)" stroke-dasharray="4 3"/>`:""}</svg><div class="sub" style="font-size:11px">近5年走势 · 虚线 = 自身中位数 ${num(med,1)}</div>`;
+}
+const gauge=(label,pc)=>pc==null?`<div class="gauge"><div class="gl">${label}：历史分位不可用</div></div>`:`<div class="gauge"><div class="gl">${label} · 高于自身近5年 <b>${Math.round(pc*100)}%</b> 的时间</div><div class="gbar"><i style="left:${Math.max(1,Math.min(99,pc*100))}%"></i></div><div class="gs"><span>便宜</span><span>贵</span></div></div>`;
+
+function healthCard(d){
+  const h=d.health; if(!h) return "";
+  const L=h.lights, G="var(--c1)",Y="var(--c1)",R="var(--bad)",A="var(--c1)";
+  const fin=h.fin.slice(-8), yy=r=>String(r.year).slice(2);
+  const infra=["电力","交通","公用事业"].includes(d.industry), gy=infra?[60,75]:[50,70], roeG=h.is_fin?9:10;
+  const pos=(v,g,yv)=>v<=g?G:v<=yv?Y:R;
+  const div=miniBars(fin.filter(r=>r.payout!=null).map(r=>({l:yy(r),v:r.payout,c:pos(r.payout,.8,1)})),{fmt:v=>Math.round(v*100)+"%",refs:[{v:1,c:R,t:"100%"}]});
+  const roe=miniBars(fin.filter(r=>r.roe!=null).map(r=>({l:yy(r),v:r.roe,c:r.roe>=roeG?G:r.roe>=6?Y:R})),{fmt:v=>num(v,0),refs:[{v:roeG,c:G,t:roeG+"%"}]});
+  const sq=`<div class="sqs">净利同比：${fin.map(r=>`<i class="sq ${r.np_yoy==null?"":r.np_yoy<0?"r":"g"}" title="${r.year}: ${r.np_yoy==null?"–":pct(r.np_yoy,0)}"></i>`).join("")}<span>红=降</span></div>`;
+  const dp=fin.filter(r=>r.dps!=null), stab=miniBars(dp.map((r,i)=>({l:yy(r),v:r.dps,c:i>0&&r.dps<dp[i-1].dps*.9?R:A})),{fmt:v=>num(v,2)});
+  const debt=miniBars(fin.filter(r=>r.debt!=null).map(r=>({l:yy(r),v:r.debt,c:pos(r.debt,gy[0],gy[1])})),{fmt:v=>Math.round(v)+"%",refs:[{v:gy[1],c:R,t:gy[1]+"%"}]});
+  const useB=h.basis==="PB", m=useB?h.pb:h.pe, o2=useB?h.pe:h.pb;
+  const val=gauge(h.basis+" "+(m.now!=null?num(m.now,1):"–")+" 倍",m.pct)+miniLine(m.series,m.med,A)+`<div class="why" style="margin-top:2px">另：${useB?"PE":"PB"} ${o2.now!=null?num(o2.now,1):"–"} 倍${o2.pct!=null?`（分位 ${Math.round(o2.pct*100)}%）`:""}</div>`;
+  const cards=[["div","①","分红能力",div],["earn","②","盈利质量",roe+sq],["stab","③","分红稳定",stab],["safe","④","财务安全",L.safe.lv==="na"?`<div class="sub" style="padding:22px 0">不适用</div>`:debt],["val","⑤","估值",val]];
+  return `<div class="card"><h2>公司体检 <span class="sub" style="font-weight:400">· 股息率之外，这家公司值不值得持有（五项各自评级，不合并总分）</span></h2>
+    <div class="lights">${cards.map(c=>`<div class="lt"><i class="dot ${L[c[0]].lv}"></i><b>${c[2]}</b><span>${L[c[0]].head}</span></div>`).join("")}</div>
+    <div class="hgrid">${cards.map(([k,no,t,body])=>`<div class="hc ${L[k].lv}" ${k==="val"?'style="grid-column:span 2"':""}><h4><i class="dot ${L[k].lv}"></i>${no} ${t}<em>${LVT[L[k].lv]}</em></h4><div class="big">${L[k].head}</div>${body}<div class="why">${L[k].text}</div></div>`).join("")}</div>
+    <p class="note">红绿灯是经验阈值（分红率 ≤80%、ROE ≥10%、负债率 ≤50%（公用事业 ≤60%）、估值分位 ≤40% 为绿），只作筛查，不构成投资建议。经营现金流未扣资本开支，不等同自由现金流。金融股不看负债与现金流；周期/金融股估值用 PB。</p></div>
+  `;
+}
+
+/* ---------- 个股详情 ---------- */
+function openDetail(code){
+  const t="#/stock/"+code; if(location.hash===t) return route(); location.hash=t;
+}
+function goto(t){ if(location.hash===t||(t==="#/"&&!location.hash)) return route(); location.hash=t; }
+function route(){
+  const m=location.hash.replace(/^#\/?/,"").split("/");
+  state.tab=m[0]==="hold"?"hold":m[0]==="settings"?"settings":m[0]==="learn"?"learn":"pool"; state.detail=(m[0]==="stock"&&/^\d+$/.test(m[1]||""))?m[1]:null;
+  render(); window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+function renderDetail(d){
+  const z=d.zones, cap=+state.holdings.settings.capital, mp=+state.holdings.settings.maxPct/100;
+  const ys=(d.normalized&&d.yield_series_avg)?d.yield_series_avg:d.yield_series;
+  let ruler="";
+  if(z){
+    const segs=[["var(--zb0)","低位","#04382a"],["var(--zb1)","偏低","#173d0d"],["var(--zb2)","适中","#4a3800"],["var(--zb3)","偏高","#4a2200"],["var(--zb4)","高位","#fff"]];
+    const bounds=[["0",""],[px(z.heavy),""],[px(z.buy),""],[px(z.hold),""],[px(z.profit),""]];
+    ruler=`<div class="zonebar" style="height:34px">${segs.map(([c,t,tc])=>`<div style="width:20%;background:${c};color:${tc};font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">${t}</div>`).join("")}<span class="marker" style="left:${(posFrac(d.price,z)*100).toFixed(1)}%">现价 ${px(d.price)}</span></div>
+    <div style="display:flex;font-size:12px;color:var(--mute)">${[`≤ ${px(z.heavy)}`,`≤ ${px(z.buy)}`,`≤ ${px(z.hold)}`,`< ${px(z.profit)}`,`≥ ${px(z.profit)}`].map(t=>`<span style="width:20%;text-align:center">${t}</span>`).join("")}</div>`;
+  }
+  const banner=`<div class="verdict s-${d.status}"><div class="vt">${lab(d)}</div><div class="vd">${reason(d)}</div></div>`;
+  const firstQty = (cap>0&&z)? Math.floor(cap*mp/3/d.price/100)*100 : null;
+  const labels=d.monthly.map(m=>m[0]);
+  const pending=d.pending.length?`<h3>已公告 / 待实施</h3><table><thead><tr><th>报告期</th><th>方案</th><th>股权登记日</th><th>除权除息日</th><th>进度</th></tr></thead><tbody>${d.pending.map(p=>`<tr><td>${p.period||"–"}</td><td class="l">${p.plan||""}</td><td>${p.reg||"–"}</td><td>${p.ex||"未定"}</td><td>${p.progress||""}</td></tr>`).join("")}</tbody></table>`:"";
+  $("#main").innerHTML=`
+  <div class="crumb"><a href="#/" id="back">红利股票池</a><span>›</span><b>${d.name}</b><span>${d.code}</span></div>
+  <div class="card">
+    <div class="pos-head"><h2 style="margin:0;font-size:20px">${d.name}</h2><span class="mute">${d.code} · ${d.industry}</span> ${stagHtml(d.industry)}<div class="spacer"></div>
+      <button class="btn" id="favbtn">${favSet().has(d.code)?"★ 已关注":"☆ 加入关注"}</button> <button class="btn primary" id="addpos">+ 持仓录入</button> <button class="btn" id="rmstk" title="把这只股票从股票池里移出（有持仓记录时需先删除记录）">移出股票池</button></div>
+    ${banner}
+    <div class="note" style="margin:0 0 8px">本股买入要求：股息率 ≥ <b>${pct(d.floor,1)}</b>（国债 ${cfg().rf}% + ${d.industry}溢价 ${premOf(d.industry)}%）· 单独设定 <input id="ov" type="number" step="0.1" style="width:70px" value="${cfg().ov[d.code]??""}" placeholder="默认"> % <button class="btn sm" id="ovclear">清除</button></div>
+    ${(()=>{const f=(d.forward||[]).reduce((a,x)=>a+x.cash,0); return d._d0>0&&Math.abs(f/d._d0-1)>0.08?`<div class="note" style="margin:0 0 8px">⚠ 按最新一轮分红节奏推算，年分红约 ${num(f,3)} 元（${f>d._d0?"高于":"低于"}上一财年 ${Math.abs(f/d._d0-1)*100|0}%），对应股息率 ${pct(f/d.price)}。</div>`:""})()}
+    <div class="grid g3" style="margin-top:10px">
+      <div class="kpi"><div class="k">现价（${d.date}${d.ccy&&d.ccy!=="CNY"?" · "+mkt(d)+"，"+cu(d):""}）</div><div class="v">${px(d.price)}</div></div>
+      <div class="kpi"><div class="k">${d.normalized?`股息率（近3年平均分红 ${num(d.ttm_dps)} 元/股；最新年度 ${num(d._d0)}）`:(d.industry==="ETF"?`股息率（近 12 个月分红 ${num(d.ttm_dps,3)} ${cu(d)}/份）`:(d.market&&d.market!=="a"?`股息率（近 12 个月分红 ${num(d.ttm_dps,3)} ${cu(d)}/股）`:`股息率（${d.base_year}年度分红 ${num(d.ttm_dps)} 元/股）`))}</div><div class="v">${pct(d.yield)}</div></div>
+      <div class="kpi"><div class="k">已连续分红</div><div class="v">${d.consec} 年</div></div>
+    </div>
+    ${ruler}
+    ${z?`<p class="note">买入价 ≤ ${px(z.buy)}：此价对应的股息率刚好达到你的要求（在「设置」里调整）;≤ ${px(z.heavy)} 进入「低位」（比要求还高 1 个点）。当前价格${d.price<=z.buy?"<b>已低于买入价</b>。":`比买入价高 ${pct(d.price/z.buy-1,1)}。`}</p>`:""}
+  </div>
+  ${healthCard(d)}
+  <div class="grid g2">
+    <div class="card"><h2>股价 vs 含分红再投 (10年，起点=100)</h2>
+      ${lineChart([{name:"股价（送转调整）",color:"var(--c1)",data:d.monthly.map(m=>m[1])},{name:"含分红再投总回报",color:"var(--c2)",data:d.monthly.map(m=>m[2])}],labels)}
+      <p class="note">近${num(d.ret.years,1)}年：股价 ${pct(d.ret.price,0)}（年化 ${pct(d.ret.price_cagr,1)}），含息 ${pct(d.ret.total,0)}（年化 ${pct(d.ret.total_cagr,1)}），分红贡献约 ${pct((d.ret.total_cagr||0)-(d.ret.price_cagr||0),1)}/年。</p></div>
+    <div class="card"><h2>股息率走势 （近5年，${(d.industry==="ETF"||(d.market&&d.market!=="a"))?"近 12 个月分红":"上一完整财年分红"} ÷ 当时股价）</h2>
+      ${z?lineChart([{name:"股息率",color:"var(--c1)",data:ys.map(m=>m[1])},{name:`买入线（股息率 ≥ ${pct(d.ttm_dps/z.buy,2)}，价格 ≤ ${px(z.buy)}）`,color:"var(--buy)",dash:1,w:1.5,data:ys.map(()=>d.ttm_dps/z.buy)},{name:"自身近5年中位数",color:"var(--mute)",dash:1,w:1.5,data:ys.map(()=>z.y["50"])},{name:`高位线（股息率 ≤ ${pct(d.ttm_dps/z.profit,2)}，价格 ≥ ${px(z.profit)}）`,color:"var(--profit)",dash:1,w:1.5,data:ys.map(()=>d.ttm_dps/z.profit)}],ys.map(m=>m[0]),{fmt:v=>pct(v,1),tipfmt:v=>pct(v,2)}):'<div class="empty">数据不足</div>'}
+      <p class="note">纵轴是股息率：股息率越高=价格越便宜，所以「买入线」在上、「高位线」在下是正常的。线按当前分红折算，位置随你的买入要求变化；买入线低于灰线（自身中位数）说明你的要求比它自己的历史宽松。</p></div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><h2>${d.industry==="ETF"?"每年每份分红（按除息日所在年份）":(d.market&&d.market!=="a")?"每年每股分红（按除息日所在年份）":"每年每股分红（按所属财年）"}</h2>
+      ${barChart(d.annual.map(a=>({label:String(a.year).slice(2),v:a.dps,partial:a.partial,sub:a.n+"次"+(a.yield!=null?" · 当年末股息率 "+pct(a.yield):"")+(a.payout!=null?" · 分红率 "+pct(a.payout,0):"")})),{fmt:v=>num(v,2)})}
+      <p class="note">浅色为尚未分完的财年。鼠标悬停看当年次数、年末股息率与分红率。</p></div>
+    <div class="card"><h2>分红节奏</h2>
+      <div style="margin-bottom:8px"><b>${d.freq}</b> <span class="mute">（近3年规律）</span></div>
+      <div class="months">${Array.from({length:12},(_,i)=>`<div class="${d.months.includes(i+1)?"on":""}">${i+1}月</div>`).join("")}</div>
+      <h3>最近几次除息</h3>
+      <table><tbody>${d.last_events.slice().reverse().map(e=>`<tr><td class="l">${e[0]}</td><td>${num(e[1],3)} ${cu(d)}/股</td></tr>`).join("")}</tbody></table>
+      ${pending}</div>
+  </div>
+  <details class="card"><summary>年度明细与历次分红记录</summary><div class="tablewrap"><table>
+    <thead><tr><th>年份</th><th>每股分红（${cu(d)}）</th><th>次数</th><th>年末收盘</th><th>年末股息率</th><th>分红率（分红/EPS）</th></tr></thead>
+    <tbody>${d.annual.slice().reverse().map(a=>`<tr><td class="l">${a.year}${a.partial?" （未分完）":""}</td><td>${num(a.dps,3)}</td><td>${a.n}</td><td>${num(a.close)}</td><td>${pct(a.yield)}</td><td>${pct(a.payout,0)}</td></tr>`).join("")}</tbody></table></div>
+    <h3>历次分红记录</h3><div class="tablewrap"><table><thead><tr><th>报告期</th><th>方案</th><th>股权登记日</th><th>除权除息日</th></tr></thead>
+    <tbody>${d.records.map(r=>`<tr><td class="l">${r.period||""}</td><td class="l">${r.plan||""}${r.bonus10?` 送转${r.bonus10}`:""}</td><td>${r.reg||""}</td><td>${r.ex||""}</td></tr>`).join("")}</tbody></table></div></details>`;
+  const setOv=async v=>{const S=state.holdings.settings; S.overrides={...(S.overrides||{})}; if(v==null) delete S.overrides[d.code]; else S.overrides[d.code]=v; await saveHoldings(); state.pool.stocks.forEach(applyZones); renderDetail(applyZones(d))};
+  $("#ov").onchange=e=>{const v=+e.target.value; e.target.value===""?setOv(null):(v>0&&v<=15&&setOv(v))};
+  $("#ovclear").onclick=()=>setOv(null);
+  $("#favbtn").onclick=()=>{setFav(d.code,!favSet().has(d.code)); renderDetail(d)};
+  $("#addpos").onclick=()=>{state.prefill=d.code;goto("#/hold")};
+  $("#rmstk").onclick=async()=>{
+    if(!(await askConfirm(`把「${d.name}」移出股票池？以后可以在「设置 → 管理股票池」里恢复。`,"移出"))) return;
+    if(await removeStock({code:d.code,name:d.name,industry:d.industry})) goto("#/")};
+}
+
+/* ---------- 卖出:按先买先卖冲减批次 ---------- */
+// lots 是买入批次(原样保存),sells 是卖出记录。按卖出日期顺序,每笔卖出先冲减最早的、买入日不晚于卖出日的批次(和红利税"先进先出"一致)。
+function applySells(H){
+  const lots=H.lots.map(l=>({...l,orig:l.shares})), real=[];
+  [...(H.sells||[])].sort((a,b)=>a.date.localeCompare(b.date)).forEach(sl=>{
+    let need=sl.shares; const portions=[];
+    lots.filter(l=>l.code===sl.code&&l.date<=sl.date&&l.shares>0).sort((a,b)=>a.date.localeCompare(b.date)).forEach(l=>{
+      if(need<=0) return; const q=Math.min(l.shares,need); l.shares-=q; need-=q; portions.push({date:l.date,price:l.price,shares:q})});
+    real.push({...sl,portions,short:need});
+  });
+  return {active:lots.filter(l=>l.shares>0),real};
+}
+/* ---------- 隐私模式:金额、份额、收益、日期、代码全部变成 **,个股名称变成 首字**末字 ---------- */
+const EYE_ON='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const EYE_OFF='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.9 17.9A10.1 10.1 0 0 1 12 19c-6.4 0-10-7-10-7a17.6 17.6 0 0 1 4.1-4.9M9.9 5.2A9.5 9.5 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-2.2 3.2M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="M2 2l20 20"/></svg>';
+function maskName(n){return n[0]+"***"}
+function applyPrivacy(root,names,inds){
+  const nameRx=names.slice().sort((a,b)=>b.length-a.length).filter(Boolean).map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));
+  const rxNames=nameRx.length?new RegExp(nameRx.join("|"),"g"):null;
+  const indRx=(inds||[]).slice().sort((a,b)=>b.length-a.length).filter(Boolean).map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));
+  const rxInds=indRx.length?new RegExp(indRx.join("|"),"g"):null;
+  const rxNum=/\d+\/\d+|\d{4}-\d{2}-\d{2}|\d{1,2}-\d{2}|[-+−]?\d[\d,]*(?:\.\d+)?(?:\s?[%％万亿元股份次只笔])?/g;
+  const skip="#entry,.pub,input,textarea,script,style,.dlg";
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT), nodes=[];
+  while(w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(t=>{
+    if(t.parentElement&&t.parentElement.closest(skip)) return;
+    let v=t.nodeValue; if(!/[\d\u4e00-\u9fa5A-Za-z]/.test(v)) return;
+    if(rxNames) v=v.replace(rxNames,m=>maskName(m));
+    if(rxInds) v=v.replace(rxInds,"**");
+    v=v.replace(rxNum,(m,off,str)=>{ if(/^\d+\/\d+$/.test(m)) return m; const nx=str[off+m.length]; if(nx&&"月年天档".includes(nx)) return m; return "**" });
+    if(v!==t.nodeValue) t.nodeValue=v;
+  });
+  root.classList.add("priv-on");
+  root.querySelectorAll(".hbody .verdict,.hbody .nodes").forEach(e=>e.remove());   // 价格位置结论、加仓止盈节点:直接移除,不只是隐藏
+  root.querySelectorAll(".badge").forEach(b=>{if(/\bs-/.test(b.className)||b.classList.contains("held")){b.className="badge pbadge"; b.textContent="***"}});
+  root.querySelectorAll("[title]").forEach(e=>{if(!e.closest("#entry")&&e.id!=="privbtn") e.removeAttribute("title")});
+}
+/* ---------- 检查更新 ---------- */
+async function checkUpdate(manual){
+  try{ return await api("/api/update"+(manual?"?force=1":"")) }catch(e){ return {error:"检查失败，请稍后再试"} }
+}
+function showUpd(info,manual){
+  if(!info||!info.newer||document.getElementById("updlg")) return;
+  let dis=""; try{dis=localStorage.getItem("updDismiss")||""}catch(e){}
+  if(!manual&&dis===info.latest) return;
+  const notes=(info.notes||[]).map(t=>`<li>${t}</li>`).join("");
+  const dl=info.download?`<a class="btn primary" href="${info.download}" target="_blank" rel="noopener">去下载</a>${info.code?`<span class="sub">提取码 <b>${info.code}</b></span>`:""}`:`<span class="sub">请到${info.contact||"微信公众号「快乐收息佬」"}获取新版</span>`;
+  const w=document.createElement("div"); w.className="mask"; w.id="updlg";
+  w.innerHTML=`<div class="dlg updlg" role="dialog" aria-label="发现新版本"><h3>发现新版本 v${info.latest}</h3>
+    <p>你现在用的是 v${info.current}${info.released?` · 新版发布于 ${info.released}`:""}</p>
+    ${notes?`<ul class="updnotes">${notes}</ul>`:""}
+    <div class="updget">${dl}</div>
+    <div class="acts">${manual?"":'<button class="btn" data-x="skip">这个版本不再提醒</button>'}<button class="btn" data-x="later">${manual?"关闭":"稍后再说"}</button></div></div>`;
+  const close=()=>{w.remove(); document.removeEventListener("keydown",kd)};
+  const kd=e=>{if(e.key==="Escape") close()};
+  w.onclick=e=>{const x=e.target.dataset.x; if(x==="skip"){try{localStorage.setItem("updDismiss",info.latest)}catch(_){} close()} else if(x==="later"||e.target===w) close()};
+  document.addEventListener("keydown",kd); document.body.appendChild(w);
+}
+/* ---------- 持仓 ---------- */
+async function renderHold(){
+  const H=state.holdings, S=H.settings, P=state.pool?.stocks||[];
+  H.sells=H.sells||[];
+  const eff=applySells(H), preDir=state.prefillDir==="sell"?"sell":"buy";
+  const codes=[...new Set([...eff.active.map(l=>l.code),...H.sells.map(x=>x.code)])];
+  const det={}; await Promise.all(codes.map(async c=>det[c]=await getStock(c).catch(()=>null)));
+  const isHK=c=>/^\d{5}$/.test(c);
+  const fxs={}; codes.forEach(c=>{const d=det[c]; fxs[c]=isHK(c)?1:fxOf(d); if(d&&!isHK(c)) det[c]=cnyView(d)});
+  eff.active.forEach(l=>{l.price*=fxs[l.code]||1});
+  eff.real.forEach(r=>{const f=fxs[r.code]||1; r.price*=f; r.portions.forEach(p=>{p.price*=f})});
+  const t0=today();
+  const heldNow=new Map(); eff.active.forEach(l=>heldNow.set(l.code,(heldNow.get(l.code)||0)+l.shares));
+  const allG=codes.map(c=>{
+    const lots=eff.active.filter(l=>l.code===c), d=det[c]; if(!lots.length||!d) return null;
+    const sh=lots.reduce((a,l)=>a+l.shares,0), cost=lots.reduce((a,l)=>a+l.shares*l.price,0), mv=sh*d.price;
+    const avg=cost/sh;
+    const ev=d.forward.map(f=>({date:f.date,cash:f.cash,declared:f.declared}));
+    ev.forEach(e=>{e.gross=0;e.tax=0;lots.forEach(l=>{if(e.declared&&l.date>=e.date)return;const g=l.shares*e.cash;const r=taxOf(d,Math.max(0,dayDiff(l.date,e.date)));e.gross+=g;e.tax+=g*r})});
+    const gross=ev.reduce((a,e)=>a+e.gross,0), tax=ev.reduce((a,e)=>a+e.tax,0);
+    const rc=recvDiv(d,lots,t0), gain=mv-cost;
+    return {c,d,lots,sh,cost,mv,avg,ev,gross,tax,rc,gain,total:gain+rc.gross-rc.tax};
+  }).filter(Boolean);
+  const groups=allG.filter(g=>!isHK(g.c)), gH=allG.filter(g=>isHK(g.c));
+  // 已实现:每笔卖出 = 价差 + 持有期内已领分红 − 卖出时补的红利税
+  const stockName=c=>(P.find(x=>x.code===c)||{}).name||c;
+  const realAll=eff.real.map(r=>{const d=det[r.code], q=r.portions.reduce((a,p)=>a+p.shares,0), cost=r.portions.reduce((a,p)=>a+p.shares*p.price,0), gain=q*r.price-cost;
+    const rd=d?recvDiv(d,r.portions,r.date):{gross:0,tax:0};
+    return {...r,name:stockName(r.code),q,cost,gain,div:rd.gross,dtax:rd.tax,total:gain+rd.gross-rd.tax}}).sort((a,b)=>b.date.localeCompare(a.date));
+  const realRows=realAll.filter(r=>!isHK(r.code)), realH=realAll.filter(r=>isHK(r.code));
+  const RT=realRows.reduce((a,r)=>({gain:a.gain+r.gain,div:a.div+r.div,tax:a.tax+r.dtax,total:a.total+r.total,cost:a.cost+r.cost}),{gain:0,div:0,tax:0,total:0,cost:0});
+  const T={cost:0,mv:0,gross:0,tax:0,gain:0,recv:0,rtax:0}; groups.forEach(g=>{T.cost+=g.cost;T.mv+=g.mv;T.gross+=g.gross;T.tax+=g.tax;T.gain+=g.gain;T.recv+=g.rc.gross;T.rtax+=g.rc.tax});
+  const cap=+S.capital||0, maxPct=+S.maxPct||15;
+  // 月历
+  const now=new Date(), cal=Array.from({length:12},(_,i)=>{const d=new Date(now.getFullYear(),now.getMonth()+i,1);return {key:d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0"),label:(d.getMonth()+1)+"月",y:d.getFullYear(),v:0,items:[]}});
+  groups.forEach(g=>g.ev.forEach(e=>{const k=e.date.slice(0,7);const m=cal.find(x=>x.key===k);if(m){m.v+=e.gross-e.tax; m.items.push({n:g.d.name,v:e.gross-e.tax,date:e.date,declared:e.declared})}}));
+
+  const pre=P.find(s=>s.code===state.prefill);
+  $("#main").innerHTML=`
+  <div class="ph hasbtn"><h2>我的持仓</h2><span class="sub">一只一行，点开看加仓/止盈节点、买入批次和分红细节</span>${allG.length?`<button class="privbtn ${state.privacy?"on":""}" id="privbtn" aria-label="${state.privacy?"显示数据":"隐私模式：隐藏金额、份额、收益和个股名称"}" title="${state.privacy?"点击显示数据":"隐私模式：隐藏金额、份额、收益和个股名称"}">${state.privacy?EYE_OFF:EYE_ON}</button>`:""}</div>
+  ${gH.length?`<h3 class="mksec">A 股 / B 股 <span class="sub">人民币</span></h3>`:""}
+  ${groups.length?`
+  <div class="grid g4" style="margin-bottom:16px">
+    <div class="card kpi" style="margin:0"><div class="k">持仓市值 / 成本</div><div class="v">${cny(T.mv)}</div><div class="sub">成本 ${cny(T.cost)} · 浮盈 <span class="${sgn(T.mv-T.cost)}">${cny(T.mv-T.cost)} (${pct(T.cost?T.mv/T.cost-1:0,1)})</span></div></div>
+    <div class="card kpi" style="margin:0"><div class="k">未来12月预计分红（税前）</div><div class="v">${cny(T.gross)}</div><div class="sub">占成本 ${pct(T.cost?T.gross/T.cost:0)} · 占市值 ${pct(T.mv?T.gross/T.mv:0)}</div></div>
+    <div class="card kpi" style="margin:0"><div class="k">预计红利税</div><div class="v">${cny(T.tax)}</div><div class="sub">按各批次到分红日的持股期限估算</div></div>
+    <div class="card kpi" style="margin:0"><div class="k">预计税后分红</div><div class="v">${cny(T.gross-T.tax)}</div><div class="sub">占成本 ${pct(T.cost?(T.gross-T.tax)/T.cost:0)}${cap?` · 仓位 ${pct(T.mv/cap,0)}`:""}</div></div>
+  </div>
+  ${holdTable(groups,T,cap,maxPct)}
+  ${fold(totalCard(groups,T),`<b class="${sgn(T.gain+T.recv-T.rtax)}">${cny(T.gain+T.recv-T.rtax)}</b>`)}
+  ${fold(allocCard(groups,T))}
+  ${fold(divCal(cal),`<b>${cny(cal.reduce((a,m)=>a+m.v,0))}</b>`)}`:`<div class="card empty">${gH.length?"目前没有 A 股持仓。":realRows.length||realH.length?"目前没有持仓（已全部卖出）。":"还没有持仓。先在上面录入一笔买入。"}</div>`}
+  ${realRows.length?fold(sellCard(realRows,RT),`<b class="${sgn(RT.total)}">${cny(RT.total)}</b>`):""}
+  ${gH.length||realH.length?hkSection(gH,realH):""}
+  <details class="card fold" id="entry" ${(!groups.length||state.prefill)?"open":""}><summary><h2>持仓录入</h2><span class="sumv sub">买入、卖出都在这里录</span><i class="hchev">›</i></summary><div class="foldbody"><div class="form" style="margin-top:12px">
+    <label class="stkpick">股票<input id="lcq" placeholder="代码 / 名称 / 拼音缩写，如 sh、神华" autocomplete="off" value="${pre?pre.name+" "+pre.code:""}"><input type="hidden" id="lc" value="${pre?pre.code:""}"><div class="sugg" id="sugg" hidden></div></label>
+  </div>
+    <div class="lotrows" id="lotrows"><div class="lotrow lothead"><span>日期</span><span>方向</span><span>成交价（股票的交易币种）</span><span>数量（股）</span><span></span></div></div>
+    <div class="form" style="margin-top:10px"><button class="btn" id="addrow" type="button">＋ 再加一行</button><button class="btn primary" id="addlot">添加记录</button><span class="sub" id="rowtip">同一只股票的几笔买入或卖出，可以一次录入多行；卖出按先买先卖冲减批次</span></div>
+    <p class="note">每次买入作为一个批次记录（用于按批次计算持股期限与红利税）。每一行用「方向」选买入或卖出；卖出按先买先卖冲减批次，并算出已实现盈亏。录错了可以在下方改或删。数据保存在本机 holdings.json。股票不在列表里？到「设置 → 添加个股」输入代码加入即可（港股 5 位代码如 00941，B 股 6 位代码如 900948、200596）。</p></div></details>
+  ${(()=>{const fl=groups.filter(g=>g.d.fx_orig);return fl.length?`<p class="note">B 股：价格和分红按美元/港元计算，这里按当前汇率折合人民币（${[...new Map(fl.map(g=>[g.d.ccy,g.d.fx_orig.fx])).entries()].map(([c,f])=>`1 ${CU[c]} ≈ ${f.toFixed(3)} 元`).join("，")}），成本也按当前汇率折算，所以不含买入后汇率变动的盈亏。红利税按 10% 估算（没有持股期优惠），以券商实际扣税为准。</p>`:""})()}
+  <p class="note pub">红利税：A 股持股 ≤1个月 20%、1个月~1年 10%、>1年免税，按「持有到分红日」估算，以券商清算为准。仅供研究，不构成投资建议。</p>`;
+
+  // 股票:输入代码、名称或拼音缩写匹配
+  const lcq=$("#lcq"), lc=$("#lc"), sugg=$("#sugg");
+  const poolList=P;
+  const matchStk=q=>{q=q.trim().toLowerCase(); return q?poolList.filter(s=>s.name.includes(q)||s.code.includes(q)||(s.py||"").includes(q)||(s.pyfull||"").includes(q)):poolList};
+  const pick=s=>{lc.value=s.code; lcq.value=s.name+" "+s.code; sugg.hidden=true; const n=heldNow.get(s.code)||0; $("#rowtip").textContent=n?`当前持有 ${n} 股；卖出按先买先卖冲减批次`:"同一只股票的几笔买入或卖出，可以一次录入多行；卖出按先买先卖冲减批次"};
+  const showSugg=()=>{const r=matchStk(lcq.value).slice(0,8); sugg.innerHTML=r.length?r.map(s=>`<button type="button" data-c="${s.code}"><b>${s.name}</b><span class="sub">${s.code} · ${s.industry}</span></button>`).join(""):'<div class="sub" style="padding:10px 12px">没有匹配的股票</div>'; sugg.hidden=false};
+  lcq.oninput=()=>{lc.value=""; showSugg()}; lcq.onfocus=()=>{lcq.select(); showSugg()};
+  lcq.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault(); const r=matchStk(lcq.value); if(r.length) pick(r[0])}else if(e.key==="Escape") sugg.hidden=true};
+  sugg.onmousedown=e=>{const b=e.target.closest("[data-c]"); if(b){e.preventDefault(); pick(P.find(s=>s.code===b.dataset.c))}};
+  lcq.onblur=()=>{if(!lc.value){const r=matchStk(lcq.value); if(lcq.value.trim()&&r.length===1) pick(r[0])} sugg.hidden=true};
+  // 多行录入:同一只股票的几笔成交一次加完
+  const rowsEl=$("#lotrows");
+  const addRow=(focus,dir)=>{const r=document.createElement("div"); r.className="lotrow";
+    r.innerHTML=`<input class="rd" type="date" value="${t0}"><select class="rk"><option value="buy">买入</option><option value="sell">卖出</option></select><input class="rp" type="number" step="0.01" placeholder="如 38.50"><input class="rs" type="number" step="100" placeholder="如 1000"><button type="button" class="btn sm rx" title="删除这一行">✕</button>`;
+    r.querySelector(".rk").value=dir||"buy"; rowsEl.appendChild(r); if(focus) r.querySelector(".rp").focus()};
+  addRow(false,preDir);
+  rowsEl.onclick=e=>{if(e.target.classList.contains("rx")&&rowsEl.querySelectorAll(".lotrow:not(.lothead)").length>1) e.target.closest(".lotrow").remove()};
+  rowsEl.onkeydown=e=>{if(e.key==="Enter"&&e.target.classList.contains("rs")){e.preventDefault(); const last=rowsEl.lastElementChild; if(e.target.closest(".lotrow")===last) addRow(true,e.target.closest(".lotrow").querySelector(".rk").value); else e.target.closest(".lotrow").nextElementSibling.querySelector(".rp").focus()}};
+  $("#addrow").onclick=()=>addRow(true);
+  document.querySelectorAll("[data-sell]").forEach(b=>b.onclick=()=>{state.prefillDir="sell"; state.prefill=b.dataset.sell; renderHold().then(()=>$("#entry").scrollIntoView({behavior:"smooth",block:"center"}))});
+  document.querySelectorAll("[data-delsell]").forEach(b=>b.onclick=async()=>{if(!(await askConfirm("删除这条卖出记录？删除后对应的股数会回到持仓里。","删除")))return;H.sells=H.sells.filter(x=>x.id!==b.dataset.delsell);await saveHoldings();renderHold()});
+  $("#addlot").onclick=async()=>{
+    if(!lc.value){notice("请先选择股票：输入代码、名称或拼音缩写，再点候选项");return}
+    const rows=[...rowsEl.querySelectorAll(".lotrow:not(.lothead)")].map((r,i)=>({i:i+1,kind:r.querySelector(".rk").value,date:r.querySelector(".rd").value,price:+r.querySelector(".rp").value,shares:+r.querySelector(".rs").value,empty:!r.querySelector(".rp").value&&!r.querySelector(".rs").value}));
+    const use=rows.filter(r=>!r.empty); if(!use.length){notice("请填写成交价和数量");return}
+    const bad=use.find(r=>!(r.price>0&&r.shares>0&&r.date)); if(bad){notice(`第 ${bad.i} 行没填完整：需要日期、成交价和数量`);return}
+    const mk=(r,k)=>({id:Date.now().toString(36)+k,code:lc.value,date:r.date,price:r.price,shares:r.shares});
+    const nl=H.lots.length, ns=H.sells.length;
+    use.forEach((r,k)=>(r.kind==="sell"?H.sells:H.lots).push(mk(r,k)));
+    const over=applySells(H).real.find(x=>x.short>0);
+    if(over){H.lots.length=nl; H.sells.length=ns; notice(`卖出数量超过了当时的持有数量（${stockName(over.code)} 缺 ${over.short} 股）。请检查卖出日期和数量，或先录入对应的买入。`); return}
+    state.prefill=null; state.prefillDir=null; await saveHoldings(); renderHold()};
+  document.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{if(!(await askConfirm("删除这个批次？","删除")))return;const keepLots=H.lots;H.lots=H.lots.filter(l=>l.id!==b.dataset.del);
+    const over=applySells(H).real.find(x=>x.short>0); if(over){H.lots=keepLots; return notice(`删除后买入数量不够覆盖已卖出的股数（${stockName(over.code)} 缺 ${over.short} 股）。请先删除对应的卖出记录。`)}
+    await saveHoldings();renderHold()});
+  document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=async()=>{const l=H.lots.find(x=>x.id===b.dataset.edit);
+    const v=await dlg({title:"修改这笔买入",fields:[{k:"date",label:"买入日期",type:"date",v:l.date},{k:"price",label:`买入价（${CU[(state.pool.stocks.find(x=>x.code===l.code)||{}).ccy||"CNY"]}）`,step:"0.01",v:l.price},{k:"shares",label:"数量（股）",step:"100",v:l.shares}],ok:"保存"}); if(!v) return;
+    if(!(+v.shares>0&&+v.price>0&&v.date)) return notice("请填写有效的买入日期、买入价和数量");
+    const old={date:l.date,shares:l.shares,price:l.price}; l.date=v.date;l.shares=+v.shares;l.price=+v.price;
+    const over=applySells(H).real.find(x=>x.short>0);
+    if(over){Object.assign(l,old); return notice(`改完后买入数量不够覆盖已卖出的股数（${stockName(over.code)} 缺 ${over.short} 股）。请先修改或删除对应的卖出记录。`)}
+    await saveHoldings();renderHold()});
+  document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
+  if(groups.length) bindAlloc();
+  $("#privbtn")&&($("#privbtn").onclick=()=>{state.privacy=!state.privacy; try{localStorage.setItem("privacy",state.privacy?"1":"")}catch(e){} renderHold()});
+  if(state.privacy){ applyPrivacy($("#main"),P.map(x=>x.name),[...new Set(P.map(x=>x.industry))]); const q=$("#lcq"); if(q&&pre) q.value=maskName(pre.name)+" **" } else $("#main").classList.remove("priv-on");
+}
+
+/* ---------- 含息总收益 ---------- */
+// 买入日之后、登记日之前已持有的除息分红（估算）；税按"今天卖出"的持股期限补缴（一年以内卖出补税，超过一年免税）
+function recvDiv(d,lots,t0){
+  let gross=0,tax=0,n=0;
+  (d.records||[]).forEach(r=>{
+    if(!r.ex||r.ex>t0||!(r.cash10>0)) return;
+    let hit=false;
+    lots.forEach(l=>{const ok=r.reg?(l.date<=r.reg):(l.date<r.ex); if(!ok) return; hit=true;
+      const g=l.shares*r.cash10/10; gross+=g; tax+=g*taxOf(d,Math.max(0,dayDiff(l.date,t0)))});
+    if(hit) n++;
+  });
+  return {gross,tax,n};
+}
+function totalCard(groups,T){
+  const tot=T.gain+T.recv-T.rtax, rows=[...groups].sort((a,b)=>b.total/b.cost-a.total/a.cost);
+  const mx=Math.max(...rows.map(g=>Math.abs(g.gain/g.cost)+Math.max(0,(g.rc.gross-g.rc.tax)/g.cost)),0.01);
+  const bars=rows.map(g=>{const p=g.gain/g.cost, dv=(g.rc.gross-g.rc.tax)/g.cost, t=g.total/g.cost;
+    return `<div class="trow"><div class="tn"><b>${g.d.name}</b></div>
+      <div class="tbar"><i class="${p>=0?"tp":"tpn"}" style="width:${(Math.abs(p)/mx*100).toFixed(1)}%" title="价差 ${pct(p,1)}"></i><i class="td" style="width:${(Math.max(0,dv)/mx*100).toFixed(1)}%" title="已收分红（税后估算） ${pct(dv,1)}"></i></div>
+      <div class="tv"><b class="${sgn(t)}">${pct(t,1)}</b><span class="sub">价差 ${pct(p,1)} · 分红 ${pct(dv,1)}</span></div></div>`}).join("");
+  return `<div class="card"><h2>含息总收益 <span class="sub" style="font-weight:400">· 税后总回报 = 价差 + 已收分红 − 税（别只看浮盈）</span></h2>
+    <div class="grid g4" style="margin:6px 0 12px">
+      <div class="kpi"><div class="k">含息总收益</div><div class="v ${sgn(tot)}">${cny(tot)}</div><div class="sub">占成本 <b class="${sgn(tot)}">${pct(T.cost?tot/T.cost:0,1)}</b></div></div>
+      <div class="kpi"><div class="k">价差（浮盈）</div><div class="v ${sgn(T.gain)}">${cny(T.gain)}</div><div class="sub">${pct(T.cost?T.gain/T.cost:0,1)}</div></div>
+      <div class="kpi"><div class="k">已收分红（税前）</div><div class="v">${cny(T.recv)}</div><div class="sub">${pct(T.cost?T.recv/T.cost:0,1)} · 买入后已除息的</div></div>
+      <div class="kpi"><div class="k">若今天卖出需补税</div><div class="v">${cny(T.rtax)}</div><div class="sub">持股满一年的分红免税</div></div>
+    </div>
+    <div class="legend"><span><i style="background:var(--c1)"></i>价差</span><span><i style="background:var(--c2)"></i>已收分红（税后估算）</span><span><i style="background:var(--tl-r)"></i>价差为负</span></div>
+    <div class="tlist">${bars}</div>
+    <p class="note pub">已收分红按每个批次买入日之后、股权登记日之前已持有的除息记录估算；税按「今天卖出」的持股期限计（一年以内卖出，分红要按持股期限补税）。不含手续费，送转股没有调整。含息总收益才是你真正赚到的，价差只是其中一部分。</p></div>`;
+}
+
+/* ---------- 风险属性分类 ---------- */
+const STYLES={
+  def:{name:"防御型",c:"var(--st-def)",role:"压舱石",inds:["电力","公用事业","通信","交通"],desc:"收费、公用事业类：需求刚性、现金流稳，股价波动小。分红稳，但增长慢，股息率一般不高。",m:[5,2,1]},
+  fin:{name:"金融型",c:"var(--st-fin)",role:"稳健底仓",inds:["银行","券商","保险"],desc:"银行、券商、保险：分红率稳定，估值常低于净资产。风险在资产质量和利率周期。",m:[4,2,3]},
+  gro:{name:"成长型",c:"var(--st-gro)",role:"长期增厚",inds:["消费","医药","传媒"],desc:"消费、医药：股息率不算高，但分红随利润一起长大，要为成长付更高的估值。",m:[4,5,3]},
+  cyc:{name:"周期型",c:"var(--st-cyc)",role:"高息弹性",inds:["煤炭","油气","航运","建材","汽车","有色金属","建筑","制造"],desc:"资源、航运、建材、汽车：景气好时分红丰厚，景气差时分红大减。高股息是对不确定性的补偿。",m:[2,3,5]},
+  oth:{name:"未分类",c:"var(--mute)",role:"",inds:[],desc:"",m:[0,0,0]}
+};
+const styleKey=ind=>Object.keys(STYLES).find(k=>STYLES[k].inds.includes(ind))||"oth";
+const stagHtml=ind=>{if(ind==="ETF") return `<span class="stag" style="--c:var(--accent)" title="打包一篮子股票的基金；没有公司体检，分红按近 12 个月计算">ETF</span>`; const s=STYLES[styleKey(ind)];return `<span class="stag" style="--c:${s.c}" title="${s.role?s.role+":":""}${s.desc}">${s.name}</span>`};
+
+/* ---------- 配置分析（持仓页） ---------- */
+function allocCard(groups,T){
+  const S=state.holdings.settings, tg=S.targets||{}, c=cfg(), keys=["def","fin","gro","cyc","oth"].filter(k=>k!=="oth"||groups.some(g=>styleKey(g.d.industry)==="oth"));
+  const by={}; keys.forEach(k=>by[k]={mv:0,div:0,prem:0,names:[]}); const byI={};
+  groups.forEach(g=>{const k=styleKey(g.d.industry), b=by[k]; b.mv+=g.mv; b.div+=g.gross; b.prem+=g.mv*premOf(g.d.industry); b.names.push(g.d.name); byI[g.d.industry]=(byI[g.d.industry]||0)+g.mv});
+  const tot=T.mv||1, share=k=>by[k].mv/tot;
+  const avgPrem=keys.reduce((a,k)=>a+by[k].prem,0)/tot, reqY=(c.rf+avgPrem)/100, actY=T.gross/tot;
+  const tsum=keys.reduce((a,k)=>a+(+tg[k]||0),0), hasT=tsum>0;
+  const bar=`<div class="stackbar">${keys.filter(k=>by[k].mv>0).map(k=>`<div style="width:${(share(k)*100).toFixed(2)}%;background:${STYLES[k].c}" title="${STYLES[k].name} ${(share(k)*100).toFixed(1)}%"><span>${share(k)>=0.2?STYLES[k].name+" "+Math.round(share(k)*100)+"%":share(k)>=0.06?Math.round(share(k)*100)+"%":""}</span></div>`).join("")}</div>`;
+  const rows=keys.map(k=>{const b=by[k], s=STYLES[k], cur=share(k)*100, t=+tg[k]||0, diff=cur-t;
+    return `<div class="arow"><div class="an"><i class="sdot" style="background:${s.c}"></i><b>${s.name}</b><span class="sub">${b.names.length?b.names.join("、"):"—"}</span></div>
+      <div class="ab"><div class="atrack"><i style="width:${Math.min(100,cur)}%;background:${s.c}"></i>${hasT?`<u style="left:${Math.min(100,t)}%" title="目标 ${t}%"></u>`:""}</div></div>
+      <div class="av"><b>${cur.toFixed(0)}%</b><span class="sub">${b.mv?`股息率 ${pct(b.div/b.mv,1)} · 溢价 ${(b.prem/b.mv).toFixed(1)}`:"—"}</span>${hasT&&t?`<span class="sub ${(Math.abs(diff)>=5||Math.abs(diff)/t>=0.25)?"warn":""}">目标 ${t}% · ${diff>0?"高":"低"} ${Math.abs(diff).toFixed(0)}</span>`:""}</div></div>`}).join("");
+  const ind=Object.entries(byI).sort((a,b)=>b[1]-a[1]);
+  const hints=[]; const top=ind[0];
+  if(top&&top[1]/tot>0.4&&ind.length>1) hints.push(`「${top[0]}」占 ${Math.round(top[1]/tot*100)}%，行业集中度偏高：同一行业的股票常常一起涨跌，分红也容易一起受影响。`);
+  else if(ind.length===1&&groups.length>1) hints.push(`目前只持有「${top[0]}」一个行业，所有持仓面对同一类风险。`);
+  if(share("cyc")>0.4) hints.push(`周期型占 ${Math.round(share("cyc")*100)}%：这类股票景气差时分红会明显减少，收入的稳定性要留意。`);
+  if(groups.length&&groups.length<5) hints.push(`目前持有 ${groups.length} 只，个股的偶发事件（分红被砍、业绩暴雷）对整体影响较大。`);
+  if(keys.filter(k=>by[k].mv>0).length===1&&groups.length>1) hints.push(`只持有「${STYLES[keys.find(k=>by[k].mv>0)].name}」一类风险属性。`);
+  const devs=keys.filter(k=>{const t=+tg[k]||0, d=Math.abs(share(k)*100-t); return t>0&&(d>=5||d/t>=0.25)});
+  if(devs.length) hints.push(`「${devs.map(k=>STYLES[k].name).join("、")}」偏离目标已超过阈值（偏离 ≥5 个百分点，或相对目标 ≥25%）。调整的顺序：先用新增资金和收到的分红补足低配的类别，不要急着卖出高配的；A 股持股一年以内卖出，分红要补税，别为了调仓打断持股期限。`);
+  return `<div class="card"><h2>配置分析 <span class="sub" style="font-weight:400">· 按风险属性看你的钱分在哪（溢价来自风险，不是股息越高越好）</span></h2>
+    ${bar}
+    <div class="legend">${keys.filter(k=>by[k].mv>0).map(k=>`<span><i style="background:${STYLES[k].c}"></i>${STYLES[k].name}</span>`).join("")}</div>
+    <div class="grid g3" style="margin:12px 0">
+      <div class="kpi"><div class="k">组合平均溢价（市值加权）</div><div class="v">${avgPrem.toFixed(2)}%</div><div class="sub">越高 = 整体承担的风险越大</div></div>
+      <div class="kpi"><div class="k">组合要求股息率</div><div class="v">${pct(reqY)}</div><div class="sub">国债 ${c.rf}% + 平均溢价</div></div>
+      <div class="kpi"><div class="k">组合预计股息率</div><div class="v">${pct(actY)}</div><div class="sub ${actY>=reqY?"":"warn"}">${actY>=reqY?"≥ 要求，风险补偿够":"低于要求，补偿偏薄"}（按市值，未来12月预计分红）</div></div>
+    </div>
+    <div class="alist">${rows}</div>
+    <h3>按行业</h3>
+    <div class="alist">${ind.map(([n,v])=>{const s=STYLES[styleKey(n)];return `<div class="arow slim"><div class="an"><i class="sdot" style="background:${s.c}"></i><b>${n}</b></div><div class="ab"><div class="atrack"><i style="width:${(v/tot*100).toFixed(1)}%;background:${s.c}"></i></div></div><div class="av"><b>${(v/tot*100).toFixed(0)}%</b></div></div>`}).join("")}</div>
+    ${hints.length?`<div class="hint" style="margin-top:12px">${hints.map(h=>"· "+h).join("<br>")}</div>`:""}
+    <details style="margin-top:10px"><summary class="sub">设置我的配置目标（可选，设了就会显示偏离）</summary>
+      <div class="form" style="margin-top:10px">${keys.filter(k=>k!=="oth").map(k=>`<label>${STYLES[k].name} %<input type="number" min="0" max="100" step="5" data-tg="${k}" value="${tg[k]??""}" placeholder="—"></label>`).join("")}<span class="sub" id="tgsum">${hasT?"合计 "+tsum+"%":""}</span></div>
+      <p class="note">目标比例没有标准答案，取决于你收入的稳定性、投资期限和能承受的波动。可以先看「知识」页里的示意。</p></details>
+    <p class="note pub">分类依据：防御型（电力、公用事业、通信、交通）、金融型（银行、券商、保险）、成长型（消费、医药、传媒）、周期型（煤炭、油气、航运、建材、汽车、有色金属、建筑、制造）。这是按行业的粗略归类，同一行业里个股的风险也会不同。仅供研究，不构成投资建议。</p></div>`;
+}
+function bindAlloc(){
+  document.querySelectorAll("[data-tg]").forEach(i=>i.onchange=async()=>{const S=state.holdings.settings; S.targets={...(S.targets||{})}; const v=i.value===""?null:Math.max(0,Math.min(100,+i.value)); v===null?delete S.targets[i.dataset.tg]:S.targets[i.dataset.tg]=v; await saveHoldings(); renderHold()});
+}
+
+function divCal(cal){
+  const cells=cal.map((m,i)=>`<div class="cm ${m.v?"has":""}"><div class="cmh"><b class="pub">${m.label}${m.label==="1月"||i===0?`<span class="sub"> ${m.y}</span>`:""}</b>${m.v?`<span class="ct">${cny(m.v)}</span>`:'<span class="sub">–</span>'}</div>${m.items.sort((a,b)=>a.date.localeCompare(b.date)).map(it=>`<div class="ci"><span>${it.n} <i>${it.date.slice(5)}${it.declared?"":" 预计"}</i></span><b>${cny(it.v)}</b></div>`).join("")}</div>`).join("");
+  return `<div class="card"><h2>分红日历 <span class="sub" style="font-weight:400">· 未来 12 个月，税后</span></h2><div class="calgrid">${cells}</div><p class="note">已公告的按公告金额，其余按去年节奏顺延，不含增长假设；金额是扣掉预计红利税之后的。</p></div>`;
+}
+function fold(html,right=""){
+  const m=html.match(/^<div class="card">\s*<h2>([\s\S]*?)<\/h2>([\s\S]*)<\/div>\s*$/);
+  return m?`<details class="card fold"><summary><h2>${m[1]}</h2>${right?`<span class="sumv">${right}</span>`:""}<i class="hchev">›</i></summary><div class="foldbody">${m[2]}</div></details>`:html;
+}
+// 一只股票一行;点开看节点、批次等细节
+function holdTable(groups,T,cap,maxPct,f=cny,body=posCard){
+  const head=`<div class="hsum hhead"><span>股票</span><span class="r hm">持股</span><span class="r hm">成本价</span><span class="r hm">现价</span><span class="r">市值</span><span class="r hm">浮盈</span><span class="r hm">已收分红</span><span class="r">含息收益</span><span class="r hm">成本股息率</span><span class="hm">价格位置</span><span></span></div>`;
+  const rows=groups.map(g=>{const {d,sh,cost,mv,avg}=g, pnl=mv-cost, yoc=d.ttm_dps/avg;
+    return `<details class="hrow"><summary class="hsum"><span class="hn"><b>${d.name}</b><span class="sub">${d.code} · ${d.industry}</span></span><span class="r hm">${sh.toLocaleString("zh-CN")}</span><span class="r hm">${px(avg)}</span><span class="r hm">${px(d.price)}</span><span class="r">${f(mv)}</span><span class="r hm ${sgn(pnl)}">${pct(cost?pnl/cost:0,1)}</span><span class="r hm">${g.rc.gross?cny(g.rc.gross):"–"}</span><span class="r ${sgn(g.total)}"><b>${pct(cost?g.total/cost:0,1)}</b></span><span class="r hm">${pct(yoc)}</span><span class="hm"><span class="badge s-${d.status}">${lab(d)}</span></span><i class="hchev">›</i></summary><div class="hbody">${body(g,cap,maxPct)}</div></details>`}).join("");
+  const tot=T.gain+T.recv-T.rtax;
+  const foot=`<div class="hsum hfoot"><span>合计 ${groups.length} 只</span><span class="hm"></span><span class="hm"></span><span class="hm"></span><span class="r">${f(T.mv)}</span><span class="r hm ${sgn(T.gain)}">${pct(T.cost?T.gain/T.cost:0,1)}</span><span class="r hm">${f(T.recv)}</span><span class="r ${sgn(tot)}">${pct(T.cost?tot/T.cost:0,1)}</span><span class="hm"></span><span class="hm"></span><span></span></div>`;
+  return `<div class="card htable">${head}${rows}${foot}</div>`;
+}
+function sellCard(rows,RT){
+  const cnyS=v=>`<span class="${sgn(v)}">${cny(v)}</span>`;
+  return `<div class="card"><h2>卖出记录 · 已实现盈亏</h2>
+    <div class="lnums" style="margin:0 0 12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div><span class="sub">已实现含息收益</span><b>${cnyS(RT.total)}</b></div><div><span class="sub">价差</span><b>${cnyS(RT.gain)}</b></div><div><span class="sub">持有期已收分红（税前）</span><b>${cny(RT.div)}</b></div><div><span class="sub">卖出时补缴红利税</span><b>${cny(RT.tax)}</b></div></div>
+    <div class="tablewrap"><table><thead><tr><th>卖出日</th><th>股票</th><th>卖出价</th><th>数量</th><th>成本均价</th><th>价差</th><th>持有期分红</th><th>补税</th><th>含息合计</th><th></th></tr></thead><tbody>
+    ${rows.map(r=>`<tr><td class="l">${r.date}</td><td class="l">${r.name}</td><td>${px(r.price)}</td><td>${r.q}</td><td>${r.q?num(r.cost/r.q):"–"}</td><td class="${sgn(r.gain)}">${cny(r.gain)}</td><td>${cny(r.div)}</td><td>${cny(r.dtax)}</td><td class="${sgn(r.total)}"><b>${cny(r.total)}</b></td><td><button class="btn sm" data-delsell="${r.id}">删</button></td></tr>`).join("")}</tbody></table></div>
+    <p class="note pub">按先买先卖冲减批次；含息合计 = 价差 + 持有期内已领分红 − 卖出时按持股期限补缴的红利税（≤1 个月 20%，1 个月~1 年 10%，满 1 年免税）。不含手续费和印花税，以券商清算为准。</p></div>`;
+}
+/* 港股:单独一块,港元计,不算红利税,功能从简(持仓表 + 买入批次 + 卖出记录) */
+const hkd=x=>x==null?"–":(x<0?"-":"")+"HK$"+cny(Math.abs(x));
+function hkSection(gs,rr){
+  const T={cost:0,mv:0,gross:0,recv:0,gain:0,rtax:0}; gs.forEach(g=>{T.cost+=g.cost;T.mv+=g.mv;T.gross+=g.gross;T.recv+=g.rc.gross;T.gain+=g.gain});
+  const tot=T.gain+T.recv;
+  const kpi=gs.length?`<div class="grid g4" style="margin-bottom:16px">
+    <div class="card kpi" style="margin:0"><div class="k">持仓市值 / 成本</div><div class="v">${hkd(T.mv)}</div><div class="sub">成本 ${hkd(T.cost)} · 浮盈 <span class="${sgn(T.gain)}">${hkd(T.gain)} (${pct(T.cost?T.gain/T.cost:0,1)})</span></div></div>
+    <div class="card kpi" style="margin:0"><div class="k">未来12月预计分红</div><div class="v">${hkd(T.gross)}</div><div class="sub">占成本 ${pct(T.cost?T.gross/T.cost:0)} · 占市值 ${pct(T.mv?T.gross/T.mv:0)}</div></div>
+    <div class="card kpi" style="margin:0"><div class="k">已收分红</div><div class="v">${hkd(T.recv)}</div><div class="sub">买入后已除息的</div></div>
+    <div class="card kpi" style="margin:0"><div class="k">含息总收益</div><div class="v ${sgn(tot)}">${hkd(tot)}</div><div class="sub">占成本 ${pct(T.cost?tot/T.cost:0,1)}</div></div>
+  </div>${holdTable(gs,T,0,0,hkd,posCardHK)}`:"";
+  const R=rr.reduce((a,r)=>({gain:a.gain+r.gain,div:a.div+r.div,total:a.total+r.total}),{gain:0,div:0,total:0});
+  const sells=rr.length?fold(`<div class="card"><h2>卖出记录 · 已实现盈亏（港元）</h2>
+    <div class="lnums" style="margin:0 0 12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div><span class="sub">已实现含息收益</span><b><span class="${sgn(R.total)}">${hkd(R.total)}</span></b></div><div><span class="sub">价差</span><b>${hkd(R.gain)}</b></div><div><span class="sub">持有期已收分红</span><b>${hkd(R.div)}</b></div></div>
+    <div class="tablewrap"><table><thead><tr><th>卖出日</th><th>股票</th><th>卖出价</th><th>数量</th><th>成本均价</th><th>价差</th><th>持有期分红</th><th>含息合计</th><th></th></tr></thead><tbody>
+    ${rr.map(r=>`<tr><td class="l">${r.date}</td><td class="l">${r.name}</td><td>${px(r.price)}</td><td>${r.q}</td><td>${r.q?num(r.cost/r.q):"–"}</td><td class="${sgn(r.gain)}">${hkd(r.gain)}</td><td>${hkd(r.div)}</td><td class="${sgn(r.total)}"><b>${hkd(r.total)}</b></td><td><button class="btn sm" data-delsell="${r.id}">删</button></td></tr>`).join("")}</tbody></table></div></div>`,`<b class="${sgn(R.total)}">${hkd(R.total)}</b>`):"";
+  return `<h3 class="mksec">港股 <span class="sub">港元，不折算人民币，不计红利税</span></h3>${kpi||'<div class="card empty">目前没有港股持仓。</div>'}${sells}
+  <p class="note">港股按港元计价和计分红，不折算成人民币，也没有算红利税（港股通实际扣税以券商为准）；A 股和港股的金额不会加在一起。已收分红按买入后已除息的记录估算，不含手续费、印花税和汇率变动。</p>`;
+}
+function posCardHK(g){
+  const {d,lots,sh,cost,mv,avg}=g, pnl=mv-cost;
+  return `<div class="card">
+    <div class="pos-head"><h3>${d.name}</h3><span class="mute">${d.code}</span> ${stagHtml(d.industry)}<div class="spacer"></div><button class="btn sm" data-sell="${d.code}">卖出</button> <button class="btn sm" data-open="${d.code}">查看详情</button></div>
+    <div class="grid g4">
+      <div class="kpi"><div class="k">持仓 / 均价</div><div class="v">${sh} 股</div><div class="sub">均价 ${num(avg,3)} · 现价 ${px(d.price)}（港元）</div></div>
+      <div class="kpi"><div class="k">市值 / 浮盈</div><div class="v">${hkd(mv)}</div><div class="sub"><span class="${sgn(pnl)}">${hkd(pnl)} (${pct(pnl/cost,1)})</span></div></div>
+      <div class="kpi"><div class="k">成本股息率 / 现价股息率</div><div class="v">${pct(d.ttm_dps/avg)}</div><div class="sub">现价股息率 ${pct(d.yield)}</div></div>
+      <div class="kpi"><div class="k">未来12月预计分红</div><div class="v">${hkd(g.gross)}</div><div class="sub">已收分红 ${hkd(g.rc.gross)}${g.rc.n?`（${g.rc.n} 次）`:""}</div></div>
+    </div>
+    <div class="verdict s-${d.status}"><div class="vt">${lab(d)}</div></div>
+    <details style="margin-top:8px"><summary>买入批次</summary><div class="tablewrap"><table><thead><tr><th>买入日</th><th>买入价</th><th>数量</th><th>浮盈</th><th></th></tr></thead>
+    <tbody>${lots.map(l=>`<tr><td class="l">${l.date}</td><td>${px(l.price)}</td><td>${l.shares}${l.orig!==l.shares?`<span class="sub"> / 买入 ${l.orig}</span>`:""}</td><td class="${sgn(d.price-l.price)}">${pct(d.price/l.price-1,1)}</td>
+      <td><button class="btn sm" data-edit="${l.id}">改</button> <button class="btn sm" data-del="${l.id}">删</button></td></tr>`).join("")}</tbody></table></div></details>
+  </div>`;
+}
+function posCard(g,cap,maxPct){
+  const {d,lots,sh,cost,mv,avg}=g, z=d.zones, pnl=mv-cost;
+  const yoc = d.ttm_dps/avg;
+  const posPct = cap? mv/cap*100 : null;
+  const room = cap? Math.max(0,cap*maxPct/100-mv):null;
+  const addQty = room!=null? Math.floor(room/d.price/100)*100 : null;
+  // 四个节点按价格从低到高排列:加仓二档 < 加仓一档 < 止盈一档 < 止盈二档（股价下跌时先触发一档，再触发二档）
+  const nodes = z? [
+    ["加仓二档",Math.min(z.heavy,avg*0.9),"低位线 / 成本价 -10% 取低，可再加 1/3",d.price<=Math.min(z.heavy,avg*0.9)],
+    ["加仓一档",z.buy,"买入价（偏低区上沿），可先加 1/3 仓",d.price<=z.buy],
+    ["止盈一档",z.profit,"进入高位，可减 1/3",d.price>=z.profit],
+    ["止盈二档",z.profit*1.15,"高于高位线 15%，可再减 1/3",d.price>=z.profit*1.15]] : [];
+  let advice="数据不足";
+  if(z){
+    if(d.price>=z.profit) advice=`价格处于高位（股息率 ${pct(d.yield)}，近5年最低的一档）：可考虑按节点分批减仓/止盈，或持有至满1年享免税再减。`;
+    else if(d.price>=z.hold) advice="价格偏高：可暂停加仓，继续持有收息。";
+    else if(d.price>z.buy) advice="价格适中：以持有为主，等回到买入价以下再考虑加仓。";
+    else if(room!=null && room<d.price*100) advice=`价格${d.price<=z.heavy?"处于低位":"偏低"}，但这只股票的仓位已达你设的上限，不再加仓。`;
+    else advice=`价格${d.price<=z.heavy?"处于低位":"偏低"}：可考虑加仓${addQty?`（在你设的仓位上限内，最多再买约 ${addQty} 股）`:""}。`;
+  }
+  return `<div class="card">
+    <div class="pos-head"><h3>${d.name}</h3><span class="mute">${d.code}</span> ${stagHtml(d.industry)}<div class="spacer"></div><button class="btn sm" data-sell="${d.code}">卖出</button> <button class="btn sm" data-open="${d.code}">查看详情</button></div>
+    <div class="grid g4">
+      <div class="kpi"><div class="k">持仓 / 均价</div><div class="v">${sh} 股</div><div class="sub">均价 ${num(avg,3)} · 现价 ${px(d.price)}</div></div>
+      <div class="kpi"><div class="k">市值 / 浮盈</div><div class="v">${cny(mv)}</div><div class="sub"><span class="${sgn(pnl)}">${cny(pnl)} (${pct(pnl/cost,1)})</span></div></div>
+      <div class="kpi"><div class="k">成本股息率 / 现价股息率</div><div class="v">${pct(yoc)}</div><div class="sub">现价股息率 ${pct(d.yield)}</div></div>
+      <div class="kpi"><div class="k">未来12月分红 税前 → 税后</div><div class="v">${cny(g.gross)} → ${cny(g.gross-g.tax)}</div><div class="sub">预计红利税 ${cny(g.tax)}</div></div>
+    </div>
+    <div class="sub hline" style="margin:10px 0 2px">含息总收益 <b class="${sgn(g.total)}">${cny(g.total)} (${pct(g.total/g.cost,1)})</b> = 价差 ${cny(g.gain)} + 已收分红 ${cny(g.rc.gross)}${g.rc.n?`（${g.rc.n} 次）`:""} − 若今天卖出补税 ${cny(g.rc.tax)}</div>
+    ${posPct!=null?`<div style="margin:10px 0 2px" class="sub">仓位 ${posPct.toFixed(1)}% / 上限 ${maxPct}%</div><div class="bar"><i class="${posPct>maxPct?"over":""}" style="width:${Math.min(100,posPct/maxPct*100)}%"></i></div>`:""}
+    <div class="verdict s-${d.status}"><div class="vt">${lab(d)}</div><div class="vd">${advice}</div></div>
+    ${nodes.length?`<div class="nodes">${nodes.map(n=>`<div class="node ${n[3]?"hit":""}"><span class="sub">${n[0]}${n[3]?" · 已触发":""}</span><b>${px(n[1])}</b><span class="sub">${n[2]}</span></div>`).join("")}</div>`:""}
+    <details style="margin-top:8px"><summary>买入批次与免税倒计时</summary><div class="tablewrap"><table><thead><tr><th>买入日</th><th>买入价</th><th>数量</th><th>持有天数</th><th>现适用税率</th><th>免税倒计时</th><th>浮盈</th><th></th></tr></thead>
+    <tbody>${lots.map(l=>{const dd=dayDiff(l.date,today()), isE=d.industry==="ETF", r=taxOf(d,dd);return `<tr><td class="l">${l.date}</td><td>${px(l.price)}</td><td>${l.shares}${l.orig!==l.shares?`<span class="sub"> / 买入 ${l.orig}</span>`:""}</td><td>${dd}</td><td>${taxLabel(r)}</td>
+      <td>${r===0?"已免税":(d.market==="hk"||d.market==="b")?"无持股期优惠":"还需 "+(366-dd)+" 天"}</td><td class="${sgn(d.price-l.price)}">${pct(d.price/l.price-1,1)}</td>
+      <td><button class="btn sm" data-edit="${l.id}">改</button> <button class="btn sm" data-del="${l.id}">删</button></td></tr>`}).join("")}</tbody></table></div></details>
+  </div>`;
+}
+
+/* ---------- 红利课堂（知识页） ---------- */
+// 页内对话框:不用浏览器自带的 confirm/prompt/alert(内置浏览器和部分手机浏览器会直接忽略它们)
+function dlg({title,msg="",fields=[],ok="确定",cancel="取消"}){
+  return new Promise(res=>{
+    const w=document.createElement("div"); w.className="mask";
+    w.innerHTML=`<div class="dlg" role="dialog"><h3>${title}</h3>${msg?`<p>${msg}</p>`:""}${fields.map(f=>`<label>${f.label}<input name="${f.k}" type="${f.type||"number"}" step="${f.step||"any"}" value="${f.v??""}"></label>`).join("")}<div class="acts">${cancel?`<button class="btn" data-x="0">${cancel}</button>`:""}<button class="btn primary" data-x="1">${ok}</button></div></div>`;
+    const val=()=>Object.fromEntries([...w.querySelectorAll("input")].map(i=>[i.name,i.value]));
+    const done=v=>{w.remove(); document.removeEventListener("keydown",kd); res(v)};
+    const kd=e=>{if(e.key==="Escape")done(null); else if(e.key==="Enter"&&e.target.tagName!=="BUTTON")done(val())};
+    w.onclick=e=>{const x=e.target.dataset.x; if(x==="1")done(val()); else if(x==="0"||e.target===w)done(null)};
+    document.addEventListener("keydown",kd); document.body.appendChild(w);
+    const f=w.querySelector("input"); if(f){f.focus(); f.select()} else w.querySelector("[data-x='1']").focus();
+  });
+}
+const askConfirm=(msg,ok="确定")=>dlg({title:msg,ok}).then(v=>v!==null);
+const notice=msg=>dlg({title:"提示",msg:String(msg).replace(/\n/g,"<br>"),ok:"知道了",cancel:""});
+const rg=(id,label,min,max,step,val,unit,mark)=>{const mp=mark==null?0:(mark-min)/(max-min)*100;
+  return `<label class="rg"><span>${label} <b id="${id}-v">${val}</b>${unit}</span><span class="rgw${mark==null?"":" hasmk"}"><input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}">${mark==null?"":`<i class="mk" style="left:calc(${mp.toFixed(1)}% + ${(12-mp*0.24).toFixed(1)}px)"><s>${mark} 元</s></i>`}</span></label>`};
+const paintR=e=>{const p=(e.value-e.min)/(e.max-e.min)*100; e.style.background=`linear-gradient(90deg,var(--accent) ${p}%,var(--none-bg) ${p}%)`};
+function simSvg(a1,a2,target,hit){
+  const W=820,H=250,L=50,R=10,T=14,B=26,n=a1.length, mx=Math.max(...a1,target)*1.1||1, bw=(W-L-R)/n, y=v=>T+(H-T-B)*(1-v/mx);
+  let g=""; for(let k=0;k<=4;k++){const v=mx*k/4; g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--mute)">${v.toFixed(1)}</text>`}
+  a1.forEach((v,i)=>{const x=L+bw*i+bw*.15, w=bw*.7, on=hit&&i+1===hit; g+=`<rect x="${x}" y="${y(v)}" width="${w}" height="${Math.max(1,H-B-y(v))}" rx="2" fill="${on?"var(--ink)":"var(--c1)"}" opacity="${hit&&i+1>=hit?1:.55}"><title>第${i+1}年 年股息 ${v.toFixed(2)} 万</title></rect>`; if((i+1)%5===0||i===0) g+=`<text x="${x+w/2}" y="${H-8}" font-size="11" text-anchor="middle" fill="var(--mute)">${i+1}</text>`});
+  g+=`<path d="${a2.map((v,i)=>(i?"L":"M")+(L+bw*i+bw/2).toFixed(1)+","+y(v).toFixed(1)).join("")}" fill="none" stroke="var(--c2)" stroke-width="2.2"/>`;
+  g+=`<line x1="${L}" x2="${W-R}" y1="${y(target)}" y2="${y(target)}" stroke="var(--tl-r)" stroke-width="1.6" stroke-dasharray="6 4"/><text x="${W-R}" y="${y(target)-5}" text-anchor="end" font-size="11" fill="var(--tl-r)">目标 ${target} 万/年</text>`;
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}">${g}</svg>`;
+}
+function renderLearn(){
+  const c=cfg(), P=state.pool?.stocks||[], inds=[...new Set(P.map(s=>s.industry))];
+  const stat=["def","fin","gro","cyc"].map(k=>{const L=P.filter(s=>styleKey(s.industry)===k), ys=L.map(s=>s.yield).sort((a,b)=>a-b), is=[...new Set(L.map(s=>s.industry))], pr=is.map(i=>premOf(i));
+    const FILL={def:["水务燃气","高速公路","港口"],fin:["券商","多元金融","交易所"],gro:["家电","食品饮料","医疗器械"],cyc:["有色金属","钢铁","化工"]}, ex=[...is,...FILL[k]].slice(0,5);
+    return {k,n:L.length,med:ys.length?ys[ys.length>>1]:0,is,ex,pavg:pr.length?pr.reduce((a,b)=>a+b,0)/pr.length:0,pmin:pr.length?Math.min(...pr):0,pmax:pr.length?Math.max(...pr):0}});
+  const ladder=["电力","银行","汽车","航运"].map(i=>({i,k:styleKey(i),p:premOf(i)})).sort((a,b)=>a.p-b.p), maxT=Math.max(...ladder.map(x=>c.rf+x.p),1)*1.1;
+  const dots=n=>`<span class="mdots">${"●".repeat(n)}<i>${"●".repeat(5-n)}</i></span>`;
+  const mixes=[["偏稳",[40,30,20,10]],["均衡",[30,25,25,20]],["偏进取",[15,20,30,35]]];
+  $("#main").innerHTML=`
+  <div class="ph"><h2>红利课堂</h2><span class="sub">先看核心，再按目录挑章节</span></div>
+
+  <div class="card hero" id="sec-0"><div class="kick">先记住这一句</div>
+    <div class="big">红利的核心，就两件事：<em>选到好公司</em>，<em>买在好位置</em></div>
+    <div class="pair">
+      <div class="pc"><b>① 好公司</b><p>赚得到钱、分得出来、不会被砍。分红是公司赚了才发的，不是利息，公司不行，分红就没了。</p><span class="go">→ 看「公司体检」五个灯</span></div>
+      <div class="pc"><b>② 好位置</b><p>分红固定时，股价越低，股息率越高。同一家好公司，买得便宜才划算，追高就是把股息让给了别人。</p><span class="go">→ 看「价格位置」和「买入价」</span></div></div>
+    <p class="note" style="margin-top:12px">缺一不可：好公司买贵了，股息率被压得很低；价格再便宜，买到坏公司，分红可能被砍，本金还会亏。</p>
+    <div class="demo"><div class="sub" style="margin-bottom:8px">试一试：同一家公司，每年固定分红 5 元，拖动看买入价不同会怎样</div>
+      <div class="base">基准：<b>股价 100 元</b>，每年分红 <b>5 元</b> → 股息率 <b>5%</b>（竖线就是 100 元）</div>
+      <div class="ctrl">${rg("hp","买入价格",60,160,1,100," 元",100)}</div>
+      <div class="lnums"><div><span class="sub">这个价格买入的股息率</span><b id="hy">5.0%</b></div><div><span class="sub">每投入 1 万元，每年收</span><b id="hn">500 元</b></div></div>
+      <div class="lmsg" id="hmsg"></div></div></div>
+
+  <div class="card" id="sec-1"><h2>① 红利是怎么赚钱的</h2>
+    <div class="lsteps">
+      <div class="lstep"><span class="circ">1</span><b>买入</b><p>用一笔钱，买下好公司的一小部分。</p></div><div class="larrow">→</div>
+      <div class="lstep"><span class="circ">2</span><b>年年分红</b><p>公司把赚的钱按持股比例，以现金发给你。</p></div><div class="larrow">→</div>
+      <div class="lstep"><span class="circ">3</span><b>再投资</b><p>把分红继续买入，下一年的股息就更多了。</p></div>
+    </div>
+    <div class="formulas"><div class="fm"><b>股息率</b> = 每股分红 ÷ 股价<span class="sub">买入这一刻，每年能收回本金的百分之几</span></div><div class="fm"><b>分红率</b> = 每股分红 ÷ 每股收益<span class="sub">公司把赚的钱分出去多少。超过 100% = 分的比赚的多</span></div></div></div>
+
+  <div class="card" id="sec-2"><h2>② 股息率的两面：价格一跌，数字就变高</h2>
+    <div class="l2">
+      <div class="ctrl"><div class="base">基准：<b>股价 100 元</b>，<b>每年分红 5 元</b> → 股息率 5%</div>${rg("bp","现在的股价",20,200,1,100," 元",100)}<div class="sub">当前每股分红 <b id="bd-v">5.0</b> 元（点下面的按钮改变）</div>
+        <div class="btnrow"><button class="btn sm" data-bp="drop">股价腰斩</button><button class="btn sm" data-bp="cut">分红砍半</button><button class="btn sm" data-bp="both">双杀</button><button class="btn sm" data-bp="reset">重置</button></div></div>
+      <div class="lout"><div class="sub">现价股息率</div><div class="bigy" id="by">5.0%</div>
+        <div class="gbar"><i id="byb" style="left:33%"></i></div><div class="gs"><span>0%</span><span>7.5%</span><span>15%</span></div>
+        <div class="lnums"><div><span class="sub">100 元买入的人，成本股息率</span><b id="bc">5.0%</b></div><div><span class="sub">现在花 1 万元买入，每年收</span><b id="bn">500 元</b></div></div></div></div>
+    <div class="lmsg" id="bmsg"></div></div>
+
+  <div class="card" id="sec-3"><h2>③ 股息率不等于收益率：总回报 = 分红 + 价差</h2>
+    <div class="l2">
+      <div class="ctrl"><div class="base">基准：你以 <b>100 元</b>买入，这一年收到分红 <b>5 元</b>（股息率 5%）</div>${rg("tr1","一年后的股价",40,160,1,85," 元",100)}
+        <div class="btnrow"><button class="btn sm" data-tr="85">跌到 85</button><button class="btn sm" data-tr="100">股价不变</button><button class="btn sm" data-tr="120">涨到 120</button></div></div>
+      <div class="lout"><div class="sub">这一年的总回报</div><div class="bigy" id="trt">-10.0%</div>
+        <div class="trbars"><div class="trb"><span>分红</span><div class="tr0"><i id="trd"></i></div><b id="trdv"></b></div><div class="trb"><span>价差</span><div class="tr0"><i id="trp"></i></div><b id="trpv"></b></div></div></div></div>
+    <div class="lmsg" id="trmsg"></div></div>
+
+  <div class="card" id="sec-4"><h2>④ 溢价来自风险：要求的回报，是国债加上风险补偿</h2>
+    <div class="legend"><span><i style="background:var(--none-bg);border:1px solid var(--mute)"></i>国债收益率 ${c.rf}%（几乎没有风险的收益）</span></div>
+    <div class="lad4">${ladder.map(x=>`<div class="lc"><span class="lc-n"><i class="sdot" style="background:${STYLES[x.k].c}"></i>${x.i}</span><span class="lc-c"><span>${STYLES[x.k].name}</span></span><div class="ltrack"><i class="lbase" style="width:${(c.rf/maxT*100).toFixed(2)}%"><span class="lg">国债 ${c.rf}%</span><span class="sh">${c.rf}</span></i><i class="lprem" style="width:${(x.p/maxT*100).toFixed(2)}%;background:${STYLES[x.k].c}"><span class="lg">+ 溢价 ${x.p}</span><span class="sh">+${x.p}</span></i></div><b class="lc-v">${(c.rf+x.p).toFixed(2).replace(/0$/,"")}%</b></div>`).join("")}<div class="lc-f">条形 = 国债收益率 + 风险溢价，右侧数字 = 要求股息率</div></div>
+    <p class="note">这里只挑 4 个行业做示意，数值不是精确值。同样 5% 的股息率，放在电力上可能很划算，放在航运上却可能不够——因为航运的分红更不稳定。其余行业的溢价在「设置」里看和调，风险越高，要求的回报越高。 <a href="#/settings">去调整 →</a></p></div>
+
+  <div class="card" id="sec-5"><h2>⑤ 四类资产，各司其职：不是股息越高越好</h2>
+    <div class="grid g4 sgrid">${stat.map(s=>{const S0=STYLES[s.k];return `<div class="scard" style="--c:${S0.c}"><div class="scap"><b>${S0.name}</b><span class="role">${S0.role}</span></div><p class="sd">${S0.desc}</p>
+      <div class="meters"><div>分红稳定 ${dots(S0.m[0])}</div><div>分红增长 ${dots(S0.m[1])}</div><div>价格稳定 ${dots(6-S0.m[2])}</div></div>
+      <div class="sub" style="margin-top:8px">股票池 ${s.n} 只 · 股息率中位 ${pct(s.med,1)}<br>要求 ${(c.rf+s.pmin).toFixed(1)}%~${(c.rf+s.pmax).toFixed(1)}%</div>
+      <div class="chipline">${s.is.map(i=>`<span>${i}</span>`).join("")}</div></div>`}).join("")}</div>
+    <p class="note" style="margin-top:6px">圆点越多越好：分红越稳、增长越快、价格越稳。</p>
+    <h3>常见的配置思路（示意，不是建议）</h3>
+    ${mixes.map(([n,v])=>`<div class="mixrow"><span class="mn">${n}</span><div class="stackbar thin">${v.map((p,i)=>`<div style="width:${p}%;background:${STYLES[["def","fin","gro","cyc"][i]].c}"><span>${p}%</span></div>`).join("")}</div></div>`).join("")}
+    <div class="legend" style="margin-top:6px">${["def","fin","gro","cyc"].map(k=>`<span><i style="background:${STYLES[k].c}"></i>${STYLES[k].name}</span>`).join("")}</div>
+    <p class="note">比例没有标准答案，取决于你收入的稳定性、投资期限和能承受的波动。核心思路是：稳的负责安心，成长的负责增厚，周期的负责弹性，别把鸡蛋放在同一类风险里。 <a href="#/hold">看我的持仓配置 →</a></p></div>
+
+  <div class="card" id="sec-6"><h2>⑥ 红利 ETF：把一篮子红利股装进一只基金</h2>
+    <div class="etfgrid">
+      <div class="etfc"><b>是什么</b><p>基金按指数规则买入一篮子高分红股票，你买一份，就等于持有这一整篮。收益来自两部分：成分股的分红，以及净值的涨跌。</p></div>
+      <div class="etfc"><b>为什么有人用它</b><p>一次买入就分散到几十家公司，不用自己挑股、盯财报；买卖像股票一样方便。</p></div>
+      <div class="etfc"><b>代价是什么</b><p>要付管理费等费用；收益会和指数有偏差（跟踪误差）；行业可能很集中；分红多久发一次，由基金合同决定，不是每个红利 ETF 都月月派息。</p></div>
+    </div>
+    <h3>分红不是额外收益：派息后净值会同步下降</h3>
+    <div class="navdemo">
+      <div class="navrow"><span>分红前</span><div class="navbar"><i style="width:100%">净值 1.000</i></div></div>
+      <div class="navrow"><span>分红后</span><div class="navbar"><i style="width:95%">净值 0.950</i><u style="width:5%">0.05</u></div></div>
+    </div>
+    <div class="legend" style="margin-top:6px"><span><i style="background:var(--c1)"></i>基金净值</span><span><i style="background:var(--c2)"></i>发给你的分红（现金）</span></div>
+    <p class="note">分红只是把基金里的一部分钱换成现金发给你，净值相应下降，你的总资产没有变多。要看「分红 + 净值变化」的总回报。</p>
+    <h3>个股、红利 ETF、公募 REITs：三种工具的差别（示意）</h3>
+    <div class="tablewrap"><table class="cmp"><thead><tr><th class="l">工具</th><th>分散程度</th><th>抗单一公司风险</th><th>省心程度</th><th>费用低</th></tr></thead><tbody>
+      <tr><td class="l"><b>红利个股</b></td><td>${dots(1)}</td><td>${dots(1)}</td><td>${dots(1)}</td><td>${dots(5)}</td></tr>
+      <tr><td class="l"><b>红利 ETF</b></td><td>${dots(4)}</td><td>${dots(4)}</td><td>${dots(4)}</td><td>${dots(3)}</td></tr>
+      <tr><td class="l"><b>公募 REITs</b></td><td>${dots(2)}</td><td>${dots(2)}</td><td>${dots(3)}</td><td>${dots(3)}</td></tr></tbody></table></div>
+    <p class="note">圆点越多越好（分散、抗风险、省心、费用低）。个股没有基金管理费但集中风险最高、最费心；ETF 用费用换分散；REITs 的现金流来自底层不动产经营（要求把大部分可分配收益分出去），风险是资产、利率和经营，不是"更安全"。常见思路是 ETF 做底仓、精选个股做补充，不是反过来。示意性质，不是建议。</p>
+    <h3>选红利 ETF，看这几件事</h3>
+    <div class="chkgrid">
+      <div class="chk"><b>1 指数规则</b><p>是按股息率高低选股，还是加了低波动、盈利质量、现金流等筛选？规则不同，风险和行业分布差别很大。</p></div>
+      <div class="chk"><b>2 费用与买卖价差</b><p>管理费、托管费之外，成交不活跃时买卖价差也是成本。</p></div>
+      <div class="chk"><b>3 跟踪误差</b><p>基金收益与指数收益差多少。费用、税、现金拖累都会让它偏离。</p></div>
+      <div class="chk"><b>4 规模与流动性</b><p>规模太小、成交稀少，买卖时容易吃亏，极端情况下还有清盘风险。</p></div>
+      <div class="chk"><b>5 行业集中度</b><p>前十大持仓是不是集中在银行、煤炭、电力等同一类风险？买了 ETF 不等于自动分散。</p></div>
+      <div class="chk"><b>6 分红安排与溢折价</b><p>看基金合同和公告里的分红频率；场内价格也可能高于或低于净值。</p></div>
+    </div>
+    <h3>费用怎么吃掉收益：拖动看</h3>
+    <div class="l2">
+      <div class="ctrl">${rg("e1","指数全年总回报",-10,20,0.5,8," %")}${rg("e2","管理费等综合费率",0,1.5,0.05,0.3," %")}${rg("e3","跟踪偏离、税等其他拖累",0,1.5,0.05,0.2," %")}</div>
+      <div class="lout"><div class="sub">你实际拿到的回报</div><div class="bigy" id="er">7.5%</div><div class="sub" id="es"></div></div></div>
+    <div class="tlist" id="ebar" style="margin-top:10px"></div>
+    <h3>税与分红：要看基金公告</h3>
+    <p class="note">个人持有 A 股个股满一年，分红免个税；基金分配给投资者的收益，一般暂不征个人所得税（具体以基金公告为准）。但基金买入股票时取得的分红，可能已经在基金层面按持股期限扣过税，这部分「税务拖累」体现在净值里，看不见却是真实的成本。所以比较个股和 ETF，要比较的是税后、费后的总回报。</p>
+    <h3>怎么用收息佬看红利 ETF</h3>
+    <p class="note">红利 ETF 的成分股，就是收息佬股票池里这类公司。拿到一只 ETF 的前十大持仓，用同样的方法看：它们集中在防御、金融、成长、周期哪几类？行业有没有扎堆？股息率是不是被个别高息股拉高？再回到「公司体检」逐个看分红能不能持续。以上是通用知识，不是产品推荐。</p></div>
+
+  <div class="card" id="sec-7"><h2>⑦ 红利再投 vs 分红花掉：同样的钱，差在哪</h2>
+    <div class="mech">
+      <div class="ms"><span>持有</span><b>1,000 股</b><em>股价 20 元 · 每股分红 0.8 元</em></div><i>→</i>
+      <div class="ms"><span>毛分红</span><b>800 元</b><em>1,000 × 0.8</em></div><i>→</i>
+      <div class="ms"><span>税后（税 20%）</span><b>640 元</b><em>800 × 80%</em></div><i>→</i>
+      <div class="ms"><span>再买入</span><b>+32 股</b><em>640 ÷ 20 = 32，共 1,032 股</em></div><i>→</i>
+      <div class="ms hot"><span>下一年分红</span><b>825.6 元</b><em>股价和每股分红不变，比 800 元多 3.2%</em></div>
+    </div>
+    <p class="note" style="margin-top:6px">再投资的复利，来自「新买的份额继续产生分红」，不是分红本身变多。</p>
+    <div class="l2" style="margin-top:12px">
+      <div class="ctrl">${rg("r1","初始投入",10,500,10,100," 万")}${rg("r2","股息率",2,8,0.5,5," %")}${rg("r3","股价与分红每年增长",0,8,0.5,3," %")}${rg("r4","持有年数",5,40,1,20," 年")}
+        <div class="rtax"><span class="sub">分红要交的税</span><div class="btnrow"><button class="btn sm on" data-rt="0">0%（持股满一年）</button><button class="btn sm" data-rt="10">10%</button><button class="btn sm" data-rt="20">20%</button></div></div></div>
+      <div class="rescol">
+        <div class="rescard a"><div class="rt">A · 分红全部再投资</div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年总资产</span><b id="ra1">–</b></div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年的年股息</span><b id="ra2">–</b></div></div>
+        <div class="rescard b"><div class="rt">B · 分红拿去花</div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年资产（+ 已花掉的分红）</span><b id="rb1">–</b></div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年的年股息</span><b id="rb2">–</b></div></div>
+      </div></div>
+    <div class="lmsg" id="rmsg"></div>
+    <h3>最后拥有的：再投 vs 花掉</h3>
+    <div class="navdemo" id="rbars"></div>
+    <h3>每年收到的股息</h3>
+    <div class="legend"><span><i style="background:var(--c1)"></i>A 再投资</span><span><i style="background:var(--c2)"></i>B 花掉</span></div>
+    <div id="rchart"></div>
+    <p class="note">模型：每年按股息率领取分红；再投资的一方用税后分红在年末按当时股价买入更多股份；股价和每股分红按相同速度增长。不含手续费、分红被砍和股价波动，别当成预测，看的是「再投资」这个动作的影响。</p></div>
+
+  <div class="card" id="sec-8"><h2>⑧ 攒股息，退休晚不了：拖动看多久能靠股息覆盖开销</h2>
+    <div class="l2 sim">
+      <div class="ctrl">${rg("s1","现有本金",0,300,5,20," 万")}${rg("s2","每年追加",0,30,1,5," 万")}${rg("s3","股息率",2,8,0.1,5," %")}${rg("s4","分红年增长",0,10,0.5,3," %")}${rg("s5","目标年股息",1,30,1,6," 万/年")}</div>
+      <div class="lout"><div><div class="sub">年股息达到目标需要</div><div class="bigy" id="sy">–</div></div><div class="lres"><div class="sub" id="ss1"></div><div class="sub" id="ss2"></div></div></div></div>
+    <div class="legend"><span><i style="background:var(--c1)"></i>分红全部再投资（年股息）</span><span><i style="background:var(--c2)"></i>分红拿去花、只靠追加</span><span><i style="background:var(--ink)"></i>首次达到目标</span></div>
+    <div id="simchart"></div>
+    <p class="note">示意模型：每年把当年分红（和追加的钱）按相同股息率买入，已持有的部分分红每年按设定速度增长。不含股价波动、分红被砍、税和手续费，别当成预测。</p></div>
+
+  <div class="card" id="sec-9"><h2>⑨ 红利税：拿得越久越划算</h2>
+    <div class="taxrow">${[["持股 ≤ 1 个月","20%",0.2],["1 个月 ~ 1 年","10%",0.1],["超过 1 年","免税",0]].map(([t,r,v])=>`<div class="taxc"><div class="sub">${t}</div><b>${r}</b><div class="taxbar"><i style="width:${(1-v)*100}%"></i><u style="width:${v*100}%"></u></div><div class="sub">5% 的股息率 → 到手 <b>${(5*(1-v)).toFixed(1)}%</b>${v?`，交税 <b class="bad">${(5*v).toFixed(1)}%</b>`:"，不用交税"}</div></div>`).join("")}</div>
+    <p class="note">个人持股一年以内，分红时暂不扣税，卖出时按持股期限补缴；持股超过一年免征。所以短线赚分红不划算，长期持有收息才吃得到免税。具体以券商清算为准。</p></div>
+
+  <div class="card" id="sec-10"><h2>⑩ 登记日、除息日：怎么才拿得到这次分红</h2>
+    <div class="tline">${[["公告预案","公司宣布分红方案","var(--c1)"],["股权登记日","当天收盘还持有，才有资格。要在前一个交易日或更早买入","var(--c1)"],["除权除息日","股价按分红额下调，这天买入的拿不到这次分红","var(--accent)"],["派息日","现金到账","var(--c1)"]].map(([t,d,col],i)=>`<div class="tnode" style="--c:${col}"><span class="tdot">${i+1}</span><b>${t}</b><p>${d}</p></div>`).join("")}</div>
+    <p class="note">除息当天股价会下调约等于分红额，所以不是"领了分红就白赚"。收息靠的是长期持有、分红年年有，以及股价之后的"填权"。</p></div>
+
+  <div class="card" id="sec-11"><h2>⑪ 收息佬怎么用：五步</h2>
+    <div class="lsteps flow">
+      <a class="lstep" href="#/"><span class="circ">1</span><b>选</b><p>看「公司体检」五个灯，先排除有红灯的</p></a><div class="larrow">→</div>
+      <a class="lstep" href="#/settings"><span class="circ">2</span><b>定</b><p>设「买入要求」= 国债 + 行业溢价</p></a><div class="larrow">→</div>
+      <a class="lstep" href="#/"><span class="circ">3</span><b>买</b><p>价格偏低（达到你的要求）再分批买，别追高</p></a><div class="larrow">→</div>
+      <a class="lstep" href="#/hold"><span class="circ">4</span><b>配</b><p>在持仓页看四类风险的分布</p></a><div class="larrow">→</div>
+      <a class="lstep" href="#/hold"><span class="circ">5</span><b>持</b><p>每年收息，满一年免税，再投资</p></a></div></div>
+
+  <div class="card" id="sec-faq"><h2>常见疑问与误区</h2>
+    <details><summary>分红和利息一样吗？</summary><p class="note">不一样。利息通常由合同约定，分红取决于公司当年的经营和分配决定，可能增加、减少，也可能暂停。另外股价会涨跌，总回报要把分红和价差一起看（见「③ 股息率不等于收益率」）。</p></details>
+    <details><summary>红利 ETF 和自己选股有什么区别？</summary><p class="note">ETF 是按指数规则打包的一篮子股票，能分散单只公司的风险；但不同红利指数的筛选规则、行业分布和费用都不同。买之前可以先看指数规则、主要持仓和费率，详见「⑥ 红利 ETF」。</p></details>
+    <details><summary>登记日前买入才能领分红吗？</summary><p class="note">一般来说，股权登记日收盘时持有股票，才有资格领取这次分红；除息日起股价会按分红额调整。是否值得买，仍然要看公司和价格位置，不必只为赶分红而买（见「⑩ 登记日 · 除息日」）。</p></details>
+    <details><summary>股息率越高越好？</summary><p class="note">不一定。股息率 = 分红 ÷ 股价，股价暴跌会把它推高。要看分红是不是真能持续：公司有没有赚到钱、分红率是否超过 100%。这正是「公司体检」要回答的。</p></details>
+    <details><summary>只看股息率，不看公司？</summary><p class="note">高股息的公司里有一部分是"股息陷阱":盈利在恶化，分红随后被砍。先看体检的五个灯，再看价格。</p></details>
+    <details><summary>全仓同一个行业？</summary><p class="note">同一行业的股票常一起涨跌，分红也一起受影响。按防御、金融、成长、周期分散，不同风险互相抵消。</p></details>
+    <details><summary>涨了很多再买，股息率就低了？</summary><p class="note">对。买入价越高，同样的分红对应的股息率越低。所以设「买入要求」，只在价格偏低（达到要求）时分批买。</p></details>
+    <details><summary>分红领完就赚了？</summary><p class="note">除息日股价会按分红额下调。收息的回报要看长期：分红的累计、股价的填权，以及再投资的复利。</p></details>
+  </div>`;
+
+  // 结构：核心 → 目录 → 小节（分四组）；每节 = 编号 + 标题 + 一句话结论 + 内容
+  const TK={"sec-1":"买入 → 年年分红 → 再投资；股息率 = 每股分红 ÷ 股价","sec-2":"分红不变，股价越低股息率越高；但暴跌常常是风险信号","sec-3":"总回报 = 分红 + 价差，股息率只是其中一半","sec-4":"要求的回报 = 国债 + 风险补偿，风险越高要求越高","sec-5":"防御、金融、成长、周期：风险不同，各司其职","sec-6":"一篮子红利股装进一只基金：省心，但要看持仓和费用","sec-7":"分红再投资，时间越长差距越大","sec-8":"拖动看看，多久能靠股息覆盖开销","sec-9":"持股满一年免红利税，不满一年卖出要补税","sec-10":"登记日收盘时持有才能领分红；除息日股价按分红下调","sec-11":"选、定、买、配、持：五步用法","sec-faq":"新手最常问的几个问题"};
+  const GROUPS_L=[["读懂股息",["sec-1","sec-2","sec-3"]],["风险与资产",["sec-4","sec-5","sec-6"]],["收益与规则",["sec-7","sec-8","sec-9","sec-10"]],["动手用起来",["sec-11","sec-faq"]]];
+  const TITLE={};
+  Object.keys(TK).forEach(id=>{const c=document.getElementById(id); if(!c) return; const h=c.querySelector("h2"); const t=h.textContent.replace(/^[①②③④⑤⑥⑦⑧⑨⑩⑪]\s*/,"").split(/[:：]/)[0].trim(); TITLE[id]=t;
+    const no=id==="sec-faq"?'<svg viewBox="0 0 24 24" width="100%" height="100%"><text x="12" y="17.2" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" font-family="-apple-system,sans-serif">?</text></svg>':id.slice(4); c.classList.add("sec");
+    const hd=document.createElement("div"); hd.className="sec-hd"; hd.innerHTML=`<span class="snum${no.length>1&&no.length<4?" n2":""}">${no}</span><div><h2>${t}</h2><p class="lead">${TK[id]}</p></div>`; h.replaceWith(hd)});
+  GROUPS_L.forEach(([t,ids],gi)=>{const f=document.getElementById(ids[0]); if(f) f.insertAdjacentHTML("beforebegin",`<div class="grp">${"一二三四"[gi]} · ${t}</div>`)});
+  document.getElementById("sec-0").insertAdjacentHTML("afterend",`<div class="card toc" id="toc"><h2 style="margin-bottom:12px">目录</h2><div class="tocg">${GROUPS_L.map(([t,ids])=>`<div><div class="tgl">${t}</div>${ids.map(id=>`<a class="tl" href="#/learn" data-go="${id}"><b${id.length>5&&id!=="sec-faq"?' class="n2"':""}>${id==="sec-faq"?'<svg viewBox="0 0 24 24" width="14" height="14"><text x="12" y="17.2" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" font-family="-apple-system,sans-serif">?</text></svg>':id.slice(4)}</b>${TITLE[id]}</a>`).join("")}</div>`).join("")}</div></div>`);
+  $("#main .ph").insertAdjacentHTML("afterend",`<button class="totop" id="totop" title="回到顶部">↑ 顶部</button>`);
+  document.querySelectorAll("[data-go]").forEach(a=>a.onclick=e=>{e.preventDefault(); const t=document.getElementById(a.dataset.go); if(t) t.scrollIntoView({behavior:"smooth",block:"start"})});
+  $("#totop").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+  // 核心：同一家公司，买入价格 → 股息率
+  (()=>{const hp=$("#hp"), calc=()=>{paintR(hp); const p=+hp.value, y=5/p; $("#hp-v").textContent=p; $("#hy").textContent=(y*100).toFixed(1)+"%"; $("#hn").textContent=Math.round(10000*y)+" 元";
+    $("#hmsg").innerHTML=p<=85?`<b>很便宜，股息率 ${(y*100).toFixed(1)}%</b>。但先问一句：为什么这么便宜？好公司短期被错杀是机会，公司本身出了问题就是陷阱，这时要回头看「公司体检」。`
+      :p<=110?`<b>合理的位置</b>：股息率在 ${(y*100).toFixed(1)}% 左右。好公司买在这个区间，安心收息就行，不用等到最低点，没有人能买在最低点。`
+      :`<b>偏贵了</b>：同样的 5 元分红，只对应 ${(y*100).toFixed(1)}% 的股息率。公司没变，是你买贵了。涨多了不追，等回落或者看别的好公司。`}; hp.oninput=calc; calc()})();
+  // ② 股息率的两面
+  const B={p:100,d:5}, bp=$("#bp"), bd={value:5};
+  const calcB=()=>{paintR(bp); const p=+bp.value, d=+bd.value, y=p?d/p:0; $("#bp-v").textContent=p; $("#bd-v").textContent=d.toFixed(1);
+    $("#by").textContent=(y*100).toFixed(1)+"%"; $("#byb").style.left=Math.min(98,y*100/15*100)+"%";
+    $("#bc").textContent=(d/B.p*100).toFixed(1)+"%"; $("#bn").textContent=Math.round(10000/p*d)+" 元";
+    const dropP=p<B.p*0.85, cutD=d<B.d*0.85;
+    $("#bmsg").innerHTML=dropP&&!cutD?`<b>股价跌了、分红没变</b>：股息率被推高到 ${(y*100).toFixed(1)}%。但这不是多赚了，只是便宜了——要问为什么跌。如果是风险在变大，高股息率就是在提醒你。`
+      :cutD&&!dropP?`<b>分红被砍</b>：你每年收到的钱变少了，股息率也被拖低到 ${(y*100).toFixed(1)}%。这是收息最怕的事，所以要看分红稳不稳。`
+      :dropP&&cutD?`<b>股价和分红一起掉</b>：这时的股息率 ${(y*100).toFixed(1)}% 看着还行，其实是个陷阱——钱少了，本金还在亏。`
+      :p>B.p*1.15?`<b>股价涨了</b>：同样的分红，现在买入的股息率只有 ${(y*100).toFixed(1)}%。你 100 元买入的成本股息率仍是 ${(d/B.p*100).toFixed(1)}%，这是长期持有的好处。`:"拖动滑块，或点上面的按钮，看股息率怎么变。"};
+  bp.oninput=calcB;
+  document.querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{const k=b.dataset.bp; bp.value=k==="drop"||k==="both"?50:100; bd.value=k==="cut"||k==="both"?2.5:5; calcB()});
+  calcB();
+  // ⑤ 攒股息
+  const ids=["s1","s2","s3","s4","s5"], el=Object.fromEntries(ids.map(i=>[i,$("#"+i)]));
+  const calcS=()=>{ids.forEach(i=>paintR(el[i])); const K=+el.s1.value, C=+el.s2.value, y=+el.s3.value/100, g=+el.s4.value/100, T=+el.s5.value;
+    ids.forEach(i=>$("#"+i+"-v").textContent=el[i].value);
+    const run=re=>{let D=K*y, a=[]; for(let t=1;t<=30;t++){a.push(D); D=D*(1+g)+(re?(D+C)*y:C*y)} return a};
+    const a1=run(true), a2=run(false), hit=a1.findIndex(v=>v>=T)+1, hit2=a2.findIndex(v=>v>=T)+1;
+    $("#sy").textContent=hit?`第 ${hit} 年`:"30 年内达不到";
+    $("#ss1").textContent=hit?`分红再投资：第 ${hit} 年年股息 ${a1[hit-1].toFixed(1)} 万，约每月 ${Math.round(a1[hit-1]*10000/12).toLocaleString("zh-CN")} 元`:"试试提高每年追加或股息率";
+    $("#ss2").textContent=hit2?`分红拿去花：第 ${hit2} 年才达到`:"分红拿去花：30 年内达不到（再投资差距就在这里）";
+    $("#simchart").innerHTML=simSvg(a1,a2,T,hit)};
+  ids.forEach(i=>el[i].oninput=calcS); calcS();
+  // ③ 总回报
+  const t1=$("#tr1"), t2={value:5};
+  const calcT=()=>{paintR(t1); const p1=+t1.value, d=+t2.value, pv=p1-100, dv=d, tot=(pv+dv)/100*100;
+    $("#tr1-v").textContent=p1; $("#trt").textContent=(tot>=0?"+":"")+tot.toFixed(1)+"%"; $("#trt").style.color=tot>=0?"var(--tl-g)":"var(--tl-r)";
+    const bar=(id,v)=>{const el=$(id), w=Math.min(50,Math.abs(v)/30*50); el.style.width=w+"%"; el.style.left=v>=0?"50%":(50-w)+"%"; el.style.background=v>=0?"var(--tl-g)":"var(--tl-r)"};
+    bar("#trd",dv); bar("#trp",pv); $("#trdv").textContent=(dv>=0?"+":"")+dv.toFixed(1)+"%"; $("#trpv").textContent=(pv>=0?"+":"")+pv.toFixed(1)+"%";
+    $("#trmsg").innerHTML=tot<0&&dv>0?`<b>分红 +${dv.toFixed(1)}%，价差 ${pv.toFixed(1)}%，合计 ${tot.toFixed(1)}%</b>：${dv.toFixed(1)}% 的股息率没能挡住本金下跌。收息不是保险，先看公司值不值得持有。`
+      :tot>=0&&pv<0?`<b>价差 ${pv.toFixed(1)}%，分红 +${dv.toFixed(1)}%</b>：分红把亏损补了回来，合计 +${tot.toFixed(1)}%。这就是长期持有收息的缓冲作用。`
+      :pv>=0?`<b>价差 +${pv.toFixed(1)}%，分红 +${dv.toFixed(1)}%</b>：两条腿都在赚，合计 +${tot.toFixed(1)}%。别忘了，价差只是其中一部分。`:"拖动滑块试试。"};
+  t1.oninput=calcT;
+  document.querySelectorAll("[data-tr]").forEach(b=>b.onclick=()=>{t1.value=b.dataset.tr; t2.value=5; calcT()}); calcT();
+  // ⑦ ETF 费用
+  const e1=$("#e1"), e2=$("#e2"), e3=$("#e3");
+  const calcE=()=>{[e1,e2,e3].forEach(paintR); const a=+e1.value, f=+e2.value, o=+e3.value, net=a-f-o;
+    $("#e1-v").textContent=a.toFixed(1); $("#e2-v").textContent=f.toFixed(2); $("#e3-v").textContent=o.toFixed(2);
+    $("#er").textContent=net.toFixed(2)+"%"; $("#es").textContent=`指数 ${a.toFixed(1)}% − 费用 ${f.toFixed(2)}% − 其他拖累 ${o.toFixed(2)}% = ${net.toFixed(2)}%`;
+    const tot=Math.max(Math.abs(a),0.5);
+    $("#ebar").innerHTML=`<div class="trow"><div class="tn"><b>指数回报</b></div><div class="tbar"><i class="tp" style="width:${Math.max(0,a)/tot*100}%"></i></div><div class="tv"><b>${a.toFixed(2)}%</b></div></div>
+      <div class="trow"><div class="tn"><b>你拿到的</b></div><div class="tbar"><i class="${net>=0?"td":"tpn"}" style="width:${Math.min(100,Math.abs(net)/tot*100)}%"></i></div><div class="tv"><b class="${sgn(net)}">${net.toFixed(2)}%</b><span class="sub">被吃掉 ${(f+o).toFixed(2)} 个点</span></div></div>`};
+  [e1,e2,e3].forEach(e=>e.oninput=calcE); calcE();
+  // ⑧ 再投 vs 花掉
+  let rtax=0; const rr=["r1","r2","r3","r4"].map(i=>$("#"+i));
+  const lines2=(a,b)=>{const W=820,H=240,L=54,R=12,T=14,B=26,n=a.length,mx=Math.max(...a,...b)*1.08||1,x=i=>L+(W-L-R)*(n>1?i/(n-1):0),y=v=>T+(H-T-B)*(1-v/mx);
+    let g=""; for(let k=0;k<=4;k++){const v=mx*k/4; g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--mute)">${v.toFixed(1)}</text>`}
+    a.forEach((_,i)=>{if((i+1)%5===0||i===0) g+=`<text x="${x(i)}" y="${H-8}" font-size="11" text-anchor="middle" fill="var(--mute)">${i+1}</text>`});
+    const path=(s,c)=>`<path d="${s.map((v,i)=>(i?"L":"M")+x(i).toFixed(1)+","+y(v).toFixed(1)).join("")}" fill="none" stroke="${c}" stroke-width="2.6"/>`;
+    return `<svg class="chart" viewBox="0 0 ${W} ${H}">${g}${path(b,"var(--c2)")}${path(a,"var(--c1)")}<text x="${W-R}" y="${y(a[n-1])-6}" text-anchor="end" font-size="12" fill="var(--c1)">${a[n-1].toFixed(1)} 万</text><text x="${W-R}" y="${y(b[n-1])-6}" text-anchor="end" font-size="12" fill="var(--c2)">${b[n-1].toFixed(1)} 万</text></svg>`};
+  const calcR=()=>{const V0=+rr[0].value, y=+rr[1].value/100, g=+rr[2].value/100, n=+rr[3].value;
+    rr.forEach(e=>{paintR(e); $("#"+e.id+"-v").textContent=e.value});
+    let sA=1,cash=0,A=[],B=[];
+    for(let t=1;t<=n;t++){const dps=y*Math.pow(1+g,t-1), Pt=Math.pow(1+g,t), incA=sA*dps, incB=dps;
+      A.push(incA*V0); B.push(incB*V0); sA+=incA*(1-rtax)/Pt; cash+=incB*(1-rtax)}
+    const Pn=Math.pow(1+g,n), assetA=sA*Pn*V0, assetB=Pn*V0, cashB=cash*V0, totB=assetB+cashB;
+    document.querySelectorAll(".rny").forEach(e=>e.textContent=n);
+    $("#ra1").textContent=assetA.toFixed(0)+" 万"; $("#ra2").textContent=A[n-1].toFixed(1)+" 万";
+    $("#rb1").textContent=assetB.toFixed(0)+" 万 + "+cashB.toFixed(0)+" 万"; $("#rb2").textContent=B[n-1].toFixed(1)+" 万";
+    $("#rmsg").innerHTML=`<b>再投资的年股息是花掉的 ${(A[n-1]/B[n-1]).toFixed(1)} 倍</b>:A 的持股从 1 份滚到了 ${sA.toFixed(2)} 份，B 一直是 1 份。${assetA>totB?`最后 A 的总资产 ${assetA.toFixed(0)} 万，超过 B 的资产加所有已领分红（${totB.toFixed(0)} 万）。`:`这个年限下，B 的资产加已领分红（${totB.toFixed(0)} 万）还没被 A（${assetA.toFixed(0)} 万）超过，再投资的优势要靠更长的时间才显现。`}`;
+    const mxv=Math.max(assetA,totB,1);
+    $("#rbars").innerHTML=`<div class="navrow"><span style="width:auto">A 再投</span><div class="navbar" style="height:32px"><i style="width:${assetA/mxv*100}%">资产 ${assetA.toFixed(0)} 万</i></div></div>
+      <div class="navrow"><span style="width:auto">B 花掉</span><div class="navbar" style="height:32px"><i style="width:${assetB/mxv*100}%">资产 ${assetB.toFixed(0)} 万</i><u style="width:${cashB/mxv*100}%">已花掉 ${cashB.toFixed(0)} 万</u></div></div>`;
+    $("#rchart").innerHTML=lines2(A,B)};
+  rr.forEach(e=>e.oninput=calcR);
+  document.querySelectorAll("[data-rt]").forEach(b=>b.onclick=()=>{rtax=+b.dataset.rt/100; document.querySelectorAll("[data-rt]").forEach(x=>x.classList.toggle("on",x===b)); calcR()});
+  calcR();
+}
+
+/* ---------- 设置页 ---------- */
+const getTheme=()=>{try{return localStorage.getItem("theme")||"auto"}catch(e){return "auto"}};
+function setTheme(v){
+  try{v==="auto"?localStorage.removeItem("theme"):localStorage.setItem("theme",v)}catch(e){}
+  if(v==="auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme=v;
+}
+async function saveAndApply(){ await saveHoldings(); state.pool.stocks.forEach(applyZones); }
+function paintRefresh(){
+  const ca=$("#chgaddr"); if(ca) ca.onclick=()=>window.ShouxiShell.changeAddress();
+  api("/api/access").then(a=>{const u=(a.urls||[])[0]; const box=$("#mu-qr"), note=$("#mu-note"); if(!box) return;
+    if(!u){box.innerHTML='<div class="sub">没有检测到局域网地址</div>'; note.textContent="电脑没有连上局域网，连上 WiFi 后再刷新这个页面。"; return}
+    box.innerHTML=`<img alt="手机访问二维码" src="/api/qr?u=${encodeURIComponent(u)}" onerror="this.outerHTML='<div class=sub style=margin-bottom:6px>二维码暂时无法生成，请在手机浏览器直接输入下面的地址</div>'"><code>${u}</code>`;
+    const more=(a.urls||[]).slice(1,3);
+    note.innerHTML=(a.enabled?"已设置访问密码：手机第一次打开会要求输入。":"没有设访问密码：同一个 WiFi 下的人都能看到你的持仓，公共 WiFi 下不要开。")+(more.length?` 如果上面的地址打不开，可以试试：${more.join("、")}。`:"")});
+  const b=$("#refresh"); if(b){b.disabled=!!state.refreshing; b.textContent=state.refreshing?(state.refreshTxt||"刷新中…"):"刷新数据"}
+}
+async function startRefresh(){ await api("/api/refresh",{method:"POST"}); poll(); }
+async function poll(){
+  state.refreshing=true; paintRefresh();
+  const tick=async()=>{const s=await api("/api/status");
+    if(s.running){state.refreshTxt=`刷新中 ${s.done||0}/${s.total||"?"} ${s.current||""}`; paintRefresh(); setTimeout(tick,1500)}
+    else{state.refreshing=false; await load(); render();
+      if(s.errors&&Object.keys(s.errors).length)notice("部分股票刷新失败： "+Object.keys(s.errors).join(", ")+"\n多为数据源限流，稍后再点一次「刷新数据」即可，失败的股票会保留上次的数据。")}};
+  tick();
+}
+function renderSettings(){
+  const S=state.holdings.settings, c=cfg(), P=state.pool, inds=[...new Set(P.stocks.map(s=>s.industry))];
+  const ovn=()=>Object.keys(S.overrides||{}).length, th=getTheme();
+  $("#main").innerHTML=`
+  <div class="ph"><h2>设置</h2><span class="sub">外观 · 数据刷新 · 买入要求 · 个股单独设定</span></div>
+  <div class="card"><h2>外观</h2>
+    <div class="seg" id="themeseg">${[["auto","跟随系统"],["light","浅色"],["dark","深色"]].map(([k,t])=>`<button data-th="${k}" class="${th===k?"on":""}">${t}</button>`).join("")}</div>
+    <p class="note">只影响当前浏览器。「跟随系统」会随电脑的深浅色自动切换。</p></div>
+  <div class="card"><h2>数据</h2>
+    <div class="form"><button class="btn primary" id="refresh">刷新数据</button><span class="sub">${P.updated?"数据更新于 "+P.updated:"尚无数据"} · 共 ${P.stocks.length} 只</span></div>
+    ${(()=>{const ds=P.stocks.map(s=>s.date).filter(Boolean).sort(), last=ds[ds.length-1]; if(!last) return ""; const old=P.stocks.filter(s=>s.date&&dayDiff(s.date,last)>3); return old.length?`<p class="note" style="color:var(--warn,var(--mute))">有 ${old.length} 只股票的报价停在 ${last} 之前（数据源临时失败或停牌），再刷新一次通常能补上。</p>`:""})()}
+    <div id="as-miss"></div>
+    <p class="note">重新采集全部股票的分红、价格与财务数据，约 5~8 分钟，期间可以继续使用。价格是日线收盘，可能晚一个交易日；分红来自东方财富，日线和财务数据来自新浪财经（腾讯作备用）。日线只在第一次完整下载，之后每次只补最近几天，所以很快。增加股票用下面的「添加个股」，移出在个股详情页。</p></div>
+  <div class="card" id="addstk"><h2>添加个股</h2>
+    <div class="form"><input id="as-code" placeholder="股票代码" inputmode="numeric" maxlength="6" autocomplete="off" style="width:150px"><button class="btn" id="as-look">查询</button><span class="sub" id="as-msg">A 股、B 股、ETF 填 6 位，港股填 5 位（如 00941）</span></div>
+    <div class="form" id="as-res" hidden style="margin-top:10px"><span id="as-info" class="sub"></span><input id="as-name" maxlength="20" placeholder="名称" style="width:140px"><select id="as-ind"><option value="">选择行业…</option>${IND_GROUPS.map(([g,l])=>`<optgroup label="${g}">${l.filter(i=>INDS_ALL().includes(i)).map(i=>`<option value="${i}">${i}</option>`).join("")}</optgroup>`).join("")}</select><button class="btn primary" id="as-add">加入股票池</button></div>
+    <p class="note">加入后会自动下载这只股票的价格和分红数据，约半分钟。行业决定买入价里的风险溢价，选最接近的就行，之后可以在下方「行业溢价」里调整。港股、B 股按各自币种显示，持仓页统一折成人民币。</p></div>
+  <div class="card" id="mgstk"><h2>管理股票池</h2>
+    <p class="note" style="margin:0 0 10px">不关心的股票可以移出，之后不再出现在列表和搜索里，刷新也不再下载它。持仓里有记录的股票不能移出，要先在「我的持仓」里删除相关记录。移出的股票可以在下面一键恢复。</p>
+    <div class="filters"><input id="mq" style="width:230px" placeholder="搜索 名称 / 代码 / 拼音"></div>
+    <div class="tablewrap"><table class="ovt"><tbody id="mgb"></tbody></table></div>
+    <div id="mgrm"></div></div>
+  <div class="card"><h2>备份与恢复</h2>
+    <div class="form"><button class="btn" id="bk-out">导出持仓备份</button><button class="btn" id="bk-in">从备份恢复</button><input type="file" id="bk-file" accept=".json,application/json" hidden><span class="sub" id="bk-msg"></span></div>
+    <p class="note">备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。每次保存前，程序也会在数据目录留一份 holdings.json.bak。</p></div>
+  ${/ShouxiApp/.test(navigator.userAgent)?"":`
+  <div class="card"><h2>手机使用</h2>
+    <div class="mu"><div class="mu-steps"><ol>
+      <li>手机和电脑连<b>同一个 WiFi</b>，电脑上的收息佬保持打开。</li>
+      <li>用手机相机或浏览器<b>扫右边的二维码</b>（也可以直接输入下面的地址）。</li>
+      <li><b>iPhone</b>：Safari 点底部「分享」→「添加到主屏幕」；<b>安卓</b>：Chrome 右上角菜单 →「添加到主屏幕」。以后从桌面图标进入，就是全屏的 App。</li>
+      <li>电脑第一次弹出「是否允许接受传入网络连接」，点「允许」。</li></ol>
+      <p class="note" id="mu-note">正在读取本机地址…</p>${window.ShouxiShell?'<button class="btn" id="chgaddr" style="margin-top:6px">更改电脑地址</button>':""}</div>
+      <div class="mu-qr" id="mu-qr"><div class="sub">生成中…</div></div></div></div>
+`}
+  <h3 class="sectitle">行业溢价设定</h3>
+  <div class="card"><h2>买入要求 = 10 年期国债收益率 + 行业溢价</h2>
+    <div class="prem-list">
+      <div class="prow base"><span class="pn">10 年期国债收益率<em>基准利率，需手动更新</em></span><span class="pv"><input id="rf" type="number" step="0.05" inputmode="decimal" value="${c.rf}"><b class="unit">%</b></span></div>
+      ${[...IND_GROUPS.map(([g])=>g),"其他"].map(g=>{const L=inds.filter(i=>grpOf(i)===g); return L.length?`<div class="pgrp">${g}</div>`+L.map(i=>`<label class="prow"><span class="pn">${i}${CYCLICAL.has(i)?'<em>周期股 · 3年平均分红</em>':""}</span><span class="pv"><input type="number" step="0.1" inputmode="decimal" data-prem="${i}" value="${premOf(i)}"><span class="res">→ <b>${(c.rf+premOf(i)).toFixed(2).replace(/0$/,"")}%</b></span></span></label>`).join(""):""}).join("")}
+    </div>
+    <div class="form" style="margin-top:12px"><button class="btn" id="resetcfg">恢复默认</button></div>
+    <p class="note">参考：2026 年 10 月中旬 10 年期国债活跃券约 1.64%~1.66%（财联社、Trading Economics）。该值不会自动更新，利率明显变动时请手动改。</p>
+    <p class="note">每行右边是「要求股息率」= 国债收益率 + 该行业溢价。买入价 = 每股分红 ÷ 要求股息率；溢价越高，要求越严，买入价越低。自身近 5 年历史只做 ⚠ 提示，不影响买入价。</p></div>
+  <div class="card"><h2>个股单独设定</h2>
+    <p class="note" style="margin:0 0 10px">给某只股票设一个自己的「要求股息率」，覆盖上面的国债+行业溢价。留空 = 用默认。已单独设定 <b id="ovcnt">${ovn()}</b> 只。</p>
+    <div class="filters"><input id="sq" style="width:230px" placeholder="搜索 名称 / 代码 / 拼音"><button class="btn sm" id="ovall">清除全部单独设定</button></div>
+    <div class="tablewrap"><table class="ovt"><thead><tr><th class="l">名称</th><th>行业</th><th>默认要求</th><th>单独设定 %</th><th>生效要求</th><th>买入价 ≤</th><th></th></tr></thead><tbody id="ovb"></tbody></table></div></div>
+  <div class="card about"><img src="/logo-full.webp" alt="收息佬"><div class="abt">
+    <h2>关于收息佬</h2><p>股息攒得好，退休晚不了。</p>
+    <p class="note">一个做红利研究的本地小工具（A 股、ETF、B 股、港股）：看股息率、看买入价、看公司体检，再慢慢攒。数据来源东方财富、新浪财经，仅供研究，不构成投资建议。</p>
+    <div class="abver"><span>当前版本 <b id="curver">v?</b></span><button class="btn sm" id="chkupd" type="button">检查更新</button><span class="sub" id="updmsg"></span></div>
+    <ul class="contact">
+      <li><span>开发者微信</span><b>wind126</b><button class="btn sm cpy" type="button" data-copy="wind126">复制</button></li>
+      <li><span>微信公众号</span><b>快乐收息佬</b><em>happyshouxilao</em><button class="btn sm cpy" type="button" data-copy="happyshouxilao">复制 ID</button></li>
+      <li><span>小红书</span><b>收息佬</b><em>happyshouxilao</em><button class="btn sm cpy" type="button" data-copy="happyshouxilao">复制 ID</button></li>
+      <li><span>邮件</span><a href="mailto:shouxilao@foxmail.com">shouxilao@foxmail.com</a></li>
+    </ul>
+    <details class="chlog" id="chlog"><summary>版本更新说明</summary><div class="chlogbody" id="chlogbody"><div class="sub">加载中…</div></div></details>
+  </div></div>`;
+
+  // 行业溢价设定、个股单独设定:默认折叠(改完数值重新渲染时,保留你展开的状态)
+  state.openFolds=state.openFolds||{};
+  document.querySelectorAll("#main > .sectitle").forEach(h=>{if(h.textContent.includes("行业溢价设定")) h.remove()});
+  [["管理股票池","mg",`共 ${P.stocks.length} 只${(S.removed||[]).length?` · 已移出 ${S.removed.length}`:""}`],["买入要求","prem",`国债 ${c.rf}% + 行业溢价`],["个股单独设定","ov",Object.keys(S.overrides||{}).length?`已单独设定 ${Object.keys(S.overrides).length} 只`:"默认"]].forEach(([title,key,right])=>{
+    const card=[...document.querySelectorAll("#main > .card")].find(x=>(x.querySelector("h2")?.textContent||"").startsWith(title)); if(!card) return;
+    const h=card.querySelector("h2"), d=document.createElement("details"), sum=document.createElement("summary"), body=document.createElement("div");
+    d.className="card fold"; body.className="foldbody"; sum.appendChild(h); sum.insertAdjacentHTML("beforeend",`<span class="sumv sub">${right}</span><i class="hchev">›</i>`);
+    while(card.firstChild) body.appendChild(card.firstChild);
+    d.append(sum,body); d.open=!!state.openFolds[key]; d.addEventListener("toggle",()=>{state.openFolds[key]=d.open}); card.replaceWith(d)});
+
+  // 检查更新
+  api("/api/version").then(v=>{const e=$("#curver"); if(e) e.textContent="v"+v.version}).catch(()=>{});
+  $("#chkupd").onclick=async()=>{const m=$("#updmsg"); m.textContent="检查中…"; const i=await checkUpdate(true);
+    if(i.error) m.textContent=i.error; else if(i.newer){m.innerHTML=`发现新版本 v${i.latest}，已弹出更新提示`; showUpd(i,true)} else m.textContent=`已经是最新版（v${i.current}）`};
+  // 联系方式:一键复制
+  document.querySelectorAll(".cpy").forEach(b=>b.onclick=async()=>{const t=b.dataset.copy, o=b.textContent; let ok=false;
+    try{await navigator.clipboard.writeText(t); ok=true}catch(e){try{const ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); ok=document.execCommand("copy"); ta.remove()}catch(e2){}}
+    b.textContent=ok?"已复制":"请手动复制"; setTimeout(()=>{b.textContent=o},1500)});
+  // 版本更新说明:读 /changelog.md,第一次展开时渲染
+  const mdLite=md=>{const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"), inl=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/`(.+?)`/g,"<code>$1</code>");
+    let html="", ul=false; const close=()=>{if(ul){html+="</ul>"; ul=false}};
+    md.split("\n").forEach(raw=>{const l=raw.trimEnd();
+      if(l.startsWith("# ")||l.startsWith("> ")) return;
+      if(l.startsWith("## ")){close(); html+=`<h3>${inl(l.slice(3))}</h3>`; return}
+      if(l==="---"){close(); html+="<hr>"; return}
+      const m=l.match(/^\*\*(.+)\*\*$/); if(m){close(); html+=`<h4>${esc(m[1])}</h4>`; return}
+      if(l.startsWith("- ")){if(!ul){html+="<ul>"; ul=true} html+=`<li>${inl(l.slice(2))}</li>`; return}
+      close(); if(l.trim()) html+=`<p>${inl(l)}</p>`});
+    close(); return html};
+  const cl=$("#chlog"); if(cl) cl.addEventListener("toggle",async()=>{if(!cl.open||cl.dataset.done) return; try{const r=await fetch("/changelog.md"); if(!r.ok) throw 0; $("#chlogbody").innerHTML=mdLite(await r.text()); cl.dataset.done="1"}catch(e){$("#chlogbody").innerHTML='<div class="sub">更新说明加载失败</div>'}});
+  // 外观
+  document.querySelectorAll("#themeseg button").forEach(b=>b.onclick=()=>{setTheme(b.dataset.th); document.querySelectorAll("#themeseg button").forEach(x=>x.classList.toggle("on",x===b))});
+  // 刷新
+  $("#refresh").onclick=startRefresh; paintRefresh();
+  let found=null; const asMsg=(t,bad)=>{const m=$("#as-msg"); m.textContent=t; m.style.color=bad?"var(--bad)":""};
+  const look=async()=>{ const code=$("#as-code").value.trim(); found=null; $("#as-res").hidden=true;
+    if(!/^\d{5,6}$/.test(code)) return asMsg("代码格式不对：A 股、B 股、ETF 填 6 位，港股填 5 位",1);
+    asMsg("查询中…");
+    try{ const r=await fetch("/api/lookup?code="+code); const j=await r.json(); if(!r.ok) return asMsg(j.error||"查询失败",1);
+      if(j.exists) return asMsg(`「${j.name}」已经在股票池里了`,1);
+      found=j; $("#as-name").value=j.name; $("#as-info").textContent=`${j.code}${j.market==="hk"?" · 港股":j.market==="b"?" · B 股":""}`;
+      const guess=/^(5[0-9]|15|16)\d{4}$/.test(code)?"ETF":null; if(guess) $("#as-ind").value=guess;
+      $("#as-res").hidden=false; asMsg("") }catch(e){ asMsg(e instanceof TypeError?"连不上收息佬本机服务，请确认程序还开着，刷新页面后再试":"查询失败："+e.message,1) } };
+  $("#as-look").onclick=look; $("#as-code").onkeydown=e=>{if(e.key==="Enter") look()};
+  $("#as-add").onclick=async()=>{ if(!found) return; if(!$("#as-ind").value) return asMsg("请先选择行业（决定买入价里的风险溢价）",1); if(state.refreshing) return asMsg("正在刷新数据，等刷新完再添加",1);
+    try{ const r=await fetch("/api/stocks",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:found.code,name:$("#as-name").value.trim(),industry:$("#as-ind").value})}); const j=await r.json();
+      if(!r.ok) return asMsg(j.error||"添加失败",1);
+      $("#as-res").hidden=true; $("#as-code").value=""; asMsg(`已添加「${j.name}」，正在下载数据…`); found=null; poll() }catch(e){ asMsg("添加失败，请稍后再试",1) } };
+  api("/api/missing").then(m=>{const el=$("#as-miss"); if(!el||!m.length) return;
+    el.innerHTML=`<p class="note">这些股票已加入但还没有数据：${m.map(x=>`${x.name}（${x.code}）<button class="btn sm" data-retry="${x.code}" data-n="${x.name}" data-i="${x.industry}">重试下载</button>`).join(" ")}</p>`;
+    el.querySelectorAll("[data-retry]").forEach(b=>b.onclick=async()=>{try{const r=await fetch("/api/stocks",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:b.dataset.retry,name:b.dataset.n,industry:b.dataset.i})}); const j=await r.json(); if(!r.ok) return notice(j.error||"重试失败"); b.textContent="下载中…"; b.disabled=true; poll()}catch(e){notice("重试失败，请稍后再试")}})}).catch(()=>{});
+  $("#bk-out").onclick=()=>{const fn=`收息佬持仓备份-${today()}.json`; if(window.ShouxiAndroid){let ok=false; try{ok=ShouxiAndroid.saveFile(fn,JSON.stringify(state.holdings,null,1))}catch(e){} $("#bk-msg").textContent=ok?"已保存到手机「下载」文件夹":"保存失败，请稍后再试"; return} const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(state.holdings,null,1)],{type:"application/json"})); a.download=`收息佬持仓备份-${today()}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1500); $("#bk-msg").textContent="已导出"};
+  $("#bk-in").onclick=()=>$("#bk-file").click();
+  $("#bk-file").onchange=async e=>{const f=e.target.files[0]; if(!f) return; let j;
+    try{ j=JSON.parse(await f.text()); if(!j||!Array.isArray(j.lots)) throw 0 }catch(x){ return notice("这不是有效的收息佬持仓备份文件") }
+    if(!(await askConfirm(`用备份覆盖当前数据？备份里有 ${j.lots.length} 笔买入、${(j.sells||[]).length} 笔卖出。`,"覆盖"))) return;
+    try{ const r=await fetch("/api/holdings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(j)}); if(!r.ok) throw 0; await load(); renderSettings(); notice("已恢复") }catch(x){ notice("恢复失败，请稍后再试") }};
+  // 管理股票池:移出 / 恢复
+  const heldCodes=()=>new Set([...(state.holdings.lots||[]).map(l=>l.code),...(state.holdings.sells||[]).map(x=>x.code)]);
+  const mgFill=()=>{const ql=$("#mq").value.trim().toLowerCase(), held=heldCodes(), fav=favSet();
+    const list=P.stocks.filter(s=>!ql||s.name.toLowerCase().includes(ql)||s.code.includes(ql)||(s.py||"").includes(ql)||(s.pyfull||"").includes(ql));
+    $("#mgb").innerHTML=list.map(s=>`<tr><td class="l"><b>${s.name}</b><div class="sub">${s.code}${s.market==="hk"?" · 港股":s.market==="b"?" · B 股":""}</div></td><td>${s.industry}</td><td>${fav.has(s.code)?'<span class="sub">已关注</span>':""}</td><td>${held.has(s.code)?'<span class="sub">持仓中</span>':`<button class="btn sm" data-rm="${s.code}">移出</button>`}</td></tr>`).join("")||'<tr><td colspan="4" class="empty">没有匹配的股票</td></tr>';
+    $("#mgb").querySelectorAll("[data-rm]").forEach(b=>b.onclick=async()=>{const st=P.stocks.find(x=>x.code===b.dataset.rm); if(!st) return;
+      if(!(await askConfirm(`把「${st.name}」移出股票池？${fav.has(st.code)||(S.overrides||{})[st.code]!=null?"它的关注和单独设定也会一起清除。":""}以后可以在这里恢复。`,"移出"))) return;
+      if(await removeStock(st)) renderSettings()})};
+  const rmFill=()=>{const rm=S.removed||[]; const el=$("#mgrm"); if(!rm.length){el.innerHTML="";return}
+    el.innerHTML=`<h3 class="sectitle" style="margin-top:16px">已移出（${rm.length}）</h3><p class="note" style="margin:0 0 8px">点「恢复」会重新加入股票池，并自动下载数据，约半分钟。</p>`+rm.map(x=>`<div class="prow"><span class="pn">${x.name}<em>${x.code} · ${x.industry}</em></span><button class="btn sm" data-back="${x.code}">恢复</button></div>`).join("");
+    el.querySelectorAll("[data-back]").forEach(b=>b.onclick=async()=>{const x=(S.removed||[]).find(y=>y.code===b.dataset.back); if(!x) return;
+      if(state.refreshing) return notice("正在刷新数据，等刷新完再恢复");
+      try{ const r=await fetch("/api/stocks",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(x)}); const j=await r.json(); if(!r.ok) return notice(j.error||"恢复失败");
+        S.removed=(S.removed||[]).filter(y=>y.code!==x.code); await saveHoldings(); b.textContent="下载中…"; b.disabled=true; poll() }catch(e){ notice("恢复失败，请稍后再试") }})};
+  $("#mq").oninput=mgFill; mgFill(); rmFill();
+  // 买入要求
+  const keep=async()=>{const y=scrollY; await saveAndApply(); renderSettings(); scrollTo(0,y)};
+  $("#rf").onchange=e=>{const v=+e.target.value; if(e.target.value===""||!(v>=0&&v<=8))return; S.rf=v; keep()};
+  document.querySelectorAll("[data-prem]").forEach(i=>i.onchange=e=>{const v=+e.target.value; if(!(v>=0&&v<=12))return; S.premiums={...(S.premiums||{}),[i.dataset.prem]:v}; keep()});
+  $("#resetcfg").onclick=()=>{delete S.rf; delete S.premiums; keep()};
+  // 个股单独设定
+  const tb=$("#ovb"), fmtB=s=>s.zones?num(s.zones.buy):"–";
+  const rowHtml=s=>{const ov=(S.overrides||{})[s.code], def=c.rf+premOf(s.industry,c);
+    return `<tr data-code="${s.code}"><td class="l"><b>${s.name}</b><div class="sub">${s.code}</div></td><td>${s.industry}</td><td>${def.toFixed(2)}%</td>
+    <td><input type="number" step="0.1" min="0.5" max="15" class="ovin" data-code="${s.code}" value="${ov??""}" placeholder="默认"></td>
+    <td class="eff"><b>${((s.floor||0)*100).toFixed(2)}%</b></td><td class="eb">${fmtB(s)}</td><td>${ov!=null?`<button class="btn sm ovclr" data-code="${s.code}">清除</button>`:""}</td></tr>`};
+  const fill=()=>{const ql=$("#sq").value.trim().toLowerCase();
+    const list=P.stocks.filter(s=>!ql||s.name.includes(ql)||s.code.includes(ql)||(s.py||"").includes(ql)||(s.pyfull||"").includes(ql));
+    tb.innerHTML=list.map(rowHtml).join("")||'<tr><td colspan="7" class="empty">没有匹配的股票</td></tr>'};
+  $("#sq").oninput=fill; fill();
+  tb.addEventListener("change",async e=>{const i=e.target.closest(".ovin"); if(!i)return;
+    const code=i.dataset.code, v=i.value===""?null:+i.value;
+    if(v!==null&&!(v>0&&v<=15)){i.value=(S.overrides||{})[code]??"";return}
+    S.overrides={...(S.overrides||{})}; v===null?delete S.overrides[code]:S.overrides[code]=v;
+    await saveAndApply(); const s=P.stocks.find(x=>x.code===code), tr=i.closest("tr");
+    tr.querySelector(".eff").innerHTML=`<b>${((s.floor||0)*100).toFixed(2)}%</b>`; tr.querySelector(".eb").textContent=fmtB(s);
+    $("#ovcnt").textContent=ovn(); const last=tr.lastElementChild; last.innerHTML=v!==null?`<button class="btn sm ovclr" data-code="${code}">清除</button>`:""});
+  tb.addEventListener("click",async e=>{const b=e.target.closest(".ovclr"); if(!b)return;
+    S.overrides={...(S.overrides||{})}; delete S.overrides[b.dataset.code]; await saveAndApply(); fill(); $("#ovcnt").textContent=ovn()});
+  $("#ovall").onclick=async()=>{if(!ovn()||!(await askConfirm("清除全部 "+ovn()+" 只股票的单独设定？","清除")))return; S.overrides={}; await saveAndApply(); fill(); $("#ovcnt").textContent=0};
+}
+
+/* ---------- 框架 ---------- */
+function syncNav(){document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===state.tab))}
+function render(){
+  syncNav();
+  if(state.tab==="hold") return renderHold();
+  if(state.tab==="settings") return renderSettings();
+  if(state.tab==="learn") return renderLearn();
+  if(state.detail) return getStock(state.detail).then(renderDetail);
+  renderPool();
+}
+window.addEventListener("scroll",()=>{const b=document.querySelector("#totop"); if(b) b.classList.toggle("show",scrollY>520)},{passive:true});
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>goto({hold:"#/hold",settings:"#/settings",learn:"#/learn"}[b.dataset.tab]||"#/"));
+$("#home").onclick=e=>{e.preventDefault(); state.f={q:"",ind:"",st:defaultView(),minY:0}; goto("#/")};
+async function load(){
+  state.cache={};
+  api("/api/version").then(v=>{const e=document.getElementById("ver"); if(e) e.textContent="v"+v.version}).catch(()=>{}); try{state.privacy=localStorage.getItem("privacy")==="1"}catch(e){} try{const last=+localStorage.getItem("updLast")||0; if(Date.now()-last>20*3600e3){localStorage.setItem("updLast",String(Date.now())); checkUpdate(false).then(i=>showUpd(i,false))}}catch(e){} state.pool=await api("/api/pool"); state.holdings=await api("/api/holdings"); state.pool.stocks.forEach(applyZones);
+  if(!state.viewInit){state.f.st=defaultView(); state.viewInit=true}
+  $("#updated").textContent=state.pool.updated?"数据更新于 "+state.pool.updated:"尚无数据，请到「设置」刷新";
+}
+load().then(async()=>{route(); const s=await api("/api/status"); if(s.running)poll()});
+</script>
+</body>
+</html>

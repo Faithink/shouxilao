@@ -1,0 +1,16 @@
+{
+  "name": "收息佬",
+  "short_name": "收息佬",
+  "description": "股息攒得好，退休晚不了。A股红利股的股息率、买入价与公司体检。",
+  "lang": "zh-CN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14211d",
+  "theme_color": "#f9f8f4",
+  "icons": [
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}

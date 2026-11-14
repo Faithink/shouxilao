@@ -33,3 +33,4 @@ data/cache/
 holdings.json.bak
 *.bak
 *.log
+data/*.log

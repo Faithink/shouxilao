@@ -2,6 +2,7 @@
 本机:http://127.0.0.1:8890   局域网内的手机/电脑:http://<本机IP>:8890
 只接受内网地址(192.168.x.x / 10.x.x.x / 172.16-31.x.x / 本机)的访问;可用 passcode.py 加访问密码。
 """
+import gzip
 import hashlib
 from html import escape as _esc
 import hmac
@@ -13,13 +14,11 @@ import re
 import secrets
 import shutil
 import socket
-import sys
 import threading
 import time
 import urllib.parse
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from pathlib import Path
 
 import datasrc
 import fetch_data
@@ -134,7 +133,7 @@ button{margin-top:12px;width:100%;padding:12px;font-size:16px;border:0;border-ra
 
 
 def valid_code(code):
-    return code.isdigit() and len(code) in (5, 6)
+    return code.isascii() and code.isdigit() and len(code) in (5, 6)
 
 
 def stock_codes():
@@ -166,8 +165,16 @@ class Handler(BaseHTTPRequestHandler):
 
     # ---- 基础响应 ----
     def _send(self, code, body=b"", ctype="text/plain; charset=utf-8", headers=None):
+        # 文本类响应超过 1KB 且浏览器支持时压缩(页面 245KB、股票池 170KB,局域网/手机上能快很多)
+        gz = (len(body) > 1024 and "gzip" in (self.headers.get("Accept-Encoding") or "")
+              and (ctype.startswith(("text/", "application/json", "application/manifest", "image/svg"))))
+        if gz:
+            body = gzip.compress(body, 5)
         self.send_response(code)
         self.send_header("Content-Type", ctype)
+        if gz:
+            self.send_header("Content-Encoding", "gzip")
+            self.send_header("Vary", "Accept-Encoding")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-cache")
         for k, v in (headers or {}).items():
@@ -188,7 +195,12 @@ class Handler(BaseHTTPRequestHandler):
         self._send(404, body, "text/html; charset=utf-8")
 
     def _body(self):
-        n = int(self.headers.get("Content-Length") or 0)
+        try:
+            n = int(self.headers.get("Content-Length") or 0)
+        except ValueError:
+            n = 0
+        if n < 0 or n > MAX_BODY:       # 负数会让 read() 一直等到连接关闭;过大的请求体直接当空处理(随后按 bad json 拒绝)
+            n = 0
         return self.rfile.read(n) if n else b""
 
     def _cookie(self, name):
@@ -242,7 +254,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(d)
         if path.startswith("/api/stock/"):
             code = path.rsplit("/", 1)[-1]
-            if not code.isdigit():
+            if not (code.isascii() and code.isdigit()):
                 return self._json({"error": "bad code"}, 400)
             d = read_json(DATA / "stocks" / f"{code}.json", None)
             return self._json(d) if d else self._json({"error": "not found"}, 404)
@@ -308,7 +320,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/passcode":
             try:
                 pc = (json.loads(self._body() or b"{}").get("passcode") or "").strip()
-            except json.JSONDecodeError:
+            except ValueError:
                 return self._json({"error": "bad json"}, 400)
             if not pc:
                 ACCESS.unlink(missing_ok=True)
@@ -322,7 +334,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/stocks":
             try:
                 body = json.loads(self._body() or b"{}")
-            except json.JSONDecodeError:
+            except ValueError:
                 return self._json({"error": "bad json"}, 400)
             code, industry = str(body.get("code", "")).strip(), str(body.get("industry", "")).strip()
             if not valid_code(code):
@@ -393,8 +405,12 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/holdings":
             try:
                 body = json.loads(self._body())
-            except json.JSONDecodeError:
+            except ValueError:
                 return self._json({"error": "bad json"}, 400)
+            # 结构校验:必须是对象,买入/卖出记录必须是列表,否则前端读到会整页出错
+            if (not isinstance(body, dict) or not isinstance(body.get("lots", []), list)
+                    or not isinstance(body.get("sells", []), list) or not isinstance(body.get("settings", {}), dict)):
+                return self._json({"error": "持仓数据格式不对"}, 400)
             with _lock:
                 HOLDINGS.parent.mkdir(parents=True, exist_ok=True)
                 # 先写临时文件再替换,中途失败不会损坏原文件;替换前留一份 .bak
@@ -408,7 +424,10 @@ class Handler(BaseHTTPRequestHandler):
 
     def _static(self, path):
         rel = urllib.parse.unquote(path).lstrip("/") or "index.html"
-        target = (WEB / rel).resolve()
+        try:
+            target = (WEB / rel).resolve()
+        except (ValueError, OSError):
+            return self._not_found(path)
         if WEB.resolve() not in target.parents and target != WEB.resolve() / "index.html":
             return self._not_found(path)
         if not target.is_file():
@@ -419,6 +438,7 @@ class Handler(BaseHTTPRequestHandler):
         self._send(200, target.read_bytes(), ctype)
 
 
+MAX_BODY = 8 * 1024 * 1024        # 请求体上限(持仓文件通常只有几十 KB)
 NOT_FOUND_HTML = """<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>找不到这个页面 · 收息佬</title>
 <style>:root{color-scheme:light dark}body{font:16px/1.75 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:520px;margin:12vh auto;padding:0 20px;background:#f9f8f4;color:#1f2430}
 @media(prefers-color-scheme:dark){body{background:#0c1018;color:#e3e8f2}}h1{font-size:22px;margin:0 0 12px}code{background:rgba(127,127,127,.18);padding:2px 8px;border-radius:6px;word-break:break-all}
@@ -448,6 +468,11 @@ for _m in ("do_GET", "do_POST", "do_PUT", "do_DELETE"):
     setattr(Handler, _m, _safe(getattr(Handler, _m)))
 
 
+class Server(ThreadingHTTPServer):
+    request_queue_size = 128        # 默认只有 5:页面一次并发十几个请求(手机、多标签)时,多出来的连接会被直接重置
+    daemon_threads = True
+
+
 def pick_port():
     want = int(os.environ.get("SHOUXI_PORT") or 0)
     for p in ([want] if want else PORT_RANGE):
@@ -468,7 +493,7 @@ def start():
     ensure_home()
     port = pick_port()
     Handler.port = port
-    srv = ThreadingHTTPServer((os.environ.get("SHOUXI_BIND", "0.0.0.0"), port), Handler)
+    srv = Server((os.environ.get("SHOUXI_BIND", "0.0.0.0"), port), Handler)
     srv.daemon_threads = True
     (HOME / "server.port").write_text(str(port), encoding="utf-8")
     return srv, port

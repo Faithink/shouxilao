@@ -16,7 +16,6 @@ import json
 import math
 import os
 import sys
-import time
 from datetime import date, datetime, timedelta
 from statistics import fmean, median
 

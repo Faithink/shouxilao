@@ -144,7 +144,9 @@ python tools/build_demo.py site   # 生成纯静态的 site/ 目录，可部署�
 | (ETF) | 行业写 `ETF` 就按 ETF 处理(例如 `563020,红利低波ETF易方达,ETF`):分红取近 12 个月合计,没有公司体检,分红不计红利税,要求股息率用设置里的「ETF 溢价」(默认 2.5) |
 | `fetch_data.py` / `datasrc.py` | 采集与指标计算 / 数据源请求,输出到 `data/` |
 | `paths.py` | 路径集中管理:开发时用项目目录,打包后用 `~/Library/Application Support/收息佬/` |
-| `packaging/` | Mac 应用打包(菜单栏小程序、图标、构建脚本) |
+| `packaging/` | 打包:Mac(菜单栏小程序、`build.sh`)、Windows(`build_win.ps1`)、图标和 logo 生成(`make_brand.py`) |
+| `tools/` | 开发辅助:后端冒烟测试 `smoke_test.py`、在线演示生成 `build_demo.py`、同步到公开仓库 `sync_public.py` |
+| `android-standalone/` | 安卓独立版(手机里自己跑服务) |
 | `app.py` | 本地服务(局域网可访问),持仓存到 `holdings.json`(你的私人数据,注意备份),访问密码存 `access.json` |
 | `web/index.html` | 前端,单文件、无外部依赖 |
 | `docs/` | 项目交接文档(架构、数据、算法、前端、发布、决策准则),从 `docs/00_交接说明.md` 读起 |

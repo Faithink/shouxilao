@@ -113,8 +113,6 @@ tbody tr.row td:first-child b{font-size:14.5px}
 .indstrip{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin:-4px 0 14px;padding:2px 28px 6px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)}
 .indstrip::-webkit-scrollbar{display:none}.indstrip .chip{flex:none;padding:3px 12px;font-size:12px;color:var(--mute);box-shadow:none}.indstrip .chip.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent)}
 @media(max-width:620px){.toprow{gap:8px}.toprow #fq{max-width:none;min-width:0;width:100%;flex:1 1 100%}.indstrip .chip{padding:6px 13px;font-size:13px}}.chips.sm{margin-top:-4px}.chips.sm .chip{padding:3px 12px;font-size:12px;color:var(--mute);box-shadow:none}.chips.sm .chip.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);box-shadow:none}
-.panel{position:fixed;top:60px;right:20px;z-index:30;width:min(600px,calc(100vw - 32px));max-height:80vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow-lg)}
-.panel[hidden]{display:none}
 
 /* ---- 体检 ---- */
 .lights{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
@@ -206,7 +204,6 @@ button.fav:hover{color:#f0a800;transform:scale(1.18)}button.fav.on{color:#f0a800
 .seg button{border:0;background:none;padding:6px 18px;border-radius:8px;cursor:pointer;color:var(--mute);font-size:13.5px;font-family:inherit}
 .seg button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow);font-weight:600}
 .stag{display:inline-block;padding:1px 9px;border-radius:99px;font-size:12px;font-weight:600;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);vertical-align:1px}
-.lcls{display:flex;flex-direction:column;gap:2px;line-height:1.3}.lcls em{font-style:normal;font-size:11px;color:var(--mute)}
 .sdot{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none}
 .stackbar{display:flex;height:34px;border-radius:10px;overflow:hidden;margin:10px 0 4px;background:var(--none-bg)}
 .stackbar div{display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-shadow:0 1px 1px rgba(0,0,0,.25)}
@@ -254,7 +251,6 @@ a.lstep:hover{outline:2px solid var(--accent)}
 #toc .tocg .tgrp{display:block}#toc .tocg .tgl{margin:0 0 4px;padding:0;font-size:12px;font-weight:700;color:var(--mute);letter-spacing:1px}
 #toc .tocg .tcl{display:flex;flex-direction:column;gap:0}#toc .tocg .tcl a.tl{border:0;background:transparent;border-radius:8px;padding:5px 6px;margin:0 -6px;font-size:13.5px;gap:8px}#toc .tocg .tcl a.tl:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}#toc .tocg .tcl a.tl.on{background:color-mix(in srgb,var(--accent) 14%,transparent)}#toc .tocg .tcl a.tl.done::after{margin-left:auto}
 @media(max-width:900px){#toc .tocg{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:620px){#toc .tocg{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
-.lprog{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-size:13px;color:var(--mute)}.lprog .pb{flex:1;height:8px;border-radius:4px;background:var(--seg);overflow:hidden}.lprog .pb i{display:block;height:100%;background:var(--accent);transition:width .3s}
 .tocg a.tl.on{color:var(--accent);font-weight:700}.tocg a.tl.on b{background:var(--accent);color:var(--accent-ink)}.tocg a.tl{padding:7px 8px;margin:0 -8px;border-radius:10px;line-height:1.35}.tocg a.tl:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}.tocg a.tl.on{background:color-mix(in srgb,var(--accent) 12%,transparent)}.tocg a.tl b,.tocg a.tl b.n2{width:26px;height:26px;border-radius:50%;font-size:12px}.tocg a.tl.done::after{content:"✓";flex:none;margin-left:2px;color:var(--accent);font-size:13px;font-weight:700}.tocg a.tl.done:not(.on){color:var(--mute)}.tocg a.tl.done b{background:var(--seg);color:var(--mute)}
 .lnav[hidden],.lcongrat[hidden]{display:none!important}.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin:14px 0 4px}.lnav .lnx{flex:0 0 100%;font-size:13px;color:var(--mute);line-height:1.6}.lnav .lnx b{color:var(--ink)}.lnav .btn{padding:10px 18px}
 .lcongrat{text-align:center;padding:34px 22px}.lcongrat .lc-t{font-size:22px;font-weight:700;margin:6px 0 8px}.lcongrat ul{display:inline-block;text-align:left;margin:10px 0;padding-left:18px;font-size:14px;line-height:1.9}.lcongrat .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}.lcongrat .star{font-size:40px;color:var(--accent);line-height:1}
@@ -296,19 +292,14 @@ a.lstep:hover{outline:2px solid var(--accent)}
 .bigy{font-size:40px;font-weight:800;line-height:1.1;margin:2px 0 10px;font-variant-numeric:tabular-nums}
 .lnums{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.lnums div{display:flex;flex-direction:column}.lnums b{font-size:18px}
 .lmsg{margin-top:12px;padding:10px 14px;background:var(--hold-bg);color:var(--ink);border-radius:10px;font-size:13px;line-height:1.65}
-.lad{display:flex;flex-direction:column;gap:2px;margin-top:6px}
-.lrow{display:grid;grid-template-columns:96px 1fr 86px;gap:10px;align-items:center;padding:5px 0}
-#sec-4 .lrow{grid-template-columns:176px 1fr 76px;padding:9px 0}@media(max-width:620px){#sec-4 .lrow{grid-template-columns:104px 1fr 62px}}
 .lad4 .lc{display:grid;grid-template-columns:76px 66px 1fr 72px;gap:10px;align-items:center;padding:8px 0}
 .lad4 .ltrack{height:34px}.lad4 .ltrack i{height:34px;line-height:34px}
 .lc-n{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:15px;flex:none}
 .lc-c{display:flex}.lc-c span{font-size:11.5px;padding:1px 8px;border-radius:99px;background:var(--none-bg);color:var(--mute)}
 .lc-v{font-size:18px;text-align:right}.lc-f{font-size:12px;color:var(--mute);text-align:right;padding-top:4px}
 @media(max-width:620px){.lad4 .lc{grid-template-columns:62px 1fr 58px}.lc-c{display:none}.lad4 .ltrack{height:28px}.lad4 .ltrack i{height:28px;line-height:28px}.lc-v{font-size:15px}}
-.lname{display:flex;align-items:center;gap:7px;font-weight:500}
 .ltrack{display:flex;height:16px;border-radius:5px;overflow:hidden;background:var(--none-bg)}
 .lbase{background:color-mix(in srgb,var(--ink) 16%,var(--card));opacity:1}.lprem{display:block}
-.lval{text-align:right;white-space:nowrap}.lval em{font-style:normal;font-size:11.5px;color:var(--mute);margin-left:4px}
 .sgrid{margin-bottom:6px}
 .scard{border:1px solid var(--line);border-top:4px solid var(--c);border-radius:12px;padding:12px 14px}
 .scap{display:flex;align-items:center;justify-content:space-between}.scap b{font-size:16px;color:var(--c)}.role{font-size:12px;color:var(--mute)}
@@ -354,7 +345,6 @@ table.cmp td,table.cmp th{text-align:center}table.cmp td.l,table.cmp th.l{text-a
 @media(max-width:620px){.navbar u{font-size:0}.etfgrid,.chkgrid{grid-template-columns:1fr}.trow.slimr{grid-template-columns:70px 1fr 96px}}
 .lbase,.lprem{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11.5px;white-space:nowrap;overflow:hidden;color:#fff}
 .lbase{color:var(--ink)}.lg{display:inline}.sh{display:none}
-.lrow.lhead{font-size:12px;color:var(--mute)}.ltrack0 b{font-weight:500}
 @media(max-width:620px){.lg{display:none}.sh{display:inline}}
 .mech{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap}
 .mech i{align-self:center;color:var(--mute);font-style:normal}
@@ -366,10 +356,6 @@ table.cmp td,table.cmp th{text-align:center}table.cmp td.l,table.cmp th.l{text-a
 .rtax .btn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 @media(max-width:620px){.mech{flex-direction:column}.mech i{transform:rotate(90deg)}}
 .card[id^="sec-"],#toc{scroll-margin-top:72px}
-.tocgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px}
-.tocitem{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;background:var(--none-bg);color:var(--ink);font-size:13.5px;text-decoration:none!important;transition:background .15s,transform .15s}
-.tocitem b{color:var(--accent);font-size:15px}
-.tocitem:hover{background:color-mix(in srgb,var(--accent) 14%,transparent);transform:translateY(-1px)}
 .totop{position:fixed;right:22px;bottom:24px;z-index:15;border:0;border-radius:99px;padding:10px 16px;background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:13px;box-shadow:var(--shadow-lg);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(8px);transition:all .2s;font-family:inherit}
 .totop.show{opacity:1;pointer-events:auto;transform:none}
 @media(max-width:620px){.tocgrid{grid-template-columns:1fr 1fr}.totop{bottom:calc(72px + env(safe-area-inset-bottom));right:14px}}
@@ -405,7 +391,6 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .zonebar div{height:100%}
 .marker{position:absolute;top:-22px;transform:translateX(-50%);font-size:12px;font-weight:700}
 .marker::after{content:"";display:block;width:2px;height:48px;background:var(--ink);margin:0 auto}
-.zlabels{display:flex;font-size:11px;color:var(--mute)}
 .months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
 .months div{text-align:center;padding:5px 0;border-radius:6px;background:var(--none-bg);font-size:12px;color:var(--mute)}
 .months div.on{background:var(--accent);color:var(--accent-ink);font-weight:700}
@@ -432,7 +417,7 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .hfoot{font-weight:700;background:var(--none-bg);border-top:1px solid var(--line)}
 .hrow[open]>summary{background:color-mix(in srgb,var(--accent) 7%,transparent)}
 .hbody{background:color-mix(in srgb,var(--none-bg) 45%,var(--card));padding:6px 22px 16px;border-top:1px solid var(--line)}.hbody .card{border:0;box-shadow:none;margin:0;padding:6px 0;background:transparent}
-.hbody .pos-head h3,.hbody .pos-head .mute,.hbody .pos-head .stag{display:none}.hbody .pos-head{margin-bottom:2px}.hbody .hline{font-size:13px;color:var(--ink)}.hbody .hline b{font-size:14px}
+.hbody details>summary{padding:7px 0}.hbody .pos-head h3,.hbody .pos-head .mute,.hbody .pos-head .stag{display:none}.hbody .pos-head{margin-bottom:2px}.hbody .hline{font-size:13px;color:var(--ink)}.hbody .hline b{font-size:14px}
 .hbody .grid.g4{grid-template-columns:repeat(4,1fr);gap:0;margin:0}.hbody .kpi{background:transparent;box-shadow:none;border:0;border-radius:0;padding:4px 16px;border-left:1px solid var(--line)}.hbody .kpi:first-child{border-left:0;padding-left:0}
 .hbody .kpi .v{font-size:19px}.hbody .kpi .k{font-size:12px}
 .hbody .verdict{padding:9px 14px;margin:12px 0;gap:12px;border-radius:10px}.hbody .verdict .vt{font-size:17px}.hbody .verdict .vd{font-size:12.5px;min-width:200px;line-height:1.55}
@@ -760,8 +745,8 @@ const GUIDE_GO={
 /* ---------- 「要求股息率」图示 + 小计算器(使用指引和红利课堂共用) ---------- */
 function reqBlock(p){const c=cfg(), pm=DEF_PREM["消费"]??3;
   return `<div class="greq" id="${p}-bar"><i class="a"><u>国债</u><b id="${p}-v1">${c.rf}</b></i><s>+</s><i class="b"><u>行业溢价</u><b id="${p}-v2">${pm}</b></i><s>+</s><i class="c"><u>个股追加</u><b id="${p}-v3">0</b></i><s>=</s><i class="t"><u>要求</u><b id="${p}-vt">${(c.rf+pm).toFixed(2)}%</b></i></div>
-    <div class="gcalc"><div class="row"><span class="nw">国债 <input id="${p}-a" type="number" step="0.05" value="${c.rf}">%</span><span class="nw">行业溢价 <input id="${p}-p" type="number" step="0.1" value="${pm}">%</span><span class="nw">个股追加 <input id="${p}-x" type="number" step="0.1" value="0">%</span></div>
-      <div class="row"><span class="nw">每股分红 <input id="${p}-d" type="number" step="0.1" value="2"> 元</span><span class="nw">→ 买入价约 <b id="${p}-b">–</b> 元</span><span class="nw">低位线约 <b id="${p}-h">–</b> 元</span></div></div>`}
+    <div class="gcalc"><div class="row"><span class="nw">国债 <input id="${p}-a" type="number" step="0.05" value="${c.rf}" aria-label="国债收益率（%）">%</span><span class="nw">行业溢价 <input id="${p}-p" type="number" step="0.1" value="${pm}" aria-label="行业溢价（%）">%</span><span class="nw">个股追加 <input id="${p}-x" type="number" step="0.1" value="0" aria-label="个股追加（%）">%</span></div>
+      <div class="row"><span class="nw">每股分红 <input id="${p}-d" type="number" step="0.1" value="2" aria-label="每股分红（元）"> 元</span><span class="nw">→ 买入价约 <b id="${p}-b">–</b> 元</span><span class="nw">低位线约 <b id="${p}-h">–</b> 元</span></div></div>`}
 function bindReqCalc(root,p){const q=k=>root.querySelector("#"+p+"-"+k);
   const calc=()=>{const a=+q("a").value,pm=+q("p").value,x=+q("x").value,d=+q("d").value,f=(a+pm+x)/100;
     q("v1").textContent=a; q("v2").textContent=pm; q("v3").textContent=x; q("vt").textContent=(f*100).toFixed(2)+"%";
@@ -769,7 +754,7 @@ function bindReqCalc(root,p){const q=k=>root.querySelector("#"+p+"-"+k);
     q("b").textContent=d>0&&f>0?(d/f).toFixed(2):"–"; q("h").textContent=d>0&&f>0?(d/(f+0.01)).toFixed(2):"–"};
   ["a","p","x","d"].forEach(k=>q(k).oninput=calc); calc()}
 /* 红利课堂「要求股息率」:色块里的数字直接改 → 要求股息率、买入价尺、不同要求下的买入价对比 */
-function reqLab(p){const c=cfg(), pm=DEF_PREM["消费"]??3, ie=(id,v,st)=>`<span class="ie"><input id="${p}-${id}" type="number" step="${st}" value="${v}"><span>%</span></span>`;
+function reqLab(p){const c=cfg(), pm=DEF_PREM["消费"]??3, ie=(id,v,st)=>`<span class="ie"><input id="${p}-${id}" type="number" step="${st}" value="${v}" aria-label="${{a:"国债收益率",p:"行业溢价",x:"个股追加"}[id]} （%）"><span>%</span></span>`;
   return `<div class="greq edit"><i class="a"><u>国债</u>${ie("a",c.rf,.05)}</i><s>+</s><i class="b"><u>行业溢价</u>${ie("p",pm,.1)}</i><s>+</s><i class="c"><u>个股追加</u>${ie("x",0,.1)}</i><s>=</s><i class="t"><u>要求</u><b id="${p}-vt">${(c.rf+pm).toFixed(2)}%</b></i></div>`}
 function bindReqLab(root,p){const q=k=>root.querySelector("#"+p+"-"+k), n2=v=>(+v).toFixed(2);
   const calc=()=>{const a=+q("a").value, pm=+q("p").value, x=+q("x").value, d=+q("d").value, f=(a+pm+x)/100;
@@ -891,7 +876,7 @@ function renderPool(){
   <div class="indstrip" id="indstrip"><button class="chip ${ind===""?"on":""}" data-ind="">全部</button>${indList.map(([i,n])=>`<button class="chip ${ind===i?"on":""}" data-ind="${i}">${i} ${n}</button>`).join("")}</div>
   <div class="card">
     <div class="filters">
-      <select class="msort" id="msort">${[["verdict","排序：建议优先"],["yield","排序：股息率 高→低"],["health","排序：体检 好→差"],["name","排序：名称"]].map(([k,t])=>`<option value="${k}" ${state.sort.key===k?"selected":""}>${t}</option>`).join("")}</select>
+      <select class="msort" id="msort" aria-label="排序方式">${[["verdict","排序：建议优先"],["yield","排序：股息率 高→低"],["health","排序：体检 好→差"],["name","排序：名称"]].map(([k,t])=>`<option value="${k}" ${state.sort.key===k?"selected":""}>${t}</option>`).join("")}</select>
       <span class="sub">显示 <span id="cnt">${rows.length}</span> 只 · 点击一行看详情（分红节奏、体检、走势都在详情里）</span>
     </div>
     <div class="tablewrap"><table class="pool">
@@ -1171,7 +1156,7 @@ async function renderHold(){
   ${holdTable(groups,T,cap,maxPct)}
   ${fold(totalCard(groups,T),`<b class="${sgn(T.gain+T.recv-T.rtax)}">${cny(T.gain+T.recv-T.rtax)}</b>`)}
   ${fold(allocCard(groups,T))}
-  ${fold(divCal(cal),`<b>${cny(cal.reduce((a,m)=>a+m.v,0))}</b>`)}`:`<div class="card empty">${gH.length?"目前没有 A 股持仓。":realRows.length||realH.length?"目前没有持仓（已全部卖出）。":"还没有持仓。先在上面录入一笔买入。"}</div>`}
+  ${fold(divCal(cal),`<b>${cny(cal.reduce((a,m)=>a+m.v,0))}</b>`)}`:`<div class="card empty">${gH.length?"目前没有 A 股持仓。":realRows.length||realH.length?"目前没有持仓（已全部卖出）。":"还没有持仓。先在下面「持仓录入」里录入一笔买入。"}</div>`}
   ${realRows.length?fold(sellCard(realRows,RT),`<b class="${sgn(RT.total)}">${cny(RT.total)}</b>`):""}
   ${gH.length||realH.length?hkSection(gH,realH):""}
   <details class="card fold" id="entry" ${(!groups.length||state.prefill)?"open":""}><summary><h2>持仓录入</h2><span class="sumv sub">买入、卖出都在这里录</span><i class="hchev">›</i></summary><div class="foldbody"><div class="form" style="margin-top:12px">
@@ -1196,7 +1181,7 @@ async function renderHold(){
   // 多行录入:同一只股票的几笔成交一次加完
   const rowsEl=$("#lotrows");
   const addRow=(focus,dir)=>{const r=document.createElement("div"); r.className="lotrow";
-    r.innerHTML=`<input class="rd" type="date" value="${t0}"><select class="rk"><option value="buy">买入</option><option value="sell">卖出</option></select><input class="rp" type="number" step="0.01" placeholder="如 38.50"><input class="rs" type="number" step="100" placeholder="如 1000"><button type="button" class="btn sm rx" title="删除这一行">✕</button>`;
+    r.innerHTML=`<input class="rd" type="date" value="${t0}" aria-label="成交日期"><select class="rk" aria-label="买入或卖出"><option value="buy">买入</option><option value="sell">卖出</option></select><input class="rp" type="number" step="0.01" placeholder="如 38.50"><input class="rs" type="number" step="100" placeholder="如 1000"><button type="button" class="btn sm rx" title="删除这一行">✕</button>`;
     r.querySelector(".rk").value=dir||"buy"; rowsEl.appendChild(r); if(focus) r.querySelector(".rp").focus()};
   addRow(false,preDir);
   rowsEl.onclick=e=>{if(e.target.classList.contains("rx")&&rowsEl.querySelectorAll(".lotrow:not(.lothead)").length>1) e.target.closest(".lotrow").remove()};
@@ -1609,7 +1594,7 @@ function renderLearn(){
         <div class="rg"><span><i class="g"></i>≤50%（电力、交通、公用事业 ≤60%）</span><span><i class="y"></i>≤70%（这几类 ≤75%）</span><span><i class="r"></i>超过</span></div></div>
       <div class="hl-c wide"><h4><i class="hl-dot g"></i>⑤ 估值</h4><div class="q">现在贵不贵？（和它自己的历史比）</div><div class="lk">看：市盈率 PE（金融、周期股看市净率 PB）在自己近 5 年里排第几分位</div>
         <div class="rg"><span><i class="g"></i>分位 ≤40%：比自己多数时候便宜</span><span><i class="y"></i>40~75%</span><span><i class="r"></i>&gt;75% 或亏损：比自己多数时候贵</span></div></div></div>
-    <div class="hl-demo"><span>试试看，分红率：<b id="hld-v">70%</b></span><input id="hld-r" type="range" min="20" max="200" value="70"><span id="hld-o"></span></div>
+    <div class="hl-demo"><span>试试看，分红率：<b id="hld-v">70%</b></span><input id="hld-r" type="range" aria-label="分红率" min="20" max="200" value="70"><span id="hld-o"></span></div>
     <h3>怎么用这五个灯</h3>
     <ul style="margin:6px 0 0;padding-left:18px;font-size:14px;line-height:1.85">
       <li><b>先看前四个</b>（分红能力、盈利质量、分红稳定、财务安全）：它们回答"这家公司值不值得持有"。有红灯，先弄明白原因再说价格。</li>
@@ -1622,7 +1607,7 @@ function renderLearn(){
     <div class="gform"><b>买入价 = 每股分红 ÷ 要求股息率</b><em>要求股息率由三层叠加，每一层都可以改</em></div>
     ${reqLab("l")}
     <div class="lhint">✎ 虚线下的数字都能直接点开修改，下面的买入价会跟着变。</div>
-    <div class="rwhat"><span>假设每年每股分红 <input id="l-d" type="number" step="0.1" value="2"> 元</span><span>现价 <b id="l-pv">50</b> 元（拖动）</span><input id="l-pr" type="range" min="16" max="100" step="0.5" value="50"></div>
+    <div class="rwhat"><span>假设每年每股分红 <input id="l-d" type="number" step="0.1" value="2" aria-label="每年每股分红（元）"> 元</span><span>现价 <b id="l-pv">50</b> 元（拖动）</span><input id="l-pr" type="range" aria-label="现价（元）" min="16" max="100" step="0.5" value="50"></div>
     <div class="pscale" id="l-sc"><div class="z z1" id="l-z1">低位</div><div class="z z2" id="l-z2">偏低</div><div class="z z3" id="l-z3">还没到买点</div><div class="pin" id="l-pin"></div><div class="tk l" id="l-t1"></div><div class="tk r" id="l-t2"></div></div>
     <div class="pverdict" id="l-vd"></div>
     <h3>要求每提高 1 个点，买入价就低一截</h3>
@@ -1804,7 +1789,7 @@ function renderSettings(){
     <p class="note">重新采集全部股票的分红、价格与财务数据，约 5~8 分钟，期间可以继续使用。价格是日线收盘，可能晚一个交易日；分红来自东方财富，日线和财务数据来自新浪财经（腾讯作备用）。日线只在第一次完整下载，之后每次只补最近几天，所以很快。增加股票用下面的「添加个股」，移出在个股详情页。</p></div>
   <div class="card" id="addstk"><h2>添加个股</h2>
     <div class="form"><input id="as-code" placeholder="股票代码" inputmode="numeric" maxlength="6" autocomplete="off" style="width:150px"><button class="btn" id="as-look">查询</button><span class="sub" id="as-msg">A 股、B 股、ETF 填 6 位，港股填 5 位（如 00941）</span></div>
-    <div class="form" id="as-res" hidden style="margin-top:10px"><span id="as-info" class="sub"></span><input id="as-name" maxlength="20" placeholder="名称" style="width:140px"><select id="as-ind"><option value="">选择行业…</option>${IND_GROUPS.map(([g,l])=>`<optgroup label="${g}">${l.filter(i=>INDS_ALL().includes(i)).map(i=>`<option value="${i}">${i}</option>`).join("")}</optgroup>`).join("")}</select><button class="btn primary" id="as-add">加入股票池</button></div>
+    <div class="form" id="as-res" hidden style="margin-top:10px"><span id="as-info" class="sub"></span><input id="as-name" maxlength="20" placeholder="名称" style="width:140px"><select id="as-ind" aria-label="行业"><option value="">选择行业…</option>${IND_GROUPS.map(([g,l])=>`<optgroup label="${g}">${l.filter(i=>INDS_ALL().includes(i)).map(i=>`<option value="${i}">${i}</option>`).join("")}</optgroup>`).join("")}</select><button class="btn primary" id="as-add">加入股票池</button></div>
     <p class="note">加入后会自动下载这只股票的价格和分红数据，约半分钟。行业决定买入价里的风险溢价，选最接近的就行，之后可以在下方「行业溢价」里调整。港股、B 股按各自币种显示，持仓页统一折成人民币。</p></div>
   <div class="card" id="mgstk"><h2>管理股票池</h2>
     <p class="note" style="margin:0 0 10px">不关心的股票可以移出，之后不再出现在列表和搜索里，刷新也不再下载它。持仓里有记录的股票不能移出，要先在「我的持仓」里删除相关记录。移出的股票可以在下面一键恢复。</p>
@@ -1812,7 +1797,7 @@ function renderSettings(){
     <div class="tablewrap"><table class="ovt"><tbody id="mgb"></tbody></table></div>
     <div id="mgrm"></div></div>
   <div class="card"><h2>备份与恢复</h2>
-    <div class="form"><button class="btn" id="bk-out">导出持仓备份</button><button class="btn" id="bk-in">从备份恢复</button><input type="file" id="bk-file" accept=".json,application/json" hidden><span class="sub" id="bk-msg"></span></div>
+    <div class="form"><button class="btn" id="bk-out">导出持仓备份</button><button class="btn" id="bk-in">从备份恢复</button><input type="file" id="bk-file" aria-label="选择备份文件" accept=".json,application/json" hidden><span class="sub" id="bk-msg"></span></div>
     <p class="note">备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。每次保存前，程序也会在数据目录留一份 holdings.json.bak。</p></div>
   ${/ShouxiApp/.test(navigator.userAgent)?"":`
   <div class="card"><h2>手机使用</h2>
@@ -1827,7 +1812,7 @@ function renderSettings(){
   <h3 class="sectitle">行业溢价设定</h3>
   <div class="card"><h2>买入要求 = 10 年期国债收益率 + 行业溢价</h2>
     <div class="prem-list">
-      <div class="prow base"><span class="pn">10 年期国债收益率<em>基准利率，需手动更新</em></span><span class="pv"><input id="rf" type="number" step="0.05" inputmode="decimal" value="${c.rf}"><b class="unit">%</b></span></div>
+      <div class="prow base"><span class="pn">10 年期国债收益率<em>基准利率，需手动更新</em></span><span class="pv"><input id="rf" type="number" aria-label="10 年期国债收益率（%）" step="0.05" inputmode="decimal" value="${c.rf}"><b class="unit">%</b></span></div>
       ${[...IND_GROUPS.map(([g])=>g),"其他"].map(g=>{const L=inds.filter(i=>grpOf(i)===g); return L.length?`<div class="pgrp">${g}</div>`+L.map(i=>`<label class="prow"><span class="pn">${i}${CYCLICAL.has(i)?'<em>周期股 · 3年平均分红</em>':""}${EMPIRICAL.has(i)?'<em title="样本少，依据偏弱，是经验值">经验值</em>':""}</span><span class="pv"><input type="number" step="0.1" inputmode="decimal" data-prem="${i}" value="${premOf(i)}"><span class="res">→ <b>${(c.rf+premOf(i)).toFixed(2).replace(/0$/,"")}%</b></span></span></label>`).join(""):""}).join("")}
     </div>
     <div class="form" style="margin-top:12px"><button class="btn" id="resetcfg">恢复默认</button></div>

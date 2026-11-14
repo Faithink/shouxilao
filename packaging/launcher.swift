@@ -67,6 +67,7 @@ final class Delegate: NSObject, NSApplicationDelegate {
     func waitForPort(tries: Int) {
         if let s = try? String(contentsOf: portFile, encoding: .utf8), let v = Int(s.trimmingCharacters(in: .whitespacesAndNewlines)) {
             port = v; starting = false
+            statusItem.button?.toolTip = "收息佬 · 127.0.0.1:\(v)"
             openBrowser(); fetchLAN(); rebuildMenu()
             return
         }
@@ -102,6 +103,7 @@ final class Delegate: NSObject, NSApplicationDelegate {
             let i = NSMenuItem(title: "正在启动…", action: nil, keyEquivalent: ""); i.isEnabled = false; m.addItem(i)
         } else {
             m.addItem(item("打开收息佬", #selector(openBrowser), "o"))
+            m.addItem(item("  本机地址 http://127.0.0.1:\(port)  · 点击复制", #selector(copyLocal)))
             m.addItem(.separator())
             let h = NSMenuItem(title: "手机访问(同一 WiFi)", action: nil, keyEquivalent: ""); h.isEnabled = false; m.addItem(h)
             if let u = lanURL {
@@ -123,6 +125,10 @@ final class Delegate: NSObject, NSApplicationDelegate {
 
     @objc func openBrowser() {
         if let u = baseURL { NSWorkspace.shared.open(u) }
+    }
+    @objc func copyLocal() {
+        guard let u = baseURL?.absoluteString else { return }
+        NSPasteboard.general.clearContents(); NSPasteboard.general.setString(u, forType: .string)
     }
     @objc func copyLAN() {
         guard let u = lanURL else { return }

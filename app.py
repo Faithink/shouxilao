@@ -3,6 +3,7 @@
 只接受内网地址(192.168.x.x / 10.x.x.x / 172.16-31.x.x / 本机)的访问;可用 passcode.py 加访问密码。
 """
 import hashlib
+from html import escape as _esc
 import hmac
 import ipaddress
 import json
@@ -177,6 +178,14 @@ class Handler(BaseHTTPRequestHandler):
 
     def _json(self, obj, code=200, headers=None):
         self._send(code, json.dumps(obj, ensure_ascii=False).encode("utf-8"), "application/json; charset=utf-8", headers)
+
+    def _not_found(self, path):
+        """接口路径返回 JSON;其他路径(多半是手输地址不对)返回说明页,告诉用户地址要带端口"""
+        if path.startswith("/api/"):
+            return self._json({"error": "not found"}, 404)
+        url = "http://" + (self.headers.get("Host") or "127.0.0.1") + path
+        body = NOT_FOUND_HTML.replace("__URL__", _esc(url[:200])).replace("__PORT__", str(self.port)).encode("utf-8")
+        self._send(404, body, "text/html; charset=utf-8")
 
     def _body(self):
         n = int(self.headers.get("Content-Length") or 0)
@@ -401,13 +410,23 @@ class Handler(BaseHTTPRequestHandler):
         rel = urllib.parse.unquote(path).lstrip("/") or "index.html"
         target = (WEB / rel).resolve()
         if WEB.resolve() not in target.parents and target != WEB.resolve() / "index.html":
-            return self._send(404, b"not found")
+            return self._not_found(path)
         if not target.is_file():
-            return self._send(404, b"not found")
+            return self._not_found(path)
         ctype = mimetypes.guess_type(str(target))[0] or "application/octet-stream"
         if ctype.startswith("text/") or ctype in ("application/json", "application/manifest+json"):
             ctype += "; charset=utf-8"
         self._send(200, target.read_bytes(), ctype)
+
+
+NOT_FOUND_HTML = """<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>找不到这个页面 · 收息佬</title>
+<style>:root{color-scheme:light dark}body{font:16px/1.75 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:520px;margin:12vh auto;padding:0 20px;background:#f9f8f4;color:#1f2430}
+@media(prefers-color-scheme:dark){body{background:#0c1018;color:#e3e8f2}}h1{font-size:22px;margin:0 0 12px}code{background:rgba(127,127,127,.18);padding:2px 8px;border-radius:6px;word-break:break-all}
+.s{opacity:.7;font-size:14px}a.b{display:inline-block;margin-top:12px;padding:9px 22px;border-radius:10px;background:#9a7229;color:#fff;text-decoration:none}</style>
+<h1>找不到这个页面</h1><p>你访问的是 <code>__URL__</code>，收息佬里没有这个页面。</p>
+<p>收息佬在这台电脑本机运行，正确的地址要<b>带端口号</b>：</p><p><code>http://127.0.0.1:__PORT__</code></p>
+<p class="s">手输地址时别漏了最后的「:__PORT__」。不带端口的话，浏览器访问的是 80 端口，那里往往是电脑上别的程序，会显示它自己的 404。电脑右下角（Mac 在菜单栏）的收息佬图标里，点「打开收息佬」最省事。</p>
+<a class="b" href="/">回到收息佬首页</a>"""
 
 
 def _safe(fn):

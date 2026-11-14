@@ -33,9 +33,9 @@ rm -rf "$B/dist" "$B/work"
 # 3. 菜单栏小程序
 swiftc -O -target arm64-apple-macos11.0 "$R/packaging/launcher.swift" -o "$B/ShouxiLauncher"
 
-# 4. 图标(已有就不重做;原图在 packaging/logo_full.png)
+# 4. 图标(已有就不重做;源图 packaging/icon_1024.png 由 packaging/make_brand.py 用吉祥物原图生成)
 if [ ! -f "$B/icon/AppIcon.icns" ]; then
-  "$R/.venv/bin/python" "$R/packaging/make_icon.py" "$R/packaging/logo_full.png" "$B/icon"
+  "$R/.venv/bin/python" "$R/packaging/make_icon.py" "$R/packaging/icon_1024.png" "$B/icon"
 fi
 
 # 5. 组装

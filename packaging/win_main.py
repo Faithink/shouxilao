@@ -42,6 +42,10 @@ def main():
     def open_page(icon=None, item=None):
         webbrowser.open(url)
 
+    def copy_url(icon, item):
+        import subprocess
+        subprocess.run("clip", input=url.encode("utf-16"), shell=True, creationflags=0x08000000)
+
     def copy_lan(icon, item):
         if lan:
             import subprocess
@@ -55,6 +59,7 @@ def main():
 
     menu = pystray.Menu(
         pystray.MenuItem("打开收息佬", open_page, default=True),
+        pystray.MenuItem(f"  本机地址 {url}  · 点击复制", copy_url),
         pystray.Menu.SEPARATOR,
         pystray.MenuItem("手机访问(同一 WiFi)", None, enabled=False),
         pystray.MenuItem(f"  {lan}  · 点击复制" if lan else "  未检测到局域网地址", copy_lan, enabled=bool(lan)),
@@ -63,7 +68,7 @@ def main():
         pystray.MenuItem("退出收息佬", quit_),
     )
     img = Image.open(paths.RES / "web" / "icon-192.png").convert("RGBA")
-    icon = pystray.Icon("shouxi", img, "收息佬", menu)
+    icon = pystray.Icon("shouxi", img, f"收息佬 · 127.0.0.1:{port}", menu)
     threading.Timer(1.0, open_page).start()
     icon.run()
     srv.shutdown()

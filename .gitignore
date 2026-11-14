@@ -29,3 +29,7 @@ android-standalone/local.properties
 
 site/
 data/cache/
+要求股息率核对表.csv
+holdings.json.bak
+*.bak
+*.log

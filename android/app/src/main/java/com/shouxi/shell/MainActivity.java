@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
         s.setLoadWithOverviewMode(false);
-        s.setUserAgentString(s.getUserAgentString() + " ShouxiShell/1.6.0");
+        s.setUserAgentString(s.getUserAgentString() + " ShouxiShell/1.6.5");
         web.addJavascriptInterface(new Bridge(), "ShouxiShell");
         web.setWebChromeClient(new WebChromeClient());
         web.setWebViewClient(new WebViewClient() {

@@ -556,6 +556,7 @@ def compute(code, name, industry, today):
         "ttm_dps": ttm_now, "base_year": base_year, "avg3_dps": avg3_now, "zones_avg_y": zones_avg_y, "yield": y_now, "status": status,
         "pct_rank": pct_rank, "zones": zones, "freq": freq_text, "consec": consec,
         "lights": {k: v["lv"] for k, v in health["lights"].items()} if health else None,
+        "payout": ((health["fin"] or [{}])[-1].get("payout")) if health else None,   # 最近一年分红率,列表上识别"分红率>100%的假高股息"
         "total_cagr": detail["ret"]["total_cagr"], "price_cagr": detail["ret"]["price_cagr"],
         "dps_cagr": dps_cagr, "pending": len(pending),
     }

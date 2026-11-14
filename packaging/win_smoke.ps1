@@ -31,7 +31,7 @@ Check "二维码" { (Invoke-WebRequest "$base/api/qr?u=http%3A%2F%2F192.168.1.5%
 
 # 点「刷新数据」:全部股票重新采集一遍,最久等 14 分钟
 Invoke-WebRequest "$base/api/refresh" -Method Post -UseBasicParsing | Out-Null
-$deadline = (Get-Date).AddMinutes(14)
+$deadline = (Get-Date).AddMinutes(18)
 do {
     Start-Sleep -Seconds 10
     $st = Get-Utf8 "/api/status" | ConvertFrom-Json

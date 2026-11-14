@@ -46,7 +46,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 /* ---- 页头 ---- */
 header{display:flex;align-items:center;gap:18px;padding:10px 28px;background:var(--hdr);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none!important;margin-right:6px}
-.brand img{width:40px;height:40px;border-radius:11px;object-fit:cover;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .2s}
+.brand img{width:50px;height:50px;padding:0;box-sizing:border-box;border-radius:12px;object-fit:contain;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .2s}
 .brand:hover img{transform:rotate(-6deg) scale(1.06)}
 .brand b{display:block;font-family:var(--serif);color:var(--accent);font-size:21px;letter-spacing:2px;line-height:1.1;font-weight:700}
 .brand small{display:block;font-size:11px;color:var(--mute);letter-spacing:.5px}
@@ -145,7 +145,8 @@ tbody tr.row td:first-child b{font-size:14.5px}
 .pbar{position:relative;height:10px;width:150px;border-radius:5px;margin:6px 0 2px;background:linear-gradient(90deg,var(--zb0) 0 20%,var(--zb1) 20% 40%,var(--zb2) 40% 60%,var(--zb3) 60% 80%,var(--zb4) 80% 100%)}
 .pbar i{position:absolute;top:-4px;width:3px;height:18px;background:var(--ink);border-radius:2px;transform:translateX(-50%);box-shadow:0 0 0 1.5px var(--card)}
 .pend{display:flex;justify-content:space-between;font-size:10px;color:var(--mute);width:150px}
-.warn{color:var(--high);font-size:12px}
+@media(min-width:621px){table.pool{table-layout:fixed;width:100%}table.pool th:nth-child(1){width:44px}table.pool th:nth-child(3){width:9%}table.pool th:nth-child(4){width:9%}table.pool th:nth-child(5){width:26%}table.pool th:nth-child(6){width:13%}table.pool th:nth-child(7){width:12%}table.pool td:nth-child(2){white-space:normal;overflow:hidden;text-overflow:ellipsis}}
+.warn{color:var(--high);font-size:12px}table.pool td.vtd{white-space:normal;max-width:300px}table.pool td.vtd .warn{white-space:normal;line-height:1.45;margin-top:3px}
 details.card>summary,details>summary{cursor:pointer;font-weight:600;font-size:14px}
 @media(max-width:900px){.g4,.g3{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}main{padding:16px 14px 30px}header{padding:10px 14px;gap:10px}.foot{padding:6px 14px 28px}.nodes{grid-template-columns:1fr 1fr!important}}
 @media(max-width:560px){.brand small,#updated{display:none}.brand b{font-size:15px}header .btn{padding:5px 9px;font-size:12px}.ph h2{font-size:19px}.verdict .vt{font-size:21px}.hc[style*="span 2"]{grid-column:auto!important}}
@@ -237,7 +238,39 @@ a.lstep:hover{outline:2px solid var(--accent)}
 @media(max-width:620px){.sim .ctrl{grid-template-columns:1fr 1fr;gap:16px 18px}.sim .lout .bigy{font-size:30px}}
 .sec-hd h2{font-size:19px;margin:0;line-height:1.3;letter-spacing:.2px}.lead{margin:4px 0 0;font-size:14.5px;font-weight:500;line-height:1.55}
 .grp{display:flex;align-items:center;gap:10px;margin:30px 2px 12px;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:1.5px}.grp::after{content:"";flex:1;height:1px;background:var(--line)}
-.tocg{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.tocg .tgl{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:1px;margin-bottom:6px}
+#sec-faq .faqi{border-top:1px solid var(--line);padding:16px 0 4px}#sec-faq .faqi:first-of-type{border-top:0;padding-top:6px}
+#sec-faq .faqi h4{margin:0 0 10px;display:flex;align-items:center;gap:12px;font-size:15px;font-weight:700;line-height:1.5}
+#sec-faq .faqi h4::before{content:"Q";flex:none;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--serif)}
+#sec-faq .faqi>p.note{margin:0 0 12px 36px;padding:12px 14px;border-radius:10px;background:var(--seg);color:var(--ink);font-size:14px;line-height:1.8}
+@media(max-width:620px){#sec-faq .faqi>p.note{margin-left:0}#sec-faq .faqi h4{font-size:14.5px}}
+.tocg{display:flex!important;flex-direction:column;gap:10px}.tocg .tgrp{display:flex;gap:12px;align-items:flex-start}.tocg .tgrp .tgl{flex:0 0 78px;margin:0;padding-top:8px}.tocg .tcl{display:flex;flex-wrap:wrap;gap:8px;flex:1}
+.tocg .tcl a.tl{margin:0;padding:5px 12px 5px 6px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:13.5px;gap:7px}.tocg .tcl a.tl:hover{border-color:var(--accent);background:var(--card)}.tocg .tcl a.tl.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--card))}.tocg .tcl a.tl b,.tocg .tcl a.tl b.n2{width:22px;height:22px;font-size:11.5px}.tocg .tcl a.tl.done::after{margin-left:0}
+@media(max-width:620px){.tocg .tgrp{flex-direction:column;gap:4px}.tocg .tgrp .tgl{flex:none;padding-top:0}}
+#toc.card{padding:12px 16px}.tchead{display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}.tcur{flex:1 1 170px;min-width:0;font-size:15px;font-weight:700;line-height:1.35}.tcur small{display:block;font-weight:400;font-size:12px;color:var(--mute)}
+.tdots{display:flex;gap:10px;flex-wrap:wrap}.tdg{display:inline-flex;gap:4px}.tdots a{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);text-decoration:none!important}.tdots a:hover{background:color-mix(in srgb,var(--accent) 28%,transparent)}.tdots a.done{background:var(--seg);color:var(--mute)}.tdots a.done:not(.on){font-size:0}.tdots a.done:not(.on)::before{content:"✓";font-size:13px}.tdots a.on{background:var(--accent);color:var(--accent-ink)}
+.tbar{height:4px;border-radius:2px;background:var(--seg);overflow:hidden;margin-top:10px}.tbar i{display:block;height:100%;background:var(--accent);transition:width .3s}#toc .tocg{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}#toc .tocg[hidden]{display:none!important}
+@media(max-width:620px){.tdots{order:3;width:100%;justify-content:space-between;gap:0}.tdg{gap:3px}.tdots a{width:23px;height:23px;font-size:11px}#tbtn{order:2}}
+#toc .tocg{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px 18px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}#toc .tocg[hidden]{display:none!important}
+#toc .tocg .tgrp{display:block}#toc .tocg .tgl{margin:0 0 4px;padding:0;font-size:12px;font-weight:700;color:var(--mute);letter-spacing:1px}
+#toc .tocg .tcl{display:flex;flex-direction:column;gap:0}#toc .tocg .tcl a.tl{border:0;background:transparent;border-radius:8px;padding:5px 6px;margin:0 -6px;font-size:13.5px;gap:8px}#toc .tocg .tcl a.tl:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}#toc .tocg .tcl a.tl.on{background:color-mix(in srgb,var(--accent) 14%,transparent)}#toc .tocg .tcl a.tl.done::after{margin-left:auto}
+@media(max-width:900px){#toc .tocg{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:620px){#toc .tocg{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+.lprog{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-size:13px;color:var(--mute)}.lprog .pb{flex:1;height:8px;border-radius:4px;background:var(--seg);overflow:hidden}.lprog .pb i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.tocg a.tl.on{color:var(--accent);font-weight:700}.tocg a.tl.on b{background:var(--accent);color:var(--accent-ink)}.tocg a.tl{padding:7px 8px;margin:0 -8px;border-radius:10px;line-height:1.35}.tocg a.tl:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}.tocg a.tl.on{background:color-mix(in srgb,var(--accent) 12%,transparent)}.tocg a.tl b,.tocg a.tl b.n2{width:26px;height:26px;border-radius:50%;font-size:12px}.tocg a.tl.done::after{content:"✓";flex:none;margin-left:2px;color:var(--accent);font-size:13px;font-weight:700}.tocg a.tl.done:not(.on){color:var(--mute)}.tocg a.tl.done b{background:var(--seg);color:var(--mute)}
+.lnav[hidden],.lcongrat[hidden]{display:none!important}.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin:14px 0 4px}.lnav .lnx{flex:0 0 100%;font-size:13px;color:var(--mute);line-height:1.6}.lnav .lnx b{color:var(--ink)}.lnav .btn{padding:10px 18px}
+.lcongrat{text-align:center;padding:34px 22px}.lcongrat .lc-t{font-size:22px;font-weight:700;margin:6px 0 8px}.lcongrat ul{display:inline-block;text-align:left;margin:10px 0;padding-left:18px;font-size:14px;line-height:1.9}.lcongrat .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}.lcongrat .star{font-size:40px;color:var(--accent);line-height:1}
+.greq.edit i{padding:8px 10px}.greq.edit .ie{display:inline-flex;align-items:baseline;gap:2px}.greq.edit input{width:3.6em;text-align:center;border:0;border-bottom:2px dashed currentColor;background:transparent;color:inherit;font-family:var(--serif);font-size:20px;font-weight:700;padding:0;border-radius:0;-moz-appearance:textfield}.greq.edit input:focus{outline:0;border-bottom-style:solid}.greq.edit .ie span{font-size:14px;font-weight:700}.greq.edit .t b{font-size:20px}
+.lhint{font-size:12.5px;color:var(--mute);margin:4px 0 0}
+.rwhat{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:16px;font-size:14px}.rwhat input[type=number]{width:70px}.rwhat input[type=range]{flex:1;min-width:140px}
+.pscale{position:relative;margin:34px 6px 38px;height:26px}.pscale .z{position:absolute;top:0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;overflow:hidden;white-space:nowrap}.pscale .z1{left:0;background:var(--zb0);color:#04382a;border-radius:6px 0 0 6px}.pscale .z2{background:var(--zb1);color:#173d0d}.pscale .z3{right:0;background:var(--seg);color:var(--mute);border-radius:0 6px 6px 0}
+.pscale .pin{position:absolute;top:-30px;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:2px 9px;border-radius:8px;font-size:12px;font-weight:700;white-space:nowrap}.pscale .pin::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-top-color:var(--ink);border-bottom:0}
+.pscale .tk{position:absolute;top:26px;font-size:12px;color:var(--ink);white-space:nowrap}.pscale .tk::before{content:"";position:absolute;top:-26px;width:2px;height:26px;background:var(--ink);opacity:.55}.pscale .tk.l{transform:translateX(-100%);padding-right:6px;text-align:right}.pscale .tk.l::before{right:0}.pscale .tk.r{padding-left:6px}.pscale .tk.r::before{left:0}
+.pverdict{font-size:14px;line-height:1.7;padding:10px 12px;border-radius:10px;background:var(--seg)}.pverdict b{font-family:var(--serif)}.pverdict.ok{background:color-mix(in srgb,var(--zb1) 40%,transparent)}
+.rbars{display:flex;flex-direction:column;gap:6px;margin-top:6px}.rbars .rb{display:grid;grid-template-columns:64px 1fr 92px;gap:8px;align-items:center;font-size:13px}.rbars .rb.cur{font-weight:700}.rbars .rb i{display:block;height:16px;border-radius:5px;background:var(--c2,#c9a96e);opacity:.55}.rbars .rb.cur i{background:var(--accent);opacity:1}.rbars .rb span:last-child{text-align:right;font-family:var(--serif)}
+.hl-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin:4px 0 10px}.hl-legend span{display:inline-flex;align-items:center;gap:6px}.hl-dot{width:14px;height:14px;border-radius:50%;display:inline-block;flex:none}.hl-dot.g{background:#2f9e6b}.hl-dot.y{background:#e0b02f}.hl-dot.r{background:#d4574a}
+.hl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.hl-c{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:13.5px}.hl-c h4{margin:0;font-size:15px;display:flex;align-items:center;gap:8px}.hl-c .q{font-weight:600;color:var(--ink)}.hl-c .lk{color:var(--mute);font-size:12.5px;line-height:1.6}.hl-c .rg{display:flex;flex-direction:column;gap:3px;font-size:12.5px}.hl-c .rg span{display:flex;gap:6px;align-items:baseline}.hl-c .rg i{width:9px;height:9px;border-radius:50%;flex:none;display:inline-block;transform:translateY(0)}.hl-c .rg i.g{background:#2f9e6b}.hl-c .rg i.y{background:#e0b02f}.hl-c .rg i.r{background:#d4574a}.hl-c.wide{grid-column:span 2}.hl-c h4 .hl-dot{background:var(--accent)}
+.hl-demo{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--seg);display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:14px}.hl-demo input[type=range]{flex:1;min-width:140px}
+@media(max-width:620px){.hl-grid{grid-template-columns:1fr}.hl-c.wide{grid-column:auto}.rbars .rb{grid-template-columns:54px 1fr 80px}}
+.tocg{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}.tocg .tgl{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:1px;margin-bottom:6px}
 .tocg a.tl{display:flex;align-items:center;gap:8px;padding:5px 0;color:var(--ink);font-size:14px;text-decoration:none!important}.tocg a.tl:hover{color:var(--accent)}
 .tocg a.tl b{flex:none;width:20px;height:20px;border-radius:50%;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);font-size:11.5px;display:flex;align-items:center;justify-content:center}
 @media(max-width:620px){.tocg{grid-template-columns:1fr 1fr}.sec{padding:16px 14px}.sec-hd h2{font-size:17px}}
@@ -252,10 +285,10 @@ a.lstep:hover{outline:2px solid var(--accent)}
 .l2{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center}
 .ctrl{display:flex;flex-direction:column;gap:14px}
 .rg{display:flex;flex-direction:column;gap:6px;font-size:13px}.rg b{font-size:15px;margin:0 2px}
-.rg input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:4px;border:0;padding:0;box-shadow:none;min-height:0!important;outline:none;background:var(--none-bg);cursor:pointer}
-.rg input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);box-shadow:0 1px 5px rgba(0,0,0,.35)}
-.rg input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--accent);border:3px solid var(--card);box-shadow:0 1px 5px rgba(0,0,0,.35)}
-.rgw{position:relative;display:block}.rgw.hasmk{padding-bottom:26px}.rgw .mk{position:absolute;top:-3px;width:2px;height:14px;background:var(--ink);opacity:.55;transform:translateX(-1px);pointer-events:none}.rgw .mk s{position:absolute;top:24px;left:50%;transform:translateX(-50%);text-decoration:none;font-size:11px;font-style:normal;color:var(--mute);white-space:nowrap}
+.rg input[type=range]{-webkit-appearance:none;appearance:none;display:block;margin:0;width:100%;height:8px;border-radius:4px;border:0;padding:0;box-shadow:none;min-height:0!important;outline:none;background:var(--none-bg);cursor:pointer}
+.rg input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.rg input[type=range]::-moz-range-thumb{box-sizing:border-box;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.rgw{position:relative;display:block}.rgw.hasmk{padding-bottom:40px}.rgw .mk{position:absolute;top:19px;width:2px;height:8px;background:var(--ink);opacity:.55;transform:translateX(-1px);pointer-events:none}.rgw .mk s{position:absolute;top:10px;left:50%;transform:translateX(-50%);text-decoration:none;font-size:11px;font-style:normal;color:var(--mute);white-space:nowrap}
 .base{display:inline-block;line-height:1.7;background:var(--none-bg);border-radius:10px;padding:6px 12px;font-size:12.5px;margin:0 0 12px;color:var(--mute)}.base b{color:var(--ink)}
 .rg input[type=range]:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 30%,transparent)}
 .btnrow{display:flex;gap:8px;flex-wrap:wrap}
@@ -352,7 +385,10 @@ table.cmp td,table.cmp th{text-align:center}table.cmp td.l,table.cmp th.l{text-a
 .res{min-width:74px;text-align:right;color:var(--mute);font-size:13px}.res b{color:var(--ink);font-size:15px}
 @media(max-width:620px){.prem-list{grid-template-columns:1fr}.prow{padding:12px 2px}.prow.base{padding:12px 14px}.pv input{width:92px}.sectitle{margin-top:20px}}
 .ovt input{width:84px}
-.about{display:flex;gap:20px;align-items:flex-start}.about img{width:150px;height:150px;border-radius:14px;background:#fff;border:1px solid var(--line);object-fit:contain}.about p{margin:4px 0}.about h2{margin:0 0 4px;font-size:18px}
+.brand img.lgd,.about img.lgd{display:none}
+:root[data-theme="dark"] .brand img.lgl,:root[data-theme="dark"] .about img.lgl{display:none}:root[data-theme="dark"] .brand img.lgd,:root[data-theme="dark"] .about img.lgd{display:block;background:#102236;border-color:#25344b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand img.lgl,:root:not([data-theme="light"]) .about img.lgl{display:none}:root:not([data-theme="light"]) .brand img.lgd,:root:not([data-theme="light"]) .about img.lgd{display:block;background:#102236;border-color:#25344b}}
+.about{display:flex;gap:20px;align-items:flex-start}.about img{width:150px;height:150px;padding:0;box-sizing:border-box;border-radius:14px;background:#fff;border:1px solid var(--line);object-fit:contain}.about p{margin:4px 0}.about h2{margin:0 0 4px;font-size:18px}
 @media(max-width:560px){.about{flex-direction:column;text-align:center}}
 .chip.focus{background:linear-gradient(135deg,#fff3c4,#ffe08a);border-color:#f0c24b;color:#6b4a00;font-weight:700}
 :root[data-theme="dark"] .chip.focus{background:linear-gradient(135deg,#4a3a10,#6b5314);border-color:#a88219;color:#ffe08a}
@@ -419,13 +455,31 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .chlogbody h3{font-size:15px;margin:16px 0 4px;color:var(--ink)}.chlogbody h4{font-size:13px;margin:8px 0 2px;color:var(--accent)}.chlogbody ul{margin:2px 0 6px;padding-left:18px}.chlogbody p{margin:4px 0;color:var(--mute)}.chlogbody hr{border:0;border-top:1px solid var(--line);margin:10px 0}.chlogbody code{background:var(--none-bg);padding:0 4px;border-radius:4px;font-size:12px}
 .sugg{position:absolute;top:100%;left:0;right:0;z-index:20;margin-top:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lg);max-height:280px;overflow:auto;padding:4px}
 .sugg button{display:flex;justify-content:space-between;align-items:baseline;gap:10px;width:100%;border:0;background:none;padding:8px 10px;border-radius:8px;text-align:left;cursor:pointer;font:inherit;font-size:13px;color:var(--ink)}.sugg button:hover{background:var(--none-bg)}
-.mask{position:fixed;inset:0;z-index:100;background:rgba(20,24,40,.38);display:flex;align-items:center;justify-content:center;padding:16px}
+.bell{position:relative;border:0;background:none;color:var(--mute);cursor:pointer;padding:6px;border-radius:10px;display:inline-flex}.bell:hover{color:var(--ink)}.bell svg{width:22px;height:22px}.bell .bn{position:absolute;top:0;right:-2px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--bad);color:#fff;font-size:11px;font-weight:700;line-height:16px;text-align:center}.bell[hidden],.bell .bn[hidden]{display:none}
+.bellpanel{position:fixed;top:58px;right:20px;width:min(380px,calc(100vw - 20px));max-height:72vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);padding:14px 16px;z-index:60}.bellpanel[hidden]{display:none}.bellpanel h4{margin:0 0 4px;font-size:15px}.bellpanel .tit{grid-template-columns:1fr auto}.bellpanel .tit>.sub{grid-column:1/-1}
+@media(max-width:620px){.bellpanel{left:10px;right:10px;width:auto;top:52px}}
+.ntag{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;font-size:11.5px;font-weight:600;color:#fff;vertical-align:1px;white-space:nowrap}.ntag.buy{background:#2f9e6b}.ntag.sell{background:var(--bad)}.priv-on .ntag{display:none}
+.tday .tsec{margin:10px 0 4px;font-size:13px;color:var(--mute)}.tday .tit{display:grid;grid-template-columns:minmax(120px,1.2fr) auto 2fr;gap:8px 12px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:13px}.tday .tit:first-of-type{border-top:0}.tday .tit .sub{font-size:12px}.tday .tn a{color:var(--ink);font-weight:600;text-decoration:none}.tday .tn a:hover{text-decoration:underline}.tday .tg{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;color:#fff}.tday .tg.buy{background:var(--tl-g,#2f9e6b)}.tday .tg.sell{background:var(--bad)}@media(max-width:620px){.tday .tit{grid-template-columns:1fr auto}.tday .tit>.sub{grid-column:1/-1}}
+.spot{position:relative;outline:3px solid var(--accent);outline-offset:3px;border-radius:12px;animation:spotp 1.1s ease-in-out 5}.spot::after{content:attr(data-spot);position:absolute;right:14px;top:0;transform:translateY(-50%);background:var(--accent);color:var(--accent-ink);padding:5px 11px;border-radius:8px;font-size:13px;font-weight:600;line-height:1.4;z-index:30;max-width:80vw;box-shadow:var(--shadow-lg)}@keyframes spotp{50%{outline-color:transparent}}
+#guideback{position:fixed;right:16px;bottom:78px;z-index:99;box-shadow:var(--shadow-lg)}
+.gtiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.gtile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);cursor:pointer;text-align:center}.gtile:hover{border-color:var(--accent)}.gtile .gic svg{width:30px;height:30px;color:var(--accent)}.gtile b{font-size:15px}.gtile em{font-style:normal;font-size:12px;color:var(--mute);line-height:1.5}
+.gscale{display:flex;gap:6px;justify-content:space-between}.gscale .badge{flex:1;text-align:center;padding:8px 0;font-size:14px}.gscale2{display:flex;justify-content:space-between;font-size:12px;color:var(--mute)}
+.gcmp{display:flex;flex-direction:column;gap:8px}.gcmp>div{display:flex;align-items:center;gap:10px}.gcmp em,.gdots5 em{font-style:normal;font-size:12.5px;color:var(--mute);line-height:1.5}.gcmp .chip{pointer-events:none;flex:none}
+.gdots5{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px}.gdots5 i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.gact{display:flex;justify-content:flex-start}
+.gladder{display:flex;flex-direction:column;gap:0;position:relative}.gladder .r{display:grid;grid-template-columns:76px 22px 1fr;align-items:center;font-size:13.5px;padding:7px 0;position:relative}.gladder .r span{font-weight:700}.gladder .r em{font-style:normal;color:var(--mute);font-size:12.5px}.gladder .r i{width:12px;height:12px;border-radius:50%;justify-self:center;z-index:1}.gladder::before{content:"";position:absolute;left:87px;top:16px;bottom:16px;width:2px;background:var(--line)}.gladder .sell i{background:var(--bad)}.gladder .buy i{background:#2f9e6b}.gladder .now{background:var(--seg);border-radius:8px}.gladder .now i{background:var(--accent);width:16px;height:16px}
+.gform{display:flex;flex-direction:column;gap:2px;font-size:15px}.gform em{font-style:normal;font-size:12.5px;color:var(--mute)}
+.greq{display:flex;align-items:stretch;gap:4px;font-size:12px;flex-wrap:wrap}.greq s{text-decoration:none;align-self:center;color:var(--mute);font-weight:700}.greq i{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 8px;border-radius:8px;min-width:max-content;font-style:normal;flex:1 1 auto;transition:flex-grow .15s}.greq i u{text-decoration:none;font-size:11px;opacity:.85;white-space:nowrap}.greq i b{font-family:var(--serif);font-size:16px}.greq .a{background:#dcebf7;color:#17415f}.greq .b{background:#f5e3bf;color:#5a3b05}.greq .c{background:#f3d3d0;color:#6b1f18}.greq .t{background:var(--accent);color:var(--accent-ink);flex:none;min-width:66px}@media(max-width:480px){.greq{font-size:11px}.greq i{padding:6px 6px}.greq i b{font-size:14px}.greq s{display:none}}
+.nw{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}.glayers{display:flex;flex-direction:column;gap:8px}.glayers .lay{display:flex;align-items:center;gap:10px;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);cursor:pointer;font-size:13px;line-height:1.5}.glayers .lay:hover{border-color:var(--accent)}.glayers .lay em{font-style:normal;font-weight:700;color:var(--accent);font-size:16px}.glayers .lay span{flex:1;display:flex;flex-direction:column}.glayers .lay span b{font-size:14px}.glayers .lay i{font-style:normal;color:var(--accent);font-weight:600;white-space:nowrap}
+.gcalc input{width:64px}
+.dlg.guide{width:min(94vw,540px);max-height:88vh;overflow:auto;gap:10px}.guide h3{font-size:18px}.guide .gstep{font-size:12px;color:var(--mute)}.guide .gdots{display:flex;gap:6px;justify-content:center}.guide .gdots i{width:7px;height:7px;border-radius:50%;background:var(--line)}.guide .gdots i.on{background:var(--accent)}.gcalc{background:var(--none-bg,var(--seg));border-radius:12px;padding:12px 14px;font-size:14px;display:flex;flex-direction:column;gap:8px}.gcalc .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.gcalc b{font-family:var(--serif);font-size:20px}.gnote{font-size:12px;color:var(--mute);line-height:1.6}.guide .gck{flex-direction:row;align-items:center;gap:8px;font-size:14px;color:var(--ink)}.guide .gck input{width:auto}.mask{position:fixed;inset:0;z-index:100;background:rgba(20,24,40,.38);display:flex;align-items:center;justify-content:center;padding:16px}
 .dlg{background:var(--card);border-radius:14px;padding:20px 22px;width:min(92vw,360px);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;gap:12px}
 .dlg h3{margin:0;font-size:16px}.dlg p{margin:0;color:var(--mute);font-size:13px;line-height:1.6}
 .dlg label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mute)}.dlg input{width:100%}
 .dlg .acts{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
 .form{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.form[hidden]{display:none}
 .form label{display:flex;flex-direction:column;font-size:12px;color:var(--mute);gap:3px}
+.reqcard{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-left:4px solid var(--line)}.reqcard.on{border-left-color:var(--accent)}.reqcard .k{font-size:13px;color:var(--mute)}.reqv{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1.2;margin:2px 0}.reqset{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.reqset label{display:flex;align-items:center;gap:6px;font-size:14px}.reqset input{width:84px;font-size:16px;padding:6px 8px}
 .note{font-size:12px;color:var(--mute);margin-top:8px;line-height:1.6}
 .howto{margin-top:14px}.howto dl{display:grid;grid-template-columns:96px 1fr;gap:10px 16px;margin:0;font-size:13px;line-height:1.65}.howto dt{font-weight:700;color:var(--ink)}.howto dd{margin:0;color:var(--mute)}
 @media(max-width:620px){.howto dl{grid-template-columns:1fr;gap:2px}.howto dd{margin-bottom:10px}}
@@ -457,20 +511,22 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 </head>
 <body>
 <header>
-  <a class="brand" href="#/" id="home" title="回到首页"><img src="/logo.png" alt="收息佬"><span><b>收息佬</b><small>股息攒得好，退休晚不了</small></span></a>
+  <a class="brand" href="#/" id="home" title="回到首页"><img class="lgl" src="/logo-sm.png" srcset="/logo-sm.png 1x, /logo-sm@2x.png 2x, /logo-sm@3x.png 3x" alt="收息佬"><img class="lgd" src="/logo-sm-dark.png" srcset="/logo-sm-dark.png 1x, /logo-sm-dark@2x.png 2x, /logo-sm-dark@3x.png 3x" alt=""><span><b>收息佬</b><small>股息攒得好，退休晚不了</small></span></a>
   <nav>
-    <button data-tab="pool" class="on">红利股票池</button>
+    <button data-tab="pool" class="on">股票池</button>
     <button data-tab="hold">我的持仓</button>
-    <button data-tab="learn">知识</button>
+    <button data-tab="learn">红利课堂</button>
     <button data-tab="settings">设置</button>
   </nav>
   <div class="spacer"></div>
   <span class="sub" id="updated"></span>
+  <button class="bell" id="bell" hidden aria-label="今日提醒" title="今日提醒"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="bn" id="bellN" hidden></span></button>
 </header>
+<div class="bellpanel" id="bellpanel" hidden></div>
 <nav class="tabbar" aria-label="主导航">
   <button data-tab="pool" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>股票池</span></button>
   <button data-tab="hold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg><span>持仓</span></button>
-  <button data-tab="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 8h6M9 12h6"/></svg><span>知识</span></button>
+  <button data-tab="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 8h6M9 12h6"/></svg><span>课堂</span></button>
   <button data-tab="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg><span>设置</span></button>
 </nav>
 <main id="main"><div class="card empty" style="text-align:center;color:var(--mute)">正在加载…</div></main>
@@ -493,7 +549,12 @@ const dayDiff = (a,b)=> Math.round((new Date(b)-new Date(a))/864e5);
 async function api(path, opt){ const r = await fetch(path,opt); if(r.status===401){ location.href="/login"; throw new Error("login"); } if(!r.ok) throw new Error(path); return r.json(); }
 /* 买入要求 = 国债收益率 + 行业风险溢价（个股可单独覆盖）；买入价 = 取「自身历史分位价」与「要求股息率价」中更严格者 */
 const RF_DEF=1.65; // 10年期国债收益率参考值（2026-10中旬约1.64%~1.66%），可在设置里改
-const DEF_PREM={"煤炭":4.5,"油气":4.0,"航运":5.0,"建材":4.0,"电力":2.3,"公用事业":2.5,"消费":2.0,"交通":2.8,"通信":3.0,"银行":3.3,"保险":3.0,"券商":3.5,"汽车":3.5,"医药":2.5,"ETF":2.5,"有色金属":4.5,"建筑":3.0,"制造":3.0,"传媒":3.0};
+/* 默认行业溢价(百分点)。2026-11 按「要求股息率 = β×风险溢价 − 增长」重新核定(研究报告:红利要求率研究),消费/医药/保险/券商/汽车/传媒/制造/电力上调;其中 EMPIRICAL 里的行业样本少、依据弱,是经验值 */
+const DEF_PREM={"煤炭":4.5,"油气":4.0,"航运":5.0,"建材":4.0,"电力":2.5,"公用事业":2.5,"消费":2.85,"交通":2.8,"通信":3.0,"银行":3.3,"保险":3.35,"券商":4.85,"汽车":3.85,"医药":2.85,"ETF":2.5,"有色金属":4.5,"建筑":3.0,"制造":3.35,"传媒":3.85};
+const EMPIRICAL=new Set(["公用事业","汽车","建筑","传媒","航运","制造","建材"]);
+/* 个股追加(百分点):分红率快速上升/超过100%的按可持续分红折算,净利大幅下滑、现金流覆盖不足各加一点。只给默认值,可在「个股单独设定」覆盖 */
+const DEF_ADD={"601225":[0.3,"利润下滑"],"600188":[0.3,"利润下滑"],"600028":[0.3,"利润下滑"],"600941":[0.16,"分红率快速上升"],"601006":[0.3,"利润下滑"],"600519":[1.8,"分红率快速上升、现金流覆盖<1"],"000858":[1.8,"分红率快速上升、分红率>100%、利润下滑"],"000333":[0.98,"分红率快速上升"],"601919":[0.3,"利润下滑"],"600285":[0.3,"现金流覆盖<1"],"600066":[0.3,"现金流覆盖<1"],"601668":[0.3,"利润下滑"],"002027":[1.8,"分红率快速上升、分红率>100%、利润下滑"],"601169":[0.3,"利润下滑"],"000423":[0.02,"分红率>100%"],"01898":[0.3,"利润下滑"],"01171":[0.3,"利润下滑"],"00386":[0.3,"利润下滑"],"00006":[0.57,"分红率>100%、现金流覆盖<1"],"00135":[0.76,"分红率快速上升"],"01038":[0.3,"现金流覆盖<1"],"01919":[0.45,"分红率快速上升、利润下滑"],"00144":[0.3,"利润下滑"],"00688":[0.3,"利润下滑"],"200596":[0.6,"利润下滑、现金流覆盖<1"],"600795":[1.8,"分红率快速上升、利润下滑"],"600674":[0.3,"现金流覆盖<1"],"600863":[0.3,"利润下滑"],"601107":[0.22,"分红率快速上升"],"601390":[0.3,"利润下滑"],"601186":[0.6,"利润下滑、现金流覆盖<1"],"000568":[0.6,"利润下滑、现金流覆盖<1"],"002557":[2.1,"分红率快速上升、分红率>100%、利润下滑、现金流覆盖<1"],"600177":[0.3,"现金流覆盖<1"],"002508":[1.8,"分红率快速上升、利润下滑"],"002867":[0.3,"现金流覆盖<1"],"600329":[1.8,"分红率快速上升、分红率>100%、现金流覆盖<1"],"600566":[2.1,"分红率快速上升、利润下滑、现金流覆盖<1"],"000408":[1.8,"分红率>100%、现金流覆盖<1"],"601098":[0.3,"现金流覆盖<1"],"603288":[1.43,"分红率快速上升"],"02319":[1.5,"分红率>100%"],"00220":[0.71,"分红率>100%"],"00322":[0.69,"分红率>100%"]};
+const addOf=s=>(DEF_ADD[s.code]||[0])[0];
 const INDS_ALL=()=>Object.keys(DEF_PREM);
 const CYCLICAL=new Set(["煤炭","油气","航运","建材","有色金属","建筑"]); // 分红随景气波动，用近3年平均分红
 const cfg=()=>{const S=state.holdings.settings; return {rf:S.rf??RF_DEF, prem:S.premiums||{}, ov:S.overrides||{}}};
@@ -501,7 +562,7 @@ const cfg=()=>{const S=state.holdings.settings; return {rf:S.rf??RF_DEF, prem:S.
 const IND_GROUPS=[["金融",["银行","券商","保险"]],["能源资源",["煤炭","油气","有色金属"]],["公用事业",["电力","公用事业","通信"]],["交通运输",["交通","航运"]],["消费医药",["消费","医药","传媒"]],["制造建筑",["汽车","制造","建筑","建材"]],["ETF",["ETF"]]];
 const grpOf=ind=>(IND_GROUPS.find(([,l])=>l.includes(ind))||["其他"])[0];
 const premOf=(ind,c=cfg())=>c.prem[ind]??DEF_PREM[ind]??3.0;
-const floorOf=s=>{const c=cfg(); return (c.ov[s.code]??(c.rf+premOf(s.industry,c)))/100};
+const floorOf=s=>{const c=cfg(); return (c.ov[s.code]??(c.rf+premOf(s.industry,c)+addOf(s)))/100};
 function applyZones(s){
   if(s._d0===undefined){s._d0=s.ttm_dps; s._z0=s.zones&&s.zones.y; s._y0=s.yield}
   let D=s._d0, y=s._z0; s.normalized=false;
@@ -524,7 +585,7 @@ async function removeStock(s){
   S.removed=[...(S.removed||[]).filter(x=>x.code!==s.code),{code:s.code,name:s.name,industry:s.industry}];
   await saveHoldings(); delete state.cache[s.code]; await load(); return true;
 }
-const saveHoldings = () => api("/api/holdings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(state.holdings)});
+const saveHoldings = () => api("/api/holdings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(state.holdings)}).then(r=>{try{bellRender()}catch(e){} return r});
 
 /* ---------- 结论 ---------- */
 const ORDER={"重仓区":0,"买入区":1,"持有区":2,"偏高":3,"止盈区":4,"无足够数据":5};
@@ -546,7 +607,13 @@ const dotsOf=s=>{const l=lightsOf(s); return l?`<div class="dots">${Object.keys(
 const isFocus=s=>!!s.zones&&ORDER[s.status]<=1&&!qRed(s).length&&!distrust(s);
 const distrust=s=>s.zones&&s.zones.buy>s.price*1.5;
 const isRich=s=>!!s.rich&&s.zones&&ORDER[s.status]<=1; // 满足你的要求，但股息率低于它自己近5年的中位水平
-const qRed=s=>redNames(s).filter(n=>n!=="估值"); // 质量类红灯（不含估值）
+const qRed=s=>redNames(s).filter(n=>n!=="估值");
+const poOf=s=>s.payout!=null?s.payout:(s.health&&s.health.fin&&s.health.fin.length?s.health.fin[s.health.fin.length-1].payout:null);   // 列表条目带 payout,详情页从体检数据里取
+const fakeDiv=s=>{const p=poOf(s); return p!=null&&p>1};   // 最近一年分红率>100%:分的比赚的多,高股息不一定可持续
+/* 低位的"三重确认":价格进了低位,还要同时满足 ①股息率比国债高 2.75 个点以上(红利篮子的平均利差) ②股息率在自身近5年的较高水平 ③分红质量没红旗。只作提示,不改档位 */
+const unconf=s=>{if(s.status!=="重仓区"||!s.zones) return [];
+  const r=[]; if(s.yield-cfg().rf/100<0.0275) r.push("利差不足"); if(s.histBuyPx!=null&&s.price>s.histBuyPx) r.push("自身历史不算便宜"); if(addOf(s)>0||fakeDiv(s)) r.push("分红质量有红旗"); return r};
+const qRedShow=s=>qRed(s).filter(n=>!(fakeDiv(s)&&n==="分红能力")); // 质量类红灯（不含估值）
 const lab=s=>LABEL[s.status]; // 标签只写价格位置；体检红灯、股价大跌用单独的 ⚠ 提醒行
 const HN={div:"分红能力",earn:"盈利质量",stab:"分红稳定",safe:"财务安全",val:"估值"};
 const lightsOf=s=>s.lights||(s.health?Object.fromEntries(Object.entries(s.health.lights).map(([k,v])=>[k,v.lv])):null);
@@ -561,7 +628,10 @@ function reason(d){
   else if(d.status==="偏高") t=`价格偏高：当前股息率 ${pct(d.yield)} 已低于它自己多数时候的水平。`;
   else t=`价格处于高位：当前股息率 ${pct(d.yield)}，处在它自己近 5 年最低的一档（价格 ≥ ${px(z.profit)}）。`;
   if(isRich(d)) t+=` 注意：当前股息率 ${pct(d.yield)} 低于它自己近5年的中位水平（${pct(d.histMedY,1)}），按自身历史并不算低。`;
-  if(ORDER[d.status]<=1&&redNames(d).length) t+=` ⚠ 公司体检有红灯：${redNames(d).join("、")}（见下方体检卡），只看价格不够，先看这些再决定。`;
+  if(unconf(d).length) t+=` ⚠ 低位还没确认：${unconf(d).join("、")}（低位要同时满足：股息率比国债高 2.75 个点以上、股息率在自身近5年的较高水平、分红质量没红旗）。`;
+  if(ORDER[d.status]<=1&&fakeDiv(d)) t+=` ⚠ 最近一年分红率 ${Math.round(poOf(d)*100)}%，分的比赚的多，现在的高股息可能不可持续。`;
+  const rn=redNames(d).filter(n=>!(fakeDiv(d)&&n==="分红能力"));
+  if(ORDER[d.status]<=1&&rn.length) t+=` ⚠ 公司体检有红灯：${rn.join("、")}（见下方体检卡），只看价格不够，先看这些再决定。`;
   if(distrust(d)) t+=" ⚠ 该股股价较历史大幅下跌，区间偏宽，先看盈利是否恶化。";
   return t;
 }
@@ -623,7 +693,159 @@ function setFav(code,on){
   const S=state.holdings.settings, f=new Set((S.favorites||[]).filter(Boolean)); on?f.add(code):f.delete(code); S.favorites=[...f]; saveHoldings();
 }
 function toggleFav(code){ const y=scrollY; setFav(code,!favSet().has(code)); renderPool(); scrollTo(0,y); }
-const defaultView=()=>"focus";
+const defaultView=()=>(favSet().size||applySells(state.holdings).active.length)?"focus":"pick";   // 有持仓或手动关注就看「重点关注」,否则先看「精选」
+/* ---------- 今日提醒:持仓触发了哪些加仓/止盈节点,关注里哪些进了可建仓区间 ---------- */
+// 持仓节点:现价碰到哪一档(取最高一档),没碰到返回 null。d 和 avg 要用同一币种
+function nodeHit(d,avg){const z=d.zones, p=d.price; if(!z) return null;
+  if(p>=z.profit*1.15) return ["止盈二档","sell","高于高位线 15%，可再减 1/3"];
+  if(p>=z.profit) return ["止盈一档","sell","进入高位，可减 1/3"];
+  if(p<=Math.min(z.heavy,avg*0.9)) return ["加仓二档","buy","低位线 / 成本价 -10% 取低，可再加 1/3"];
+  if(p<=z.buy) return ["加仓一档","buy","已到买入价，可先加 1/3"];
+  return null}
+function digest(){
+  const P=state.pool.stocks, H=state.holdings, held=new Map();
+  applySells(H).active.forEach(l=>{const o=held.get(l.code)||{sh:0,cost:0}; o.sh+=l.shares; o.cost+=l.shares*l.price; held.set(l.code,o)});
+  const pos=[], watch=[];
+  held.forEach((o,c)=>{const s=P.find(x=>x.code===c); if(!s||!s.zones) return;
+    const avg=o.cost/o.sh, n=nodeHit(s,avg); if(n) pos.push({s,n,avg})});
+  const fav=favSet();
+  P.forEach(s=>{if(fav.has(s.code)&&!held.has(s.code)&&s.zones&&ORDER[s.status]<=1) watch.push(s)});
+  watch.sort((a,b)=>ORDER[a.status]-ORDER[b.status]);
+  return {pos,watch,hasAny:held.size>0||fav.size>0};
+}
+function todayBody(){
+  const d=digest(); if(!d.hasAny) return "";
+  const tags=s=>{const t=[]; if(unconf(s).length) t.push("低位待确认："+unconf(s).join("、")); if(fakeDiv(s)) t.push("分红率 "+Math.round(poOf(s)*100)+"%"); const r=qRedShow(s); if(r.length) t.push("体检红灯："+r.join("、")); return t.length?` <span class="warn">⚠ ${t.join("；")}</span>`:""};
+  const price=s=>`${px(s.price)}${s.ccy&&s.ccy!=="CNY"?" "+cu(s):" 元"}`;
+  const nm=s=>`<span class="tn"><a href="#/stock/${s.code}">${s.name}</a><div class="sub">${s.code}</div></span>`;
+  const n=d.pos.length+d.watch.length;
+  const posH=d.pos.map(({s,n,avg})=>`<div class="tit">${nm(s)}<span class="tg ${n[1]}">${n[0]}</span><span class="sub">现价 ${price(s)}（成本均价 ${px(avg)}）· ${n[2]}${n[1]==="buy"?tags(s):""}</span></div>`).join("");
+  const watH=d.watch.map(s=>`<div class="tit">${nm(s)}<span class="tg buy">${lab(s)}</span><span class="sub">现价 ${price(s)} · 买入价 ≤ ${px(s.zones.buy)} · 股息率 ${pct(s.yield)}${tags(s)}</span></div>`).join("");
+  return `<h4>今日提醒</h4>${n?`${d.pos.length?`<div class="tsec">持仓里触发了节点（${d.pos.length}）</div>${posH}`:""}${d.watch.length?`<div class="tsec">你关注的、处在可建仓区间的（${d.watch.length}）</div>${watH}`:""}`:`<div class="sub" style="padding:6px 0">今天没有持仓触发加仓/止盈节点，关注的股票也没有进入买入区。</div>`}<p class="note">按 ${state.pool.updated||"最近一次"} 的数据（日线收盘）生成，按你在设置里的「要求股息率」计算。只是价位提示，不是买卖建议，下手前先看公司体检。</p>`;
+}
+function bellRender(){
+  const b=document.getElementById("bell"); if(!b||!state.pool||!state.holdings) return;
+  const d=digest(), n=d.pos.length+d.watch.length; b.hidden=!d.hasAny; const bn=document.getElementById("bellN"); bn.hidden=!n; bn.textContent=n; b.title=n?`今日提醒：${n} 条`:"今日提醒：没有触发";
+  const pn=document.getElementById("bellpanel"); if(!pn.hidden) pn.innerHTML=`<div class="tday">${todayBody()}</div>`;
+}
+(()=>{const b=document.getElementById("bell"), pn=document.getElementById("bellpanel");
+  b.onclick=e=>{e.stopPropagation(); if(pn.hidden){pn.hidden=false; bellRender()} else pn.hidden=true};
+  document.addEventListener("pointerdown",e=>{if(!pn.hidden&&!pn.contains(e.target)&&!b.contains(e.target)) pn.hidden=true});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape") pn.hidden=true});
+  window.addEventListener("hashchange",()=>{pn.hidden=true})})();
+/* ---------- 使用指引:图示为主,按钮直接跳到对应位置并高亮;首次打开默认弹出,看完可勾选「不再显示」 ---------- */
+// 高亮:等目标出现 → 展开所在折叠 → 滚到屏幕中间 → 加描边和小标签,点一下页面或几秒后消失
+function spotlight(find,text){
+  let tries=0;
+  const go=()=>{const el=find(); if(!el){ if(tries++<40) setTimeout(go,100); return }
+    for(let a=el;a;a=a.parentElement) if(a.tagName==="DETAILS") a.open=true;
+    setTimeout(()=>{el.scrollIntoView({behavior:"smooth",block:"center"}); el.classList.add("spot"); el.dataset.spot=text;
+      const off=()=>{el.classList.remove("spot"); delete el.dataset.spot; document.removeEventListener("pointerdown",off,true)};
+      setTimeout(off,9000); setTimeout(()=>document.addEventListener("pointerdown",off,true),600)},200)};
+  go();
+}
+const GUIDE_ICON={
+  pool:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>',
+  hold:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>',
+  set:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>'};
+const guideStock=()=>{const P=state.pool.stocks, fav=[...favSet()], held=applySells(state.holdings).active.map(l=>l.code); const c=[...fav,...held].find(x=>P.some(s=>s.code===x&&s.zones)); return c||(P.find(s=>s.zones&&(s.market||"a")==="a")||P[0]).code};
+const GUIDE_GO={
+  pool:()=>{state.f.st=defaultView(); goto("#/"); spotlight(()=>document.querySelector(".chips .chip.focus"),"★ 重点关注 = 你的；精选 = 系统筛的")},
+  hold:()=>{goto("#/hold"); spotlight(()=>document.querySelector("#entry"),"在这里录买入、卖出")},
+  rf:()=>{goto("#/settings"); spotlight(()=>document.querySelector("#rf")&&document.querySelector("#rf").closest(".prow"),"① 在这里改国债收益率")},
+  prem:()=>{goto("#/settings"); spotlight(()=>document.querySelector(".prem-list"),"② 每个行业一个溢价，在这里改")},
+  ov:()=>{goto("#/stock/"+guideStock()); spotlight(()=>document.querySelector(".reqcard"),"③ 在这里单独设定这只股票的要求")},
+  health:()=>{goto("#/stock/"+guideStock()); spotlight(()=>document.querySelector("#healthcard"),"五个灯在这里")}
+};
+/* ---------- 「要求股息率」图示 + 小计算器(使用指引和红利课堂共用) ---------- */
+function reqBlock(p){const c=cfg(), pm=DEF_PREM["消费"]??3;
+  return `<div class="greq" id="${p}-bar"><i class="a"><u>国债</u><b id="${p}-v1">${c.rf}</b></i><s>+</s><i class="b"><u>行业溢价</u><b id="${p}-v2">${pm}</b></i><s>+</s><i class="c"><u>个股追加</u><b id="${p}-v3">0</b></i><s>=</s><i class="t"><u>要求</u><b id="${p}-vt">${(c.rf+pm).toFixed(2)}%</b></i></div>
+    <div class="gcalc"><div class="row"><span class="nw">国债 <input id="${p}-a" type="number" step="0.05" value="${c.rf}">%</span><span class="nw">行业溢价 <input id="${p}-p" type="number" step="0.1" value="${pm}">%</span><span class="nw">个股追加 <input id="${p}-x" type="number" step="0.1" value="0">%</span></div>
+      <div class="row"><span class="nw">每股分红 <input id="${p}-d" type="number" step="0.1" value="2"> 元</span><span class="nw">→ 买入价约 <b id="${p}-b">–</b> 元</span><span class="nw">低位线约 <b id="${p}-h">–</b> 元</span></div></div>`}
+function bindReqCalc(root,p){const q=k=>root.querySelector("#"+p+"-"+k);
+  const calc=()=>{const a=+q("a").value,pm=+q("p").value,x=+q("x").value,d=+q("d").value,f=(a+pm+x)/100;
+    q("v1").textContent=a; q("v2").textContent=pm; q("v3").textContent=x; q("vt").textContent=(f*100).toFixed(2)+"%";
+    ["a","b","c"].forEach((c,i)=>q("bar").querySelector("."+c).style.flexGrow=Math.max([a,pm,x][i],.3));
+    q("b").textContent=d>0&&f>0?(d/f).toFixed(2):"–"; q("h").textContent=d>0&&f>0?(d/(f+0.01)).toFixed(2):"–"};
+  ["a","p","x","d"].forEach(k=>q(k).oninput=calc); calc()}
+/* 红利课堂「要求股息率」:色块里的数字直接改 → 要求股息率、买入价尺、不同要求下的买入价对比 */
+function reqLab(p){const c=cfg(), pm=DEF_PREM["消费"]??3, ie=(id,v,st)=>`<span class="ie"><input id="${p}-${id}" type="number" step="${st}" value="${v}"><span>%</span></span>`;
+  return `<div class="greq edit"><i class="a"><u>国债</u>${ie("a",c.rf,.05)}</i><s>+</s><i class="b"><u>行业溢价</u>${ie("p",pm,.1)}</i><s>+</s><i class="c"><u>个股追加</u>${ie("x",0,.1)}</i><s>=</s><i class="t"><u>要求</u><b id="${p}-vt">${(c.rf+pm).toFixed(2)}%</b></i></div>`}
+function bindReqLab(root,p){const q=k=>root.querySelector("#"+p+"-"+k), n2=v=>(+v).toFixed(2);
+  const calc=()=>{const a=+q("a").value, pm=+q("p").value, x=+q("x").value, d=+q("d").value, f=(a+pm+x)/100;
+    if(!(d>0&&f>0)) return;
+    const pr=q("pr"); pr.min=(d*8).toFixed(1); pr.max=(d*50).toFixed(1); pr.step=Math.max(.1,d/20).toFixed(2);
+    let price=+pr.value; if(price<+pr.min) price=+pr.min; if(price>+pr.max) price=+pr.max; pr.value=price;
+    const buy=d/f, heavy=d/(f+0.01), max=d*50, pc=v=>Math.min(100,v/max*100);
+    q("vt").textContent=n2(f*100)+"%"; q("pv").textContent=(+price).toFixed(1);
+    q("z1").style.width=pc(heavy)+"%"; q("z2").style.left=pc(heavy)+"%"; q("z2").style.width=(pc(buy)-pc(heavy))+"%"; q("z3").style.width=(100-pc(buy))+"%";
+    const pin=q("pin"); pin.textContent="现价 "+(+price).toFixed(1); pin.style.left=Math.min(92,Math.max(8,pc(price)))+"%";
+    const t1=q("t1"), t2=q("t2"); t1.textContent="低位线 "+heavy.toFixed(1); t1.style.left=pc(heavy)+"%"; t2.textContent="买入价 "+buy.toFixed(1); t2.style.left=pc(buy)+"%";
+    const y=d/price, vd=q("vd"), ok=price<=buy; vd.className="pverdict"+(ok?" ok":"");
+    vd.innerHTML=ok?`现价 ${(+price).toFixed(1)} 元，股息率 <b>${n2(y*100)}%</b>，已经<b>达到你的要求 ${n2(f*100)}%</b>${price<=heavy?"，而且比要求高出 1 个点以上：低位。":"：偏低，可以考虑。"}`
+      :`现价 ${(+price).toFixed(1)} 元，股息率 <b>${n2(y*100)}%</b>，<b>低于</b>你的要求 ${n2(f*100)}%：还没到买点。要跌到 <b>${buy.toFixed(1)} 元</b>以下（还需跌 ${((1-buy/price)*100).toFixed(0)}%）才算达标。`;
+    const rows=[-1,0,1,2].map(k=>f+k/100).filter(v=>v>0.005), mx=d/Math.min(...rows);
+    q("rb").innerHTML=rows.map(v=>{const b=d/v, cur=Math.abs(v-f)<1e-9; return `<div class="rb ${cur?"cur":""}"><span>${n2(v*100)}%</span><span><i style="width:${(b/mx*100).toFixed(1)}%"></i></span><span>买入价 ${b.toFixed(1)}</span></div>`}).join("")};
+  ["a","p","x","d","pr"].forEach(k=>q(k).oninput=calc); calc()}
+/* 学完所有课的礼花:纯 canvas,3 秒,尊重"减少动态效果" */
+function confetti(){
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cv=document.createElement("canvas"); cv.style.cssText="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:300"; document.body.appendChild(cv);
+  const dpr=Math.min(2,window.devicePixelRatio||1), W=cv.width=innerWidth*dpr, H=cv.height=innerHeight*dpr, g=cv.getContext("2d");
+  const cols=["#9a7229","#c9a96e","#2f9e6b","#d4574a","#4a79c9","#e0b02f","#8a6bd1"], N=170, ps=[];
+  for(let i=0;i<N;i++){const side=i%2?1:-1; ps.push({x:W/2+side*W*0.05,y:H*0.62,vx:(Math.random()*9+3)*dpr*side*(0.6+Math.random()*0.8)*(Math.random()<.5?1:.55),vy:-(Math.random()*15+9)*dpr,w:(Math.random()*7+5)*dpr,h:(Math.random()*4+3)*dpr,r:Math.random()*6.28,vr:(Math.random()-.5)*.35,c:cols[i%cols.length]})}
+  const t0=performance.now(); const tick=now=>{const t=now-t0; g.clearRect(0,0,W,H);
+    ps.forEach(p=>{p.vy+=0.42*dpr; p.vx*=0.992; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr; g.save(); g.globalAlpha=Math.max(0,Math.min(1,(3200-t)/900)); g.translate(p.x,p.y); g.rotate(p.r); g.fillStyle=p.c; g.fillRect(-p.w/2,-p.h/2,p.w,p.h); g.restore()});
+    if(t<3200) requestAnimationFrame(tick); else cv.remove()};
+  requestAnimationFrame(tick);
+}
+function bindHealthDemo(root){const r=root.querySelector("#hld-r"); if(!r) return; const f=()=>{const v=+r.value; root.querySelector("#hld-v").textContent=v+"%"; const lv=v<=80?["g","绿灯：分红在赚的钱里，有余量"]:v<=100?["y","黄灯：分红快把赚的钱分完了"]:["r","红灯：分的比赚的多，在花老本"]; root.querySelector("#hld-o").innerHTML=`<i class="hl-dot ${lv[0]}" style="vertical-align:-2px"></i> ${lv[1]}`}; r.oninput=f; f()}
+const GUIDE=[
+ {t:"收息佬能帮你做什么",h:()=>`<div class="gtiles">
+    <button class="gtile" data-go="pool"><span class="gic">${GUIDE_ICON.pool}</span><b>股票池</b><em>找出价格<br>相对便宜的红利股</em></button>
+    <button class="gtile" data-go="hold"><span class="gic">${GUIDE_ICON.hold}</span><b>我的持仓</b><em>记录买卖<br>提示该加还是该减</em></button>
+    <button class="gtile" data-go="rf"><span class="gic">${GUIDE_ICON.set}</span><b>设置</b><em>调整你的<br>买入要求</em></button></div>
+    <div class="gnote">点上面的卡片可以直接去看看。数据都保存在你自己的设备上，不上传。</div>`},
+ {t:"价格越便宜，越靠左",h:()=>`<div class="gscale"><span class="badge s-重仓区">低位</span><span class="badge s-买入区">偏低</span><span class="badge s-持有区">适中</span><span class="badge s-偏高">偏高</span><span class="badge s-止盈区">高位</span></div>
+    <div class="gscale2"><span>← 便宜：股息率高于你的要求</span><span>贵：股息率低 →</span></div>
+    <div class="gcmp"><div><span class="chip focus on">★ 重点关注</span><em>你自己点 ☆ 加的，加上持仓</em></div><div><span class="chip focus on">精选</span><em>系统按价格和体检筛的，只是筛选，不是推荐</em></div></div>
+    <div class="gdots5">体检五个灯 <i style="background:#2f9e6b"></i><i style="background:#2f9e6b"></i><i style="background:#e0b02f"></i><i style="background:#2f9e6b"></i><i style="background:#d4574a"></i> <em>分红·盈利·稳定·安全·估值，红灯先看明白</em></div>
+    <div class="gact"><button class="btn sm" data-go="pool">去股票池看看 →</button></div>`},
+ {t:"持仓：价格到了，提醒你",h:()=>`<div class="gladder">
+    <div class="r sell"><span>止盈二档</span><i></i><em>高于高位线 15%：再减 1/3</em></div>
+    <div class="r sell"><span>止盈一档</span><i></i><em>进入高位：减 1/3</em></div>
+    <div class="r now"><span>现价</span><i></i><em>在这里就持有，继续收息</em></div>
+    <div class="r buy"><span>加仓一档</span><i></i><em>到买入价：加 1/3</em></div>
+    <div class="r buy"><span>加仓二档</span><i></i><em>低位线或成本 −10%：再加 1/3</em></div></div>
+    <div class="gnote">触发的节点会出现在股票池顶部的「今日提醒」里。A 股和港股分开显示；港股用港元，不算红利税。</div>
+    <div class="gact"><button class="btn sm" data-go="hold">去录入持仓 →</button></div>`},
+ {t:"重点：自定义你的股息率要求",last:1,h:()=>`<div class="gform"><b>买入价 = 每股分红 ÷ 要求股息率</b><em>要求越高，买入价越低，越难触发</em></div>
+    ${reqBlock("g")}
+    <div class="glayers">
+      <button class="lay" data-go="rf"><em>①</em><span><b>国债收益率</b>全局基准，所有股票共用</span><i>去改 →</i></button>
+      <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>每个行业一个数，默认值是经验假设</span><i>去改 →</i></button>
+      <button class="lay" data-go="ov"><em>③</em><span><b>个股单独设定</b>只改这一只，优先级最高。<b>越有把握，要求可以低一点</b></span><i>去看 →</i></button></div>
+    <div class="gnote">个别股票默认带「个股追加」（比如分红率在快速上升），详情页会写明原因，也可以用③覆盖。更多讲解在「红利课堂」。仅供研究，不构成投资建议。</div>`}
+];
+function showGuide(startAt){
+  if(document.getElementById("guide")) return;
+  const S=state.holdings.settings; let i=Number.isInteger(startAt)?startAt:0;
+  const w=document.createElement("div"); w.className="mask"; w.id="guide";
+  const flush=()=>{if(state.pendingUpd){const [a,b]=state.pendingUpd; state.pendingUpd=null; showUpd(a,b)}};
+  const close=async(done,going)=>{ if(done){S.guideHide=!!w.querySelector("#gk")?.checked; try{await saveHoldings()}catch(e){}} w.remove(); document.removeEventListener("keydown",kd); if(!going) flush()};
+  const kd=e=>{if(e.key==="Escape") close(false)};
+  const back=()=>{document.getElementById("guideback")?.remove(); const b=document.createElement("button"); b.id="guideback"; b.className="btn primary"; b.textContent="← 回到使用指引"; b.onclick=()=>{b.remove(); showGuide(i)}; document.body.appendChild(b); setTimeout(()=>b.remove(),30000)};
+  const draw=()=>{const g=GUIDE[i];
+    w.innerHTML=`<div class="dlg guide" role="dialog" aria-label="使用指引"><div class="gstep">使用指引 · ${i+1} / ${GUIDE.length}</div><h3>${g.t}</h3>${g.h()}
+      ${g.last?`<label class="gck"><input type="checkbox" id="gk" ${S.guideHide?"checked":""}>下次不再显示（以后可以在「设置」里再看）</label>`:""}
+      <div class="gdots">${GUIDE.map((_,k)=>`<i class="${k===i?"on":""}"></i>`).join("")}</div>
+      <div class="acts">${i>0?'<button class="btn" data-x="prev">上一步</button>':'<button class="btn" data-x="skip">跳过</button>'}${g.last?'<button class="btn primary" data-x="done">开始使用</button>':'<button class="btn primary" data-x="next">下一步</button>'}</div></div>`;
+    const q=id=>w.querySelector(id);
+    if(q("#g-d")) bindReqCalc(w,"g");};
+  w.onclick=e=>{const go=e.target.closest("[data-go]"); if(go){const f=GUIDE_GO[go.dataset.go]; close(false,true); back(); f(); return}
+    const x=e.target.dataset.x; if(x==="next"){i++;draw()} else if(x==="prev"){i--;draw()} else if(x==="done") close(true); else if(x==="skip"||e.target===w) close(false)};
+  draw(); document.addEventListener("keydown",kd); document.body.appendChild(w);
+}
 function renderPool(){
   if(!state.pool) return;
   // 市场筛选:A 股(含 ETF)/ B 股 / 港股;默认只看 A 股;搜索时跨市场找
@@ -634,33 +856,35 @@ function renderPool(){
   const {q,ind,st}=state.f, grp=GROUPS[st];
   const held=new Set(applySells(state.holdings).active.map(l=>l.code)), fav=favSet();
   const mine=s=>fav.has(s.code)||held.has(s.code);
-  const inGroup=s=>st==="focus"?(mine(s)||isFocus(s)):(!grp||grp.sts.includes(s.status));
+  const dg=digest(), posBy=new Map(dg.pos.map(x=>[x.s.code,x.n])), watchSet=new Set(dg.watch.map(x=>x.code));
+  const inGroup=s=>st==="focus"?mine(s):st==="pick"?isFocus(s):(!grp||grp.sts.includes(s.status));
   const q_=()=>state.f.q.trim();
   const calc=()=>{
     const ql=q_().toLowerCase();
     const r=(ql?state.pool.stocks:P.stocks).filter(s=>(!ql||s.name.includes(ql)||s.code.includes(ql)||(s.py||"").includes(ql)||(s.pyfull||"").includes(ql))&&(!ind||grpOf(s.industry)===ind)&&inGroup(s));
     const {key,dir}=state.sort;
     r.sort((a,b)=>{const x=val(a,key),y=val(b,key); if(x==null)return 1;if(y==null)return -1; return (typeof x==="string"?x.localeCompare(y,"zh"):x-y)*dir});
-    if(st==="focus"&&key==="verdict") r.sort((a,b)=>mine(b)-mine(a)); // 重点关注里：你关注的/持仓排在前面（稳定排序，其余顺序不变）
+    if(st==="focus"&&key==="verdict") r.sort((a,b)=>held.has(b.code)-held.has(a.code)); // 重点关注里：你关注的/持仓排在前面（稳定排序，其余顺序不变）
     return r;
   };
   let rows=calc(); const {dir}=state.sort;
   const indList=[...new Set(P.stocks.map(x=>grpOf(x.industry)))].map(g=>[g,P.stocks.filter(x=>grpOf(x.industry)===g&&inGroup(x)).length]).filter(([g,n])=>n>0||g===ind).sort((a,b)=>b[1]-a[1]);
   const cnt=g=>P.stocks.filter(s=>GROUPS[g].sts.includes(s.status)).length;
-  const emptyMsg=st==="focus"?"暂时没有重点股票。你可以点「全部」挑选，再点列表左侧的 ☆ 加进来。":"没有符合条件的股票。";
+  const emptyMsg=st==="focus"?"还没有关注的股票。点「精选」或「全部」挑选，再点列表左侧的 ☆ 加进来；有持仓的也会自动出现在这里。":"没有符合条件的股票。";
   const rowsHtml=rows=>!rows.length?`<tr><td colspan="7" class="empty">${emptyMsg}</td></tr>`:rows.map(s=>{const z=s.zones,gap=z?(s.price/z.buy-1)*100:0,on=fav.has(s.code);return `<tr class="row${on?" favrow":""}" data-code="${s.code}">
         <td class="favtd"><button class="fav${on?" on":""}" data-fav="${s.code}" title="${on?"取消关注":"加入我的关注"}" aria-label="${on?"取消关注":"加入我的关注"}">${on?"★":"☆"}</button></td>
-        <td class="l"><b>${s.name}</b>${held.has(s.code)?' <span class="badge held">已持仓</span>':""}${isFocus(s)?'<span class="pick" title="系统精选：价格偏低或低位、体检无质量红灯">精选</span>':""}<div class="sub">${s.code} · ${s.industry}${s.market&&s.market!=="a"?` · ${mkt(s)}（${cu(s)}）`:""}<span class="mprice"> · 现价 ${px(s.price)}</span></div></td>
+        <td class="l"><b>${s.name}</b>${held.has(s.code)?' <span class="badge held">已持仓</span>':""}${posBy.has(s.code)?`<span class="ntag ${posBy.get(s.code)[1]}">${posBy.get(s.code)[0]}</span>`:watchSet.has(s.code)?'<span class="ntag buy">可建仓</span>':""}${isFocus(s)?'<span class="pick" title="系统精选：价格偏低或低位、体检无质量红灯">精选</span>':""}<div class="sub">${s.code} · ${s.industry}${s.market&&s.market!=="a"?` · ${mkt(s)}（${cu(s)}）`:""}<span class="mprice"> · 现价 ${px(s.price)}</span></div></td>
         <td>${px(s.price)}</td><td><b>${pct(s.yield)}</b></td>
-        <td class="vtd"><span class="badge s-${s.status}" style="font-size:13px;padding:3px 12px">${lab(s)}</span>${distrust(s)?'<div class="warn">⚠ 股价已大跌，先看盈利</div>':""}${isRich(s)?'<div class="warn">⚠ 低于自身历史中位</div>':""}${ORDER[s.status]<=1&&qRed(s).length?`<div class="warn">⚠ 体检红灯：${qRed(s).join("、")}</div>`:""}${priceBar(s,true)}</td>
+        <td class="vtd"><span class="badge s-${s.status}" style="font-size:13px;padding:3px 12px">${lab(s)}</span>${distrust(s)?'<div class="warn">⚠ 股价已大跌，先看盈利</div>':""}${isRich(s)?'<div class="warn">⚠ 低于自身历史中位</div>':""}${unconf(s).length?`<div class="warn" title="低位的三重确认：①股息率比国债高 2.75 个点以上 ②股息率在自身近5年的较高水平 ③分红质量没红旗">⚠ 低位待确认：${unconf(s).join("、")}</div>`:""}${ORDER[s.status]<=1&&fakeDiv(s)?`<div class="warn">⚠ 分红率 ${Math.round(poOf(s)*100)}%，高股息难持续</div>`:""}${ORDER[s.status]<=1&&qRedShow(s).length?`<div class="warn">⚠ 体检红灯：${qRedShow(s).join("、")}</div>`:""}${priceBar(s,true)}</td>
         <td>${dotsOf(s)}</td>
         <td>${z?`≤ <b>${px(z.buy)}</b><div class="sub">${gap<=0?"已低于买入价":"还需跌 "+(100-z.buy/s.price*100).toFixed(0)+"%"}</div>`:"–"}</td></tr>`}).join("");
-  const sub={focus:"★ 是你关注的（含持仓，排在前面）；带「精选」标签的是系统筛的：价格偏低或低位、体检无质量红灯。看中的点 ☆ 加进来"}[st]||`共 ${P.stocks.length} 只 · ★ 是你的关注，「精选」是系统筛的`;
+  const sub={focus:"★ 是你关注的，加上持仓（持仓排在前面）。看中的股票点列表左侧的 ☆ 加进来",pick:"系统筛的：价格偏低或低位、体检无质量红灯、区间可信。只是筛选结果，不是推荐，看中的点 ☆ 加进来"}[st]||`共 ${P.stocks.length} 只 · ★ 是你的关注，「精选」是系统筛的`;
   $("#main").innerHTML=`
-  <div class="ph"><h2>红利股票池</h2><span class="sub">${sub}</span></div>
+  <div class="ph"><h2>股票池</h2><span class="sub">${sub}</span></div>
   <div class="toprow">${hasMk?`<div class="seg" id="mkseg">${[["a","A 股"],["b","B 股"],["hk","港股"],["","全部"]].filter(([k])=>k==="a"||k===""||mkCnt(k)).map(([k,t])=>`<button data-mk="${k}" class="${mkSel===k?"on":""}">${t}<span class="mkn">${mkCnt(k)}</span></button>`).join("")}</div>`:""}<input id="fq" placeholder="搜索 名称 / 代码 / 拼音（如 zgsh）" value="${q}"></div>
   <div class="chips">
-    <button class="chip focus ${st==="focus"?"on":""}" data-st="focus">★ 重点关注 ${P.stocks.filter(s=>mine(s)||isFocus(s)).length}</button>
+    <button class="chip focus ${st==="focus"?"on":""}" data-st="focus">★ 重点关注 ${P.stocks.filter(mine).length}</button>
+    <button class="chip focus ${st==="pick"?"on":""}" data-st="pick" title="系统筛的：价格偏低或低位、体检无质量红灯、区间可信">精选 ${P.stocks.filter(isFocus).length}</button>
     <button class="chip ${st===""?"on":""}" data-st="">全部 ${P.stocks.length}</button>
     ${Object.entries(GROUPS).map(([k,g])=>`<button class="chip ${g.cls} ${st===k?"on":""}" data-st="${k}">${g.label} ${cnt(k)}</button>`).join("")}
   </div>
@@ -691,6 +915,7 @@ function renderPool(){
   document.querySelectorAll("#mkseg [data-mk]").forEach(c=>c.onclick=()=>{state.f.mk=c.dataset.mk; try{localStorage.setItem("mk",c.dataset.mk)}catch(e){} state.f.ind=""; renderPool()});
   const strip=$("#indstrip"), on=strip&&strip.querySelector(".chip.on"); if(on&&on.dataset.ind) strip.scrollLeft=on.offsetLeft-strip.clientWidth/2+on.offsetWidth/2;
   document.querySelectorAll(".chip[data-st]").forEach(c=>c.onclick=()=>{state.f.st=c.dataset.st;renderPool()});
+
   document.querySelectorAll(".chip[data-ind]").forEach(c=>c.onclick=()=>{state.f.ind=c.dataset.ind;renderPool()});
   document.querySelectorAll("th[data-k]").forEach(th=>th.onclick=()=>{const k=th.dataset.k; state.sort=state.sort.key===k?{key:k,dir:-state.sort.dir}:{key:k,dir:["name","verdict","health","buy"].includes(k)?1:-1};renderPool()});
   bindRows();
@@ -717,6 +942,21 @@ function miniLine(ser,med,color){
 }
 const gauge=(label,pc)=>pc==null?`<div class="gauge"><div class="gl">${label}：历史分位不可用</div></div>`:`<div class="gauge"><div class="gl">${label} · 高于自身近5年 <b>${Math.round(pc*100)}%</b> 的时间</div><div class="gbar"><i style="left:${Math.max(1,Math.min(99,pc*100))}%"></i></div><div class="gs"><span>便宜</span><span>贵</span></div></div>`;
 
+/* ---------- A+H 对照:同一家公司在 A 股和港股的价格、股息率 ---------- */
+const AH=[["601088","01088"],["600941","00941"],["601398","01398"],["601939","00939"],["600036","03968"],["601318","02318"],["601601","02601"],["601898","01898"],["601728","00728"],["600028","00386"],["601857","00857"],["600938","00883"],["601899","02899"],["601288","01288"],["601988","03988"],["601328","03328"],["601919","01919"],["600011","00902"],["600690","06690"],["600660","03606"],["600377","00177"]];
+function ahCard(d){
+  const pr=AH.find(p=>p.includes(d.code)); if(!pr) return "";
+  const P=state.pool.stocks, a=P.find(x=>x.code===pr[0]), h=P.find(x=>x.code===pr[1]); if(!a||!h) return "";
+  const hc=h.price*(h.fx||1), prem=hc/a.price-1, dy=h.yield-a.yield;
+  const lk=(x,t)=>x.code===d.code?`<b>${t}</b>`:`<a href="#/stock/${x.code}">${t}</a>`;
+  return `<div class="card"><h2>A+H 对照 <span class="sub" style="font-weight:400">· 同一家公司在两地的价格和股息率</span></h2>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="kpi"><div class="k">${lk(a,"A 股")} ${a.code}</div><div class="v">${px(a.price)} 元</div><div class="sub">股息率 ${pct(a.yield)} · ${lab(a)}</div></div>
+      <div class="kpi"><div class="k">${lk(h,"H 股")} ${h.code}</div><div class="v">${px(h.price)} 港元</div><div class="sub">折合 ${px(hc)} 元 · 股息率 ${pct(h.yield)} · ${lab(h)}</div></div>
+      <div class="kpi"><div class="k">H 股相对 A 股</div><div class="v ${prem<0?"up":"dn"}">${prem<0?"折价":"溢价"} ${Math.abs(prem*100).toFixed(1)}%</div><div class="sub">H 股股息率${dy>=0?"高":"低"} ${Math.abs(dy*100).toFixed(2)} 个点（税前）</div></div>
+    </div>
+    <p class="note">H 股折价越多，同样的分红对应的股息率越高，买点可能比 A 股先到。但要注意：港股通个人分红通常扣 20% 税，A 股持满一年免税，到手要自己折算；H 股还有汇率波动，两边的股息率口径也各按各自的规则算。</p></div>`;
+}
 function healthCard(d){
   const h=d.health; if(!h) return "";
   const L=h.lights, G="var(--c1)",Y="var(--c1)",R="var(--bad)",A="var(--c1)";
@@ -731,7 +971,7 @@ function healthCard(d){
   const useB=h.basis==="PB", m=useB?h.pb:h.pe, o2=useB?h.pe:h.pb;
   const val=gauge(h.basis+" "+(m.now!=null?num(m.now,1):"–")+" 倍",m.pct)+miniLine(m.series,m.med,A)+`<div class="why" style="margin-top:2px">另：${useB?"PE":"PB"} ${o2.now!=null?num(o2.now,1):"–"} 倍${o2.pct!=null?`（分位 ${Math.round(o2.pct*100)}%）`:""}</div>`;
   const cards=[["div","①","分红能力",div],["earn","②","盈利质量",roe+sq],["stab","③","分红稳定",stab],["safe","④","财务安全",L.safe.lv==="na"?`<div class="sub" style="padding:22px 0">不适用</div>`:debt],["val","⑤","估值",val]];
-  return `<div class="card"><h2>公司体检 <span class="sub" style="font-weight:400">· 股息率之外，这家公司值不值得持有（五项各自评级，不合并总分）</span></h2>
+  return `<div class="card" id="healthcard"><h2>公司体检 <span class="sub" style="font-weight:400">· 股息率之外，这家公司值不值得持有（五项各自评级，不合并总分）</span></h2>
     <div class="lights">${cards.map(c=>`<div class="lt"><i class="dot ${L[c[0]].lv}"></i><b>${c[2]}</b><span>${L[c[0]].head}</span></div>`).join("")}</div>
     <div class="hgrid">${cards.map(([k,no,t,body])=>`<div class="hc ${L[k].lv}" ${k==="val"?'style="grid-column:span 2"':""}><h4><i class="dot ${L[k].lv}"></i>${no} ${t}<em>${LVT[L[k].lv]}</em></h4><div class="big">${L[k].head}</div>${body}<div class="why">${L[k].text}</div></div>`).join("")}</div>
     <p class="note">红绿灯是经验阈值（分红率 ≤80%、ROE ≥10%、负债率 ≤50%（公用事业 ≤60%）、估值分位 ≤40% 为绿），只作筛查，不构成投资建议。经营现金流未扣资本开支，不等同自由现金流。金融股不看负债与现金流；周期/金融股估值用 PB。</p></div>
@@ -746,7 +986,7 @@ function goto(t){ if(location.hash===t||(t==="#/"&&!location.hash)) return route
 function route(){
   const m=location.hash.replace(/^#\/?/,"").split("/");
   state.tab=m[0]==="hold"?"hold":m[0]==="settings"?"settings":m[0]==="learn"?"learn":"pool"; state.detail=(m[0]==="stock"&&/^\d+$/.test(m[1]||""))?m[1]:null;
-  render(); window.scrollTo(0,0);
+  render(); window.scrollTo(0,0); bellRender();
 }
 window.addEventListener("hashchange",route);
 function renderDetail(d){
@@ -764,12 +1004,11 @@ function renderDetail(d){
   const labels=d.monthly.map(m=>m[0]);
   const pending=d.pending.length?`<h3>已公告 / 待实施</h3><table><thead><tr><th>报告期</th><th>方案</th><th>股权登记日</th><th>除权除息日</th><th>进度</th></tr></thead><tbody>${d.pending.map(p=>`<tr><td>${p.period||"–"}</td><td class="l">${p.plan||""}</td><td>${p.reg||"–"}</td><td>${p.ex||"未定"}</td><td>${p.progress||""}</td></tr>`).join("")}</tbody></table>`:"";
   $("#main").innerHTML=`
-  <div class="crumb"><a href="#/" id="back">红利股票池</a><span>›</span><b>${d.name}</b><span>${d.code}</span></div>
+  <div class="crumb"><a href="#/" id="back">股票池</a><span>›</span><b>${d.name}</b><span>${d.code}</span></div>
   <div class="card">
     <div class="pos-head"><h2 style="margin:0;font-size:20px">${d.name}</h2><span class="mute">${d.code} · ${d.industry}</span> ${stagHtml(d.industry)}<div class="spacer"></div>
       <button class="btn" id="favbtn">${favSet().has(d.code)?"★ 已关注":"☆ 加入关注"}</button> <button class="btn primary" id="addpos">+ 持仓录入</button> <button class="btn" id="rmstk" title="把这只股票从股票池里移出（有持仓记录时需先删除记录）">移出股票池</button></div>
     ${banner}
-    <div class="note" style="margin:0 0 8px">本股买入要求：股息率 ≥ <b>${pct(d.floor,1)}</b>（国债 ${cfg().rf}% + ${d.industry}溢价 ${premOf(d.industry)}%）· 单独设定 <input id="ov" type="number" step="0.1" style="width:70px" value="${cfg().ov[d.code]??""}" placeholder="默认"> % <button class="btn sm" id="ovclear">清除</button></div>
     ${(()=>{const f=(d.forward||[]).reduce((a,x)=>a+x.cash,0); return d._d0>0&&Math.abs(f/d._d0-1)>0.08?`<div class="note" style="margin:0 0 8px">⚠ 按最新一轮分红节奏推算，年分红约 ${num(f,3)} 元（${f>d._d0?"高于":"低于"}上一财年 ${Math.abs(f/d._d0-1)*100|0}%），对应股息率 ${pct(f/d.price)}。</div>`:""})()}
     <div class="grid g3" style="margin-top:10px">
       <div class="kpi"><div class="k">现价（${d.date}${d.ccy&&d.ccy!=="CNY"?" · "+mkt(d)+"，"+cu(d):""}）</div><div class="v">${px(d.price)}</div></div>
@@ -779,6 +1018,13 @@ function renderDetail(d){
     ${ruler}
     ${z?`<p class="note">买入价 ≤ ${px(z.buy)}：此价对应的股息率刚好达到你的要求（在「设置」里调整）;≤ ${px(z.heavy)} 进入「低位」（比要求还高 1 个点）。当前价格${d.price<=z.buy?"<b>已低于买入价</b>。":`比买入价高 ${pct(d.price/z.buy-1,1)}。`}</p>`:""}
   </div>
+  <div class="card reqcard${cfg().ov[d.code]!=null?" on":""}">
+    <div class="reqleft"><div class="k">本股买入要求：股息率 ≥</div><div class="reqv">${pct(d.floor,2)}</div>
+      <div class="sub">${cfg().ov[d.code]!=null?`<b>已单独设定</b>（默认 ${pct((+cfg().rf+premOf(d.industry)+addOf(d))/100,2)} = 国债 ${cfg().rf}% + ${d.industry}溢价 ${premOf(d.industry)}%${addOf(d)?` + 个股追加 ${addOf(d)}%`:""}）`:`默认 = 国债 ${cfg().rf}% + ${d.industry}溢价 ${premOf(d.industry)}%${addOf(d)?` + 个股追加 ${addOf(d)}%（${DEF_ADD[d.code][1]}）`:""}`}${z?` · 对应买入价 ≤ <b>${px(z.buy)}</b>`:""}</div></div>
+    <div class="reqset"><label>单独设定<input id="ov" type="number" step="0.1" value="${cfg().ov[d.code]??""}" placeholder="默认"><span>%</span></label><button class="btn sm" id="ovclear">恢复默认</button>
+      <div class="sub">对这家公司更有把握，要求可以设低一点；没把握就设高一点。</div></div>
+  </div>
+  ${ahCard(d)}
   ${healthCard(d)}
   <div class="grid g2">
     <div class="card"><h2>股价 vs 含分红再投 (10年，起点=100)</h2>
@@ -858,6 +1104,7 @@ async function checkUpdate(manual){
 }
 function showUpd(info,manual){
   if(!info||!info.newer||document.getElementById("updlg")) return;
+  if(document.getElementById("guide")){state.pendingUpd=[info,manual]; return}
   let dis=""; try{dis=localStorage.getItem("updDismiss")||""}catch(e){}
   if(!manual&&dis===info.latest) return;
   const notes=(info.notes||[]).map(t=>`<li>${t}</li>`).join("");
@@ -1063,7 +1310,7 @@ function allocCard(groups,T){
     ${hints.length?`<div class="hint" style="margin-top:12px">${hints.map(h=>"· "+h).join("<br>")}</div>`:""}
     <details style="margin-top:10px"><summary class="sub">设置我的配置目标（可选，设了就会显示偏离）</summary>
       <div class="form" style="margin-top:10px">${keys.filter(k=>k!=="oth").map(k=>`<label>${STYLES[k].name} %<input type="number" min="0" max="100" step="5" data-tg="${k}" value="${tg[k]??""}" placeholder="—"></label>`).join("")}<span class="sub" id="tgsum">${hasT?"合计 "+tsum+"%":""}</span></div>
-      <p class="note">目标比例没有标准答案，取决于你收入的稳定性、投资期限和能承受的波动。可以先看「知识」页里的示意。</p></details>
+      <p class="note">目标比例没有标准答案，取决于你收入的稳定性、投资期限和能承受的波动。可以先看「红利课堂」里的示意。</p></details>
     <p class="note pub">分类依据：防御型（电力、公用事业、通信、交通）、金融型（银行、券商、保险）、成长型（消费、医药、传媒）、周期型（煤炭、油气、航运、建材、汽车、有色金属、建筑、制造）。这是按行业的粗略归类，同一行业里个股的风险也会不同。仅供研究，不构成投资建议。</p></div>`;
 }
 function bindAlloc(){
@@ -1082,7 +1329,7 @@ function fold(html,right=""){
 function holdTable(groups,T,cap,maxPct,f=cny,body=posCard){
   const head=`<div class="hsum hhead"><span>股票</span><span class="r hm">持股</span><span class="r hm">成本价</span><span class="r hm">现价</span><span class="r">市值</span><span class="r hm">浮盈</span><span class="r hm">已收分红</span><span class="r">含息收益</span><span class="r hm">成本股息率</span><span class="hm">价格位置</span><span></span></div>`;
   const rows=groups.map(g=>{const {d,sh,cost,mv,avg}=g, pnl=mv-cost, yoc=d.ttm_dps/avg;
-    return `<details class="hrow"><summary class="hsum"><span class="hn"><b>${d.name}</b><span class="sub">${d.code} · ${d.industry}</span></span><span class="r hm">${sh.toLocaleString("zh-CN")}</span><span class="r hm">${px(avg)}</span><span class="r hm">${px(d.price)}</span><span class="r">${f(mv)}</span><span class="r hm ${sgn(pnl)}">${pct(cost?pnl/cost:0,1)}</span><span class="r hm">${g.rc.gross?cny(g.rc.gross):"–"}</span><span class="r ${sgn(g.total)}"><b>${pct(cost?g.total/cost:0,1)}</b></span><span class="r hm">${pct(yoc)}</span><span class="hm"><span class="badge s-${d.status}">${lab(d)}</span></span><i class="hchev">›</i></summary><div class="hbody">${body(g,cap,maxPct)}</div></details>`}).join("");
+    return `<details class="hrow"><summary class="hsum"><span class="hn"><b>${d.name}${(()=>{const n=nodeHit(d,avg); return n?`<span class="ntag ${n[1]}">${n[0]}</span>`:""})()}</b><span class="sub">${d.code} · ${d.industry}</span></span><span class="r hm">${sh.toLocaleString("zh-CN")}</span><span class="r hm">${px(avg)}</span><span class="r hm">${px(d.price)}</span><span class="r">${f(mv)}</span><span class="r hm ${sgn(pnl)}">${pct(cost?pnl/cost:0,1)}</span><span class="r hm">${g.rc.gross?cny(g.rc.gross):"–"}</span><span class="r ${sgn(g.total)}"><b>${pct(cost?g.total/cost:0,1)}</b></span><span class="r hm">${pct(yoc)}</span><span class="hm"><span class="badge s-${d.status}">${lab(d)}</span></span><i class="hchev">›</i></summary><div class="hbody">${body(g,cap,maxPct)}</div></details>`}).join("");
   const tot=T.gain+T.recv-T.rtax;
   const foot=`<div class="hsum hfoot"><span>合计 ${groups.length} 只</span><span class="hm"></span><span class="hm"></span><span class="hm"></span><span class="r">${f(T.mv)}</span><span class="r hm ${sgn(T.gain)}">${pct(T.cost?T.gain/T.cost:0,1)}</span><span class="r hm">${f(T.recv)}</span><span class="r ${sgn(tot)}">${pct(T.cost?tot/T.cost:0,1)}</span><span class="hm"></span><span class="hm"></span><span></span></div>`;
   return `<div class="card htable">${head}${rows}${foot}</div>`;
@@ -1205,51 +1452,85 @@ function renderLearn(){
   const dots=n=>`<span class="mdots">${"●".repeat(n)}<i>${"●".repeat(5-n)}</i></span>`;
   const mixes=[["偏稳",[40,30,20,10]],["均衡",[30,25,25,20]],["偏进取",[15,20,30,35]]];
   $("#main").innerHTML=`
-  <div class="ph"><h2>红利课堂</h2><span class="sub">先看核心，再按目录挑章节</span></div>
+  <div class="ph"><h2>红利课堂</h2><span class="sub">一课一课学，点下面的课程；学完的会打 ✓</span></div>
 
-  <div class="card hero" id="sec-0"><div class="kick">先记住这一句</div>
+  <div class="card hero" id="sec-0"><div class="kick">红利投资的核心</div>
     <div class="big">红利的核心，就两件事：<em>选到好公司</em>，<em>买在好位置</em></div>
     <div class="pair">
-      <div class="pc"><b>① 好公司</b><p>赚得到钱、分得出来、不会被砍。分红是公司赚了才发的，不是利息，公司不行，分红就没了。</p><span class="go">→ 看「公司体检」五个灯</span></div>
-      <div class="pc"><b>② 好位置</b><p>分红固定时，股价越低，股息率越高。同一家好公司，买得便宜才划算，追高就是把股息让给了别人。</p><span class="go">→ 看「价格位置」和「买入价」</span></div></div>
+      <div class="pc"><b>① 好公司</b><p>赚得到钱、分得出来、不会被砍。分红是公司赚了才发的，不是利息，公司不行，分红就没了。</p><a class="go" href="#/learn" data-lesson-go="sec-12">→ 去学「公司体检」五个灯</a></div>
+      <div class="pc"><b>② 好位置</b><p>分红固定时，股价越低，股息率越高。同一家好公司，买得便宜才划算，追高就是把股息让给了别人。</p><a class="go" href="#/learn" data-lesson-go="sec-13">→ 去学「要求股息率」和「买入价」</a></div></div>
     <p class="note" style="margin-top:12px">缺一不可：好公司买贵了，股息率被压得很低；价格再便宜，买到坏公司，分红可能被砍，本金还会亏。</p>
     <div class="demo"><div class="sub" style="margin-bottom:8px">试一试：同一家公司，每年固定分红 5 元，拖动看买入价不同会怎样</div>
       <div class="base">基准：<b>股价 100 元</b>，每年分红 <b>5 元</b> → 股息率 <b>5%</b>（竖线就是 100 元）</div>
       <div class="ctrl">${rg("hp","买入价格",60,160,1,100," 元",100)}</div>
       <div class="lnums"><div><span class="sub">这个价格买入的股息率</span><b id="hy">5.0%</b></div><div><span class="sub">每投入 1 万元，每年收</span><b id="hn">500 元</b></div></div>
-      <div class="lmsg" id="hmsg"></div></div></div>
+      <div class="lmsg" id="hmsg"></div></div>
+    <h3 style="margin-top:18px">接下来：五步用起来（点步骤，去学对应的一课）</h3>
+    <div class="lsteps flow">
+      <a class="lstep" href="#/learn" data-lesson-go="sec-12"><span class="circ">1</span><b>选</b><p>看「公司体检」五个灯，先排除有红灯的</p></a><div class="larrow">→</div>
+      <a class="lstep" href="#/learn" data-lesson-go="sec-13"><span class="circ">2</span><b>定</b><p>设「要求股息率」= 国债 + 行业溢价 + 个股追加</p></a><div class="larrow">→</div>
+      <a class="lstep" href="#/learn" data-lesson-go="sec-2"><span class="circ">3</span><b>买</b><p>价格偏低（达到你的要求）再分批买，别追高</p></a><div class="larrow">→</div>
+      <a class="lstep" href="#/learn" data-lesson-go="sec-5"><span class="circ">4</span><b>配</b><p>看四类风险的分布，别把鸡蛋放在同一类</p></a><div class="larrow">→</div>
+      <a class="lstep" href="#/learn" data-lesson-go="sec-9"><span class="circ">5</span><b>持</b><p>每年收息，满一年免税，再投资</p></a></div>
+  </div>
 
-  <div class="card" id="sec-1"><h2>① 红利是怎么赚钱的</h2>
+  <div class="card" id="sec-1"><h2>分红与再投资</h2>
     <div class="lsteps">
       <div class="lstep"><span class="circ">1</span><b>买入</b><p>用一笔钱，买下好公司的一小部分。</p></div><div class="larrow">→</div>
       <div class="lstep"><span class="circ">2</span><b>年年分红</b><p>公司把赚的钱按持股比例，以现金发给你。</p></div><div class="larrow">→</div>
       <div class="lstep"><span class="circ">3</span><b>再投资</b><p>把分红继续买入，下一年的股息就更多了。</p></div>
     </div>
-    <div class="formulas"><div class="fm"><b>股息率</b> = 每股分红 ÷ 股价<span class="sub">买入这一刻，每年能收回本金的百分之几</span></div><div class="fm"><b>分红率</b> = 每股分红 ÷ 每股收益<span class="sub">公司把赚的钱分出去多少。超过 100% = 分的比赚的多</span></div></div></div>
+    <div class="formulas"><div class="fm"><b>股息率</b> = 每股分红 ÷ 股价<span class="sub">买入这一刻，每年能收回本金的百分之几</span></div><div class="fm"><b>分红率</b> = 每股分红 ÷ 每股收益<span class="sub">公司把赚的钱分出去多少。超过 100% = 分的比赚的多</span></div></div>
+    <h3 style="margin-top:18px">再投资，差别有多大</h3>
 
-  <div class="card" id="sec-2"><h2>② 股息率的两面：价格一跌，数字就变高</h2>
+    <div class="mech">
+      <div class="ms"><span>持有</span><b>1,000 股</b><em>股价 20 元 · 每股分红 0.8 元</em></div><i>→</i>
+      <div class="ms"><span>毛分红</span><b>800 元</b><em>1,000 × 0.8</em></div><i>→</i>
+      <div class="ms"><span>税后（税 20%）</span><b>640 元</b><em>800 × 80%</em></div><i>→</i>
+      <div class="ms"><span>再买入</span><b>+32 股</b><em>640 ÷ 20 = 32，共 1,032 股</em></div><i>→</i>
+      <div class="ms hot"><span>下一年分红</span><b>825.6 元</b><em>股价和每股分红不变，比 800 元多 3.2%</em></div>
+    </div>
+    <p class="note" style="margin-top:6px">再投资的复利，来自「新买的份额继续产生分红」，不是分红本身变多。</p>
+    <div class="l2" style="margin-top:12px">
+      <div class="ctrl">${rg("r1","初始投入",10,500,10,100," 万")}${rg("r2","股息率",2,8,0.5,5," %")}${rg("r3","股价与分红每年增长",0,8,0.5,3," %")}${rg("r4","持有年数",5,40,1,20," 年")}
+        <div class="rtax"><span class="sub">分红要交的税</span><div class="btnrow"><button class="btn sm on" data-rt="0">0%（持股满一年）</button><button class="btn sm" data-rt="10">10%</button><button class="btn sm" data-rt="20">20%</button></div></div></div>
+      <div class="rescol">
+        <div class="rescard a"><div class="rt">A · 分红全部再投资</div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年总资产</span><b id="ra1">–</b></div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年的年股息</span><b id="ra2">–</b></div></div>
+        <div class="rescard b"><div class="rt">B · 分红拿去花</div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年资产（+ 已花掉的分红）</span><b id="rb1">–</b></div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年的年股息</span><b id="rb2">–</b></div></div>
+      </div></div>
+    <div class="lmsg" id="rmsg"></div>
+    <h3>最后拥有的：再投 vs 花掉</h3>
+    <div class="navdemo" id="rbars"></div>
+    <h3>每年收到的股息</h3>
+    <div class="legend"><span><i style="background:var(--c1)"></i>A 再投资</span><span><i style="background:var(--c2)"></i>B 花掉</span></div>
+    <div id="rchart"></div>
+    <p class="note">模型：每年按股息率领取分红；再投资的一方用税后分红在年末按当时股价买入更多股份；股价和每股分红按相同速度增长。不含手续费、分红被砍和股价波动，别当成预测，看的是「再投资」这个动作的影响。</p>
+  </div>
+
+  <div class="card" id="sec-2"><h2>股息率与总回报</h2>
+    <h3>价格一跌，股息率就变高</h3>
     <div class="l2">
       <div class="ctrl"><div class="base">基准：<b>股价 100 元</b>，<b>每年分红 5 元</b> → 股息率 5%</div>${rg("bp","现在的股价",20,200,1,100," 元",100)}<div class="sub">当前每股分红 <b id="bd-v">5.0</b> 元（点下面的按钮改变）</div>
         <div class="btnrow"><button class="btn sm" data-bp="drop">股价腰斩</button><button class="btn sm" data-bp="cut">分红砍半</button><button class="btn sm" data-bp="both">双杀</button><button class="btn sm" data-bp="reset">重置</button></div></div>
       <div class="lout"><div class="sub">现价股息率</div><div class="bigy" id="by">5.0%</div>
         <div class="gbar"><i id="byb" style="left:33%"></i></div><div class="gs"><span>0%</span><span>7.5%</span><span>15%</span></div>
         <div class="lnums"><div><span class="sub">100 元买入的人，成本股息率</span><b id="bc">5.0%</b></div><div><span class="sub">现在花 1 万元买入，每年收</span><b id="bn">500 元</b></div></div></div></div>
-    <div class="lmsg" id="bmsg"></div></div>
-
-  <div class="card" id="sec-3"><h2>③ 股息率不等于收益率：总回报 = 分红 + 价差</h2>
+    <div class="lmsg" id="bmsg"></div>
+    <h3 style="margin-top:22px">股息率不等于收益率：总回报 = 分红 + 价差</h3>
     <div class="l2">
       <div class="ctrl"><div class="base">基准：你以 <b>100 元</b>买入，这一年收到分红 <b>5 元</b>（股息率 5%）</div>${rg("tr1","一年后的股价",40,160,1,85," 元",100)}
         <div class="btnrow"><button class="btn sm" data-tr="85">跌到 85</button><button class="btn sm" data-tr="100">股价不变</button><button class="btn sm" data-tr="120">涨到 120</button></div></div>
       <div class="lout"><div class="sub">这一年的总回报</div><div class="bigy" id="trt">-10.0%</div>
         <div class="trbars"><div class="trb"><span>分红</span><div class="tr0"><i id="trd"></i></div><b id="trdv"></b></div><div class="trb"><span>价差</span><div class="tr0"><i id="trp"></i></div><b id="trpv"></b></div></div></div></div>
-    <div class="lmsg" id="trmsg"></div></div>
+    <div class="lmsg" id="trmsg"></div>
+  </div>
 
-  <div class="card" id="sec-4"><h2>④ 溢价来自风险：要求的回报，是国债加上风险补偿</h2>
+  <div class="card" id="sec-4"><h2>风险与溢价</h2>
     <div class="legend"><span><i style="background:var(--none-bg);border:1px solid var(--mute)"></i>国债收益率 ${c.rf}%（几乎没有风险的收益）</span></div>
     <div class="lad4">${ladder.map(x=>`<div class="lc"><span class="lc-n"><i class="sdot" style="background:${STYLES[x.k].c}"></i>${x.i}</span><span class="lc-c"><span>${STYLES[x.k].name}</span></span><div class="ltrack"><i class="lbase" style="width:${(c.rf/maxT*100).toFixed(2)}%"><span class="lg">国债 ${c.rf}%</span><span class="sh">${c.rf}</span></i><i class="lprem" style="width:${(x.p/maxT*100).toFixed(2)}%;background:${STYLES[x.k].c}"><span class="lg">+ 溢价 ${x.p}</span><span class="sh">+${x.p}</span></i></div><b class="lc-v">${(c.rf+x.p).toFixed(2).replace(/0$/,"")}%</b></div>`).join("")}<div class="lc-f">条形 = 国债收益率 + 风险溢价，右侧数字 = 要求股息率</div></div>
     <p class="note">这里只挑 4 个行业做示意，数值不是精确值。同样 5% 的股息率，放在电力上可能很划算，放在航运上却可能不够——因为航运的分红更不稳定。其余行业的溢价在「设置」里看和调，风险越高，要求的回报越高。 <a href="#/settings">去调整 →</a></p></div>
 
-  <div class="card" id="sec-5"><h2>⑤ 四类资产，各司其职：不是股息越高越好</h2>
+  <div class="card" id="sec-5"><h2>四类资产</h2>
     <div class="grid g4 sgrid">${stat.map(s=>{const S0=STYLES[s.k];return `<div class="scard" style="--c:${S0.c}"><div class="scap"><b>${S0.name}</b><span class="role">${S0.role}</span></div><p class="sd">${S0.desc}</p>
       <div class="meters"><div>分红稳定 ${dots(S0.m[0])}</div><div>分红增长 ${dots(S0.m[1])}</div><div>价格稳定 ${dots(6-S0.m[2])}</div></div>
       <div class="sub" style="margin-top:8px">股票池 ${s.n} 只 · 股息率中位 ${pct(s.med,1)}<br>要求 ${(c.rf+s.pmin).toFixed(1)}%~${(c.rf+s.pmax).toFixed(1)}%</div>
@@ -1260,7 +1541,7 @@ function renderLearn(){
     <div class="legend" style="margin-top:6px">${["def","fin","gro","cyc"].map(k=>`<span><i style="background:${STYLES[k].c}"></i>${STYLES[k].name}</span>`).join("")}</div>
     <p class="note">比例没有标准答案，取决于你收入的稳定性、投资期限和能承受的波动。核心思路是：稳的负责安心，成长的负责增厚，周期的负责弹性，别把鸡蛋放在同一类风险里。 <a href="#/hold">看我的持仓配置 →</a></p></div>
 
-  <div class="card" id="sec-6"><h2>⑥ 红利 ETF：把一篮子红利股装进一只基金</h2>
+  <div class="card" id="sec-6"><h2>红利 ETF</h2>
     <div class="etfgrid">
       <div class="etfc"><b>是什么</b><p>基金按指数规则买入一篮子高分红股票，你买一份，就等于持有这一整篮。收益来自两部分：成分股的分红，以及净值的涨跌。</p></div>
       <div class="etfc"><b>为什么有人用它</b><p>一次买入就分散到几十家公司，不用自己挑股、盯财报；买卖像股票一样方便。</p></div>
@@ -1298,31 +1579,7 @@ function renderLearn(){
     <h3>怎么用收息佬看红利 ETF</h3>
     <p class="note">红利 ETF 的成分股，就是收息佬股票池里这类公司。拿到一只 ETF 的前十大持仓，用同样的方法看：它们集中在防御、金融、成长、周期哪几类？行业有没有扎堆？股息率是不是被个别高息股拉高？再回到「公司体检」逐个看分红能不能持续。以上是通用知识，不是产品推荐。</p></div>
 
-  <div class="card" id="sec-7"><h2>⑦ 红利再投 vs 分红花掉：同样的钱，差在哪</h2>
-    <div class="mech">
-      <div class="ms"><span>持有</span><b>1,000 股</b><em>股价 20 元 · 每股分红 0.8 元</em></div><i>→</i>
-      <div class="ms"><span>毛分红</span><b>800 元</b><em>1,000 × 0.8</em></div><i>→</i>
-      <div class="ms"><span>税后（税 20%）</span><b>640 元</b><em>800 × 80%</em></div><i>→</i>
-      <div class="ms"><span>再买入</span><b>+32 股</b><em>640 ÷ 20 = 32，共 1,032 股</em></div><i>→</i>
-      <div class="ms hot"><span>下一年分红</span><b>825.6 元</b><em>股价和每股分红不变，比 800 元多 3.2%</em></div>
-    </div>
-    <p class="note" style="margin-top:6px">再投资的复利，来自「新买的份额继续产生分红」，不是分红本身变多。</p>
-    <div class="l2" style="margin-top:12px">
-      <div class="ctrl">${rg("r1","初始投入",10,500,10,100," 万")}${rg("r2","股息率",2,8,0.5,5," %")}${rg("r3","股价与分红每年增长",0,8,0.5,3," %")}${rg("r4","持有年数",5,40,1,20," 年")}
-        <div class="rtax"><span class="sub">分红要交的税</span><div class="btnrow"><button class="btn sm on" data-rt="0">0%（持股满一年）</button><button class="btn sm" data-rt="10">10%</button><button class="btn sm" data-rt="20">20%</button></div></div></div>
-      <div class="rescol">
-        <div class="rescard a"><div class="rt">A · 分红全部再投资</div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年总资产</span><b id="ra1">–</b></div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年的年股息</span><b id="ra2">–</b></div></div>
-        <div class="rescard b"><div class="rt">B · 分红拿去花</div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年资产（+ 已花掉的分红）</span><b id="rb1">–</b></div><div class="rn"><span class="sub">第 <b class="rny">20</b> 年的年股息</span><b id="rb2">–</b></div></div>
-      </div></div>
-    <div class="lmsg" id="rmsg"></div>
-    <h3>最后拥有的：再投 vs 花掉</h3>
-    <div class="navdemo" id="rbars"></div>
-    <h3>每年收到的股息</h3>
-    <div class="legend"><span><i style="background:var(--c1)"></i>A 再投资</span><span><i style="background:var(--c2)"></i>B 花掉</span></div>
-    <div id="rchart"></div>
-    <p class="note">模型：每年按股息率领取分红；再投资的一方用税后分红在年末按当时股价买入更多股份；股价和每股分红按相同速度增长。不含手续费、分红被砍和股价波动，别当成预测，看的是「再投资」这个动作的影响。</p></div>
-
-  <div class="card" id="sec-8"><h2>⑧ 攒股息，退休晚不了：拖动看多久能靠股息覆盖开销</h2>
+  <div class="card" id="sec-8"><h2>攒股息与退休</h2>
     <div class="l2 sim">
       <div class="ctrl">${rg("s1","现有本金",0,300,5,20," 万")}${rg("s2","每年追加",0,30,1,5," 万")}${rg("s3","股息率",2,8,0.1,5," %")}${rg("s4","分红年增长",0,10,0.5,3," %")}${rg("s5","目标年股息",1,30,1,6," 万/年")}</div>
       <div class="lout"><div><div class="sub">年股息达到目标需要</div><div class="bigy" id="sy">–</div></div><div class="lres"><div class="sub" id="ss1"></div><div class="sub" id="ss2"></div></div></div></div>
@@ -1330,45 +1587,107 @@ function renderLearn(){
     <div id="simchart"></div>
     <p class="note">示意模型：每年把当年分红（和追加的钱）按相同股息率买入，已持有的部分分红每年按设定速度增长。不含股价波动、分红被砍、税和手续费，别当成预测。</p></div>
 
-  <div class="card" id="sec-9"><h2>⑨ 红利税：拿得越久越划算</h2>
-    <div class="taxrow">${[["持股 ≤ 1 个月","20%",0.2],["1 个月 ~ 1 年","10%",0.1],["超过 1 年","免税",0]].map(([t,r,v])=>`<div class="taxc"><div class="sub">${t}</div><b>${r}</b><div class="taxbar"><i style="width:${(1-v)*100}%"></i><u style="width:${v*100}%"></u></div><div class="sub">5% 的股息率 → 到手 <b>${(5*(1-v)).toFixed(1)}%</b>${v?`，交税 <b class="bad">${(5*v).toFixed(1)}%</b>`:"，不用交税"}</div></div>`).join("")}</div>
-    <p class="note">个人持股一年以内，分红时暂不扣税，卖出时按持股期限补缴；持股超过一年免征。所以短线赚分红不划算，长期持有收息才吃得到免税。具体以券商清算为准。</p></div>
-
-  <div class="card" id="sec-10"><h2>⑩ 登记日、除息日：怎么才拿得到这次分红</h2>
+  <div class="card" id="sec-9"><h2>领分红与红利税</h2>
+    <h3>怎么才拿得到这次分红：登记日、除息日</h3>
     <div class="tline">${[["公告预案","公司宣布分红方案","var(--c1)"],["股权登记日","当天收盘还持有，才有资格。要在前一个交易日或更早买入","var(--c1)"],["除权除息日","股价按分红额下调，这天买入的拿不到这次分红","var(--accent)"],["派息日","现金到账","var(--c1)"]].map(([t,d,col],i)=>`<div class="tnode" style="--c:${col}"><span class="tdot">${i+1}</span><b>${t}</b><p>${d}</p></div>`).join("")}</div>
-    <p class="note">除息当天股价会下调约等于分红额，所以不是"领了分红就白赚"。收息靠的是长期持有、分红年年有，以及股价之后的"填权"。</p></div>
+    <p class="note">除息当天股价会下调约等于分红额，所以不是"领了分红就白赚"。收息靠的是长期持有、分红年年有，以及股价之后的"填权"。</p>
+    <h3 style="margin-top:22px">红利税：拿得越久越划算</h3>
+    <div class="taxrow">${[["持股 ≤ 1 个月","20%",0.2],["1 个月 ~ 1 年","10%",0.1],["超过 1 年","免税",0]].map(([t,r,v])=>`<div class="taxc"><div class="sub">${t}</div><b>${r}</b><div class="taxbar"><i style="width:${(1-v)*100}%"></i><u style="width:${v*100}%"></u></div><div class="sub">5% 的股息率 → 到手 <b>${(5*(1-v)).toFixed(1)}%</b>${v?`，交税 <b class="bad">${(5*v).toFixed(1)}%</b>`:"，不用交税"}</div></div>`).join("")}</div>
+    <p class="note">个人持股一年以内，分红时暂不扣税，卖出时按持股期限补缴；持股超过一年免征。所以短线赚分红不划算，长期持有收息才吃得到免税。具体以券商清算为准。</p>
+  </div>
 
-  <div class="card" id="sec-11"><h2>⑪ 收息佬怎么用：五步</h2>
-    <div class="lsteps flow">
-      <a class="lstep" href="#/"><span class="circ">1</span><b>选</b><p>看「公司体检」五个灯，先排除有红灯的</p></a><div class="larrow">→</div>
-      <a class="lstep" href="#/settings"><span class="circ">2</span><b>定</b><p>设「买入要求」= 国债 + 行业溢价</p></a><div class="larrow">→</div>
-      <a class="lstep" href="#/"><span class="circ">3</span><b>买</b><p>价格偏低（达到你的要求）再分批买，别追高</p></a><div class="larrow">→</div>
-      <a class="lstep" href="#/hold"><span class="circ">4</span><b>配</b><p>在持仓页看四类风险的分布</p></a><div class="larrow">→</div>
-      <a class="lstep" href="#/hold"><span class="circ">5</span><b>持</b><p>每年收息，满一年免税，再投资</p></a></div></div>
+  <div class="card" id="sec-12"><h2>公司体检</h2>
+    <div class="hl-legend"><span><i class="hl-dot g"></i>绿：稳</span><span><i class="hl-dot y"></i>黄：留意</span><span><i class="hl-dot r"></i>红：警惕</span><span style="color:var(--mute)">五项各自评级，<b>不合并成总分</b></span></div>
+    <div class="hl-grid">
+      <div class="hl-c"><h4><i class="hl-dot g"></i>① 分红能力</h4><div class="q">分的钱，公司赚得出来吗？</div><div class="lk">看：分红率（分红 ÷ 每股收益）、经营现金流能覆盖分红几倍</div>
+        <div class="rg"><span><i class="g"></i>分红率 ≤80%，现金流 ≥1.5 倍</span><span><i class="y"></i>分红率 80~100%</span><span><i class="r"></i>分红率 &gt;100%：分的比赚的多</span></div></div>
+      <div class="hl-c"><h4><i class="hl-dot g"></i>② 盈利质量</h4><div class="q">利润是真的、稳的吗？</div><div class="lk">看：近 5 年平均 ROE、利润明显下滑（降超 10%）的次数、利润有多少变成了现金</div>
+        <div class="rg"><span><i class="g"></i>ROE ≥10%（金融 ≥9%），少下滑</span><span><i class="y"></i>ROE 6~10%，或下滑 1 次</span><span><i class="r"></i>ROE &lt;6%、下滑 ≥2 次、最近一年骤降超 30%</span></div></div>
+      <div class="hl-c"><h4><i class="hl-dot g"></i>③ 分红稳定</h4><div class="q">分红会不会被砍？</div><div class="lk">看：连续分红几年、近 5 年每股分红下降几次、最近一年是不是含特别分红</div>
+        <div class="rg"><span><i class="g"></i>连续 ≥5 年，没有下降</span><span><i class="y"></i>下降 1~2 次，或疑似特别分红</span><span><i class="r"></i>单次砍掉 1/4 以上、连续下降、连续不足 3 年</span></div></div>
+      <div class="hl-c"><h4><i class="hl-dot g"></i>④ 财务安全</h4><div class="q">欠的债多不多？</div><div class="lk">看：资产负债率。银行、保险的高负债是行业特点，这一项不看</div>
+        <div class="rg"><span><i class="g"></i>≤50%（电力、交通、公用事业 ≤60%）</span><span><i class="y"></i>≤70%（这几类 ≤75%）</span><span><i class="r"></i>超过</span></div></div>
+      <div class="hl-c wide"><h4><i class="hl-dot g"></i>⑤ 估值</h4><div class="q">现在贵不贵？（和它自己的历史比）</div><div class="lk">看：市盈率 PE（金融、周期股看市净率 PB）在自己近 5 年里排第几分位</div>
+        <div class="rg"><span><i class="g"></i>分位 ≤40%：比自己多数时候便宜</span><span><i class="y"></i>40~75%</span><span><i class="r"></i>&gt;75% 或亏损：比自己多数时候贵</span></div></div></div>
+    <div class="hl-demo"><span>试试看，分红率：<b id="hld-v">70%</b></span><input id="hld-r" type="range" min="20" max="200" value="70"><span id="hld-o"></span></div>
+    <h3>怎么用这五个灯</h3>
+    <ul style="margin:6px 0 0;padding-left:18px;font-size:14px;line-height:1.85">
+      <li><b>先看前四个</b>（分红能力、盈利质量、分红稳定、财务安全）：它们回答"这家公司值不值得持有"。有红灯，先弄明白原因再说价格。</li>
+      <li><b>估值是价格信号</b>：红灯说明现在比它自己多数时候贵，不等于公司不好。</li>
+      <li><b>灰色</b>表示不适用或数据不足（比如银行不看负债、ETF 没有公司体检），不是红灯。</li>
+      <li>灯是经验阈值，只用来筛查，不构成投资建议；经营现金流没扣资本开支，不等同自由现金流。</li></ul>
+    <div class="gact" style="margin-top:10px"><button class="btn sm" data-lgo="health">去一只股票的页面看看 →</button></div></div>
 
-  <div class="card" id="sec-faq"><h2>常见疑问与误区</h2>
-    <details><summary>分红和利息一样吗？</summary><p class="note">不一样。利息通常由合同约定，分红取决于公司当年的经营和分配决定，可能增加、减少，也可能暂停。另外股价会涨跌，总回报要把分红和价差一起看（见「③ 股息率不等于收益率」）。</p></details>
-    <details><summary>红利 ETF 和自己选股有什么区别？</summary><p class="note">ETF 是按指数规则打包的一篮子股票，能分散单只公司的风险；但不同红利指数的筛选规则、行业分布和费用都不同。买之前可以先看指数规则、主要持仓和费率，详见「⑥ 红利 ETF」。</p></details>
-    <details><summary>登记日前买入才能领分红吗？</summary><p class="note">一般来说，股权登记日收盘时持有股票，才有资格领取这次分红；除息日起股价会按分红额调整。是否值得买，仍然要看公司和价格位置，不必只为赶分红而买（见「⑩ 登记日 · 除息日」）。</p></details>
-    <details><summary>股息率越高越好？</summary><p class="note">不一定。股息率 = 分红 ÷ 股价，股价暴跌会把它推高。要看分红是不是真能持续：公司有没有赚到钱、分红率是否超过 100%。这正是「公司体检」要回答的。</p></details>
-    <details><summary>只看股息率，不看公司？</summary><p class="note">高股息的公司里有一部分是"股息陷阱":盈利在恶化，分红随后被砍。先看体检的五个灯，再看价格。</p></details>
-    <details><summary>全仓同一个行业？</summary><p class="note">同一行业的股票常一起涨跌，分红也一起受影响。按防御、金融、成长、周期分散，不同风险互相抵消。</p></details>
-    <details><summary>涨了很多再买，股息率就低了？</summary><p class="note">对。买入价越高，同样的分红对应的股息率越低。所以设「买入要求」，只在价格偏低（达到要求）时分批买。</p></details>
-    <details><summary>分红领完就赚了？</summary><p class="note">除息日股价会按分红额下调。收息的回报要看长期：分红的累计、股价的填权，以及再投资的复利。</p></details>
+  <div class="card" id="sec-13"><h2>要求股息率</h2>
+    <div class="gform"><b>买入价 = 每股分红 ÷ 要求股息率</b><em>要求股息率由三层叠加，每一层都可以改</em></div>
+    ${reqLab("l")}
+    <div class="lhint">✎ 虚线下的数字都能直接点开修改，下面的买入价会跟着变。</div>
+    <div class="rwhat"><span>假设每年每股分红 <input id="l-d" type="number" step="0.1" value="2"> 元</span><span>现价 <b id="l-pv">50</b> 元（拖动）</span><input id="l-pr" type="range" min="16" max="100" step="0.5" value="50"></div>
+    <div class="pscale" id="l-sc"><div class="z z1" id="l-z1">低位</div><div class="z z2" id="l-z2">偏低</div><div class="z z3" id="l-z3">还没到买点</div><div class="pin" id="l-pin"></div><div class="tk l" id="l-t1"></div><div class="tk r" id="l-t2"></div></div>
+    <div class="pverdict" id="l-vd"></div>
+    <h3>要求每提高 1 个点，买入价就低一截</h3>
+    <div class="rbars" id="l-rb"></div>
+    <h3>三层，越往下越细，也越优先</h3>
+    <div class="glayers">
+      <button class="lay" data-lgo="rf"><em>①</em><span><b>国债收益率</b>全局基准，所有股票共用。利率明显变了就改一下</span><i>去改 →</i></button>
+      <button class="lay" data-lgo="prem"><em>②</em><span><b>行业溢价</b>每个行业在国债之上多要多少，风险越高要得越多</span><i>去改 →</i></button>
+      <button class="lay" data-lgo="ov"><em>③</em><span><b>个股单独设定</b>直接给某只股票填要求股息率，覆盖前两层</span><i>去看 →</i></button></div>
+    <h3>怎么定才合理</h3>
+    <ul style="margin:6px 0 0;padding-left:18px;font-size:14px;line-height:1.85">
+      <li><b>分红稳、看得清</b>的公司（收费类、公用事业类）：对分红有把握，要求可以低一点。</li>
+      <li><b>分红随景气波动</b>，或靠单一产品的公司：不确定性高，要求高一点；周期股收息佬会用近 3 年平均分红来算。</li>
+      <li><b>分红率已经很高、还在上升，或利润在下滑</b>：当前的高股息可能不可持续，收息佬会给「个股追加」，你也可以自己加。</li>
+      <li>价格进了「低位」，还会用<b>三重确认</b>再看一遍：股息率比国债高 2.75 个点以上、在自身近 5 年较高水平、分红质量没红旗；没通过的会写「低位待确认」。</li></ul>
+    <p class="note">默认的行业溢价和个股追加是经验假设：参考「要求回报 = 国债 + 风险溢价 − 增长」和红利股整体比国债高约 2.5~3 个点的水平，不是标准答案。你的判断比默认值重要，可以随时改。 <a href="#/settings">去设置 →</a></p></div>
+
+  <div class="card" id="sec-faq"><h2>常见疑问</h2>
+    <div class="faqi"><h4>分红和利息一样吗？</h4><p class="note">不一样。利息通常由合同约定，分红取决于公司当年的经营和分配决定，可能增加、减少，也可能暂停。另外股价会涨跌，总回报要把分红和价差一起看（见「股息率与总回报」）。</p></div>
+    <div class="faqi"><h4>红利 ETF 和自己选股有什么区别？</h4><p class="note">ETF 是按指数规则打包的一篮子股票，能分散单只公司的风险；但不同红利指数的筛选规则、行业分布和费用都不同。买之前可以先看指数规则、主要持仓和费率，详见「红利 ETF」。</p></div>
+    <div class="faqi"><h4>登记日前买入才能领分红吗？</h4><p class="note">一般来说，股权登记日收盘时持有股票，才有资格领取这次分红；除息日起股价会按分红额调整。是否值得买，仍然要看公司和价格位置，不必只为赶分红而买（见「领分红与红利税」）。</p></div>
+    <div class="faqi"><h4>股息率越高越好？</h4><p class="note">不一定。股息率 = 分红 ÷ 股价，股价暴跌会把它推高。要看分红是不是真能持续：公司有没有赚到钱、分红率是否超过 100%。这正是「公司体检」要回答的。</p></div>
+    <div class="faqi"><h4>只看股息率，不看公司？</h4><p class="note">高股息的公司里有一部分是"股息陷阱":盈利在恶化，分红随后被砍。先看体检的五个灯，再看价格。</p></div>
+    <div class="faqi"><h4>全仓同一个行业？</h4><p class="note">同一行业的股票常一起涨跌，分红也一起受影响。按防御、金融、成长、周期分散，不同风险互相抵消。</p></div>
+    <div class="faqi"><h4>涨了很多再买，股息率就低了？</h4><p class="note">对。买入价越高，同样的分红对应的股息率越低。所以设「买入要求」，只在价格偏低（达到要求）时分批买。</p></div>
+    <div class="faqi"><h4>分红领完就赚了？</h4><p class="note">除息日股价会按分红额下调。收息的回报要看长期：分红的累计、股价的填权，以及再投资的复利。</p></div>
   </div>`;
 
   // 结构：核心 → 目录 → 小节（分四组）；每节 = 编号 + 标题 + 一句话结论 + 内容
-  const TK={"sec-1":"买入 → 年年分红 → 再投资；股息率 = 每股分红 ÷ 股价","sec-2":"分红不变，股价越低股息率越高；但暴跌常常是风险信号","sec-3":"总回报 = 分红 + 价差，股息率只是其中一半","sec-4":"要求的回报 = 国债 + 风险补偿，风险越高要求越高","sec-5":"防御、金融、成长、周期：风险不同，各司其职","sec-6":"一篮子红利股装进一只基金：省心，但要看持仓和费用","sec-7":"分红再投资，时间越长差距越大","sec-8":"拖动看看，多久能靠股息覆盖开销","sec-9":"持股满一年免红利税，不满一年卖出要补税","sec-10":"登记日收盘时持有才能领分红；除息日股价按分红下调","sec-11":"选、定、买、配、持：五步用法","sec-faq":"新手最常问的几个问题"};
-  const GROUPS_L=[["读懂股息",["sec-1","sec-2","sec-3"]],["风险与资产",["sec-4","sec-5","sec-6"]],["收益与规则",["sec-7","sec-8","sec-9","sec-10"]],["动手用起来",["sec-11","sec-faq"]]];
+  const TK={"sec-1":"分红年年收，再投资让它越滚越多：同样的钱，差在能不能让分红继续生息","sec-2":"股价一跌，股息率就变高；但总回报 = 分红 + 价差，股息率只是其中一半","sec-12":"先看公司：五个灯各看一件事，红灯先弄明白","sec-5":"防御、金融、成长、周期：风险不同，各司其职","sec-4":"要求的回报 = 国债 + 风险补偿，风险越高，要求越高","sec-13":"要求股息率 = 国债 + 行业溢价（+ 个股追加）；买入价 = 分红 ÷ 要求","sec-9":"登记日收盘时持有才能领分红；持股满一年免红利税，不满一年卖出要补税","sec-6":"一篮子红利股装进一只基金：省心，但要看持仓和费用","sec-8":"拖动看看，多久能靠股息覆盖开销","sec-faq":"新手最常问的几个问题"};
+  const GROUPS_L=[["认识红利",["sec-0","sec-1","sec-2"]],["选好公司",["sec-12","sec-5"]],["买在好位置",["sec-4","sec-13"]],["规则与组合",["sec-9","sec-6","sec-8"]],["答疑",["sec-faq"]]];
+  const NO=id=>String(GROUPS_L.flatMap(g=>g[1]).indexOf(id)+1);
   const TITLE={};
-  Object.keys(TK).forEach(id=>{const c=document.getElementById(id); if(!c) return; const h=c.querySelector("h2"); const t=h.textContent.replace(/^[①②③④⑤⑥⑦⑧⑨⑩⑪]\s*/,"").split(/[:：]/)[0].trim(); TITLE[id]=t;
-    const no=id==="sec-faq"?'<svg viewBox="0 0 24 24" width="100%" height="100%"><text x="12" y="17.2" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" font-family="-apple-system,sans-serif">?</text></svg>':id.slice(4); c.classList.add("sec");
+  Object.keys(TK).forEach(id=>{const c=document.getElementById(id); if(!c) return; const h=c.querySelector("h2"); const t=h.textContent.replace(/^[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬]\s*/,"").split(/[:：]/)[0].trim(); TITLE[id]=t;
+    const no=NO(id); c.classList.add("sec");
     const hd=document.createElement("div"); hd.className="sec-hd"; hd.innerHTML=`<span class="snum${no.length>1&&no.length<4?" n2":""}">${no}</span><div><h2>${t}</h2><p class="lead">${TK[id]}</p></div>`; h.replaceWith(hd)});
-  GROUPS_L.forEach(([t,ids],gi)=>{const f=document.getElementById(ids[0]); if(f) f.insertAdjacentHTML("beforebegin",`<div class="grp">${"一二三四"[gi]} · ${t}</div>`)});
-  document.getElementById("sec-0").insertAdjacentHTML("afterend",`<div class="card toc" id="toc"><h2 style="margin-bottom:12px">目录</h2><div class="tocg">${GROUPS_L.map(([t,ids])=>`<div><div class="tgl">${t}</div>${ids.map(id=>`<a class="tl" href="#/learn" data-go="${id}"><b${id.length>5&&id!=="sec-faq"?' class="n2"':""}>${id==="sec-faq"?'<svg viewBox="0 0 24 24" width="14" height="14"><text x="12" y="17.2" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" font-family="-apple-system,sans-serif">?</text></svg>':id.slice(4)}</b>${TITLE[id]}</a>`).join("")}</div>`).join("")}</div></div>`);
-  $("#main .ph").insertAdjacentHTML("afterend",`<button class="totop" id="totop" title="回到顶部">↑ 顶部</button>`);
-  document.querySelectorAll("[data-go]").forEach(a=>a.onclick=e=>{e.preventDefault(); const t=document.getElementById(a.dataset.go); if(t) t.scrollIntoView({behavior:"smooth",block:"start"})});
-  $("#totop").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+  TITLE["sec-0"]="红利投资的核心";
+  const LESSONS=GROUPS_L.flatMap(g=>g[1]), S=state.holdings.settings; S.learned=Array.isArray(S.learned)?S.learned.filter(id=>LESSONS.includes(id)):[];
+  const noOf=NO;
+  $("#main .ph").insertAdjacentHTML("afterend",`<div class="card toc" id="toc">
+    <div class="tchead"><div class="tcur"><span id="tcur-t"></span><small id="lprog-t"></small></div>
+      <div class="tdots">${GROUPS_L.map(([t,ids])=>`<span class="tdg">${ids.map(id=>`<a href="#/learn" data-lesson="${id}" title="${noOf(id)} ${TITLE[id]}">${noOf(id)}</a>`).join("")}</span>`).join("")}</div>
+      <button class="btn sm" id="tbtn" type="button">目录 ▾</button></div>
+    <div class="tocg" hidden>${GROUPS_L.map(([t,ids])=>`<div class="tgrp"><div class="tgl">${t}</div><div class="tcl">${ids.map(id=>`<a class="tl" href="#/learn" data-lesson="${id}"><b>${noOf(id)}</b>${TITLE[id]}</a>`).join("")}</div></div>`).join("")}</div></div>`);
+  $("#main").insertAdjacentHTML("beforeend",`<div class="lnav" id="lnav"></div><div class="card lcongrat" id="lcongrat" hidden></div>`);
+  if(!state.lesson||!(LESSONS.includes(state.lesson)||state.lesson==="done")) state.lesson=LESSONS.find(id=>!S.learned.includes(id))||"done";
+  const save=()=>{try{saveHoldings()}catch(e){}};
+  const paint=(scroll)=>{
+    const cur=state.lesson, done=cur==="done", ix=LESSONS.indexOf(cur);
+    LESSONS.forEach(id=>{const e=document.getElementById(id); if(e) e.style.display=id===cur?"":"none"});
+    document.querySelectorAll("#toc a[data-lesson]").forEach(a=>{a.classList.toggle("on",a.dataset.lesson===cur); a.classList.toggle("done",S.learned.includes(a.dataset.lesson))});
+    const n=S.learned.length; $("#lprog-t").textContent=`已学 ${n} / ${LESSONS.length} 课`; $("#tcur-t").textContent=done?"全部学完":`第 ${ix+1} 课 · ${TITLE[cur]}`;
+    const cg=$("#lcongrat"), nav=$("#lnav"); cg.hidden=!done; nav.hidden=done;
+    if(done){cg.innerHTML=`<div class="star">★</div><div class="lc-t">太棒了，${LESSONS.length} 课全部学完！</div><div class="sub">你已经掌握了红利投资最关键的几件事：</div><ul><li>看懂分红、再投资和股息率，知道价格越低、股息率越高</li><li>读懂公司体检的五个灯，先看公司再看价格</li><li>会设自己的要求股息率，算出买入价</li><li>知道登记日、红利税和红利 ETF 这些规则与工具</li></ul><div class="sub">觉得哪里模糊，随时可以再学一次，或者点上面的课程单独回看。</div><div class="acts"><button class="btn primary" id="lagain">再学一次</button><button class="btn" id="lpool">去股票池</button><button class="btn" id="lset">去调我的要求</button></div>`;
+      $("#lagain").onclick=()=>{S.learned=[]; save(); state.lesson=LESSONS[0]; paint(true)}; $("#lpool").onclick=()=>goto("#/"); $("#lset").onclick=()=>GUIDE_GO.rf()}
+    else{const last=ix===LESSONS.length-1; nav.innerHTML=`${ix>0?'<button class="btn" id="lprev">← 上一课</button>':"<span></span>"}<button class="btn primary" id="lnext">${last?"学完了 ✓":S.learned.includes(cur)?"下一课 →":"学完了，下一课 →"}</button>`;
+      if(!last) nav.insertAdjacentHTML("afterbegin",`<div class="lnx">下一课：<b>${TITLE[LESSONS[ix+1]]}</b>${TK[LESSONS[ix+1]]?"——"+TK[LESSONS[ix+1]]:""}</div>`);
+      if(ix>0) $("#lprev").onclick=()=>{state.lesson=LESSONS[ix-1]; paint(true)};
+      $("#lnext").onclick=()=>{if(!S.learned.includes(cur)){S.learned.push(cur); save()} state.lesson=S.learned.length>=LESSONS.length?"done":(last?LESSONS.find(id=>!S.learned.includes(id)):LESSONS[ix+1]); paint(true); if(state.lesson==="done") confetti()}}
+    if(scroll){const t=done?cg:document.getElementById(cur); const y=(t.getBoundingClientRect().top||0)+window.scrollY-70; window.scrollTo({top:Math.min(y,(document.getElementById("toc").getBoundingClientRect().bottom+window.scrollY)-70),behavior:"smooth"})}};
+  const tg=document.querySelector("#toc .tocg"), tb=$("#tbtn"); tb.onclick=()=>{tg.hidden=!tg.hidden; tb.textContent=tg.hidden?"目录 ▾":"收起 ▴"};
+  document.querySelectorAll("#toc a[data-lesson]").forEach(a=>a.onclick=e=>{e.preventDefault(); state.lesson=a.dataset.lesson; tg.hidden=true; tb.textContent="目录 ▾"; paint(true)});
+  document.querySelectorAll("[data-lesson-go]").forEach(a=>a.onclick=e=>{e.preventDefault(); state.lesson=a.dataset.lessonGo; paint(true)});
+  paint(false);
+  bindReqLab(document.getElementById("sec-13"),"l"); bindHealthDemo(document.getElementById("sec-12")); document.querySelectorAll("#sec-12 [data-lgo],#sec-13 [data-lgo]").forEach(b=>b.onclick=()=>GUIDE_GO[b.dataset.lgo]());
   // 核心：同一家公司，买入价格 → 股息率
   (()=>{const hp=$("#hp"), calc=()=>{paintR(hp); const p=+hp.value, y=5/p; $("#hp-v").textContent=p; $("#hy").textContent=(y*100).toFixed(1)+"%"; $("#hn").textContent=Math.round(10000*y)+" 元";
     $("#hmsg").innerHTML=p<=85?`<b>很便宜，股息率 ${(y*100).toFixed(1)}%</b>。但先问一句：为什么这么便宜？好公司短期被错杀是机会，公司本身出了问题就是陷阱，这时要回头看「公司体检」。`
@@ -1474,6 +1793,7 @@ function renderSettings(){
   const ovn=()=>Object.keys(S.overrides||{}).length, th=getTheme();
   $("#main").innerHTML=`
   <div class="ph"><h2>设置</h2><span class="sub">外观 · 数据刷新 · 买入要求 · 个股单独设定</span></div>
+  <div class="card"><h2>使用指引</h2><div class="form"><button class="btn" id="guidebtn">再看一遍</button><span class="sub">主要功能，以及怎么自定义股息率要求</span></div></div>
   <div class="card"><h2>外观</h2>
     <div class="seg" id="themeseg">${[["auto","跟随系统"],["light","浅色"],["dark","深色"]].map(([k,t])=>`<button data-th="${k}" class="${th===k?"on":""}">${t}</button>`).join("")}</div>
     <p class="note">只影响当前浏览器。「跟随系统」会随电脑的深浅色自动切换。</p></div>
@@ -1508,7 +1828,7 @@ function renderSettings(){
   <div class="card"><h2>买入要求 = 10 年期国债收益率 + 行业溢价</h2>
     <div class="prem-list">
       <div class="prow base"><span class="pn">10 年期国债收益率<em>基准利率，需手动更新</em></span><span class="pv"><input id="rf" type="number" step="0.05" inputmode="decimal" value="${c.rf}"><b class="unit">%</b></span></div>
-      ${[...IND_GROUPS.map(([g])=>g),"其他"].map(g=>{const L=inds.filter(i=>grpOf(i)===g); return L.length?`<div class="pgrp">${g}</div>`+L.map(i=>`<label class="prow"><span class="pn">${i}${CYCLICAL.has(i)?'<em>周期股 · 3年平均分红</em>':""}</span><span class="pv"><input type="number" step="0.1" inputmode="decimal" data-prem="${i}" value="${premOf(i)}"><span class="res">→ <b>${(c.rf+premOf(i)).toFixed(2).replace(/0$/,"")}%</b></span></span></label>`).join(""):""}).join("")}
+      ${[...IND_GROUPS.map(([g])=>g),"其他"].map(g=>{const L=inds.filter(i=>grpOf(i)===g); return L.length?`<div class="pgrp">${g}</div>`+L.map(i=>`<label class="prow"><span class="pn">${i}${CYCLICAL.has(i)?'<em>周期股 · 3年平均分红</em>':""}${EMPIRICAL.has(i)?'<em title="样本少，依据偏弱，是经验值">经验值</em>':""}</span><span class="pv"><input type="number" step="0.1" inputmode="decimal" data-prem="${i}" value="${premOf(i)}"><span class="res">→ <b>${(c.rf+premOf(i)).toFixed(2).replace(/0$/,"")}%</b></span></span></label>`).join(""):""}).join("")}
     </div>
     <div class="form" style="margin-top:12px"><button class="btn" id="resetcfg">恢复默认</button></div>
     <p class="note">参考：2026 年 10 月中旬 10 年期国债活跃券约 1.64%~1.66%（财联社、Trading Economics）。该值不会自动更新，利率明显变动时请手动改。</p>
@@ -1517,7 +1837,7 @@ function renderSettings(){
     <p class="note" style="margin:0 0 10px">给某只股票设一个自己的「要求股息率」，覆盖上面的国债+行业溢价。留空 = 用默认。已单独设定 <b id="ovcnt">${ovn()}</b> 只。</p>
     <div class="filters"><input id="sq" style="width:230px" placeholder="搜索 名称 / 代码 / 拼音"><button class="btn sm" id="ovall">清除全部单独设定</button></div>
     <div class="tablewrap"><table class="ovt"><thead><tr><th class="l">名称</th><th>行业</th><th>默认要求</th><th>单独设定 %</th><th>生效要求</th><th>买入价 ≤</th><th></th></tr></thead><tbody id="ovb"></tbody></table></div></div>
-  <div class="card about"><img src="/logo-full.webp" alt="收息佬"><div class="abt">
+  <div class="card about"><img class="lgl" src="/logo-full.webp" alt="收息佬"><img class="lgd" src="/logo-full-dark.webp" alt=""><div class="abt">
     <h2>关于收息佬</h2><p>股息攒得好，退休晚不了。</p>
     <p class="note">一个做红利研究的本地小工具（A 股、ETF、B 股、港股）：看股息率、看买入价、看公司体检，再慢慢攒。数据来源东方财富、新浪财经，仅供研究，不构成投资建议。</p>
     <div class="abver"><span>当前版本 <b id="curver">v?</b></span><button class="btn sm" id="chkupd" type="button">检查更新</button><span class="sub" id="updmsg"></span></div>
@@ -1563,7 +1883,7 @@ function renderSettings(){
   // 外观
   document.querySelectorAll("#themeseg button").forEach(b=>b.onclick=()=>{setTheme(b.dataset.th); document.querySelectorAll("#themeseg button").forEach(x=>x.classList.toggle("on",x===b))});
   // 刷新
-  $("#refresh").onclick=startRefresh; paintRefresh();
+  $("#refresh").onclick=startRefresh; paintRefresh(); $("#guidebtn").onclick=()=>showGuide(0);
   let found=null; const asMsg=(t,bad)=>{const m=$("#as-msg"); m.textContent=t; m.style.color=bad?"var(--bad)":""};
   const look=async()=>{ const code=$("#as-code").value.trim(); found=null; $("#as-res").hidden=true;
     if(!/^\d{5,6}$/.test(code)) return asMsg("代码格式不对：A 股、B 股、ETF 填 6 位，港股填 5 位",1);
@@ -1609,7 +1929,7 @@ function renderSettings(){
   $("#resetcfg").onclick=()=>{delete S.rf; delete S.premiums; keep()};
   // 个股单独设定
   const tb=$("#ovb"), fmtB=s=>s.zones?num(s.zones.buy):"–";
-  const rowHtml=s=>{const ov=(S.overrides||{})[s.code], def=c.rf+premOf(s.industry,c);
+  const rowHtml=s=>{const ov=(S.overrides||{})[s.code], def=c.rf+premOf(s.industry,c)+addOf(s);
     return `<tr data-code="${s.code}"><td class="l"><b>${s.name}</b><div class="sub">${s.code}</div></td><td>${s.industry}</td><td>${def.toFixed(2)}%</td>
     <td><input type="number" step="0.1" min="0.5" max="15" class="ovin" data-code="${s.code}" value="${ov??""}" placeholder="默认"></td>
     <td class="eff"><b>${((s.floor||0)*100).toFixed(2)}%</b></td><td class="eb">${fmtB(s)}</td><td>${ov!=null?`<button class="btn sm ovclr" data-code="${s.code}">清除</button>`:""}</td></tr>`};
@@ -1648,7 +1968,7 @@ async function load(){
   if(!state.viewInit){state.f.st=defaultView(); state.viewInit=true}
   $("#updated").textContent=state.pool.updated?"数据更新于 "+state.pool.updated:"尚无数据，请到「设置」刷新";
 }
-load().then(async()=>{route(); const s=await api("/api/status"); if(s.running)poll()});
+load().then(async()=>{route(); if(!state.holdings.settings.guideHide&&!state.guideShown){state.guideShown=true; showGuide()} const s=await api("/api/status"); if(s.running)poll()});
 </script>
 </body>
 </html>

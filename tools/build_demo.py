@@ -31,6 +31,7 @@ shutil.copy(ROOT / "tools/demo/demo.js", out / "demo.js")
 # 页面里的绝对路径(/logo.png 等)改成相对路径,放在 github.io/<仓库名>/ 子目录下也能用
 html = (out / "index.html").read_text(encoding="utf-8")
 html = re.sub(r'(href|src)="/(?!/)', r'\1="./', html)
+html = re.sub(r'srcset="([^"]*)"', lambda m: 'srcset="' + re.sub(r'(^|,\s*)/(?!/)', r'\1./', m.group(1)) + '"', html)   # 页头 logo 的 1x/2x/3x 图
 html = html.replace("<head>", '<head>\n<script src="./demo.js"></script>', 1)
 (out / "index.html").write_text(html, encoding="utf-8")
 m = (out / "manifest.webmanifest")

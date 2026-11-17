@@ -33,10 +33,26 @@ android {
         }
     }
 
+    // 固定签名:云端构建从 GitHub 加密变量里读密钥(环境变量 SHOUXI_KEYSTORE 等);没有这些变量(比如别人自己构建)就用临时的调试签名
+    signingConfigs {
+        shouxi {
+            if (System.getenv("SHOUXI_KEYSTORE")) {
+                storeFile file(System.getenv("SHOUXI_KEYSTORE"))
+                storeType "pkcs12"
+                storePassword System.getenv("SHOUXI_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("SHOUXI_KEY_ALIAS")
+                keyPassword System.getenv("SHOUXI_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
+        debug {
+            if (System.getenv("SHOUXI_KEYSTORE")) signingConfig signingConfigs.shouxi
+        }
         release {
             minifyEnabled false
-            signingConfig signingConfigs.debug
+            signingConfig System.getenv("SHOUXI_KEYSTORE") ? signingConfigs.shouxi : signingConfigs.debug
         }
     }
     compileOptions {

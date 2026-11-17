@@ -1,8 +1,8 @@
 name: build-android-standalone
 on:
   workflow_dispatch:
-  push:
-    tags: ["v*"]
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,6 +18,25 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.7"
+      - name: Decode signing key (only when the secrets exist)
+        env:
+          KS_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          KS_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KS_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ -n "$KS_B64" ]; then
+            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/shouxi.p12"
+            {
+              echo "SHOUXI_KEYSTORE=$RUNNER_TEMP/shouxi.p12"
+              echo "SHOUXI_KEYSTORE_PASSWORD=$KS_PASS"
+              echo "SHOUXI_KEY_ALIAS=$KS_ALIAS"
+              echo "SHOUXI_KEY_PASSWORD=$KEY_PASS"
+            } >> "$GITHUB_ENV"
+            echo "Using the fixed signing key"
+          else
+            echo "No signing secrets: APK will use a temporary debug key"
+          fi
       - name: Prepare sources and assets
         run: bash android-standalone/scripts/prepare.sh
       - name: Build arm64 APK (for phones)
@@ -38,6 +57,15 @@ jobs:
           name: standalone-apks
           path: dist/*.apk
 
+      - name: Attach to the release (tag builds only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"; VER="${TAG#v}"
+          cp "dist/shouxi-standalone-$VER-arm64.apk" "Shouxi-$VER.apk"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "收息佬 $VER" --notes "构建产物(私有仓库,发布前由 tools/publish_release.py 取用)" || true
+          gh release upload "$TAG" "Shouxi-$VER.apk" --clobber
   emulator:
     needs: build
     runs-on: ubuntu-latest

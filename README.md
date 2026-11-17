@@ -147,6 +147,7 @@ python tools/build_demo.py site   # 生成纯静态的 site/ 目录，可部署�
 | `packaging/` | 打包:Mac(菜单栏小程序、`build.sh`)、Windows(`build_win.ps1`)、图标和 logo 生成(`make_brand.py`) |
 | `tools/` | 开发辅助:后端冒烟测试 `smoke_test.py`、在线演示生成 `build_demo.py`、同步到公开仓库 `sync_public.py` |
 | `android-standalone/` | 安卓独立版(手机里自己跑服务) |
+| `skills/deploy-shouxi/` | 「部署收息佬」Skill(`SKILL.md`):让 Agent 帮用户在本机装好并启动收息佬 |
 | `app.py` | 本地服务(局域网可访问),持仓存到 `holdings.json`(你的私人数据,注意备份),访问密码存 `access.json` |
 | `web/index.html` | 前端,单文件、无外部依赖 |
 | `docs/` | 项目交接文档(架构、数据、算法、前端、发布、决策准则),从 `docs/00_交接说明.md` 读起 |

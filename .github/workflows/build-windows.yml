@@ -1,8 +1,8 @@
 name: build-windows
 on:
   workflow_dispatch:
-  push:
-    tags: ["v*"]
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: windows-latest
@@ -22,3 +22,13 @@ jobs:
         with:
           name: 收息佬-win
           path: packaging/build/收息佬-win-*.zip
+      - name: Attach to the release (tag builds only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"; VER="${TAG#v}"
+          cp packaging/build/收息佬-win-*.zip "Shouxi-win-$VER.zip"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "收息佬 $VER" --notes "构建产物(私有仓库,发布前由 tools/publish_release.py 取用)" || true
+          gh release upload "$TAG" "Shouxi-win-$VER.zip" --clobber

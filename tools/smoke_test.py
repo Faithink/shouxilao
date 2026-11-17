@@ -132,6 +132,21 @@ finally:
     c.close()
 req("PUT", "/api/holdings", {"settings": {"capital": 0, "maxPct": 15}, "lots": []})
 
+# ---------- 自动备份、实收分红 ----------
+s, h, d = req("PUT", "/api/holdings", {**good, "divs": [{"id": "d1", "code": "600941", "date": "2025-07-10", "amount": 100}]})
+check("保存带实收分红的持仓", s == 200, d[:60])
+s, h, d = req("PUT", "/api/holdings", {**good, "divs": "x"})
+check("拒绝 divs 不是列表", s == 400, s)
+s, h, d = req("GET", "/api/backups")
+bk = js(d)
+check("保存后出现自动备份", s == 200 and len(bk) >= 1 and bk[0]["name"].startswith("holdings-"), bk[:1])
+s, h, d = req("POST", "/api/backups/restore", {"name": bk[0]["name"]})
+check("从自动备份恢复", s == 200, s)
+for nm in ("../app.py", "holdings-1.json", "x"):
+    s, h, d = req("POST", "/api/backups/restore", {"name": nm})
+    check("恢复:拒绝非法文件名 " + nm, s == 404, s)
+req("PUT", "/api/holdings", good)
+
 # ---------- 个股管理接口 ----------
 for nm, body, want in (("坏 JSON", b"xx", 400), ("非法代码", {"code": "12", "industry": "银行"}, 400), ("没有行业", {"code": "600941", "industry": ""}, 400),
                        ("已在池里", {"code": "600941", "name": "x", "industry": "通信"}, 409)):

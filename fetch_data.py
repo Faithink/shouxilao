@@ -16,6 +16,7 @@ import json
 import math
 import os
 import sys
+import time
 from datetime import date, datetime, timedelta
 from statistics import fmean, median
 
@@ -561,8 +562,11 @@ def compute(code, name, industry, today):
     }
 
 
-def run(only=None, log=print):
-    """刷新股票池(only=代码集合时只刷新这些)。进度写到 status.json。"""
+def run(only=None, log=print, mode="full"):
+    """刷新股票池(only=代码集合时只刷新这些)。进度写到 status.json。
+    mode="full":分红、财务、价格全部重新联网取;mode="quick":只联网更新价格,分红和财务用 7 天内的本地缓存(快很多)。
+    刷新完一遍后,价格日期落后的股票(接口限流、断连造成的)等一会儿再补刷一轮。"""
+    datasrc.SLOW_TTL = 7 * 86400 if mode == "quick" else 0
     today = get_today()
     only = set(only or [])
     DATA.mkdir(parents=True, exist_ok=True)
@@ -580,6 +584,23 @@ def run(only=None, log=print):
         except Exception as e:
             errors[r["code"]] = str(e)[:120]
             log(f"[{i}/{len(todo)}] {r['code']} {r['name']} FAIL {e}")
+    # 补刷:接口限流/断连时,个别股票会沿用旧价格。刷新一遍后,把价格日期明显落后的挑出来,歇一会儿再取一次
+    dates = sorted(v.get("date") or "" for v in result.values())
+    latest = dates[-1] if dates else ""
+    if latest:
+        lim = (date.fromisoformat(latest) - timedelta(days=3)).isoformat()
+        stale = [r for r in todo if (result.get(r["code"], {}).get("date") or "") < lim]
+        if stale and len(stale) <= 80:
+            log(f"补刷 {len(stale)} 只价格落后的股票,先歇 40 秒")
+            write_status(running=True, done=len(todo), total=len(todo), current="补刷落后的股票", errors=errors)
+            time.sleep(40)
+            for r in stale:
+                try:
+                    result[r["code"]] = compute(r["code"], r["name"], r["industry"], today)
+                    errors.pop(r["code"], None)
+                    log(f"补刷 {r['code']} {r['name']} ok")
+                except Exception as e:
+                    errors[r["code"]] = str(e)[:120]
     order = [r["code"] for r in rows]
     stocks = [result[c] for c in order if c in result]
     pool_file.write_text(json.dumps({"updated": datetime.now().strftime("%Y-%m-%d %H:%M"), "stocks": stocks},

@@ -254,8 +254,13 @@ a.lstep:hover{outline:2px solid var(--accent)}
 .tocg a.tl.on{color:var(--accent);font-weight:700}.tocg a.tl.on b{background:var(--accent);color:var(--accent-ink)}.tocg a.tl{padding:7px 8px;margin:0 -8px;border-radius:10px;line-height:1.35}.tocg a.tl:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}.tocg a.tl.on{background:color-mix(in srgb,var(--accent) 12%,transparent)}.tocg a.tl b,.tocg a.tl b.n2{width:26px;height:26px;border-radius:50%;font-size:12px}.tocg a.tl.done::after{content:"✓";flex:none;margin-left:2px;color:var(--accent);font-size:13px;font-weight:700}.tocg a.tl.done:not(.on){color:var(--mute)}.tocg a.tl.done b{background:var(--seg);color:var(--mute)}
 .lnav[hidden],.lcongrat[hidden]{display:none!important}.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin:14px 0 4px}.lnav .lnx{flex:0 0 100%;font-size:13px;color:var(--mute);line-height:1.6}.lnav .lnx b{color:var(--ink)}.lnav .btn{padding:10px 18px}
 .lcongrat{text-align:center;padding:34px 22px}.lcongrat .lc-t{font-size:22px;font-weight:700;margin:6px 0 8px}.lcongrat ul{display:inline-block;text-align:left;margin:10px 0;padding-left:18px;font-size:14px;line-height:1.9}.lcongrat .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}.lcongrat .star{font-size:40px;color:var(--accent);line-height:1}
-.greq.edit i{padding:8px 10px}.greq.edit .ie{display:inline-flex;align-items:baseline;gap:2px}.greq.edit input{width:3.6em;text-align:center;border:0;border-bottom:2px dashed currentColor;background:transparent;color:inherit;font-family:var(--serif);font-size:20px;font-weight:700;padding:0;border-radius:0;-moz-appearance:textfield}.greq.edit input:focus{outline:0;border-bottom-style:solid}.greq.edit .ie span{font-size:14px;font-weight:700}.greq.edit .t b{font-size:20px}
+.greq.edit i{padding:8px 10px}.greq.edit .ie{display:inline-flex;align-items:baseline;gap:2px}.greq.edit input{width:3.6em;text-align:center;border:0;border-bottom:2px dashed currentColor;background:transparent;color:inherit;font-family:var(--serif);font-size:20px;font-weight:700;padding:0;border-radius:0;-moz-appearance:textfield}.greq.edit input:focus{outline:0;border-bottom-style:solid}.greq.edit .ie span{font-size:14px;font-weight:700}.greq.edit .t b{font-size:20px}@media(max-width:480px){.greq.edit input{width:2.5em;font-size:16px}.greq.edit i{padding:6px 7px}.greq.edit .ie span{font-size:12px}.greq.edit .t b{font-size:16px}.greq.edit .t{min-width:58px}.greq{gap:3px}}
 .lhint{font-size:12.5px;color:var(--mute);margin:4px 0 0}
+.actm{margin-left:2px;font-size:10px;color:var(--accent);font-weight:700;vertical-align:super}
+.bkrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:13.5px}.bkrow:first-child{border-top:0}
+.rres{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:14px}.rres input{width:72px}.rres .rpill{flex:1;min-width:104px;background:var(--seg);border-radius:10px;padding:6px 12px;display:flex;flex-direction:column;line-height:1.3}.rres .rpill span{font-size:12px;color:var(--mute)}.rres .rpill b{font-family:var(--serif);font-size:20px}
+.comm{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.comm .cqr{width:150px;height:150px;border-radius:12px;border:1px solid var(--line);background:#fff;object-fit:contain;padding:0}.comm .ct{flex:1;min-width:200px;display:flex;flex-direction:column;gap:8px}.comm .ct b{font-size:16px}.comm .ct p{margin:0;font-size:13.5px;line-height:1.7;color:var(--mute)}.comm .wid{display:flex;align-items:center;gap:8px;font-size:14px}.comm .wid b{font-family:var(--serif);font-size:18px}.comm.noqr .ct{min-width:0}
+@media(max-width:560px){.comm{flex-direction:column;align-items:center;text-align:center}.comm .wid{justify-content:center}}
 .rwhat{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:16px;font-size:14px}.rwhat input[type=number]{width:70px}.rwhat input[type=range]{flex:1;min-width:140px}
 .pscale{position:relative;margin:34px 6px 38px;height:26px}.pscale .z{position:absolute;top:0;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;overflow:hidden;white-space:nowrap}.pscale .z1{left:0;background:var(--zb0);color:#04382a;border-radius:6px 0 0 6px}.pscale .z2{background:var(--zb1);color:#173d0d}.pscale .z3{right:0;background:var(--seg);color:var(--mute);border-radius:0 6px 6px 0}
 .pscale .pin{position:absolute;top:-30px;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:2px 9px;border-radius:8px;font-size:12px;font-weight:700;white-space:nowrap}.pscale .pin::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-top-color:var(--ink);border-bottom:0}
@@ -308,6 +313,8 @@ a.lstep:hover{outline:2px solid var(--accent)}
 .chipline{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}.chipline span{font-size:11px;padding:1px 7px;border-radius:99px;background:var(--none-bg);color:var(--mute)}
 .mixrow{display:flex;align-items:center;gap:10px;margin:6px 0}.mn{width:52px;font-size:13px;font-weight:600}.mixrow .stackbar{flex:1;margin:0}
 .stackbar.thin{height:26px}
+@media(max-width:900px){.g3>.card.kpi:last-child:nth-child(odd){grid-column:1/-1}}
+.ovall .ovh{margin:0;font-size:16px}.ovall .ovh .sub{font-weight:400;font-size:13px;margin-left:6px}.ovbar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--seg)}.ovbar i{display:block;height:100%}#main.priv-on .ovbar{display:none}
 .mksec{margin:22px 0 10px;font-size:17px}.mksec .sub{font-weight:400;font-size:13px;margin-left:6px}
 .taxrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .taxc{background:var(--none-bg);border-radius:12px;padding:12px 14px}.taxc>b{display:block;font-size:26px;margin:2px 0 8px}
@@ -443,6 +450,7 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .bell{position:relative;border:0;background:none;color:var(--mute);cursor:pointer;padding:6px;border-radius:10px;display:inline-flex}.bell:hover{color:var(--ink)}.bell svg{width:22px;height:22px}.bell .bn{position:absolute;top:0;right:-2px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--bad);color:#fff;font-size:11px;font-weight:700;line-height:16px;text-align:center}.bell[hidden],.bell .bn[hidden]{display:none}
 .bellpanel{position:fixed;top:58px;right:20px;width:min(380px,calc(100vw - 20px));max-height:72vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);padding:14px 16px;z-index:60}.bellpanel[hidden]{display:none}.bellpanel h4{margin:0 0 4px;font-size:15px}.bellpanel .tit{grid-template-columns:1fr auto}.bellpanel .tit>.sub{grid-column:1/-1}
 @media(max-width:620px){.bellpanel{left:10px;right:10px;width:auto;top:52px}}
+.stale{display:inline-block;margin-left:6px;padding:0 7px;border-radius:999px;font-size:11px;font-weight:600;background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad);white-space:nowrap}
 .ntag{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;font-size:11.5px;font-weight:600;color:#fff;vertical-align:1px;white-space:nowrap}.ntag.buy{background:#2f9e6b}.ntag.sell{background:var(--bad)}.priv-on .ntag{display:none}
 .tday .tsec{margin:10px 0 4px;font-size:13px;color:var(--mute)}.tday .tit{display:grid;grid-template-columns:minmax(120px,1.2fr) auto 2fr;gap:8px 12px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:13px}.tday .tit:first-of-type{border-top:0}.tday .tit .sub{font-size:12px}.tday .tn a{color:var(--ink);font-weight:600;text-decoration:none}.tday .tn a:hover{text-decoration:underline}.tday .tg{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;color:#fff}.tday .tg.buy{background:var(--tl-g,#2f9e6b)}.tday .tg.sell{background:var(--bad)}@media(max-width:620px){.tday .tit{grid-template-columns:1fr auto}.tday .tit>.sub{grid-column:1/-1}}
 .spot{position:relative;outline:3px solid var(--accent);outline-offset:3px;border-radius:12px;animation:spotp 1.1s ease-in-out 5}.spot::after{content:attr(data-spot);position:absolute;right:14px;top:0;transform:translateY(-50%);background:var(--accent);color:var(--accent-ink);padding:5px 11px;border-radius:8px;font-size:13px;font-weight:600;line-height:1.4;z-index:30;max-width:80vw;box-shadow:var(--shadow-lg)}@keyframes spotp{50%{outline-color:transparent}}
@@ -679,6 +687,9 @@ function setFav(code,on){
 }
 function toggleFav(code){ const y=scrollY; setFav(code,!favSet().has(code)); renderPool(); scrollTo(0,y); }
 const defaultView=()=>(favSet().size||applySells(state.holdings).active.length)?"focus":"pick";   // 有持仓或手动关注就看「重点关注」,否则先看「精选」
+/* ---------- 价格日期落后:接口限流、停牌会让个别股票的价格停在旧日期,列表和详情里直接标出来 ---------- */
+const poolLatest=()=>{let m=""; (state.pool?.stocks||[]).forEach(s=>{if(s.date&&s.date>m) m=s.date}); return m};
+const staleOf=s=>{const L=poolLatest(); return s.date&&L&&dayDiff(s.date,L)>3?s.date:null};
 /* ---------- 今日提醒:持仓触发了哪些加仓/止盈节点,关注里哪些进了可建仓区间 ---------- */
 // 持仓节点:现价碰到哪一档(取最高一档),没碰到返回 null。d 和 avg 要用同一币种
 function nodeHit(d,avg){const z=d.zones, p=d.price; if(!z) return null;
@@ -742,17 +753,6 @@ const GUIDE_GO={
   ov:()=>{goto("#/stock/"+guideStock()); spotlight(()=>document.querySelector(".reqcard"),"③ 在这里单独设定这只股票的要求")},
   health:()=>{goto("#/stock/"+guideStock()); spotlight(()=>document.querySelector("#healthcard"),"五个灯在这里")}
 };
-/* ---------- 「要求股息率」图示 + 小计算器(使用指引和红利课堂共用) ---------- */
-function reqBlock(p){const c=cfg(), pm=DEF_PREM["消费"]??3;
-  return `<div class="greq" id="${p}-bar"><i class="a"><u>国债</u><b id="${p}-v1">${c.rf}</b></i><s>+</s><i class="b"><u>行业溢价</u><b id="${p}-v2">${pm}</b></i><s>+</s><i class="c"><u>个股追加</u><b id="${p}-v3">0</b></i><s>=</s><i class="t"><u>要求</u><b id="${p}-vt">${(c.rf+pm).toFixed(2)}%</b></i></div>
-    <div class="gcalc"><div class="row"><span class="nw">国债 <input id="${p}-a" type="number" step="0.05" value="${c.rf}" aria-label="国债收益率（%）">%</span><span class="nw">行业溢价 <input id="${p}-p" type="number" step="0.1" value="${pm}" aria-label="行业溢价（%）">%</span><span class="nw">个股追加 <input id="${p}-x" type="number" step="0.1" value="0" aria-label="个股追加（%）">%</span></div>
-      <div class="row"><span class="nw">每股分红 <input id="${p}-d" type="number" step="0.1" value="2" aria-label="每股分红（元）"> 元</span><span class="nw">→ 买入价约 <b id="${p}-b">–</b> 元</span><span class="nw">低位线约 <b id="${p}-h">–</b> 元</span></div></div>`}
-function bindReqCalc(root,p){const q=k=>root.querySelector("#"+p+"-"+k);
-  const calc=()=>{const a=+q("a").value,pm=+q("p").value,x=+q("x").value,d=+q("d").value,f=(a+pm+x)/100;
-    q("v1").textContent=a; q("v2").textContent=pm; q("v3").textContent=x; q("vt").textContent=(f*100).toFixed(2)+"%";
-    ["a","b","c"].forEach((c,i)=>q("bar").querySelector("."+c).style.flexGrow=Math.max([a,pm,x][i],.3));
-    q("b").textContent=d>0&&f>0?(d/f).toFixed(2):"–"; q("h").textContent=d>0&&f>0?(d/(f+0.01)).toFixed(2):"–"};
-  ["a","p","x","d"].forEach(k=>q(k).oninput=calc); calc()}
 /* 红利课堂「要求股息率」:色块里的数字直接改 → 要求股息率、买入价尺、不同要求下的买入价对比 */
 function reqLab(p){const c=cfg(), pm=DEF_PREM["消费"]??3, ie=(id,v,st)=>`<span class="ie"><input id="${p}-${id}" type="number" step="${st}" value="${v}" aria-label="${{a:"国债收益率",p:"行业溢价",x:"个股追加"}[id]} （%）"><span>%</span></span>`;
   return `<div class="greq edit"><i class="a"><u>国债</u>${ie("a",c.rf,.05)}</i><s>+</s><i class="b"><u>行业溢价</u>${ie("p",pm,.1)}</i><s>+</s><i class="c"><u>个股追加</u>${ie("x",0,.1)}</i><s>=</s><i class="t"><u>要求</u><b id="${p}-vt">${(c.rf+pm).toFixed(2)}%</b></i></div>`}
@@ -784,6 +784,16 @@ function confetti(){
     if(t<3200) requestAnimationFrame(tick); else cv.remove()};
   requestAnimationFrame(tick);
 }
+/* ---------- 使用指引里的「要求股息率」小计算器:色块里的数字可直接改,下面直接给买入价和低位线 ---------- */
+function reqMini(p){const c=cfg(), pm=DEF_PREM["消费"]??3;
+  return `${reqLab(p)}
+    <div class="rres"><span class="nw">每股分红 <input id="${p}-d" type="number" step="0.1" value="2" aria-label="每股分红（元）"> 元</span>
+      <div class="rpill"><span>买入价</span><b id="${p}-b">–</b></div><div class="rpill"><span>低位线</span><b id="${p}-h">–</b></div></div>
+    <div class="lhint">✎ 点色块里的数字可以改；买入价 = 每股分红 ÷ 要求，低位线 = 要求再高 1 个点。</div>`}
+function bindReqMini(root,p){const q=k=>root.querySelector("#"+p+"-"+k);
+  const calc=()=>{const f=(+q("a").value+ +q("p").value+ +q("x").value)/100, d=+q("d").value; q("vt").textContent=(f*100).toFixed(2)+"%";
+    q("b").textContent=d>0&&f>0?(d/f).toFixed(2):"–"; q("h").textContent=d>0&&f>0?(d/(f+0.01)).toFixed(2):"–"};
+  ["a","p","x","d"].forEach(k=>q(k).oninput=calc); calc()}
 function bindHealthDemo(root){const r=root.querySelector("#hld-r"); if(!r) return; const f=()=>{const v=+r.value; root.querySelector("#hld-v").textContent=v+"%"; const lv=v<=80?["g","绿灯：分红在赚的钱里，有余量"]:v<=100?["y","黄灯：分红快把赚的钱分完了"]:["r","红灯：分的比赚的多，在花老本"]; root.querySelector("#hld-o").innerHTML=`<i class="hl-dot ${lv[0]}" style="vertical-align:-2px"></i> ${lv[1]}`}; r.oninput=f; f()}
 const GUIDE=[
  {t:"收息佬能帮你做什么",h:()=>`<div class="gtiles">
@@ -804,14 +814,25 @@ const GUIDE=[
     <div class="r buy"><span>加仓二档</span><i></i><em>低位线或成本 −10%：再加 1/3</em></div></div>
     <div class="gnote">触发的节点会出现在股票池顶部的「今日提醒」里。A 股和港股分开显示；港股用港元，不算红利税。</div>
     <div class="gact"><button class="btn sm" data-go="hold">去录入持仓 →</button></div>`},
- {t:"重点：自定义你的股息率要求",last:1,h:()=>`<div class="gform"><b>买入价 = 每股分红 ÷ 要求股息率</b><em>要求越高，买入价越低，越难触发</em></div>
-    ${reqBlock("g")}
+  {t:"重点：自定义你的股息率要求",h:()=>`<div class="gform"><b>买入价 = 每股分红 ÷ 要求股息率</b><em>要求越高，买入价越低，越难触发</em></div>
+    ${reqMini("g")}
     <div class="glayers">
       <button class="lay" data-go="rf"><em>①</em><span><b>国债收益率</b>全局基准，所有股票共用</span><i>去改 →</i></button>
-      <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>每个行业一个数，默认值是经验假设</span><i>去改 →</i></button>
-      <button class="lay" data-go="ov"><em>③</em><span><b>个股单独设定</b>只改这一只，优先级最高。<b>越有把握，要求可以低一点</b></span><i>去看 →</i></button></div>
-    <div class="gnote">个别股票默认带「个股追加」（比如分红率在快速上升），详情页会写明原因，也可以用③覆盖。更多讲解在「红利课堂」。仅供研究，不构成投资建议。</div>`}
+      <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>每个行业一个数，默认是经验假设</span><i>去改 →</i></button>
+      <button class="lay" data-go="ov"><em>③</em><span><b>个股单独设定</b>只改这一只，优先级最高；越有把握，要求可以低一点</span><i>去看 →</i></button></div>
+    <div class="gnote">个别股票默认带「个股追加」（比如分红率在快速上升），详情页会写明原因。更多讲解在「红利课堂」。仅供研究，不构成投资建议。</div>`},
+ {t:"加入交流群，一起聊聊",last:1,h:()=>`${commCard()}<div class="gnote">收息佬是一个人在做的小工具，你的反馈会直接影响下一个版本。不方便加微信也没关系，设置页「关于」里还有公众号、小红书和邮箱。</div>`}
 ];
+/* 「复制」按钮:data-copy 里的文字写入剪贴板(设置页和使用指引共用) */
+function bindCopy(root=document){root.querySelectorAll(".cpy").forEach(b=>b.onclick=async()=>{const t=b.dataset.copy, o=b.textContent; let ok=false;
+    try{await navigator.clipboard.writeText(t); ok=true}catch(e){try{const ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); ok=document.execCommand("copy"); ta.remove()}catch(e2){}}
+    b.textContent=ok?"已复制":"请手动复制"; setTimeout(()=>{b.textContent=o},1500)})}
+/* ---------- 交流群入口:二维码放 web/wechat-qr.png(没有就只显示微信号) ---------- */
+const WECHAT_ID="wind126";
+function commCard(){
+  return `<div class="comm"><img class="cqr" src="/wechat-qr.png" alt="微信二维码" onerror="this.closest('.comm').classList.add('noqr');this.remove()">
+    <div class="ct"><b>加我微信，进交流群</b><p>一起聊红利投资、反馈问题、说说你想要的功能。加好友时备注「收息佬」，拉你进群。</p>
+      <div class="wid"><span>微信号</span><b>${WECHAT_ID}</b><button class="btn sm cpy" type="button" data-copy="${WECHAT_ID}">复制</button></div></div></div>`}
 function showGuide(startAt){
   if(document.getElementById("guide")) return;
   const S=state.holdings.settings; let i=Number.isInteger(startAt)?startAt:0;
@@ -826,7 +847,7 @@ function showGuide(startAt){
       <div class="gdots">${GUIDE.map((_,k)=>`<i class="${k===i?"on":""}"></i>`).join("")}</div>
       <div class="acts">${i>0?'<button class="btn" data-x="prev">上一步</button>':'<button class="btn" data-x="skip">跳过</button>'}${g.last?'<button class="btn primary" data-x="done">开始使用</button>':'<button class="btn primary" data-x="next">下一步</button>'}</div></div>`;
     const q=id=>w.querySelector(id);
-    if(q("#g-d")) bindReqCalc(w,"g");};
+    if(q("#g-d")) bindReqMini(w,"g"); bindCopy(w);};
   w.onclick=e=>{const go=e.target.closest("[data-go]"); if(go){const f=GUIDE_GO[go.dataset.go]; close(false,true); back(); f(); return}
     const x=e.target.dataset.x; if(x==="next"){i++;draw()} else if(x==="prev"){i--;draw()} else if(x==="done") close(true); else if(x==="skip"||e.target===w) close(false)};
   draw(); document.addEventListener("keydown",kd); document.body.appendChild(w);
@@ -858,7 +879,7 @@ function renderPool(){
   const emptyMsg=st==="focus"?"还没有关注的股票。点「精选」或「全部」挑选，再点列表左侧的 ☆ 加进来；有持仓的也会自动出现在这里。":"没有符合条件的股票。";
   const rowsHtml=rows=>!rows.length?`<tr><td colspan="7" class="empty">${emptyMsg}</td></tr>`:rows.map(s=>{const z=s.zones,gap=z?(s.price/z.buy-1)*100:0,on=fav.has(s.code);return `<tr class="row${on?" favrow":""}" data-code="${s.code}">
         <td class="favtd"><button class="fav${on?" on":""}" data-fav="${s.code}" title="${on?"取消关注":"加入我的关注"}" aria-label="${on?"取消关注":"加入我的关注"}">${on?"★":"☆"}</button></td>
-        <td class="l"><b>${s.name}</b>${held.has(s.code)?' <span class="badge held">已持仓</span>':""}${posBy.has(s.code)?`<span class="ntag ${posBy.get(s.code)[1]}">${posBy.get(s.code)[0]}</span>`:watchSet.has(s.code)?'<span class="ntag buy">可建仓</span>':""}${isFocus(s)?'<span class="pick" title="系统精选：价格偏低或低位、体检无质量红灯">精选</span>':""}<div class="sub">${s.code} · ${s.industry}${s.market&&s.market!=="a"?` · ${mkt(s)}（${cu(s)}）`:""}<span class="mprice"> · 现价 ${px(s.price)}</span></div></td>
+        <td class="l"><b>${s.name}</b>${held.has(s.code)?' <span class="badge held">已持仓</span>':""}${posBy.has(s.code)?`<span class="ntag ${posBy.get(s.code)[1]}">${posBy.get(s.code)[0]}</span>`:watchSet.has(s.code)?'<span class="ntag buy">可建仓</span>':""}${isFocus(s)?'<span class="pick" title="系统精选：价格偏低或低位、体检无质量红灯">精选</span>':""}<div class="sub">${s.code} · ${s.industry}${s.market&&s.market!=="a"?` · ${mkt(s)}（${cu(s)}）`:""}<span class="mprice"> · 现价 ${px(s.price)}</span>${staleOf(s)?`<span class="stale" title="这只股票的价格停在 ${s.date}，比其他股票旧（数据源临时失败或停牌）">价格 ${s.date.slice(5)}</span>`:""}</div></td>
         <td>${px(s.price)}</td><td><b>${pct(s.yield)}</b></td>
         <td class="vtd"><span class="badge s-${s.status}" style="font-size:13px;padding:3px 12px">${lab(s)}</span>${distrust(s)?'<div class="warn">⚠ 股价已大跌，先看盈利</div>':""}${isRich(s)?'<div class="warn">⚠ 低于自身历史中位</div>':""}${unconf(s).length?`<div class="warn" title="低位的三重确认：①股息率比国债高 2.75 个点以上 ②股息率在自身近5年的较高水平 ③分红质量没红旗">⚠ 低位待确认：${unconf(s).join("、")}</div>`:""}${ORDER[s.status]<=1&&fakeDiv(s)?`<div class="warn">⚠ 分红率 ${Math.round(poOf(s)*100)}%，高股息难持续</div>`:""}${ORDER[s.status]<=1&&qRedShow(s).length?`<div class="warn">⚠ 体检红灯：${qRedShow(s).join("、")}</div>`:""}${priceBar(s,true)}</td>
         <td>${dotsOf(s)}</td>
@@ -996,7 +1017,7 @@ function renderDetail(d){
     ${banner}
     ${(()=>{const f=(d.forward||[]).reduce((a,x)=>a+x.cash,0); return d._d0>0&&Math.abs(f/d._d0-1)>0.08?`<div class="note" style="margin:0 0 8px">⚠ 按最新一轮分红节奏推算，年分红约 ${num(f,3)} 元（${f>d._d0?"高于":"低于"}上一财年 ${Math.abs(f/d._d0-1)*100|0}%），对应股息率 ${pct(f/d.price)}。</div>`:""})()}
     <div class="grid g3" style="margin-top:10px">
-      <div class="kpi"><div class="k">现价（${d.date}${d.ccy&&d.ccy!=="CNY"?" · "+mkt(d)+"，"+cu(d):""}）</div><div class="v">${px(d.price)}</div></div>
+      <div class="kpi"><div class="k">现价（${d.date}${staleOf(d)?" · 比其他股票旧":""}${d.ccy&&d.ccy!=="CNY"?" · "+mkt(d)+"，"+cu(d):""}）</div><div class="v">${px(d.price)}</div></div>
       <div class="kpi"><div class="k">${d.normalized?`股息率（近3年平均分红 ${num(d.ttm_dps)} 元/股；最新年度 ${num(d._d0)}）`:(d.industry==="ETF"?`股息率（近 12 个月分红 ${num(d.ttm_dps,3)} ${cu(d)}/份）`:(d.market&&d.market!=="a"?`股息率（近 12 个月分红 ${num(d.ttm_dps,3)} ${cu(d)}/股）`:`股息率（${d.base_year}年度分红 ${num(d.ttm_dps)} 元/股）`))}</div><div class="v">${pct(d.yield)}</div></div>
       <div class="kpi"><div class="k">已连续分红</div><div class="v">${d.consec} 年</div></div>
     </div>
@@ -1108,7 +1129,7 @@ function showUpd(info,manual){
 /* ---------- 持仓 ---------- */
 async function renderHold(){
   const H=state.holdings, S=H.settings, P=state.pool?.stocks||[];
-  H.sells=H.sells||[];
+  H.sells=H.sells||[]; H.divs=H.divs||[];
   const eff=applySells(H), preDir=state.prefillDir==="sell"?"sell":"buy";
   const codes=[...new Set([...eff.active.map(l=>l.code),...H.sells.map(x=>x.code)])];
   const det={}; await Promise.all(codes.map(async c=>det[c]=await getStock(c).catch(()=>null)));
@@ -1117,6 +1138,7 @@ async function renderHold(){
   eff.active.forEach(l=>{l.price*=fxs[l.code]||1});
   eff.real.forEach(r=>{const f=fxs[r.code]||1; r.price*=f; r.portions.forEach(p=>{p.price*=f})});
   const t0=today();
+  const stockName0=c=>(P.find(x=>x.code===c)||{}).name||c;
   const heldNow=new Map(); eff.active.forEach(l=>heldNow.set(l.code,(heldNow.get(l.code)||0)+l.shares));
   const allG=codes.map(c=>{
     const lots=eff.active.filter(l=>l.code===c), d=det[c]; if(!lots.length||!d) return null;
@@ -1125,7 +1147,9 @@ async function renderHold(){
     const ev=d.forward.map(f=>({date:f.date,cash:f.cash,declared:f.declared}));
     ev.forEach(e=>{e.gross=0;e.tax=0;lots.forEach(l=>{if(e.declared&&l.date>=e.date)return;const g=l.shares*e.cash;const r=taxOf(d,Math.max(0,dayDiff(l.date,e.date)));e.gross+=g;e.tax+=g*r})});
     const gross=ev.reduce((a,e)=>a+e.gross,0), tax=ev.reduce((a,e)=>a+e.tax,0);
-    const rc=recvDiv(d,lots,t0), gain=mv-cost;
+    let rc=recvDiv(d,lots,t0); const gain=mv-cost;
+    const act=H.divs.filter(x=>x.code===c);       // 用户记录了实收分红的股票,已收分红按实收算(金额是股票自己的币种,B 股折人民币)
+    if(act.length) rc={gross:act.reduce((a,x)=>a+(+x.amount||0),0)*(fxs[c]||1),tax:0,n:act.length,actual:true};
     return {c,d,lots,sh,cost,mv,avg,ev,gross,tax,rc,gain,total:gain+rc.gross-rc.tax};
   }).filter(Boolean);
   const groups=allG.filter(g=>!isHK(g.c)), gH=allG.filter(g=>isHK(g.c));
@@ -1137,6 +1161,18 @@ async function renderHold(){
   const realRows=realAll.filter(r=>!isHK(r.code)), realH=realAll.filter(r=>isHK(r.code));
   const RT=realRows.reduce((a,r)=>({gain:a.gain+r.gain,div:a.div+r.div,tax:a.tax+r.dtax,total:a.total+r.total,cost:a.cost+r.cost}),{gain:0,div:0,tax:0,total:0,cost:0});
   const T={cost:0,mv:0,gross:0,tax:0,gain:0,recv:0,rtax:0}; groups.forEach(g=>{T.cost+=g.cost;T.mv+=g.mv;T.gross+=g.gross;T.tax+=g.tax;T.gain+=g.gain;T.recv+=g.rc.gross;T.rtax+=g.rc.tax});
+  // 总览:同时有 A/B 股和港股持仓时,把港股按当前汇率折成人民币后合计(群友建议:要看总市值和盈利)
+  const ovAll=(()=>{ if(!(groups.length&&gH.length)) return "";
+    const fx=g=>fxOf(g.d), hMV=gH.reduce((a,g)=>a+g.mv*fx(g),0), hCost=gH.reduce((a,g)=>a+g.cost*fx(g),0), hTot=gH.reduce((a,g)=>a+(g.gain+g.rc.gross)*fx(g),0);
+    const mv=T.mv+hMV, cost=T.cost+hCost, tot=(T.gain+T.recv-T.rtax)+hTot, pa=mv?T.mv/mv:0, rate=fx(gH[0]);
+    return `<div class="card ovall"><h3 class="ovh">总览 <span class="sub">A 股 / B 股 + 港股，折合人民币</span></h3>
+      <div class="grid g4" style="margin:8px 0 12px">
+        <div class="kpi"><div class="k">总市值</div><div class="v">${cny(mv)}</div><div class="sub">成本 ${cny(cost)}</div></div>
+        <div class="kpi"><div class="k">总浮盈</div><div class="v ${sgn(mv-cost)}">${cny(mv-cost)}</div><div class="sub">${pct(cost?mv/cost-1:0,1)}</div></div>
+        <div class="kpi"><div class="k">综合收益率（含分红）</div><div class="v ${sgn(tot)}">${cost?pct(tot/cost,1):"–"}</div><div class="sub">含息总收益 ${cny(tot)}</div></div>
+        <div class="kpi"><div class="k">市值构成</div><div class="v" style="font-size:19px">A/B ${pct(pa,0)} · 港股 ${pct(1-pa,0)}</div><div class="sub">1 港元 ≈ ${rate.toFixed(3)} 元</div></div></div>
+      <div class="ovbar"><i style="width:${(pa*100).toFixed(1)}%;background:var(--c1)"></i><i style="width:${((1-pa)*100).toFixed(1)}%;background:var(--c2)"></i></div>
+      <p class="note">港股按当前汇率折算，成本也按当前汇率折，所以不含汇率盈亏。综合收益率 = (价差 + 已收分红 − 若今天卖出补的红利税) ÷ 成本，港股不计红利税。收息佬目前不支持美股。</p></div>`})();
   const cap=+S.capital||0, maxPct=+S.maxPct||15;
   // 月历
   const now=new Date(), cal=Array.from({length:12},(_,i)=>{const d=new Date(now.getFullYear(),now.getMonth()+i,1);return {key:d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0"),label:(d.getMonth()+1)+"月",y:d.getFullYear(),v:0,items:[]}});
@@ -1145,15 +1181,16 @@ async function renderHold(){
   const pre=P.find(s=>s.code===state.prefill);
   $("#main").innerHTML=`
   <div class="ph hasbtn"><h2>我的持仓</h2><span class="sub">一只一行，点开看加仓/止盈节点、买入批次和分红细节</span>${allG.length?`<button class="privbtn ${state.privacy?"on":""}" id="privbtn" aria-label="${state.privacy?"显示数据":"隐私模式：隐藏金额、份额、收益和个股名称"}" title="${state.privacy?"点击显示数据":"隐私模式：隐藏金额、份额、收益和个股名称"}">${state.privacy?EYE_OFF:EYE_ON}</button>`:""}</div>
+  ${ovAll}
   ${gH.length?`<h3 class="mksec">A 股 / B 股 <span class="sub">人民币</span></h3>`:""}
   ${groups.length?`
-  <div class="grid g4" style="margin-bottom:16px">
+  <div class="grid g3" style="margin-bottom:16px">
     <div class="card kpi" style="margin:0"><div class="k">持仓市值 / 成本</div><div class="v">${cny(T.mv)}</div><div class="sub">成本 ${cny(T.cost)} · 浮盈 <span class="${sgn(T.mv-T.cost)}">${cny(T.mv-T.cost)} (${pct(T.cost?T.mv/T.cost-1:0,1)})</span></div></div>
-    <div class="card kpi" style="margin:0"><div class="k">未来12月预计分红（税前）</div><div class="v">${cny(T.gross)}</div><div class="sub">占成本 ${pct(T.cost?T.gross/T.cost:0)} · 占市值 ${pct(T.mv?T.gross/T.mv:0)}</div></div>
-    <div class="card kpi" style="margin:0"><div class="k">预计红利税</div><div class="v">${cny(T.tax)}</div><div class="sub">按各批次到分红日的持股期限估算</div></div>
-    <div class="card kpi" style="margin:0"><div class="k">预计税后分红</div><div class="v">${cny(T.gross-T.tax)}</div><div class="sub">占成本 ${pct(T.cost?(T.gross-T.tax)/T.cost:0)}${cap?` · 仓位 ${pct(T.mv/cap,0)}`:""}</div></div>
+    <div class="card kpi" style="margin:0"><div class="k">未来12月预计分红（税前）</div><div class="v">${cny(T.gross)}</div><div class="sub">税后约 ${cny(T.gross-T.tax)} · 占成本 ${pct(T.cost?T.gross/T.cost:0)}${cap?` · 仓位 ${pct(T.mv/cap,0)}`:""}</div></div>
+    <div class="card kpi" style="margin:0" title="综合收益率 = (浮盈 + 买入后已收分红 − 若今天卖出需补的红利税) ÷ 成本"><div class="k">综合收益率（含分红）</div><div class="v ${sgn(T.gain+T.recv-T.rtax)}">${T.cost?pct((T.gain+T.recv-T.rtax)/T.cost,1):"–"}</div><div class="sub">${cny(T.gain+T.recv-T.rtax)} = 价差 ${cny(T.gain)} + 已收分红 ${cny(T.recv)}${T.rtax?` − 补税 ${cny(T.rtax)}`:""}</div></div>
   </div>
   ${holdTable(groups,T,cap,maxPct)}
+  ${fold(divRecCard(H,codes,stockName0),`<b>${H.divs.length?H.divs.length+" 笔":"未记录"}</b>`)}
   ${fold(totalCard(groups,T),`<b class="${sgn(T.gain+T.recv-T.rtax)}">${cny(T.gain+T.recv-T.rtax)}</b>`)}
   ${fold(allocCard(groups,T))}
   ${fold(divCal(cal),`<b>${cny(cal.reduce((a,m)=>a+m.v,0))}</b>`)}`:`<div class="card empty">${gH.length?"目前没有 A 股持仓。":realRows.length||realH.length?"目前没有持仓（已全部卖出）。":"还没有持仓。先在下面「持仓录入」里录入一笔买入。"}</div>`}
@@ -1188,6 +1225,9 @@ async function renderHold(){
   rowsEl.onkeydown=e=>{if(e.key==="Enter"&&e.target.classList.contains("rs")){e.preventDefault(); const last=rowsEl.lastElementChild; if(e.target.closest(".lotrow")===last) addRow(true,e.target.closest(".lotrow").querySelector(".rk").value); else e.target.closest(".lotrow").nextElementSibling.querySelector(".rp").focus()}};
   $("#addrow").onclick=()=>addRow(true);
   document.querySelectorAll("[data-sell]").forEach(b=>b.onclick=()=>{state.prefillDir="sell"; state.prefill=b.dataset.sell; renderHold().then(()=>$("#entry").scrollIntoView({behavior:"smooth",block:"center"}))});
+  $("#dv-add")&&($("#dv-add").onclick=async()=>{const code=$("#dv-code").value, date=$("#dv-date").value, amt=+$("#dv-amt").value; if(!(amt>0&&date)) return notice("请填写到账日期和实收金额");
+    H.divs.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),code,date,amount:amt,note:$("#dv-note").value.trim()}); await saveHoldings(); renderHold()});
+  document.querySelectorAll("[data-deldiv]").forEach(b=>b.onclick=async()=>{if(!(await askConfirm("删除这条分红记录？","删除")))return; H.divs=H.divs.filter(x=>x.id!==b.dataset.deldiv); await saveHoldings(); renderHold()});
   document.querySelectorAll("[data-delsell]").forEach(b=>b.onclick=async()=>{if(!(await askConfirm("删除这条卖出记录？删除后对应的股数会回到持仓里。","删除")))return;H.sells=H.sells.filter(x=>x.id!==b.dataset.delsell);await saveHoldings();renderHold()});
   $("#addlot").onclick=async()=>{
     if(!lc.value){notice("请先选择股票：输入代码、名称或拼音缩写，再点候选项");return}
@@ -1216,6 +1256,14 @@ async function renderHold(){
   if(state.privacy){ applyPrivacy($("#main"),P.map(x=>x.name),[...new Set(P.map(x=>x.industry))]); const q=$("#lcq"); if(q&&pre) q.value=maskName(pre.name)+" **" } else $("#main").classList.remove("priv-on");
 }
 
+/* ---------- 我收到的分红:实际到账的分红(税后),记了的股票,「已收分红」和综合收益率就按实收算,不再估算 ---------- */
+function divRecCard(H,codes,nameOf){
+  const hc=[...new Set(applySells(H).active.map(l=>l.code))], opts=hc.map(c=>`<option value="${c}">${nameOf(c)} ${c}</option>`).join("");
+  const rows=[...H.divs].sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="bkrow"><span><b>${x.date}</b> · ${nameOf(x.code)} · 实收 ${num(+x.amount,2)}${(state.pool.stocks.find(s=>s.code===x.code)||{}).ccy==="HKD"?" 港元":" 元"}${x.note?` · ${x.note}`:""}</span><button class="btn sm" data-deldiv="${x.id}">删</button></div>`).join("");
+  return `<div class="card"><h2>我收到的分红</h2><div id="divrec">
+    <p class="note" style="margin:0 0 10px">记下券商里实际到账的分红（税后金额）。某只股票记过之后，它的「已收分红」和综合收益率就按你记的实收金额算，不再用估算；没记的仍是估算。</p>
+    ${hc.length?`<div class="form"><select id="dv-code" aria-label="股票">${opts}</select><input id="dv-date" type="date" value="${today()}" aria-label="到账日期"><input id="dv-amt" type="number" step="0.01" placeholder="实收金额" style="width:120px" aria-label="实收金额"><input id="dv-note" maxlength="20" placeholder="备注（可选）" style="width:140px" aria-label="备注"><button class="btn primary" id="dv-add" type="button">添加</button></div>`:'<div class="sub">先在上面录入持仓，才能记录分红。</div>'}
+    <div style="margin-top:8px">${rows||'<div class="sub">还没有记录。</div>'}</div></div></div>`}
 /* ---------- 含息总收益 ---------- */
 // 买入日之后、登记日之前已持有的除息分红（估算）；税按"今天卖出"的持股期限补缴（一年以内卖出补税，超过一年免税）
 function recvDiv(d,lots,t0){
@@ -1314,7 +1362,7 @@ function fold(html,right=""){
 function holdTable(groups,T,cap,maxPct,f=cny,body=posCard){
   const head=`<div class="hsum hhead"><span>股票</span><span class="r hm">持股</span><span class="r hm">成本价</span><span class="r hm">现价</span><span class="r">市值</span><span class="r hm">浮盈</span><span class="r hm">已收分红</span><span class="r">含息收益</span><span class="r hm">成本股息率</span><span class="hm">价格位置</span><span></span></div>`;
   const rows=groups.map(g=>{const {d,sh,cost,mv,avg}=g, pnl=mv-cost, yoc=d.ttm_dps/avg;
-    return `<details class="hrow"><summary class="hsum"><span class="hn"><b>${d.name}${(()=>{const n=nodeHit(d,avg); return n?`<span class="ntag ${n[1]}">${n[0]}</span>`:""})()}</b><span class="sub">${d.code} · ${d.industry}</span></span><span class="r hm">${sh.toLocaleString("zh-CN")}</span><span class="r hm">${px(avg)}</span><span class="r hm">${px(d.price)}</span><span class="r">${f(mv)}</span><span class="r hm ${sgn(pnl)}">${pct(cost?pnl/cost:0,1)}</span><span class="r hm">${g.rc.gross?cny(g.rc.gross):"–"}</span><span class="r ${sgn(g.total)}"><b>${pct(cost?g.total/cost:0,1)}</b></span><span class="r hm">${pct(yoc)}</span><span class="hm"><span class="badge s-${d.status}">${lab(d)}</span></span><i class="hchev">›</i></summary><div class="hbody">${body(g,cap,maxPct)}</div></details>`}).join("");
+    return `<details class="hrow"><summary class="hsum"><span class="hn"><b>${d.name}${(()=>{const n=nodeHit(d,avg); return n?`<span class="ntag ${n[1]}">${n[0]}</span>`:""})()}</b><span class="sub">${d.code} · ${d.industry}</span></span><span class="r hm">${sh.toLocaleString("zh-CN")}</span><span class="r hm">${px(avg)}</span><span class="r hm">${px(d.price)}</span><span class="r">${f(mv)}</span><span class="r hm ${sgn(pnl)}">${pct(cost?pnl/cost:0,1)}</span><span class="r hm">${g.rc.gross?f(g.rc.gross):"–"}${g.rc.actual?'<sup class="actm" title="按你记录的实收分红计算">实</sup>':""}</span><span class="r ${sgn(g.total)}"><b>${pct(cost?g.total/cost:0,1)}</b></span><span class="r hm">${pct(yoc)}</span><span class="hm"><span class="badge s-${d.status}">${lab(d)}</span></span><i class="hchev">›</i></summary><div class="hbody">${body(g,cap,maxPct)}</div></details>`}).join("");
   const tot=T.gain+T.recv-T.rtax;
   const foot=`<div class="hsum hfoot"><span>合计 ${groups.length} 只</span><span class="hm"></span><span class="hm"></span><span class="hm"></span><span class="r">${f(T.mv)}</span><span class="r hm ${sgn(T.gain)}">${pct(T.cost?T.gain/T.cost:0,1)}</span><span class="r hm">${f(T.recv)}</span><span class="r ${sgn(tot)}">${pct(T.cost?tot/T.cost:0,1)}</span><span class="hm"></span><span class="hm"></span><span></span></div>`;
   return `<div class="card htable">${head}${rows}${foot}</div>`;
@@ -1354,7 +1402,7 @@ function posCardHK(g){
       <div class="kpi"><div class="k">持仓 / 均价</div><div class="v">${sh} 股</div><div class="sub">均价 ${num(avg,3)} · 现价 ${px(d.price)}（港元）</div></div>
       <div class="kpi"><div class="k">市值 / 浮盈</div><div class="v">${hkd(mv)}</div><div class="sub"><span class="${sgn(pnl)}">${hkd(pnl)} (${pct(pnl/cost,1)})</span></div></div>
       <div class="kpi"><div class="k">成本股息率 / 现价股息率</div><div class="v">${pct(d.ttm_dps/avg)}</div><div class="sub">现价股息率 ${pct(d.yield)}</div></div>
-      <div class="kpi"><div class="k">未来12月预计分红</div><div class="v">${hkd(g.gross)}</div><div class="sub">已收分红 ${hkd(g.rc.gross)}${g.rc.n?`（${g.rc.n} 次）`:""}</div></div>
+      <div class="kpi"><div class="k">未来12月预计分红</div><div class="v">${hkd(g.gross)}</div><div class="sub">已收分红 ${hkd(g.rc.gross)}${g.rc.n?`（${g.rc.n} 次${g.rc.actual?"，实收":""}）`:""}</div></div>
     </div>
     <div class="verdict s-${d.status}"><div class="vt">${lab(d)}</div></div>
     <details style="margin-top:8px"><summary>买入批次</summary><div class="tablewrap"><table><thead><tr><th>买入日</th><th>买入价</th><th>数量</th><th>浮盈</th><th></th></tr></thead>
@@ -1390,7 +1438,7 @@ function posCard(g,cap,maxPct){
       <div class="kpi"><div class="k">成本股息率 / 现价股息率</div><div class="v">${pct(yoc)}</div><div class="sub">现价股息率 ${pct(d.yield)}</div></div>
       <div class="kpi"><div class="k">未来12月分红 税前 → 税后</div><div class="v">${cny(g.gross)} → ${cny(g.gross-g.tax)}</div><div class="sub">预计红利税 ${cny(g.tax)}</div></div>
     </div>
-    <div class="sub hline" style="margin:10px 0 2px">含息总收益 <b class="${sgn(g.total)}">${cny(g.total)} (${pct(g.total/g.cost,1)})</b> = 价差 ${cny(g.gain)} + 已收分红 ${cny(g.rc.gross)}${g.rc.n?`（${g.rc.n} 次）`:""} − 若今天卖出补税 ${cny(g.rc.tax)}</div>
+    <div class="sub hline" style="margin:10px 0 2px">含息总收益 <b class="${sgn(g.total)}">${cny(g.total)} (${pct(g.total/g.cost,1)})</b> = 价差 ${cny(g.gain)} + 已收分红 ${cny(g.rc.gross)}${g.rc.n?`（${g.rc.n} 次${g.rc.actual?"，实收":""}）`:""} − 若今天卖出补税 ${cny(g.rc.tax)}</div>
     ${posPct!=null?`<div style="margin:10px 0 2px" class="sub">仓位 ${posPct.toFixed(1)}% / 上限 ${maxPct}%</div><div class="bar"><i class="${posPct>maxPct?"over":""}" style="width:${Math.min(100,posPct/maxPct*100)}%"></i></div>`:""}
     <div class="verdict s-${d.status}"><div class="vt">${lab(d)}</div><div class="vd">${advice}</div></div>
     ${nodes.length?`<div class="nodes">${nodes.map(n=>`<div class="node ${n[3]?"hit":""}"><span class="sub">${n[0]}${n[3]?" · 已触发":""}</span><b>${px(n[1])}</b><span class="sub">${n[2]}</span></div>`).join("")}</div>`:""}
@@ -1762,15 +1810,17 @@ function paintRefresh(){
     box.innerHTML=`<img alt="手机访问二维码" src="/api/qr?u=${encodeURIComponent(u)}" onerror="this.outerHTML='<div class=sub style=margin-bottom:6px>二维码暂时无法生成，请在手机浏览器直接输入下面的地址</div>'"><code>${u}</code>`;
     const more=(a.urls||[]).slice(1,3);
     note.innerHTML=(a.enabled?"已设置访问密码：手机第一次打开会要求输入。":"没有设访问密码：同一个 WiFi 下的人都能看到你的持仓，公共 WiFi 下不要开。")+(more.length?` 如果上面的地址打不开，可以试试：${more.join("、")}。`:"")});
-  const b=$("#refresh"); if(b){b.disabled=!!state.refreshing; b.textContent=state.refreshing?(state.refreshTxt||"刷新中…"):"刷新数据"}
+  const b=$("#refresh"), f=$("#refreshfull"), m=state.refreshMode||"quick";
+  if(b){b.disabled=!!state.refreshing; b.textContent=state.refreshing&&m==="quick"?(state.refreshTxt||"更新中…"):"更新价格"}
+  if(f){f.disabled=!!state.refreshing; f.textContent=state.refreshing&&m==="full"?(state.refreshTxt||"刷新中…"):"完整刷新"}
 }
-async function startRefresh(){ await api("/api/refresh",{method:"POST"}); poll(); }
+async function startRefresh(mode){ state.refreshMode=mode||"quick"; await api("/api/refresh",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mode:state.refreshMode})}); poll(); }
 async function poll(){
   state.refreshing=true; paintRefresh();
   const tick=async()=>{const s=await api("/api/status");
     if(s.running){state.refreshTxt=`刷新中 ${s.done||0}/${s.total||"?"} ${s.current||""}`; paintRefresh(); setTimeout(tick,1500)}
     else{state.refreshing=false; await load(); render();
-      if(s.errors&&Object.keys(s.errors).length)notice("部分股票刷新失败： "+Object.keys(s.errors).join(", ")+"\n多为数据源限流，稍后再点一次「刷新数据」即可，失败的股票会保留上次的数据。")}};
+      if(s.errors&&Object.keys(s.errors).length)notice("部分股票刷新失败： "+Object.keys(s.errors).join(", ")+"\n多为数据源限流，稍后再点一次「更新价格」即可，失败的股票会保留上次的数据。")}};
   tick();
 }
 function renderSettings(){
@@ -1783,10 +1833,10 @@ function renderSettings(){
     <div class="seg" id="themeseg">${[["auto","跟随系统"],["light","浅色"],["dark","深色"]].map(([k,t])=>`<button data-th="${k}" class="${th===k?"on":""}">${t}</button>`).join("")}</div>
     <p class="note">只影响当前浏览器。「跟随系统」会随电脑的深浅色自动切换。</p></div>
   <div class="card"><h2>数据</h2>
-    <div class="form"><button class="btn primary" id="refresh">刷新数据</button><span class="sub">${P.updated?"数据更新于 "+P.updated:"尚无数据"} · 共 ${P.stocks.length} 只</span></div>
-    ${(()=>{const ds=P.stocks.map(s=>s.date).filter(Boolean).sort(), last=ds[ds.length-1]; if(!last) return ""; const old=P.stocks.filter(s=>s.date&&dayDiff(s.date,last)>3); return old.length?`<p class="note" style="color:var(--warn,var(--mute))">有 ${old.length} 只股票的报价停在 ${last} 之前（数据源临时失败或停牌），再刷新一次通常能补上。</p>`:""})()}
+    <div class="form"><button class="btn primary" id="refresh">更新价格</button><button class="btn" id="refreshfull">完整刷新</button><span class="sub">${P.updated?"数据更新于 "+P.updated:"尚无数据"} · 共 ${P.stocks.length} 只</span></div>
+    ${(()=>{const ds=P.stocks.map(s=>s.date).filter(Boolean).sort(), last=ds[ds.length-1]; if(!last) return ""; const old=P.stocks.filter(s=>s.date&&dayDiff(s.date,last)>3); return old.length?`<p class="note" style="color:var(--warn,var(--mute))">有 ${old.length} 只股票的报价停在 ${last} 之前（数据源临时失败或停牌），再点一次「更新价格」通常能补上。</p>`:""})()}
     <div id="as-miss"></div>
-    <p class="note">重新采集全部股票的分红、价格与财务数据，约 5~8 分钟，期间可以继续使用。价格是日线收盘，可能晚一个交易日；分红来自东方财富，日线和财务数据来自新浪财经（腾讯作备用）。日线只在第一次完整下载，之后每次只补最近几天，所以很快。增加股票用下面的「添加个股」，移出在个股详情页。</p></div>
+    <p class="note"><b>更新价格</b>：只联网更新最新股价，分红和财务数据用 7 天内的本地缓存，几分钟就好，平时用这个；<b>完整刷新</b>：重新采集全部股票的分红、价格与财务数据，通常 10~30 分钟（数据源限流时更久），建议每周或公告季用一次。两种刷新期间都可以继续使用，刷完会自动把价格落后的股票补刷一轮。价格是日线收盘，可能晚一个交易日；分红来自东方财富，日线和财务数据来自新浪财经（腾讯作备用）。日线只在第一次完整下载，之后每次只补最近几天，所以很快。增加股票用下面的「添加个股」，移出在个股详情页。</p></div>
   <div class="card" id="addstk"><h2>添加个股</h2>
     <div class="form"><input id="as-code" placeholder="股票代码" inputmode="numeric" maxlength="6" autocomplete="off" style="width:150px"><button class="btn" id="as-look">查询</button><span class="sub" id="as-msg">A 股、B 股、ETF 填 6 位，港股填 5 位（如 00941）</span></div>
     <div class="form" id="as-res" hidden style="margin-top:10px"><span id="as-info" class="sub"></span><input id="as-name" maxlength="20" placeholder="名称" style="width:140px"><select id="as-ind" aria-label="行业"><option value="">选择行业…</option>${IND_GROUPS.map(([g,l])=>`<optgroup label="${g}">${l.filter(i=>INDS_ALL().includes(i)).map(i=>`<option value="${i}">${i}</option>`).join("")}</optgroup>`).join("")}</select><button class="btn primary" id="as-add">加入股票池</button></div>
@@ -1798,7 +1848,9 @@ function renderSettings(){
     <div id="mgrm"></div></div>
   <div class="card"><h2>备份与恢复</h2>
     <div class="form"><button class="btn" id="bk-out">导出持仓备份</button><button class="btn" id="bk-in">从备份恢复</button><input type="file" id="bk-file" aria-label="选择备份文件" accept=".json,application/json" hidden><span class="sub" id="bk-msg"></span></div>
-    <p class="note">备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。每次保存前，程序也会在数据目录留一份 holdings.json.bak。</p></div>
+    <p class="note">备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。每次保存前，程序也会在数据目录留一份 holdings.json.bak。</p>
+    <h3 style="margin:14px 0 4px;font-size:14px">自动备份 <span class="sub" style="font-weight:400">· 每次保存后自动留一份，每天一份，保留最近 7 天</span></h3>
+    <div id="autobk"><div class="sub">读取中…</div></div></div>
   ${/ShouxiApp/.test(navigator.userAgent)?"":`
   <div class="card"><h2>手机使用</h2>
     <div class="mu"><div class="mu-steps"><ol>
@@ -1822,6 +1874,7 @@ function renderSettings(){
     <p class="note" style="margin:0 0 10px">给某只股票设一个自己的「要求股息率」，覆盖上面的国债+行业溢价。留空 = 用默认。已单独设定 <b id="ovcnt">${ovn()}</b> 只。</p>
     <div class="filters"><input id="sq" style="width:230px" placeholder="搜索 名称 / 代码 / 拼音"><button class="btn sm" id="ovall">清除全部单独设定</button></div>
     <div class="tablewrap"><table class="ovt"><thead><tr><th class="l">名称</th><th>行业</th><th>默认要求</th><th>单独设定 %</th><th>生效要求</th><th>买入价 ≤</th><th></th></tr></thead><tbody id="ovb"></tbody></table></div></div>
+  <div class="card" id="commcard"><h2>交流群</h2>${commCard()}</div>
   <div class="card about"><img class="lgl" src="/logo-full.webp" alt="收息佬"><img class="lgd" src="/logo-full-dark.webp" alt=""><div class="abt">
     <h2>关于收息佬</h2><p>股息攒得好，退休晚不了。</p>
     <p class="note">一个做红利研究的本地小工具（A 股、ETF、B 股、港股）：看股息率、看买入价、看公司体检，再慢慢攒。数据来源东方财富、新浪财经，仅供研究，不构成投资建议。</p>
@@ -1850,9 +1903,7 @@ function renderSettings(){
   $("#chkupd").onclick=async()=>{const m=$("#updmsg"); m.textContent="检查中…"; const i=await checkUpdate(true);
     if(i.error) m.textContent=i.error; else if(i.newer){m.innerHTML=`发现新版本 v${i.latest}，已弹出更新提示`; showUpd(i,true)} else m.textContent=`已经是最新版（v${i.current}）`};
   // 联系方式:一键复制
-  document.querySelectorAll(".cpy").forEach(b=>b.onclick=async()=>{const t=b.dataset.copy, o=b.textContent; let ok=false;
-    try{await navigator.clipboard.writeText(t); ok=true}catch(e){try{const ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); ok=document.execCommand("copy"); ta.remove()}catch(e2){}}
-    b.textContent=ok?"已复制":"请手动复制"; setTimeout(()=>{b.textContent=o},1500)});
+  bindCopy();
   // 版本更新说明:读 /changelog.md,第一次展开时渲染
   const mdLite=md=>{const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"), inl=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/`(.+?)`/g,"<code>$1</code>");
     let html="", ul=false; const close=()=>{if(ul){html+="</ul>"; ul=false}};
@@ -1868,7 +1919,7 @@ function renderSettings(){
   // 外观
   document.querySelectorAll("#themeseg button").forEach(b=>b.onclick=()=>{setTheme(b.dataset.th); document.querySelectorAll("#themeseg button").forEach(x=>x.classList.toggle("on",x===b))});
   // 刷新
-  $("#refresh").onclick=startRefresh; paintRefresh(); $("#guidebtn").onclick=()=>showGuide(0);
+  $("#refresh").onclick=()=>startRefresh("quick"); $("#refreshfull").onclick=()=>startRefresh("full"); paintRefresh(); $("#guidebtn").onclick=()=>showGuide(0);
   let found=null; const asMsg=(t,bad)=>{const m=$("#as-msg"); m.textContent=t; m.style.color=bad?"var(--bad)":""};
   const look=async()=>{ const code=$("#as-code").value.trim(); found=null; $("#as-res").hidden=true;
     if(!/^\d{5,6}$/.test(code)) return asMsg("代码格式不对：A 股、B 股、ETF 填 6 位，港股填 5 位",1);
@@ -1887,6 +1938,10 @@ function renderSettings(){
     el.innerHTML=`<p class="note">这些股票已加入但还没有数据：${m.map(x=>`${x.name}（${x.code}）<button class="btn sm" data-retry="${x.code}" data-n="${x.name}" data-i="${x.industry}">重试下载</button>`).join(" ")}</p>`;
     el.querySelectorAll("[data-retry]").forEach(b=>b.onclick=async()=>{try{const r=await fetch("/api/stocks",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:b.dataset.retry,name:b.dataset.n,industry:b.dataset.i})}); const j=await r.json(); if(!r.ok) return notice(j.error||"重试失败"); b.textContent="下载中…"; b.disabled=true; poll()}catch(e){notice("重试失败，请稍后再试")}})}).catch(()=>{});
   $("#bk-out").onclick=()=>{const fn=`收息佬持仓备份-${today()}.json`; if(window.ShouxiAndroid){let ok=false; try{ok=ShouxiAndroid.saveFile(fn,JSON.stringify(state.holdings,null,1))}catch(e){} $("#bk-msg").textContent=ok?"已保存到手机「下载」文件夹":"保存失败，请稍后再试"; return} const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(state.holdings,null,1)],{type:"application/json"})); a.download=`收息佬持仓备份-${today()}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1500); $("#bk-msg").textContent="已导出"};
+  api("/api/backups").then(L=>{const el=$("#autobk"); if(!el) return;
+    el.innerHTML=L.length?L.map(b=>`<div class="bkrow"><span><b>${b.date}</b> · ${b.lots} 笔买入 · ${b.sells} 笔卖出 · 关注 ${b.favorites} 只</span><button class="btn sm" data-bkr="${b.name}">恢复</button></div>`).join(""):'<div class="sub">保存过持仓后，这里会出现自动备份。</div>';
+    el.querySelectorAll("[data-bkr]").forEach(b=>b.onclick=async()=>{const x=L.find(y=>y.name===b.dataset.bkr); if(!(await askConfirm(`用 ${x.date} 的自动备份覆盖当前数据？（${x.lots} 笔买入、${x.sells} 笔卖出）当前的持仓会先留一份 holdings.json.bak。`,"恢复"))) return;
+      try{ const r=await fetch("/api/backups/restore",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:b.dataset.bkr})}); if(!r.ok) throw 0; await load(); renderSettings(); notice("已恢复") }catch(e){ notice("恢复失败，请稍后再试") }})}).catch(()=>{});
   $("#bk-in").onclick=()=>$("#bk-file").click();
   $("#bk-file").onchange=async e=>{const f=e.target.files[0]; if(!f) return; let j;
     try{ j=JSON.parse(await f.text()); if(!j||!Array.isArray(j.lots)) throw 0 }catch(x){ return notice("这不是有效的收息佬持仓备份文件") }

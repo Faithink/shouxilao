@@ -155,6 +155,33 @@ def lookup_name(code):
         return ""
 
 
+BACKUP_DIR = HOME / "backups"
+BACKUP_KEEP = 7                      # 保留最近 7 天(每天一份,当天多次保存只留最后一份)
+_BK_NAME = re.compile(r"^holdings-\d{8}\.json$")
+
+
+def rolling_backup():
+    """保存持仓后留一份按天的备份:holdings-YYYYMMDD.json,只留最近 BACKUP_KEEP 份。误删误改时可以在设置页恢复。"""
+    try:
+        BACKUP_DIR.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(HOLDINGS, BACKUP_DIR / time.strftime("holdings-%Y%m%d.json"))
+        for f in sorted(BACKUP_DIR.glob("holdings-*.json"))[:-BACKUP_KEEP]:
+            f.unlink()
+    except OSError:
+        pass
+
+
+def list_backups():
+    out = []
+    for f in sorted(BACKUP_DIR.glob("holdings-*.json"), reverse=True) if BACKUP_DIR.exists() else []:
+        if not _BK_NAME.match(f.name):
+            continue
+        d = read_json(f, None) or {}
+        out.append({"name": f.name, "date": f.name[9:13] + "-" + f.name[13:15] + "-" + f.name[15:17], "size": f.stat().st_size,
+                    "lots": len(d.get("lots") or []), "sells": len(d.get("sells") or []), "favorites": len((d.get("settings") or {}).get("favorites") or [])})
+    return out
+
+
 class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
     server_version = "Shouxi"
@@ -269,6 +296,8 @@ class Handler(BaseHTTPRequestHandler):
                                "exists": code in stock_codes()})
         if path == "/api/holdings":
             return self._json(read_json(HOLDINGS, {"settings": {"capital": 0, "maxPct": 15}, "lots": []}))
+        if path == "/api/backups":
+            return self._json(list_backups())
         if path == "/api/missing":      # 已写入 stocks.csv 但没有数据(下载失败)的股票
             have = {x.get("code") for x in (read_json(DATA / "pool.json", None) or {}).get("stocks", [])}
             import csv, io
@@ -361,13 +390,34 @@ class Handler(BaseHTTPRequestHandler):
             _refresh["t"] = threading.Thread(target=lambda: fetch_data.run(only={code}, log=lambda s: None), daemon=True)
             _refresh["t"].start()
             return self._json({"started": True, "code": code, "name": name})
+        if path == "/api/backups/restore":
+            try:
+                name = str((json.loads(self._body() or b"{}") or {}).get("name", ""))
+            except (ValueError, AttributeError):
+                return self._json({"error": "bad json"}, 400)
+            f = BACKUP_DIR / name
+            if not _BK_NAME.match(name) or not f.exists():
+                return self._json({"error": "没有这份备份"}, 404)
+            data = read_json(f, None)
+            if not isinstance(data, dict):
+                return self._json({"error": "备份文件损坏"}, 400)
+            with _lock:
+                if HOLDINGS.exists():
+                    shutil.copyfile(HOLDINGS, HOLDINGS.with_suffix(".json.bak"))     # 恢复前的当前持仓也留一份
+                shutil.copyfile(f, HOLDINGS)
+            return self._json({"ok": True})
         if path == "/api/refresh":
             t = _refresh["t"]
             if t and t.is_alive():
                 return self._json({"started": False, "msg": "已在刷新中"})
-            _refresh["t"] = threading.Thread(target=lambda: fetch_data.run(log=lambda s: None), daemon=True)
+            try:
+                mode = (json.loads(self._body() or b"{}") or {}).get("mode")
+            except (ValueError, AttributeError):
+                mode = None
+            mode = "quick" if mode == "quick" else "full"
+            _refresh["t"] = threading.Thread(target=lambda: fetch_data.run(log=lambda s: None, mode=mode), daemon=True)
             _refresh["t"].start()
-            return self._json({"started": True})
+            return self._json({"started": True, "mode": mode})
         self._send(404, b"not found")
 
     def do_DELETE(self):
@@ -409,7 +459,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"error": "bad json"}, 400)
             # 结构校验:必须是对象,买入/卖出记录必须是列表,否则前端读到会整页出错
             if (not isinstance(body, dict) or not isinstance(body.get("lots", []), list)
-                    or not isinstance(body.get("sells", []), list) or not isinstance(body.get("settings", {}), dict)):
+                    or not isinstance(body.get("sells", []), list) or not isinstance(body.get("divs", []), list)
+                    or not isinstance(body.get("settings", {}), dict)):
                 return self._json({"error": "持仓数据格式不对"}, 400)
             with _lock:
                 HOLDINGS.parent.mkdir(parents=True, exist_ok=True)
@@ -419,6 +470,7 @@ class Handler(BaseHTTPRequestHandler):
                 if HOLDINGS.exists():
                     shutil.copyfile(HOLDINGS, HOLDINGS.with_suffix(".json.bak"))
                 os.replace(tmp, HOLDINGS)
+                rolling_backup()
             return self._json({"ok": True})
         self._send(404, b"not found")
 
@@ -430,7 +482,11 @@ class Handler(BaseHTTPRequestHandler):
             return self._not_found(path)
         if WEB.resolve() not in target.parents and target != WEB.resolve() / "index.html":
             return self._not_found(path)
-        if not target.is_file():
+        try:
+            is_file = target.is_file()
+        except OSError:                 # Linux 上超长文件名会抛 ENAMETOOLONG,当作不存在
+            is_file = False
+        if not is_file:
             return self._not_found(path)
         ctype = mimetypes.guess_type(str(target))[0] or "application/octet-stream"
         if ctype.startswith("text/") or ctype in ("application/json", "application/manifest+json"):

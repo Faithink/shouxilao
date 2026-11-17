@@ -1,0 +1,38 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install
+        run: |
+          pip install pypinyin segno playwright
+          playwright install --with-deps chromium
+      - name: Syntax checks
+        run: |
+          python -m py_compile app.py datasrc.py fetch_data.py paths.py passcode.py
+          python tools/check_js.py
+      - name: Start the server on a throw-away data directory
+        run: |
+          mkdir -p "$RUNNER_TEMP/home"
+          cp -R data "$RUNNER_TEMP/home/data"
+          cp stocks.csv "$RUNNER_TEMP/home/"
+          SHOUXI_HOME="$RUNNER_TEMP/home" SHOUXI_PORT=8897 SHOUXI_BIND=127.0.0.1 nohup python app.py > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8897/api/version && break; sleep 1; done
+      - name: Backend smoke and edge-case tests
+        run: python tools/smoke_test.py http://127.0.0.1:8897
+      - name: Front-end sweep (every page, desktop and phone width)
+        run: python tools/ui_sweep.py http://127.0.0.1:8897
+      - name: Server log on failure
+        if: failure()
+        run: cat "$RUNNER_TEMP/server.log" || true

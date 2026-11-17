@@ -5,6 +5,8 @@
 - 财务摘要   新浪财经 getFinanceReport2022
 """
 import json
+import os
+import pickle
 import ssl
 import time
 import urllib.parse
@@ -21,8 +23,11 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
 
 
 # 各站点两次请求之间的最小间隔(秒),避免被限流
-_MIN_GAP = {"money.finance.sina.com.cn": 0.4, "web.ifzq.gtimg.cn": 0.6, "datacenter-web.eastmoney.com": 0.25, "quotes.sina.cn": 0.35, "push2his.eastmoney.com": 0.3}
+_MIN_GAP = {"money.finance.sina.com.cn": 0.4, "web.ifzq.gtimg.cn": 1.2, "datacenter-web.eastmoney.com": 0.25, "quotes.sina.cn": 0.35, "push2his.eastmoney.com": 0.3}
 _last_req = {}
+
+# 快速刷新:分红、财务这类慢且不常变的数据,TTL 秒内优先用本地缓存(0 = 总是联网取,完整刷新用)
+SLOW_TTL = 0
 
 
 def _throttle(url):
@@ -203,7 +208,7 @@ def _native_fetch_prices(code, start, end, adjust=""):
     sym, got, cur = _market(code), {}, start
     while cur <= end:
         nxt = min(add_years(cur, 2) - timedelta(days=1), end)
-        j = http_json("https://web.ifzq.gtimg.cn/appstock/app/fqkline/get", {"param": f"{sym},day,{cur},{nxt},640,{adjust}"})
+        j = http_json("https://web.ifzq.gtimg.cn/appstock/app/fqkline/get", {"param": f"{sym},day,{cur},{nxt},640,{adjust}"}, tries=3, wait=6.0)
         d = ((j or {}).get("data") or {}).get(sym) or {}
         for r in d.get(key) or d.get("day") or []:
             got[r[0]] = float(r[2])
@@ -457,3 +462,32 @@ def fetch_dividends(code):
     return fetch_hk_dividends(code) if k == "hk" else fetch_b_dividends(code) if k == "b" else _a_dividends(code)
 fetch_prices = _with_fallback(_ak_prices, _native_fetch_prices)
 fetch_finance = _with_fallback(_ak_finance, _native_fetch_finance)
+
+
+def _slow_cached(name, fn):
+    """给分红/财务请求加本地磁盘缓存(pickle,放在 data/cache/slow/)。每次联网取到都会写缓存;SLOW_TTL>0 且缓存没过期时直接读缓存。"""
+    from paths import DATA
+
+    def wrapper(code, *a, **kw):
+        f = DATA / "cache" / "slow" / f"{name}_{code}.pkl"
+        if SLOW_TTL > 0 and f.exists() and time.time() - f.stat().st_mtime < SLOW_TTL:
+            try:
+                return pickle.loads(f.read_bytes())
+            except Exception:
+                pass
+        r = fn(code, *a, **kw)
+        try:
+            f.parent.mkdir(parents=True, exist_ok=True)
+            tmp = f.with_suffix(".tmp")
+            tmp.write_bytes(pickle.dumps(r, protocol=4))
+            os.replace(tmp, f)
+        except Exception:
+            pass
+        return r
+    return wrapper
+
+
+fetch_dividends = _slow_cached("div", fetch_dividends)
+fetch_finance = _slow_cached("fin", fetch_finance)
+fetch_etf_dividends = _slow_cached("etfdiv", fetch_etf_dividends)
+fetch_hk_finance = _slow_cached("hkfin", fetch_hk_finance)

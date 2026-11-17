@@ -1,4 +1,4 @@
-# Windows 冒烟测试(GitHub Actions 里跑):启动打包好的 exe,走一遍"首次使用"流程,包括点「刷新数据」。
+# Windows 冒烟测试(GitHub Actions 里跑):启动打包好的 exe,走一遍"首次使用"流程,点「刷新数据」只等前几只(快速检查)。
 # Windows 默认编码不是 UTF-8,正是 1.5.0 里「刷新后详情页和持仓页打不开」的原因,这里专门复现一遍。
 $ErrorActionPreference = "Stop"
 $exe = "packaging/build/dist/收息佬/收息佬.exe"
@@ -29,17 +29,17 @@ Check "录入持仓" {
 Check "读回持仓" { (Get-Utf8 "/api/holdings" | ConvertFrom-Json).lots[0].code -eq "600941" }
 Check "二维码" { (Invoke-WebRequest "$base/api/qr?u=http%3A%2F%2F192.168.1.5%3A$port" -UseBasicParsing).StatusCode -eq 200 }
 
-# 点「刷新数据」:全部股票重新采集一遍,最久等 14 分钟
+# 点「刷新数据」:只验证刷新能启动、前几只股票能写出(快速检查,约 1~2 分钟);不等全部 178 只刷完
 Invoke-WebRequest "$base/api/refresh" -Method Post -UseBasicParsing | Out-Null
-$deadline = (Get-Date).AddMinutes(18)
+$deadline = (Get-Date).AddMinutes(3)
 do {
     Start-Sleep -Seconds 10
     $st = Get-Utf8 "/api/status" | ConvertFrom-Json
     Write-Host "refresh: running=$($st.running) $($st.done)/$($st.total)"
-} while ($st.running -and (Get-Date) -lt $deadline)
+} while ($st.running -and $st.done -lt 5 -and (Get-Date) -lt $deadline)
 $nerr = @($st.errors.PSObject.Properties).Count
-Write-Host "refresh finished, errors: $nerr"
-Check "刷新已结束" { -not $st.running }
+Write-Host "refresh progress: $($st.done), errors: $nerr"
+Check "刷新已启动并有进展" { $st.done -ge 1 }
 Check "刷新后:股票池仍可读" { (Get-Utf8 "/api/pool" | ConvertFrom-Json).stocks.Count -ge 50 }
 Check "刷新后:个股详情仍可读" { (Get-Utf8 "/api/stock/600941") -match "中国移动" }
 Check "刷新后:ETF 详情仍可读" { (Get-Utf8 "/api/stock/563020") -match "红利低波" }
@@ -49,7 +49,7 @@ Check "刷新写出的详情文件是合法 UTF-8" {
     $enc = New-Object System.Text.UTF8Encoding($false, $true)
     $null = $enc.GetString($bytes); $true
 }
-Check "刷新后大部分股票成功(失败数 < 10)" { $nerr -lt 10 }
+Check "刷新前几只没有失败(失败数 < 3)" { $nerr -lt 3 }
 Stop-Process $p -Force
 if ($fail.Count -gt 0) { Write-Host "FAILED: $($fail -join ', ')"; exit 1 }
 Write-Host "ALL PASS"

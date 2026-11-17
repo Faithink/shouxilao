@@ -34,3 +34,4 @@ holdings.json.bak
 *.bak
 *.log
 data/*.log
+backups/

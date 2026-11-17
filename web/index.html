@@ -63,7 +63,7 @@ main{max-width:1280px;margin:0 auto;padding:22px 28px 40px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
 .card h2{font-size:15px;margin:0 0 12px;letter-spacing:.2px}
 .card h3{font-size:13px;margin:14px 0 8px;color:var(--mute);font-weight:600}
-button.btn,.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 13px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;box-shadow:var(--shadow)}
+button.btn,.btn{white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 13px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;box-shadow:var(--shadow)}
 button.btn:hover{border-color:var(--accent);color:var(--accent)}
 button.btn:disabled{opacity:.55;cursor:default}
 button.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
@@ -164,23 +164,32 @@ details.card>summary,details>summary{cursor:pointer;font-weight:600;font-size:14
  button.btn{min-height:40px}button.btn.sm{min-height:32px}
  .filters{gap:8px}.filters .sub{display:none}
  #fq{width:100%!important}
- .msort,.mind{display:block;width:calc(50% - 4px)}
+ .msort,.mind{display:block;width:100%}
  .chips.sm{display:none}
  .mprice{display:inline}
  table.pool,table.pool tbody{display:block;width:100%}
  table.pool thead{display:none}
- table.pool tr.row{display:grid;grid-template-columns:42px minmax(0,1fr) auto;grid-template-areas:"fav name yield" "fav verdict verdict" "fav dots buy";align-items:center;column-gap:6px;row-gap:8px;padding:12px 2px;border-bottom:1px solid var(--line)}
+ table.pool tr.row{display:grid;grid-template-columns:minmax(0,1fr) 128px;grid-template-areas:"name yield" "name buy" "verdict dots";align-items:center;column-gap:12px;row-gap:8px;padding:12px 12px 11px;border-bottom:1px solid var(--line)}
  table.pool tr.row td{display:block;border:0;padding:0;text-align:left;white-space:normal}
- table.pool td.favtd{grid-area:fav;align-self:start;width:auto;text-align:center!important}
- table.pool td:nth-child(2){grid-area:name;max-width:none}
- table.pool tr.row td:nth-child(3){display:none}
- table.pool td:nth-child(4){grid-area:yield;text-align:right;font-size:21px;line-height:1.1}
+ table.pool tr.row td.favtd,table.pool tr.row td:nth-child(3){display:none}
+ table.pool td:nth-child(2){grid-area:name;max-width:none;align-self:start;min-width:0}
+ table.pool td:nth-child(2)>b{font-size:16px;font-weight:700;letter-spacing:.2px}
+ table.pool td:nth-child(2) .badge.held,table.pool td:nth-child(2) .pick{display:none}
+ table.pool td:nth-child(2) .mfav{min-width:0;min-height:0;padding:0 5px 0 0;font-size:18px;vertical-align:-1px}
+ table.pool td:nth-child(2) .ntag{margin:0 0 0 6px;padding:0 6px;font-size:10.5px;line-height:17px;display:inline-block;vertical-align:2px}
+ table.pool td:nth-child(2) .sub{margin-top:3px;font-size:12px;line-height:1.35;color:var(--mute);opacity:.85}
+ table.pool tr.row td:nth-child(4){grid-area:yield;text-align:right;align-self:start;line-height:1}
+ table.pool td:nth-child(4) b{font-size:21px;font-weight:700;letter-spacing:-.3px}
  table.pool td:nth-child(5){grid-area:verdict;min-width:0}
- table.pool td:nth-child(6){grid-area:dots}
- table.pool td:nth-child(7){grid-area:buy;text-align:right}
- table.pool .dots{justify-content:flex-start;gap:6px}table.pool .dot{width:14px;height:14px}
- table.pool .vtd .pbar,table.pool .vtd .pend{margin-left:0;width:100%;max-width:240px}
- table.pool .badge{font-size:12.5px!important;padding:2px 10px!important}
+ table.pool td:nth-child(6){grid-area:dots;justify-self:end}
+ table.pool tr.row td:nth-child(7){grid-area:buy;align-self:end;display:flex;align-items:baseline;justify-content:flex-end;gap:5px;font-size:12px;color:var(--mute);white-space:nowrap}
+ table.pool tr.row td:nth-child(7){text-align:right}
+ table.pool td:nth-child(7) b{font-weight:600;color:var(--ink);font-size:12.5px}table.pool td:nth-child(7) .sub{font-size:11.5px;margin:0}
+ table.pool tr.row td.vtd{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;min-height:18px;max-width:none}
+ table.pool .vtd .pbar{flex:1 1 80px;width:auto;margin:0;min-width:80px;height:6px;border-radius:3px;opacity:.9}table.pool .vtd .pbar i{height:14px;top:-4px;width:3px}
+ table.pool .vtd .pend{display:none}table.pool .vtd .warn{flex-basis:100%;margin:0}
+ table.pool .dots{gap:4px}table.pool .dot{width:10px;height:10px}
+ table.pool .badge{font-size:12px!important;padding:1px 9px!important;font-weight:600}
  .ph{margin-bottom:10px}
 }
 @media(min-width:621px){
@@ -257,8 +266,7 @@ a.lstep:hover{outline:2px solid var(--accent)}
 .greq.edit i{padding:8px 10px}.greq.edit .ie{display:inline-flex;align-items:baseline;gap:2px}.greq.edit input{width:3.6em;text-align:center;border:0;border-bottom:2px dashed currentColor;background:transparent;color:inherit;font-family:var(--serif);font-size:20px;font-weight:700;padding:0;border-radius:0;-moz-appearance:textfield}.greq.edit input:focus{outline:0;border-bottom-style:solid}.greq.edit .ie span{font-size:14px;font-weight:700}.greq.edit .t b{font-size:20px}@media(max-width:480px){.greq.edit input{width:2.5em;font-size:16px}.greq.edit i{padding:6px 7px}.greq.edit .ie span{font-size:12px}.greq.edit .t b{font-size:16px}.greq.edit .t{min-width:58px}.greq{gap:3px}}
 .lhint{font-size:12.5px;color:var(--mute);margin:4px 0 0}
 .actm{margin-left:2px;font-size:10px;color:var(--accent);font-weight:700;vertical-align:super}
-.bkrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:13.5px}.bkrow:first-child{border-top:0}
-.rres{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:14px}.rres input{width:72px}.rres .rpill{flex:1;min-width:104px;background:var(--seg);border-radius:10px;padding:6px 12px;display:flex;flex-direction:column;line-height:1.3}.rres .rpill span{font-size:12px;color:var(--mute)}.rres .rpill b{font-family:var(--serif);font-size:20px}
+.bkrow .btn{flex:none}.bkrow>span{min-width:0}.bkrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:13.5px}.bkrow:first-child{border-top:0}
 .comm{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.comm .cqr{width:150px;height:150px;border-radius:12px;border:1px solid var(--line);background:#fff;object-fit:contain;padding:0}.comm .ct{flex:1;min-width:200px;display:flex;flex-direction:column;gap:8px}.comm .ct b{font-size:16px}.comm .ct p{margin:0;font-size:13.5px;line-height:1.7;color:var(--mute)}.comm .wid{display:flex;align-items:center;gap:8px;font-size:14px}.comm .wid b{font-family:var(--serif);font-size:18px}.comm.noqr .ct{min-width:0}
 @media(max-width:560px){.comm{flex-direction:column;align-items:center;text-align:center}.comm .wid{justify-content:center}}
 .rwhat{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:16px;font-size:14px}.rwhat input[type=number]{width:70px}.rwhat input[type=range]{flex:1;min-width:140px}
@@ -405,17 +413,25 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .legend{display:flex;gap:16px;font-size:12px;color:var(--mute);margin-bottom:4px;flex-wrap:wrap}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
 .tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);padding:6px 10px;border-radius:8px;font-size:12px;z-index:20;display:none;white-space:pre;box-shadow:var(--shadow-lg)}
-.stkpick{position:relative;min-width:200px}.stkpick input{width:100%}
+.stkpick{position:relative;min-width:200px;flex:0 1 340px;max-width:340px}@media(max-width:620px){.stkpick{flex:1 1 100%;max-width:none}}.stkpick input{width:100%}
 .lotrows{display:flex;flex-direction:column;gap:8px;margin-top:12px}.lotrow{display:grid;grid-template-columns:150px 92px 140px 140px 40px;gap:10px;align-items:center}.lotrow input,.lotrow select{width:100%}.lothead{font-size:12px;color:var(--mute);margin-bottom:-4px}
-@media(max-width:620px){.lotrow{grid-template-columns:1.5fr 1fr 1fr 1fr 32px;gap:5px}.lotrow input,.lotrow select{padding:6px 4px;font-size:14px;min-width:0}}
+@media(max-width:620px){.lothead{display:none!important}.lotrow:not(.lothead){grid-template-columns:minmax(0,1fr) minmax(0,1fr) 40px;grid-template-areas:"d k x" "p s x";gap:8px;padding:10px;border:1px solid var(--line);border-radius:12px}.lotrow .rd{grid-area:d}.lotrow .rk{grid-area:k}.lotrow .rp{grid-area:p}.lotrow .rs{grid-area:s}.lotrow .rx{grid-area:x;align-self:stretch;height:auto;padding:0}.lotrow input,.lotrow select{min-width:0;font-size:15px;padding:0 10px}}
 .fold{padding:0}.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 18px}.fold>summary::-webkit-details-marker{display:none}
 .fold>summary h2{margin:0;font-size:15px;flex:1}.fold>summary h2 .sub{display:none}.fold .sumv{margin-left:auto;font-size:15px}
 .fold[open]>summary{border-bottom:1px solid var(--line)}.foldbody{padding:14px 18px 18px}
-.calgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.cm{border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-height:76px}
-.cm.has{background:color-mix(in srgb,var(--accent) 7%,transparent);border-color:color-mix(in srgb,var(--accent) 28%,var(--line))}
-.cmh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}.cmh b{font-size:14px}.cmh .ct{font-weight:700;font-family:var(--serif)}
-.ci{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--mute);line-height:1.6}.ci i{font-style:normal;font-size:11px;opacity:.8}.ci b{color:var(--ink);font-weight:600;font-family:var(--serif)}
-@media(max-width:700px){.calgrid{grid-template-columns:1fr 1fr}}
+.calwrap{position:relative}
+.calgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.cm{font:inherit;color:var(--ink);text-align:left;cursor:pointer;border:1px solid var(--line);background:transparent;border-radius:10px;padding:8px 10px 7px;display:flex;flex-direction:column;gap:2px;min-width:0;-webkit-tap-highlight-color:transparent}
+.cm .cml{font-size:12px;color:var(--mute)}.cm .cml small{opacity:.7}
+.cm .ct{font-size:15px;font-weight:700;font-family:var(--serif);white-space:nowrap}.cm:not(.has) .ct{color:var(--mute);font-weight:400}
+.cm .cmb{display:block;height:3px;border-radius:2px;background:var(--line);margin-top:3px;overflow:hidden}.cm .cmb u{display:block;height:100%;background:var(--accent);border-radius:2px;text-decoration:none}
+.cm.has{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.cm:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}.cm.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.calpop{position:absolute;z-index:20;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.18);max-height:260px;overflow:auto}
+.calpop::before{content:"";position:absolute;top:-6px;left:var(--ax,50%);width:10px;height:10px;background:var(--card);border-left:1px solid var(--line);border-top:1px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.ci{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--mute);line-height:1.7}.ci i{font-style:normal;font-size:11px;opacity:.8}.ci b{color:var(--ink);font-weight:600;font-family:var(--serif)}
+.cph{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--line)}.cph b{font-size:14px}.cph .ct{font-weight:700;font-family:var(--serif)}
+@media(max-width:700px){.calgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.cm{padding:7px 9px 6px}.cm .ct{font-size:14px}}
 .hchev{color:var(--mute);font-style:normal;font-size:18px;line-height:1;transition:transform .15s;flex:none;width:14px;text-align:center}.fold[open]>summary .hchev,.hrow[open]>summary .hchev{transform:rotate(90deg)}
 .htable{padding:0;overflow:hidden}.hsum{display:grid;grid-template-columns:minmax(120px,1.4fr) .9fr .8fr .8fr 1.1fr .8fr .95fr 1fr 1fr 1fr 16px;gap:10px;align-items:center;padding:12px 18px}
 .hhead{font-size:12px;color:var(--mute);border-bottom:1px solid var(--line);padding-top:8px;padding-bottom:8px}.hsum .r{text-align:right;font-variant-numeric:tabular-nums}
@@ -436,7 +452,7 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 @media(max-width:700px){.mu{grid-template-columns:1fr}}
 #main.priv-on .hbody .verdict,#main.priv-on .hbody .nodes{display:none}
 .pbadge{background:var(--none-bg);color:var(--mute)}
-#main.priv-on .tbar,#main.priv-on .atrack,#main.priv-on .stackbar,#main.priv-on .bar{visibility:hidden}
+#main.priv-on .treemap,#main.priv-on .tbar,#main.priv-on .atrack,#main.priv-on .stackbar,#main.priv-on .bar{visibility:hidden}
 #main.priv-on .pos,#main.priv-on .neg,#main.priv-on .up,#main.priv-on .dn{color:inherit!important}
 @media(max-width:700px){.ph.hasbtn{display:grid;grid-template-columns:1fr auto;align-items:center;row-gap:4px}.ph.hasbtn h2{grid-column:1;grid-row:1}.ph.hasbtn .privbtn{grid-column:2;grid-row:1;margin-left:0}.ph.hasbtn .sub{grid-column:1/-1;grid-row:2}}
 .privbtn{margin-left:auto;align-self:center;display:inline-flex;align-items:center;justify-content:center;width:44px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--mute);cursor:pointer;box-shadow:var(--shadow);transition:all .15s}.privbtn:hover{color:var(--accent);border-color:var(--accent)}.privbtn.on{background:color-mix(in srgb,var(--accent) 14%,var(--card));border-color:var(--accent);color:var(--accent)}
@@ -451,6 +467,31 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .bellpanel{position:fixed;top:58px;right:20px;width:min(380px,calc(100vw - 20px));max-height:72vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);padding:14px 16px;z-index:60}.bellpanel[hidden]{display:none}.bellpanel h4{margin:0 0 4px;font-size:15px}.bellpanel .tit{grid-template-columns:1fr auto}.bellpanel .tit>.sub{grid-column:1/-1}
 @media(max-width:620px){.bellpanel{left:10px;right:10px;width:auto;top:52px}}
 .stale{display:inline-block;margin-left:6px;padding:0 7px;border-radius:999px;font-size:11px;font-weight:600;background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad);white-space:nowrap}
+.abupd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 2px}.abupd .seg button{padding:5px 11px;font-size:13px}
+@media(max-width:620px){
+ .ph .sub{display:none}
+ #mkseg{display:flex;width:100%}#mkseg button{flex:1;padding:7px 4px;font-size:14px;white-space:nowrap}#mkseg .mkn{display:inline;margin-left:3px;font-size:11px}
+ .chips{flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:0 -12px 8px;padding:2px 12px 4px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+ .chips .chip{flex:none;padding:6px 12px;font-size:13px;box-shadow:none}
+ .chips .chip.focus.on{box-shadow:0 0 0 2px var(--accent)}
+}
+.mfav{display:none}.kpinote{display:none}
+@media(max-width:620px){
+ .g3.kpi3{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;margin-bottom:6px!important}
+ .g3.kpi3>.card.kpi{grid-column:auto!important;padding:10px 8px!important}.kpi3 .k{font-size:11px;line-height:1.3}.kpi3 .v{font-size:18px!important;margin-top:2px}.kpi3 .sub{display:none}
+ .kpinote{display:block;margin:0 2px 14px;line-height:1.6;font-size:12px}
+}
+.akpis{display:grid;margin-top:10px;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.atrack.thin{height:5px;margin-top:5px}.av b small{font-size:11px;font-weight:400;color:var(--mute)}
+.ibar{height:14px;margin:6px 0 8px;gap:2px;background:none}.ibar div{border-radius:3px}
+.ichips{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--mute)}.ichip{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}.ichip b{color:var(--ink)}
+@media(max-width:620px){.akpis{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;align-items:start}.akpis .kpi{padding:8px 6px}.akpis .kpi .k{font-size:11px;line-height:1.3}.akpis .kpi .v{font-size:17px}.akpis .kpi .sub:not(.warn){display:none}.akpis .kpi .sub.warn{font-size:11px}}
+@media(max-width:620px){
+ .mfav{display:inline-block;font-size:20px;padding:2px 6px 2px 0;min-width:0;min-height:0;vertical-align:-2px}
+ .about{flex-direction:column;align-items:center}.about .abt{width:100%}
+ .chips{padding-right:36px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent)}
+}
+.bupd{padding-bottom:10px;margin-bottom:8px;border-bottom:1px solid var(--line)}.bupd .updget{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .ntag{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;font-size:11.5px;font-weight:600;color:#fff;vertical-align:1px;white-space:nowrap}.ntag.buy{background:#2f9e6b}.ntag.sell{background:var(--bad)}.priv-on .ntag{display:none}
 .tday .tsec{margin:10px 0 4px;font-size:13px;color:var(--mute)}.tday .tit{display:grid;grid-template-columns:minmax(120px,1.2fr) auto 2fr;gap:8px 12px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:13px}.tday .tit:first-of-type{border-top:0}.tday .tit .sub{font-size:12px}.tday .tn a{color:var(--ink);font-weight:600;text-decoration:none}.tday .tn a:hover{text-decoration:underline}.tday .tg{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;color:#fff}.tday .tg.buy{background:var(--tl-g,#2f9e6b)}.tday .tg.sell{background:var(--bad)}@media(max-width:620px){.tday .tit{grid-template-columns:1fr auto}.tday .tit>.sub{grid-column:1/-1}}
 .spot{position:relative;outline:3px solid var(--accent);outline-offset:3px;border-radius:12px;animation:spotp 1.1s ease-in-out 5}.spot::after{content:attr(data-spot);position:absolute;right:14px;top:0;transform:translateY(-50%);background:var(--accent);color:var(--accent-ink);padding:5px 11px;border-radius:8px;font-size:13px;font-weight:600;line-height:1.4;z-index:30;max-width:80vw;box-shadow:var(--shadow-lg)}@keyframes spotp{50%{outline-color:transparent}}
@@ -471,6 +512,7 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .dlg label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mute)}.dlg input{width:100%}
 .dlg .acts{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
 .form{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.form[hidden]{display:none}
+@media(max-width:620px){#dv-code{flex:1 1 100%;width:100%!important}#dv-date,#dv-amt{flex:1 1 40%;width:auto!important;min-width:0}#dv-note{flex:1 1 50%;width:auto!important;min-width:0}}
 .form label{display:flex;flex-direction:column;font-size:12px;color:var(--mute);gap:3px}
 .reqcard{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-left:4px solid var(--line)}.reqcard.on{border-left-color:var(--accent)}.reqcard .k{font-size:13px;color:var(--mute)}.reqv{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1.2;margin:2px 0}.reqset{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.reqset label{display:flex;align-items:center;gap:6px;font-size:14px}.reqset input{width:84px;font-size:16px;padding:6px 8px}
 .note{font-size:12px;color:var(--mute);margin-top:8px;line-height:1.6}
@@ -500,6 +542,12 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .tbar .td{background:var(--c2)}.ms.hot{background:color-mix(in srgb,var(--c1) 14%,transparent)}.navbar u{background:var(--c2);color:#fff}
 .tbar .tp,.navbar i{background:var(--c1)}.tbar .tpn{background:var(--bad)}
 @media(max-width:620px){.lad4 .ltrack,.lad4 .ltrack i{height:28px;line-height:28px}}
+/* 统一控件高度:桌面 按钮/输入/下拉 34,小按钮 26;手机 42/34 */
+button.btn,.btn,input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]),select{min-height:34px;box-sizing:border-box}
+button.btn.sm{min-height:26px}
+button.btn,.btn{display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.seg button{min-height:30px}
+@media(max-width:620px){button.btn,.btn,input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]),select{min-height:42px}button.btn.sm{min-height:34px}.seg button{min-height:38px}.lotrow input,.lotrow select{min-height:42px}}
 </style>
 </head>
 <body>
@@ -709,20 +757,25 @@ function digest(){
   watch.sort((a,b)=>ORDER[a.status]-ORDER[b.status]);
   return {pos,watch,hasAny:held.size>0||fav.size>0};
 }
+function updCard(){
+  const i=state.newVer; if(!i) return "";
+  const dl=i.download?`<a class="btn primary sm" href="${i.download}" target="_blank" rel="noopener">去下载</a>${i.code?`<span class="sub">提取码 <b>${i.code}</b></span>`:""}`:`<span class="sub">请到${i.contact||"微信公众号「快乐收息佬」"}获取</span>`;
+  const notes=(i.notes||[]).slice(0,4).map(t=>`<li>${t}</li>`).join("");
+  return `<div class="bupd"><div class="tsec" style="margin-top:0">发现新版本 v${i.latest}<span class="sub"> · 你现在是 v${i.current}</span></div>${notes?`<ul class="updnotes">${notes}</ul>`:""}<div class="updget">${dl}<button class="btn sm" type="button" id="updskip">这个版本不再提醒</button></div></div>`}
 function todayBody(){
-  const d=digest(); if(!d.hasAny) return "";
+  const d=digest(); if(!d.hasAny) return updCard();
   const tags=s=>{const t=[]; if(unconf(s).length) t.push("低位待确认："+unconf(s).join("、")); if(fakeDiv(s)) t.push("分红率 "+Math.round(poOf(s)*100)+"%"); const r=qRedShow(s); if(r.length) t.push("体检红灯："+r.join("、")); return t.length?` <span class="warn">⚠ ${t.join("；")}</span>`:""};
   const price=s=>`${px(s.price)}${s.ccy&&s.ccy!=="CNY"?" "+cu(s):" 元"}`;
   const nm=s=>`<span class="tn"><a href="#/stock/${s.code}">${s.name}</a><div class="sub">${s.code}</div></span>`;
   const n=d.pos.length+d.watch.length;
   const posH=d.pos.map(({s,n,avg})=>`<div class="tit">${nm(s)}<span class="tg ${n[1]}">${n[0]}</span><span class="sub">现价 ${price(s)}（成本均价 ${px(avg)}）· ${n[2]}${n[1]==="buy"?tags(s):""}</span></div>`).join("");
   const watH=d.watch.map(s=>`<div class="tit">${nm(s)}<span class="tg buy">${lab(s)}</span><span class="sub">现价 ${price(s)} · 买入价 ≤ ${px(s.zones.buy)} · 股息率 ${pct(s.yield)}${tags(s)}</span></div>`).join("");
-  return `<h4>今日提醒</h4>${n?`${d.pos.length?`<div class="tsec">持仓里触发了节点（${d.pos.length}）</div>${posH}`:""}${d.watch.length?`<div class="tsec">你关注的、处在可建仓区间的（${d.watch.length}）</div>${watH}`:""}`:`<div class="sub" style="padding:6px 0">今天没有持仓触发加仓/止盈节点，关注的股票也没有进入买入区。</div>`}<p class="note">按 ${state.pool.updated||"最近一次"} 的数据（日线收盘）生成，按你在设置里的「要求股息率」计算。只是价位提示，不是买卖建议，下手前先看公司体检。</p>`;
+  return `${updCard()}<h4>今日提醒</h4>${n?`${d.pos.length?`<div class="tsec">持仓里触发了节点（${d.pos.length}）</div>${posH}`:""}${d.watch.length?`<div class="tsec">你关注的、处在可建仓区间的（${d.watch.length}）</div>${watH}`:""}`:`<div class="sub" style="padding:6px 0">今天没有持仓触发加仓/止盈节点，关注的股票也没有进入买入区。</div>`}<p class="note">按 ${state.pool.updated||"最近一次"} 的数据（日线收盘）生成，按你在设置里的「要求股息率」计算。只是价位提示，不是买卖建议，下手前先看公司体检。</p>`;
 }
 function bellRender(){
   const b=document.getElementById("bell"); if(!b||!state.pool||!state.holdings) return;
-  const d=digest(), n=d.pos.length+d.watch.length; b.hidden=!d.hasAny; const bn=document.getElementById("bellN"); bn.hidden=!n; bn.textContent=n; b.title=n?`今日提醒：${n} 条`:"今日提醒：没有触发";
-  const pn=document.getElementById("bellpanel"); if(!pn.hidden) pn.innerHTML=`<div class="tday">${todayBody()}</div>`;
+  const d=digest(), u=state.newVer?1:0, n=d.pos.length+d.watch.length+u; b.hidden=!d.hasAny&&!u; const bn=document.getElementById("bellN"); bn.hidden=!n; bn.textContent=n; b.title=n?`提醒：${n} 条${u?"（含新版本）":""}`:"今日提醒：没有触发";
+  const pn=document.getElementById("bellpanel"); if(!pn.hidden){pn.innerHTML=`<div class="tday">${todayBody()}</div>`; const k=document.getElementById("updskip"); if(k) k.onclick=()=>{try{localStorage.setItem("updDismiss",state.newVer.latest)}catch(_){} noteUpdate(state.newVer)}}
 }
 (()=>{const b=document.getElementById("bell"), pn=document.getElementById("bellpanel");
   b.onclick=e=>{e.stopPropagation(); if(pn.hidden){pn.hidden=false; bellRender()} else pn.hidden=true};
@@ -785,15 +838,9 @@ function confetti(){
   requestAnimationFrame(tick);
 }
 /* ---------- 使用指引里的「要求股息率」小计算器:色块里的数字可直接改,下面直接给买入价和低位线 ---------- */
-function reqMini(p){const c=cfg(), pm=DEF_PREM["消费"]??3;
-  return `${reqLab(p)}
-    <div class="rres"><span class="nw">每股分红 <input id="${p}-d" type="number" step="0.1" value="2" aria-label="每股分红（元）"> 元</span>
-      <div class="rpill"><span>买入价</span><b id="${p}-b">–</b></div><div class="rpill"><span>低位线</span><b id="${p}-h">–</b></div></div>
-    <div class="lhint">✎ 点色块里的数字可以改；买入价 = 每股分红 ÷ 要求，低位线 = 要求再高 1 个点。</div>`}
-function bindReqMini(root,p){const q=k=>root.querySelector("#"+p+"-"+k);
-  const calc=()=>{const f=(+q("a").value+ +q("p").value+ +q("x").value)/100, d=+q("d").value; q("vt").textContent=(f*100).toFixed(2)+"%";
-    q("b").textContent=d>0&&f>0?(d/f).toFixed(2):"–"; q("h").textContent=d>0&&f>0?(d/(f+0.01)).toFixed(2):"–"};
-  ["a","p","x","d"].forEach(k=>q(k).oninput=calc); calc()}
+/* 使用指引第 4 页:只说明结构的静态示意(消费类股票为例),不可编辑 */
+function reqStatic(){const c=cfg(), pm=DEF_PREM["消费"]??3;
+  return `<div class="greq"><i class="a"><u>国债</u><b>${c.rf}%</b></i><s>+</s><i class="b"><u>行业溢价</u><b>${pm}%</b></i><s>+</s><i class="c"><u>个股追加</u><b>0%</b></i><s>=</s><i class="t"><u>要求</u><b>${(c.rf+pm).toFixed(2)}%</b></i></div>`}
 function bindHealthDemo(root){const r=root.querySelector("#hld-r"); if(!r) return; const f=()=>{const v=+r.value; root.querySelector("#hld-v").textContent=v+"%"; const lv=v<=80?["g","绿灯：分红在赚的钱里，有余量"]:v<=100?["y","黄灯：分红快把赚的钱分完了"]:["r","红灯：分的比赚的多，在花老本"]; root.querySelector("#hld-o").innerHTML=`<i class="hl-dot ${lv[0]}" style="vertical-align:-2px"></i> ${lv[1]}`}; r.oninput=f; f()}
 const GUIDE=[
  {t:"收息佬能帮你做什么",h:()=>`<div class="gtiles">
@@ -814,12 +861,13 @@ const GUIDE=[
     <div class="r buy"><span>加仓二档</span><i></i><em>低位线或成本 −10%：再加 1/3</em></div></div>
     <div class="gnote">触发的节点会出现在股票池顶部的「今日提醒」里。A 股和港股分开显示；港股用港元，不算红利税。</div>
     <div class="gact"><button class="btn sm" data-go="hold">去录入持仓 →</button></div>`},
-  {t:"重点：自定义你的股息率要求",h:()=>`<div class="gform"><b>买入价 = 每股分红 ÷ 要求股息率</b><em>要求越高，买入价越低，越难触发</em></div>
-    ${reqMini("g")}
+  {t:"重点：自定义你的股息率要求",h:()=>`<div class="gform"><b>要求股息率 = 国债 + 行业溢价 + 个股追加</b><em>股票的股息率达到这个数，才算价格合适；要求越高，越难触发</em></div>
+    <div class="lhint" style="margin:2px 0 6px">以消费类股票为例（个股追加大多数股票是 0）：</div>
+    ${reqStatic()}
     <div class="glayers">
-      <button class="lay" data-go="rf"><em>①</em><span><b>国债收益率</b>全局基准，所有股票共用</span><i>去改 →</i></button>
-      <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>每个行业一个数，默认是经验假设</span><i>去改 →</i></button>
-      <button class="lay" data-go="ov"><em>③</em><span><b>个股单独设定</b>只改这一只，优先级最高；越有把握，要求可以低一点</span><i>去看 →</i></button></div>
+      <button class="lay" data-go="rf"><em>①</em><span><b>国债收益率</b>几乎没有风险的收益，是所有股票的起点</span><i>去改 →</i></button>
+      <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>风险越高的行业，要求在国债之上多要一些</span><i>去改 →</i></button>
+      <button class="lay" data-go="ov"><em>③</em><span><b>个股追加 / 单独设定</b>对某一只股票单独调整，优先级最高；越有把握，要求可以越低</span><i>去看 →</i></button></div>
     <div class="gnote">个别股票默认带「个股追加」（比如分红率在快速上升），详情页会写明原因。更多讲解在「红利课堂」。仅供研究，不构成投资建议。</div>`},
  {t:"加入交流群，一起聊聊",last:1,h:()=>`${commCard()}<div class="gnote">收息佬是一个人在做的小工具，你的反馈会直接影响下一个版本。不方便加微信也没关系，设置页「关于」里还有公众号、小红书和邮箱。</div>`}
 ];
@@ -847,7 +895,7 @@ function showGuide(startAt){
       <div class="gdots">${GUIDE.map((_,k)=>`<i class="${k===i?"on":""}"></i>`).join("")}</div>
       <div class="acts">${i>0?'<button class="btn" data-x="prev">上一步</button>':'<button class="btn" data-x="skip">跳过</button>'}${g.last?'<button class="btn primary" data-x="done">开始使用</button>':'<button class="btn primary" data-x="next">下一步</button>'}</div></div>`;
     const q=id=>w.querySelector(id);
-    if(q("#g-d")) bindReqMini(w,"g"); bindCopy(w);};
+    bindCopy(w);};
   w.onclick=e=>{const go=e.target.closest("[data-go]"); if(go){const f=GUIDE_GO[go.dataset.go]; close(false,true); back(); f(); return}
     const x=e.target.dataset.x; if(x==="next"){i++;draw()} else if(x==="prev"){i--;draw()} else if(x==="done") close(true); else if(x==="skip"||e.target===w) close(false)};
   draw(); document.addEventListener("keydown",kd); document.body.appendChild(w);
@@ -879,7 +927,7 @@ function renderPool(){
   const emptyMsg=st==="focus"?"还没有关注的股票。点「精选」或「全部」挑选，再点列表左侧的 ☆ 加进来；有持仓的也会自动出现在这里。":"没有符合条件的股票。";
   const rowsHtml=rows=>!rows.length?`<tr><td colspan="7" class="empty">${emptyMsg}</td></tr>`:rows.map(s=>{const z=s.zones,gap=z?(s.price/z.buy-1)*100:0,on=fav.has(s.code);return `<tr class="row${on?" favrow":""}" data-code="${s.code}">
         <td class="favtd"><button class="fav${on?" on":""}" data-fav="${s.code}" title="${on?"取消关注":"加入我的关注"}" aria-label="${on?"取消关注":"加入我的关注"}">${on?"★":"☆"}</button></td>
-        <td class="l"><b>${s.name}</b>${held.has(s.code)?' <span class="badge held">已持仓</span>':""}${posBy.has(s.code)?`<span class="ntag ${posBy.get(s.code)[1]}">${posBy.get(s.code)[0]}</span>`:watchSet.has(s.code)?'<span class="ntag buy">可建仓</span>':""}${isFocus(s)?'<span class="pick" title="系统精选：价格偏低或低位、体检无质量红灯">精选</span>':""}<div class="sub">${s.code} · ${s.industry}${s.market&&s.market!=="a"?` · ${mkt(s)}（${cu(s)}）`:""}<span class="mprice"> · 现价 ${px(s.price)}</span>${staleOf(s)?`<span class="stale" title="这只股票的价格停在 ${s.date}，比其他股票旧（数据源临时失败或停牌）">价格 ${s.date.slice(5)}</span>`:""}</div></td>
+        <td class="l${posBy.has(s.code)||watchSet.has(s.code)?" hasn":""}"><button class="fav mfav${on?" on":""}" data-fav="${s.code}" aria-label="${on?"取消关注":"加入我的关注"}">${on?"★":"☆"}</button><b>${s.name}</b>${held.has(s.code)?' <span class="badge held">已持仓</span>':""}${posBy.has(s.code)?`<span class="ntag ${posBy.get(s.code)[1]}">${posBy.get(s.code)[0]}</span>`:watchSet.has(s.code)?'<span class="ntag buy">可建仓</span>':""}${isFocus(s)?'<span class="pick" title="系统精选：价格偏低或低位、体检无质量红灯">精选</span>':""}<div class="sub">${s.code} · ${s.industry}${s.market&&s.market!=="a"?` · ${mkt(s)}（${cu(s)}）`:""}<span class="mprice"> · ${px(s.price)}</span>${staleOf(s)?`<span class="stale" title="这只股票的价格停在 ${s.date}，比其他股票旧（数据源临时失败或停牌）">价格 ${s.date.slice(5)}</span>`:""}</div></td>
         <td>${px(s.price)}</td><td><b>${pct(s.yield)}</b></td>
         <td class="vtd"><span class="badge s-${s.status}" style="font-size:13px;padding:3px 12px">${lab(s)}</span>${distrust(s)?'<div class="warn">⚠ 股价已大跌，先看盈利</div>':""}${isRich(s)?'<div class="warn">⚠ 低于自身历史中位</div>':""}${unconf(s).length?`<div class="warn" title="低位的三重确认：①股息率比国债高 2.75 个点以上 ②股息率在自身近5年的较高水平 ③分红质量没红旗">⚠ 低位待确认：${unconf(s).join("、")}</div>`:""}${ORDER[s.status]<=1&&fakeDiv(s)?`<div class="warn">⚠ 分红率 ${Math.round(poOf(s)*100)}%，高股息难持续</div>`:""}${ORDER[s.status]<=1&&qRedShow(s).length?`<div class="warn">⚠ 体检红灯：${qRedShow(s).join("、")}</div>`:""}${priceBar(s,true)}</td>
         <td>${dotsOf(s)}</td>
@@ -920,6 +968,7 @@ function renderPool(){
   $("#msort").onchange=e=>{const k=e.target.value; state.sort={key:k,dir:k==="yield"?-1:1}; renderPool()};
   document.querySelectorAll("#mkseg [data-mk]").forEach(c=>c.onclick=()=>{state.f.mk=c.dataset.mk; try{localStorage.setItem("mk",c.dataset.mk)}catch(e){} state.f.ind=""; renderPool()});
   const strip=$("#indstrip"), on=strip&&strip.querySelector(".chip.on"); if(on&&on.dataset.ind) strip.scrollLeft=on.offsetLeft-strip.clientWidth/2+on.offsetWidth/2;
+  if(!state.nudged&&innerWidth<=620){state.nudged=1; const cs=document.querySelector(".chips"); if(cs&&cs.scrollWidth>cs.clientWidth+20) setTimeout(()=>{cs.scrollTo({left:70,behavior:"smooth"}); setTimeout(()=>cs.scrollTo({left:0,behavior:"smooth"}),600)},500)}
   document.querySelectorAll(".chip[data-st]").forEach(c=>c.onclick=()=>{state.f.st=c.dataset.st;renderPool()});
 
   document.querySelectorAll(".chip[data-ind]").forEach(c=>c.onclick=()=>{state.f.ind=c.dataset.ind;renderPool()});
@@ -1105,6 +1154,22 @@ function applyPrivacy(root,names,inds){
   root.querySelectorAll("[title]").forEach(e=>{if(!e.closest("#entry")&&e.id!=="privbtn") e.removeAttribute("title")});
 }
 /* ---------- 检查更新 ---------- */
+/* ---------- 自动检查更新:频率可在设置里选(每次打开 / 每天 / 每 3 天 / 每周 / 关闭),页面开着时也会按频率定时再查 ---------- */
+const UPD_OPTS=[["0","每次打开"],["24","每天"],["72","每 3 天"],["168","每周"],["-1","关闭"]];
+const updEvery=()=>{const v=state.holdings&&state.holdings.settings&&state.holdings.settings.updEvery; return v==null?24:+v};
+function noteUpdate(info){   // 有新版本且没选「这个版本不再提醒」时,设置标签上亮一个小红点
+  let dis=""; try{dis=localStorage.getItem("updDismiss")||""}catch(e){}
+  state.newVer=(info&&info.newer&&info.latest!==dis)?info:null;
+  if(typeof bellRender==="function") bellRender();
+  const m=document.getElementById("updmsg"); if(m&&state.newVer&&!m.textContent) m.innerHTML=`发现新版本 v${state.newVer.latest} <button class="btn sm" id="updsee" type="button">查看</button>`, document.getElementById("updsee").onclick=()=>showUpd(state.newVer,true);
+}
+async function autoCheckUpdate(fromTimer){
+  const ev=updEvery(); if(ev<0||(ev===0&&fromTimer)) return;
+  let last=0; try{last=+localStorage.getItem("updLast")||0}catch(e){}
+  if(ev>0&&Date.now()-last<ev*3600e3) return;
+  try{localStorage.setItem("updLast",String(Date.now()))}catch(e){}
+  noteUpdate(await checkUpdate(false));   // 只在右上角铃铛里提示,不弹窗
+}
 async function checkUpdate(manual){
   try{ return await api("/api/update"+(manual?"?force=1":"")) }catch(e){ return {error:"检查失败，请稍后再试"} }
 }
@@ -1123,7 +1188,7 @@ function showUpd(info,manual){
     <div class="acts">${manual?"":'<button class="btn" data-x="skip">这个版本不再提醒</button>'}<button class="btn" data-x="later">${manual?"关闭":"稍后再说"}</button></div></div>`;
   const close=()=>{w.remove(); document.removeEventListener("keydown",kd)};
   const kd=e=>{if(e.key==="Escape") close()};
-  w.onclick=e=>{const x=e.target.dataset.x; if(x==="skip"){try{localStorage.setItem("updDismiss",info.latest)}catch(_){} close()} else if(x==="later"||e.target===w) close()};
+  w.onclick=e=>{const x=e.target.dataset.x; if(x==="skip"){try{localStorage.setItem("updDismiss",info.latest)}catch(_){} noteUpdate(info); close()} else if(x==="later"||e.target===w) close()};
   document.addEventListener("keydown",kd); document.body.appendChild(w);
 }
 /* ---------- 持仓 ---------- */
@@ -1184,26 +1249,26 @@ async function renderHold(){
   ${ovAll}
   ${gH.length?`<h3 class="mksec">A 股 / B 股 <span class="sub">人民币</span></h3>`:""}
   ${groups.length?`
-  <div class="grid g3" style="margin-bottom:16px">
-    <div class="card kpi" style="margin:0"><div class="k">持仓市值 / 成本</div><div class="v">${cny(T.mv)}</div><div class="sub">成本 ${cny(T.cost)} · 浮盈 <span class="${sgn(T.mv-T.cost)}">${cny(T.mv-T.cost)} (${pct(T.cost?T.mv/T.cost-1:0,1)})</span></div></div>
-    <div class="card kpi" style="margin:0"><div class="k">未来12月预计分红（税前）</div><div class="v">${cny(T.gross)}</div><div class="sub">税后约 ${cny(T.gross-T.tax)} · 占成本 ${pct(T.cost?T.gross/T.cost:0)}${cap?` · 仓位 ${pct(T.mv/cap,0)}`:""}</div></div>
-    <div class="card kpi" style="margin:0" title="综合收益率 = (浮盈 + 买入后已收分红 − 若今天卖出需补的红利税) ÷ 成本"><div class="k">综合收益率（含分红）</div><div class="v ${sgn(T.gain+T.recv-T.rtax)}">${T.cost?pct((T.gain+T.recv-T.rtax)/T.cost,1):"–"}</div><div class="sub">${cny(T.gain+T.recv-T.rtax)} = 价差 ${cny(T.gain)} + 已收分红 ${cny(T.recv)}${T.rtax?` − 补税 ${cny(T.rtax)}`:""}</div></div>
+  <div class="grid g3 kpi3" style="margin-bottom:16px">
+    <div class="card kpi" style="margin:0"><div class="k">持仓市值</div><div class="v">${cny(T.mv)}</div><div class="sub">成本 ${cny(T.cost)} · 浮盈 <span class="${sgn(T.mv-T.cost)}">${cny(T.mv-T.cost)} (${pct(T.cost?T.mv/T.cost-1:0,1)})</span></div></div>
+    <div class="card kpi" style="margin:0"><div class="k">预计年分红（税前）</div><div class="v">${cny(T.gross)}</div><div class="sub">税后约 ${cny(T.gross-T.tax)} · 占成本 ${pct(T.cost?T.gross/T.cost:0)}${cap?` · 仓位 ${pct(T.mv/cap,0)}`:""}</div></div>
+    <div class="card kpi" style="margin:0" title="综合收益率 = (浮盈 + 买入后已收分红 − 若今天卖出需补的红利税) ÷ 成本"><div class="k">综合收益率</div><div class="v ${sgn(T.gain+T.recv-T.rtax)}">${T.cost?pct((T.gain+T.recv-T.rtax)/T.cost,1):"–"}</div><div class="sub">${cny(T.gain+T.recv-T.rtax)} = 价差 ${cny(T.gain)} + 已收分红 ${cny(T.recv)}${T.rtax?` − 补税 ${cny(T.rtax)}`:""}</div></div>
   </div>
+  <div class="sub kpinote">成本 ${cny(T.cost)} · 浮盈 <span class="${sgn(T.mv-T.cost)}">${cny(T.mv-T.cost)}（${pct(T.cost?T.mv/T.cost-1:0,1)}）</span> · 税后分红约 ${cny(T.gross-T.tax)}${cap?` · 仓位 ${pct(T.mv/cap,0)}`:""}<br>含息收益 ${cny(T.gain+T.recv-T.rtax)} = 价差 ${cny(T.gain)} + 已收分红 ${cny(T.recv)}${T.rtax?` − 补税 ${cny(T.rtax)}`:""}</div>
   ${holdTable(groups,T,cap,maxPct)}
-  ${fold(divRecCard(H,codes,stockName0),`<b>${H.divs.length?H.divs.length+" 笔":"未记录"}</b>`)}
-  ${fold(totalCard(groups,T),`<b class="${sgn(T.gain+T.recv-T.rtax)}">${cny(T.gain+T.recv-T.rtax)}</b>`)}
-  ${fold(allocCard(groups,T))}
-  ${fold(divCal(cal),`<b>${cny(cal.reduce((a,m)=>a+m.v,0))}</b>`)}`:`<div class="card empty">${gH.length?"目前没有 A 股持仓。":realRows.length||realH.length?"目前没有持仓（已全部卖出）。":"还没有持仓。先在下面「持仓录入」里录入一笔买入。"}</div>`}
+  ${fold(allocCard(groups,T),"",true)}
+  ${fold(divCal(cal),`<b>${cny(cal.reduce((a,m)=>a+m.v,0))}</b>`,true)}`:`<div class="card empty">${gH.length?"目前没有 A 股持仓。":realRows.length||realH.length?"目前没有持仓（已全部卖出）。":"还没有持仓。先在下面「持仓录入」里录入一笔买入。"}</div>`}
   ${realRows.length?fold(sellCard(realRows,RT),`<b class="${sgn(RT.total)}">${cny(RT.total)}</b>`):""}
   ${gH.length||realH.length?hkSection(gH,realH):""}
   <details class="card fold" id="entry" ${(!groups.length||state.prefill)?"open":""}><summary><h2>持仓录入</h2><span class="sumv sub">买入、卖出都在这里录</span><i class="hchev">›</i></summary><div class="foldbody"><div class="form" style="margin-top:12px">
-    <label class="stkpick">股票<input id="lcq" placeholder="代码 / 名称 / 拼音缩写，如 sh、神华" autocomplete="off" value="${pre?pre.name+" "+pre.code:""}"><input type="hidden" id="lc" value="${pre?pre.code:""}"><div class="sugg" id="sugg" hidden></div></label>
+    <label class="stkpick">股票<input id="lcq" placeholder="代码 / 名称 / 拼音，如 sh" autocomplete="off" value="${pre?pre.name+" "+pre.code:""}"><input type="hidden" id="lc" value="${pre?pre.code:""}"><div class="sugg" id="sugg" hidden></div></label>
   </div>
     <div class="lotrows" id="lotrows"><div class="lotrow lothead"><span>日期</span><span>方向</span><span>成交价（股票的交易币种）</span><span>数量（股）</span><span></span></div></div>
     <div class="form" style="margin-top:10px"><button class="btn" id="addrow" type="button">＋ 再加一行</button><button class="btn primary" id="addlot">添加记录</button><span class="sub" id="rowtip">同一只股票的几笔买入或卖出，可以一次录入多行；卖出按先买先卖冲减批次</span></div>
-    <p class="note">每次买入作为一个批次记录（用于按批次计算持股期限与红利税）。每一行用「方向」选买入或卖出；卖出按先买先卖冲减批次，并算出已实现盈亏。录错了可以在下方改或删。数据保存在本机 holdings.json。股票不在列表里？到「设置 → 添加个股」输入代码加入即可（港股 5 位代码如 00941，B 股 6 位代码如 900948、200596）。</p></div></details>
+    <p class="note">每次买入作为一个批次记录（用于按批次计算持股期限与红利税）。每一行用「方向」选买入或卖出；卖出按先买先卖冲减批次，并算出已实现盈亏。录错了可以在下方改或删。数据保存在本机 holdings.json。股票不在列表里？到「设置 → 添加个股」输入代码加入即可（港股 5 位代码如 00941，B 股 6 位代码如 900948、200596）。</p>
   ${(()=>{const fl=groups.filter(g=>g.d.fx_orig);return fl.length?`<p class="note">B 股：价格和分红按美元/港元计算，这里按当前汇率折合人民币（${[...new Map(fl.map(g=>[g.d.ccy,g.d.fx_orig.fx])).entries()].map(([c,f])=>`1 ${CU[c]} ≈ ${f.toFixed(3)} 元`).join("，")}），成本也按当前汇率折算，所以不含买入后汇率变动的盈亏。红利税按 10% 估算（没有持股期优惠），以券商实际扣税为准。</p>`:""})()}
-  <p class="note pub">红利税：A 股持股 ≤1个月 20%、1个月~1年 10%、>1年免税，按「持有到分红日」估算，以券商清算为准。仅供研究，不构成投资建议。</p>`;
+  ${divRecCard(H,codes,stockName0)}
+  <p class="note pub">红利税：A 股持股 ≤1个月 20%、1个月~1年 10%、>1年免税，按「持有到分红日」估算，以券商清算为准。仅供研究，不构成投资建议。</p></div></details>`;
 
   // 股票:输入代码、名称或拼音缩写匹配
   const lcq=$("#lcq"), lc=$("#lc"), sugg=$("#sugg");
@@ -1218,7 +1283,7 @@ async function renderHold(){
   // 多行录入:同一只股票的几笔成交一次加完
   const rowsEl=$("#lotrows");
   const addRow=(focus,dir)=>{const r=document.createElement("div"); r.className="lotrow";
-    r.innerHTML=`<input class="rd" type="date" value="${t0}" aria-label="成交日期"><select class="rk" aria-label="买入或卖出"><option value="buy">买入</option><option value="sell">卖出</option></select><input class="rp" type="number" step="0.01" placeholder="如 38.50"><input class="rs" type="number" step="100" placeholder="如 1000"><button type="button" class="btn sm rx" title="删除这一行">✕</button>`;
+    r.innerHTML=`<input class="rd" type="date" value="${t0}" aria-label="成交日期"><select class="rk" aria-label="买入或卖出"><option value="buy">买入</option><option value="sell">卖出</option></select><input class="rp" type="number" step="0.01" placeholder="成交价" aria-label="成交价（股票的交易币种）"><input class="rs" type="number" step="100" placeholder="数量（股）" aria-label="数量（股）"><button type="button" class="btn sm rx" title="删除这一行">✕</button>`;
     r.querySelector(".rk").value=dir||"buy"; rowsEl.appendChild(r); if(focus) r.querySelector(".rp").focus()};
   addRow(false,preDir);
   rowsEl.onclick=e=>{if(e.target.classList.contains("rx")&&rowsEl.querySelectorAll(".lotrow:not(.lothead)").length>1) e.target.closest(".lotrow").remove()};
@@ -1252,6 +1317,7 @@ async function renderHold(){
     await saveHoldings();renderHold()});
   document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
   if(groups.length) bindAlloc();
+  bindCal();
   $("#privbtn")&&($("#privbtn").onclick=()=>{state.privacy=!state.privacy; try{localStorage.setItem("privacy",state.privacy?"1":"")}catch(e){} renderHold()});
   if(state.privacy){ applyPrivacy($("#main"),P.map(x=>x.name),[...new Set(P.map(x=>x.industry))]); const q=$("#lcq"); if(q&&pre) q.value=maskName(pre.name)+" **" } else $("#main").classList.remove("priv-on");
 }
@@ -1260,8 +1326,8 @@ async function renderHold(){
 function divRecCard(H,codes,nameOf){
   const hc=[...new Set(applySells(H).active.map(l=>l.code))], opts=hc.map(c=>`<option value="${c}">${nameOf(c)} ${c}</option>`).join("");
   const rows=[...H.divs].sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="bkrow"><span><b>${x.date}</b> · ${nameOf(x.code)} · 实收 ${num(+x.amount,2)}${(state.pool.stocks.find(s=>s.code===x.code)||{}).ccy==="HKD"?" 港元":" 元"}${x.note?` · ${x.note}`:""}</span><button class="btn sm" data-deldiv="${x.id}">删</button></div>`).join("");
-  return `<div class="card"><h2>我收到的分红</h2><div id="divrec">
-    <p class="note" style="margin:0 0 10px">记下券商里实际到账的分红（税后金额）。某只股票记过之后，它的「已收分红」和综合收益率就按你记的实收金额算，不再用估算；没记的仍是估算。</p>
+  return `<div class="divrecsec" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line)"><h3 style="margin:0 0 6px">实收分红校准 <span class="sub" style="font-weight:400">· 可选，不填也行</span></h3><div id="divrec">
+    <p class="note" style="margin:0 0 10px">不用手动记：收息佬已经按你每个买入批次的买入日、每次的除息登记日，自动估算出「已收分红」。只有想和券商实际到账金额对上时才来填（税后金额）——某只股票记过之后，它的已收分红和综合收益率就按你记的实收算，没记的仍是自动估算。</p>
     ${hc.length?`<div class="form"><select id="dv-code" aria-label="股票">${opts}</select><input id="dv-date" type="date" value="${today()}" aria-label="到账日期"><input id="dv-amt" type="number" step="0.01" placeholder="实收金额" style="width:120px" aria-label="实收金额"><input id="dv-note" maxlength="20" placeholder="备注（可选）" style="width:140px" aria-label="备注"><button class="btn primary" id="dv-add" type="button">添加</button></div>`:'<div class="sub">先在上面录入持仓，才能记录分红。</div>'}
     <div style="margin-top:8px">${rows||'<div class="sub">还没有记录。</div>'}</div></div></div>`}
 /* ---------- 含息总收益 ---------- */
@@ -1277,25 +1343,6 @@ function recvDiv(d,lots,t0){
   });
   return {gross,tax,n};
 }
-function totalCard(groups,T){
-  const tot=T.gain+T.recv-T.rtax, rows=[...groups].sort((a,b)=>b.total/b.cost-a.total/a.cost);
-  const mx=Math.max(...rows.map(g=>Math.abs(g.gain/g.cost)+Math.max(0,(g.rc.gross-g.rc.tax)/g.cost)),0.01);
-  const bars=rows.map(g=>{const p=g.gain/g.cost, dv=(g.rc.gross-g.rc.tax)/g.cost, t=g.total/g.cost;
-    return `<div class="trow"><div class="tn"><b>${g.d.name}</b></div>
-      <div class="tbar"><i class="${p>=0?"tp":"tpn"}" style="width:${(Math.abs(p)/mx*100).toFixed(1)}%" title="价差 ${pct(p,1)}"></i><i class="td" style="width:${(Math.max(0,dv)/mx*100).toFixed(1)}%" title="已收分红（税后估算） ${pct(dv,1)}"></i></div>
-      <div class="tv"><b class="${sgn(t)}">${pct(t,1)}</b><span class="sub">价差 ${pct(p,1)} · 分红 ${pct(dv,1)}</span></div></div>`}).join("");
-  return `<div class="card"><h2>含息总收益 <span class="sub" style="font-weight:400">· 税后总回报 = 价差 + 已收分红 − 税（别只看浮盈）</span></h2>
-    <div class="grid g4" style="margin:6px 0 12px">
-      <div class="kpi"><div class="k">含息总收益</div><div class="v ${sgn(tot)}">${cny(tot)}</div><div class="sub">占成本 <b class="${sgn(tot)}">${pct(T.cost?tot/T.cost:0,1)}</b></div></div>
-      <div class="kpi"><div class="k">价差（浮盈）</div><div class="v ${sgn(T.gain)}">${cny(T.gain)}</div><div class="sub">${pct(T.cost?T.gain/T.cost:0,1)}</div></div>
-      <div class="kpi"><div class="k">已收分红（税前）</div><div class="v">${cny(T.recv)}</div><div class="sub">${pct(T.cost?T.recv/T.cost:0,1)} · 买入后已除息的</div></div>
-      <div class="kpi"><div class="k">若今天卖出需补税</div><div class="v">${cny(T.rtax)}</div><div class="sub">持股满一年的分红免税</div></div>
-    </div>
-    <div class="legend"><span><i style="background:var(--c1)"></i>价差</span><span><i style="background:var(--c2)"></i>已收分红（税后估算）</span><span><i style="background:var(--tl-r)"></i>价差为负</span></div>
-    <div class="tlist">${bars}</div>
-    <p class="note pub">已收分红按每个批次买入日之后、股权登记日之前已持有的除息记录估算；税按「今天卖出」的持股期限计（一年以内卖出，分红要按持股期限补税）。不含手续费，送转股没有调整。含息总收益才是你真正赚到的，价差只是其中一部分。</p></div>`;
-}
-
 /* ---------- 风险属性分类 ---------- */
 const STYLES={
   def:{name:"防御型",c:"var(--st-def)",role:"压舱石",inds:["电力","公用事业","通信","交通"],desc:"收费、公用事业类：需求刚性、现金流稳，股价波动小。分红稳，但增长慢，股息率一般不高。",m:[5,2,1]},
@@ -1351,11 +1398,32 @@ function bindAlloc(){
 }
 
 function divCal(cal){
-  const cells=cal.map((m,i)=>`<div class="cm ${m.v?"has":""}"><div class="cmh"><b class="pub">${m.label}${m.label==="1月"||i===0?`<span class="sub"> ${m.y}</span>`:""}</b>${m.v?`<span class="ct">${cny(m.v)}</span>`:'<span class="sub">–</span>'}</div>${m.items.sort((a,b)=>a.date.localeCompare(b.date)).map(it=>`<div class="ci"><span>${it.n} <i>${it.date.slice(5)}${it.declared?"":" 预计"}</i></span><b>${cny(it.v)}</b></div>`).join("")}</div>`).join("");
-  return `<div class="card"><h2>分红日历 <span class="sub" style="font-weight:400">· 未来 12 个月，税后</span></h2><div class="calgrid">${cells}</div><p class="note">已公告的按公告金额，其余按去年节奏顺延，不含增长假设；金额是扣掉预计红利税之后的。</p></div>`;
+  state.calData=cal; const mx=Math.max(1,...cal.map(m=>m.v));
+  const cells=cal.map((m,i)=>`<button type="button" class="cm ${m.v?"has":""}" data-cm="${i}" aria-label="${m.label}${m.v?" 税后 "+cny(m.v):" 无分红"}"><span class="cml">${m.label}${m.label==="1月"||i===0?`<small> ${String(m.y).slice(2)}</small>`:""}</span><b class="ct">${m.v?cny(m.v):"–"}</b><i class="cmb"><u style="width:${m.v?Math.max(8,m.v/mx*100):0}%"></u></i></button>`).join("");
+  return `<div class="card"><h2>分红日历 <span class="sub" style="font-weight:400">· 未来 12 个月，税后 · 点月份看明细</span></h2><div class="calwrap"><div class="calgrid">${cells}</div></div><p class="note">已公告的按公告金额，其余按去年节奏顺延，不含增长假设；金额是扣掉预计红利税之后的。</p></div>`;
 }
-function fold(html,right=""){
+function bindCal(){
+  const old=document.getElementById("calpop"); if(old) old.remove();
+  const wrap=document.querySelector(".calwrap"); if(!wrap||!state.calData) return;
+  const close=()=>{const p=document.getElementById("calpop"); if(p) p.remove(); wrap.querySelectorAll(".cm.sel").forEach(x=>x.classList.remove("sel"))};
+  wrap.querySelectorAll(".cm").forEach(b=>b.onclick=e=>{
+    e.stopPropagation(); const was=b.classList.contains("sel"); close(); if(was) return;
+    const m=state.calData[+b.dataset.cm]; b.classList.add("sel");
+    const its=[...m.items].sort((x,y)=>x.date.localeCompare(y.date));
+    const p=document.createElement("div"); p.id="calpop"; p.className="calpop"; p.onclick=ev=>ev.stopPropagation();
+    p.innerHTML=`<div class="cph"><b>${m.y}年${m.label}</b><span class="ct">${m.v?cny(m.v):"无分红"}</span></div>${its.length?its.map(it=>`<div class="ci"><span>${it.n} <i>${it.date.slice(5)}${it.declared?"":" 预计"}</i></span><b>${cny(it.v)}</b></div>`).join(""):'<div class="sub">这个月没有预计的分红</div>'}`;
+    wrap.appendChild(p);
+    const W=wrap.clientWidth, pw=Math.min(300,W-4); p.style.width=pw+"px";
+    let l=b.offsetLeft+b.offsetWidth/2-pw/2; l=Math.max(0,Math.min(W-pw,l)); p.style.left=l+"px"; p.style.top=(b.offsetTop+b.offsetHeight+8)+"px";
+    p.style.setProperty("--ax",(b.offsetLeft+b.offsetWidth/2-l)+"px");
+  });
+  if(!window._calOut){window._calOut=1; document.addEventListener("click",()=>{const p=document.getElementById("calpop"); if(p){p.remove(); document.querySelectorAll(".cm.sel").forEach(x=>x.classList.remove("sel"))}})}
+}
+const foldKey=h=>h.replace(/<[^>]*>/g,"").split("·")[0].trim();
+document.addEventListener("toggle",e=>{const d=e.target; if(d.matches&&d.matches("details.fold[data-fk]")){state.foldSt=state.foldSt||{}; state.foldSt[d.dataset.fk]=d.open}},true);
+function fold(html,right="",open=false){
   const m=html.match(/^<div class="card">\s*<h2>([\s\S]*?)<\/h2>([\s\S]*)<\/div>\s*$/);
+  if(m){const k=foldKey(m[1]); const o=(state.foldSt&&k in state.foldSt)?state.foldSt[k]:open; return `<details class="card fold" data-fk="${k}"${o?" open":""}><summary><h2>${m[1]}</h2>${right?`<span class="sumv">${right}</span>`:""}<i class="hchev">›</i></summary><div class="foldbody">${m[2]}</div></details>`}
   return m?`<details class="card fold"><summary><h2>${m[1]}</h2>${right?`<span class="sumv">${right}</span>`:""}<i class="hchev">›</i></summary><div class="foldbody">${m[2]}</div></details>`:html;
 }
 // 一只股票一行;点开看节点、批次等细节
@@ -1801,7 +1869,11 @@ const getTheme=()=>{try{return localStorage.getItem("theme")||"auto"}catch(e){re
 function setTheme(v){
   try{v==="auto"?localStorage.removeItem("theme"):localStorage.setItem("theme",v)}catch(e){}
   if(v==="auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme=v;
+  applySys();
 }
+// 安卓 App:WebView 的 prefers-color-scheme 不一定随系统实时变化,由原生端调用 shouxiSys 告知;只在「跟随系统」时生效
+function applySys(){ if(window.__sysDark==null||getTheme()!=="auto") return; document.documentElement.dataset.theme=window.__sysDark?"dark":"light"; }
+window.shouxiSys=d=>{window.__sysDark=!!d; applySys()};
 async function saveAndApply(){ await saveHoldings(); state.pool.stocks.forEach(applyZones); }
 function paintRefresh(){
   const ca=$("#chgaddr"); if(ca) ca.onclick=()=>window.ShouxiShell.changeAddress();
@@ -1879,6 +1951,7 @@ function renderSettings(){
     <h2>关于收息佬</h2><p>股息攒得好，退休晚不了。</p>
     <p class="note">一个做红利研究的本地小工具（A 股、ETF、B 股、港股）：看股息率、看买入价、看公司体检，再慢慢攒。数据来源东方财富、新浪财经，仅供研究，不构成投资建议。</p>
     <div class="abver"><span>当前版本 <b id="curver">v?</b></span><button class="btn sm" id="chkupd" type="button">检查更新</button><span class="sub" id="updmsg"></span></div>
+    <div class="abupd"><span class="sub">自动检查更新</span><div class="seg" id="updseg">${UPD_OPTS.map(([v,t])=>`<button type="button" data-ue="${v}" class="${String(updEvery())===v?"on":""}">${t}</button>`).join("")}</div></div>
     <ul class="contact">
       <li><span>开发者微信</span><b>wind126</b><button class="btn sm cpy" type="button" data-copy="wind126">复制</button></li>
       <li><span>微信公众号</span><b>快乐收息佬</b><em>happyshouxilao</em><button class="btn sm cpy" type="button" data-copy="happyshouxilao">复制 ID</button></li>
@@ -1900,8 +1973,10 @@ function renderSettings(){
 
   // 检查更新
   api("/api/version").then(v=>{const e=$("#curver"); if(e) e.textContent="v"+v.version}).catch(()=>{});
-  $("#chkupd").onclick=async()=>{const m=$("#updmsg"); m.textContent="检查中…"; const i=await checkUpdate(true);
+  $("#chkupd").onclick=async()=>{const m=$("#updmsg"); m.textContent="检查中…"; const i=await checkUpdate(true); noteUpdate(i);
     if(i.error) m.textContent=i.error; else if(i.newer){m.innerHTML=`发现新版本 v${i.latest}，已弹出更新提示`; showUpd(i,true)} else m.textContent=`已经是最新版（v${i.current}）`};
+  document.querySelectorAll("#updseg [data-ue]").forEach(b=>b.onclick=async()=>{state.holdings.settings.updEvery=+b.dataset.ue; await saveHoldings(); document.querySelectorAll("#updseg [data-ue]").forEach(x=>x.classList.toggle("on",x===b)); if(+b.dataset.ue>=0) autoCheckUpdate()});
+  noteUpdate(state.newVer);
   // 联系方式:一键复制
   bindCopy();
   // 版本更新说明:读 /changelog.md,第一次展开时渲染
@@ -2004,11 +2079,11 @@ document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>goto({hold:"#/h
 $("#home").onclick=e=>{e.preventDefault(); state.f={q:"",ind:"",st:defaultView(),minY:0}; goto("#/")};
 async function load(){
   state.cache={};
-  api("/api/version").then(v=>{const e=document.getElementById("ver"); if(e) e.textContent="v"+v.version}).catch(()=>{}); try{state.privacy=localStorage.getItem("privacy")==="1"}catch(e){} try{const last=+localStorage.getItem("updLast")||0; if(Date.now()-last>20*3600e3){localStorage.setItem("updLast",String(Date.now())); checkUpdate(false).then(i=>showUpd(i,false))}}catch(e){} state.pool=await api("/api/pool"); state.holdings=await api("/api/holdings"); state.pool.stocks.forEach(applyZones);
+  api("/api/version").then(v=>{const e=document.getElementById("ver"); if(e) e.textContent="v"+v.version}).catch(()=>{}); try{state.privacy=localStorage.getItem("privacy")==="1"}catch(e){} state.pool=await api("/api/pool"); state.holdings=await api("/api/holdings"); state.pool.stocks.forEach(applyZones);
   if(!state.viewInit){state.f.st=defaultView(); state.viewInit=true}
   $("#updated").textContent=state.pool.updated?"数据更新于 "+state.pool.updated:"尚无数据，请到「设置」刷新";
 }
-load().then(async()=>{route(); if(!state.holdings.settings.guideHide&&!state.guideShown){state.guideShown=true; showGuide()} const s=await api("/api/status"); if(s.running)poll()});
+load().then(async()=>{route(); autoCheckUpdate(); setInterval(()=>autoCheckUpdate(true),30*60e3); if(!state.holdings.settings.guideHide&&!state.guideShown){state.guideShown=true; showGuide()} const s=await api("/api/status"); if(s.running)poll()});
 </script>
 </body>
 </html>

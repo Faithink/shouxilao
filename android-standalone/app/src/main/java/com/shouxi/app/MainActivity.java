@@ -62,6 +62,7 @@ public class MainActivity extends Activity {
         status.setGravity(Gravity.CENTER);
         root.addView(status, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         setContentView(root);
+        applyNight();
 
         WebSettings s = web.getSettings();
         s.setJavaScriptEnabled(true);
@@ -121,6 +122,7 @@ public class MainActivity extends Activity {
         web.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(final WebView v, String url) {
+                applyNight();
                 if (!getIntent().getBooleanExtra("selftest", false)) return;
                 v.postDelayed(new Runnable() {
                     @Override
@@ -182,6 +184,37 @@ public class MainActivity extends Activity {
                 }
             }
         }).start();
+    }
+
+    /** 跟随系统深浅色:状态栏/导航栏/窗口底色跟着换,并告诉网页当前系统是不是深色(网页「跟随系统」时据此切换) */
+    private boolean isNight() {
+        return (getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK)
+                == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    private void applyNight() {
+        boolean n = isNight();
+        int bar = Color.parseColor(n ? "#0F1319" : "#F9F8F4");
+        android.view.Window w = getWindow();
+        w.setStatusBarColor(bar);
+        w.setNavigationBarColor(bar);
+        w.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(n ? Color.parseColor("#0F1319") : Color.WHITE));
+        if (Build.VERSION.SDK_INT >= 23) {
+            android.view.View d = w.getDecorView();
+            int f = d.getSystemUiVisibility();
+            int light = android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | (Build.VERSION.SDK_INT >= 26 ? 0x10 : 0);
+            d.setSystemUiVisibility(n ? (f & ~light) : (f | light));
+        }
+        if (web != null) {
+            web.setBackgroundColor(n ? Color.parseColor("#0F1319") : Color.parseColor("#F9F8F4"));
+            web.evaluateJavascript("window.shouxiSys&&window.shouxiSys(" + n + ")", null);
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(android.content.res.Configuration c) {
+        super.onConfigurationChanged(c);
+        applyNight();
     }
 
     @Override

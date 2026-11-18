@@ -32,14 +32,14 @@ jobs:
           path: data/cache
           key: shouxi-cache-${{ github.run_id }}
           restore-keys: shouxi-cache-
-      - name: Refresh data (price-only on weekdays; full refresh on Fridays and on manual runs)
-        if: github.event_name != 'push'
+      - name: Refresh data (quick (price-only) on pushes and weekdays; full refresh on Fridays and manual runs)
         continue-on-error: true      # 数据源临时失败时,退回仓库里已有的快照,不让发布失败
         run: |
           python - <<'PY'
           import datetime, os
           import fetch_data
-          mode = "full" if (os.environ.get("GITHUB_EVENT_NAME") != "schedule" or datetime.date.today().weekday() == 4) else "quick"
+          ev = os.environ.get("GITHUB_EVENT_NAME")
+          mode = "full" if (ev == "workflow_dispatch" or (ev == "schedule" and datetime.date.today().weekday() == 4)) else "quick"
           print("mode", mode)
           errs = fetch_data.run(log=lambda s: None, mode=mode)
           print("errors:", len(errs or {}))

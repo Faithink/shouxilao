@@ -545,6 +545,7 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .stonly{display:none}
 html.static .stonly{display:block}
 html.static #refresh,html.static #refreshfull,html.static #autoref,html.static label:has(>#autoref),html.static .nostat,html.static #addstk,html.static #mgstk{display:none!important}
+.localnote{margin:0 0 12px;padding:10px 14px;border-radius:12px;background:var(--seg);font-size:12.5px;line-height:1.7;color:var(--mute)}.localnote b{color:var(--ink)}.localnote.warn{background:color-mix(in srgb,var(--bad) 9%,transparent)}
 /* 统一控件高度:桌面 按钮/输入/下拉 34,小按钮 26;手机 42/34 */
 button.btn,.btn,input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]),select{min-height:34px;box-sizing:border-box}
 button.btn.sm{min-height:26px}
@@ -1195,6 +1196,8 @@ function showUpd(info,manual){
   document.addEventListener("keydown",kd); document.body.appendChild(w);
 }
 /* ---------- 持仓 ---------- */
+const localNote=()=>{if(!window.SHOUXI_STATIC) return ""; const S=state.holdings.settings, n=state.holdings.lots?.length||0, le=S.lastExport, d=le?Math.floor((Date.now()-new Date(le+"T00:00:00").getTime())/864e5):null, stale=n>0&&(d===null||d>=14);
+  return `<div class="localnote${stale?" warn":""}"><b>数据只存在这个浏览器里</b>：持仓、关注和设置保存在你这台设备的浏览器中，不会上传，也没人能看到。清理浏览器数据、删除主屏幕图标都会让它们丢失。${stale?`<br><b>${le?`已经 ${d} 天没有导出备份了`:"还没有导出过备份"}</b>，建议现在到「设置 → 备份与恢复」导出一份。`:le?`<br>上次导出备份：${le}。`:""}<br>iPhone 请先点 Safari 的分享按钮「添加到主屏幕」，再从桌面图标里打开录入，这样数据才保存在图标里。</div>`};
 async function renderHold(){
   const H=state.holdings, S=H.settings, P=state.pool?.stocks||[];
   H.sells=H.sells||[]; H.divs=H.divs||[];
@@ -1249,6 +1252,7 @@ async function renderHold(){
   const pre=P.find(s=>s.code===state.prefill);
   $("#main").innerHTML=`
   <div class="ph hasbtn"><h2>我的持仓</h2><span class="sub">一只一行，点开看加仓/止盈节点、买入批次和分红细节</span>${allG.length?`<button class="privbtn ${state.privacy?"on":""}" id="privbtn" aria-label="${state.privacy?"显示数据":"隐私模式：隐藏金额、份额、收益和个股名称"}" title="${state.privacy?"点击显示数据":"隐私模式：隐藏金额、份额、收益和个股名称"}">${state.privacy?EYE_OFF:EYE_ON}</button>`:""}</div>
+  ${localNote()}
   ${ovAll}
   ${gH.length?`<h3 class="mksec">A 股 / B 股 <span class="sub">人民币</span></h3>`:""}
   ${groups.length?`
@@ -1939,6 +1943,7 @@ function renderSettings(){
     <div id="mgrm"></div></div>
   <div class="card"><h2>备份与恢复</h2>
     <div class="form"><button class="btn" id="bk-out">导出持仓备份</button><button class="btn" id="bk-in">从备份恢复</button><input type="file" id="bk-file" aria-label="选择备份文件" accept=".json,application/json" hidden><span class="sub" id="bk-msg"></span></div>
+    ${window.SHOUXI_STATIC?`<p class="note">网页版的数据只存在这个浏览器里，自动备份也在同一个地方，清理浏览器数据或删除桌面图标会一起丢失。${state.holdings.settings.lastExport?`上次导出：${state.holdings.settings.lastExport}。`:"你还没有导出过。"}请定期导出一份，存到「文件」或网盘。</p>`:""}
     <p class="note">备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。每次保存前，程序也会在数据目录留一份 holdings.json.bak。</p>
     <h3 style="margin:14px 0 4px;font-size:14px">自动备份 <span class="sub" style="font-weight:400">· 每次保存后自动留一份，每天一份，保留最近 7 天</span></h3>
     ${/ShouxiApp/.test(navigator.userAgent)?`<p class="note">安卓：每次保存还会在手机「下载 / 收息佬备份」文件夹留一份（文件名「收息佬自动备份-日期」），卸载重装后点「从备份恢复」选它就能找回。</p>`:""}
@@ -2032,7 +2037,7 @@ function renderSettings(){
   api("/api/missing").then(m=>{const el=$("#as-miss"); if(!el||!m.length) return;
     el.innerHTML=`<p class="note">这些股票已加入但还没有数据：${m.map(x=>`${x.name}（${x.code}）<button class="btn sm" data-retry="${x.code}" data-n="${x.name}" data-i="${x.industry}">重试下载</button>`).join(" ")}</p>`;
     el.querySelectorAll("[data-retry]").forEach(b=>b.onclick=async()=>{try{const r=await fetch("/api/stocks",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:b.dataset.retry,name:b.dataset.n,industry:b.dataset.i})}); const j=await r.json(); if(!r.ok) return notice(j.error||"重试失败"); b.textContent="下载中…"; b.disabled=true; poll()}catch(e){notice("重试失败，请稍后再试")}})}).catch(()=>{});
-  $("#bk-out").onclick=()=>{const fn=`收息佬持仓备份-${today()}.json`; if(window.ShouxiAndroid){let ok=false; try{ok=ShouxiAndroid.saveFile(fn,JSON.stringify(state.holdings,null,1))}catch(e){} $("#bk-msg").textContent=ok?"已保存到手机「下载」文件夹":"保存失败，请稍后再试"; return} const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(state.holdings,null,1)],{type:"application/json"})); a.download=`收息佬持仓备份-${today()}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1500); $("#bk-msg").textContent="已导出"};
+  $("#bk-out").onclick=()=>{state.holdings.settings.lastExport=today(); saveHoldings(); const fn=`收息佬持仓备份-${today()}.json`; if(window.ShouxiAndroid){let ok=false; try{ok=ShouxiAndroid.saveFile(fn,JSON.stringify(state.holdings,null,1))}catch(e){} $("#bk-msg").textContent=ok?"已保存到手机「下载」文件夹":"保存失败，请稍后再试"; return} const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(state.holdings,null,1)],{type:"application/json"})); a.download=`收息佬持仓备份-${today()}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1500); $("#bk-msg").textContent="已导出"};
   api("/api/backups").then(L=>{const el=$("#autobk"); if(!el) return;
     el.innerHTML=L.length?L.map(b=>`<div class="bkrow"><span><b>${b.date}</b> · ${b.lots} 笔买入 · ${b.sells} 笔卖出 · 关注 ${b.favorites} 只</span><button class="btn sm" data-bkr="${b.name}">恢复</button></div>`).join(""):'<div class="sub">保存过持仓后，这里会出现自动备份。</div>';
     el.querySelectorAll("[data-bkr]").forEach(b=>b.onclick=async()=>{const x=L.find(y=>y.name===b.dataset.bkr); if(!(await askConfirm(`用 ${x.date} 的自动备份覆盖当前数据？（${x.lots} 笔买入、${x.sells} 笔卖出）当前的持仓会先留一份 holdings.json.bak。`,"恢复"))) return;

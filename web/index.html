@@ -1272,7 +1272,7 @@ async function renderHold(){
   </div>
     <div class="lotrows" id="lotrows"><div class="lotrow lothead"><span>日期</span><span>方向</span><span>成交价（股票的交易币种）</span><span>数量（股）</span><span></span></div></div>
     <div class="form" style="margin-top:10px"><button class="btn" id="addrow" type="button">＋ 再加一行</button><button class="btn primary" id="addlot">添加记录</button><span class="sub" id="rowtip">同一只股票的几笔买入或卖出，可以一次录入多行；卖出按先买先卖冲减批次</span></div>
-    <p class="note">每次买入作为一个批次记录（用于按批次计算持股期限与红利税）。每一行用「方向」选买入或卖出；卖出按先买先卖冲减批次，并算出已实现盈亏。录错了可以在下方改或删。数据保存在本机 holdings.json。股票不在列表里？到「设置 → 添加个股」输入代码加入即可（港股 5 位代码如 00941，B 股 6 位代码如 900948、200596）。</p>
+    <p class="note">每次买入作为一个批次记录（用于按批次计算持股期限与红利税）。每一行用「方向」选买入或卖出；卖出按先买先卖冲减批次，并算出已实现盈亏。录错了可以在下方改或删。${window.SHOUXI_STATIC?"数据只保存在这个浏览器里。股票不在列表里？网页版的股票池是固定的，想添加请用电脑版或安卓版。":"数据保存在本机 holdings.json。股票不在列表里？到「设置 → 添加个股」输入代码加入即可（港股 5 位代码如 00941，B 股 6 位代码如 900948、200596）。"}</p>
   ${(()=>{const fl=groups.filter(g=>g.d.fx_orig);return fl.length?`<p class="note">B 股：价格和分红按美元/港元计算，这里按当前汇率折合人民币（${[...new Map(fl.map(g=>[g.d.ccy,g.d.fx_orig.fx])).entries()].map(([c,f])=>`1 ${CU[c]} ≈ ${f.toFixed(3)} 元`).join("，")}），成本也按当前汇率折算，所以不含买入后汇率变动的盈亏。红利税按 10% 估算（没有持股期优惠），以券商实际扣税为准。</p>`:""})()}
   ${divRecCard(H,codes,stockName0)}
   <p class="note pub">红利税：A 股持股 ≤1个月 20%、1个月~1年 10%、>1年免税，按「持有到分红日」估算，以券商清算为准。仅供研究，不构成投资建议。</p></div></details>`;
@@ -1924,7 +1924,7 @@ function renderSettings(){
   <div class="card"><h2>使用指引</h2><div class="form"><button class="btn" id="guidebtn">再看一遍</button><span class="sub">主要功能，以及怎么自定义股息率要求</span></div></div>
   <div class="card"><h2>外观</h2>
     <div class="seg" id="themeseg">${[["auto","跟随系统"],["light","浅色"],["dark","深色"]].map(([k,t])=>`<button data-th="${k}" class="${th===k?"on":""}">${t}</button>`).join("")}</div>
-    <p class="note">只影响当前浏览器。「跟随系统」会随电脑的深浅色自动切换。</p></div>
+    <p class="note">只影响当前浏览器。「跟随系统」会随设备的深浅色自动切换。</p></div>
   <div class="card"><h2>数据</h2>
     <div class="form"><button class="btn primary" id="refresh">更新价格</button><button class="btn" id="refreshfull">完整刷新</button><span class="sub">${P.updated?"数据更新于 "+P.updated:"尚无数据"} · 共 ${P.stocks.length} 只</span></div>
     <p class="note stonly">网页版的数据由云端每天收盘后自动更新一次，打开时会取最新的一份；添加个股、手动刷新请用电脑版或安卓版。 <button class="btn sm" type="button" onclick="window.showA2HS&&showA2HS()">添加到主屏幕的方法</button></p>
@@ -1944,7 +1944,7 @@ function renderSettings(){
   <div class="card"><h2>备份与恢复</h2>
     <div class="form"><button class="btn" id="bk-out">导出持仓备份</button><button class="btn" id="bk-in">从备份恢复</button><input type="file" id="bk-file" aria-label="选择备份文件" accept=".json,application/json" hidden><span class="sub" id="bk-msg"></span></div>
     ${window.SHOUXI_STATIC?`<p class="note">网页版的数据只存在这个浏览器里，自动备份也在同一个地方，清理浏览器数据或删除桌面图标会一起丢失。${state.holdings.settings.lastExport?`上次导出：${state.holdings.settings.lastExport}。`:"你还没有导出过。"}请定期导出一份，存到「文件」或网盘。</p>`:""}
-    <p class="note">备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。每次保存前，程序也会在数据目录留一份 holdings.json.bak。</p>
+    <p class="note">${window.SHOUXI_STATIC?"备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。":"备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。每次保存前，程序也会在数据目录留一份 holdings.json.bak。"}</p>
     <h3 style="margin:14px 0 4px;font-size:14px">自动备份 <span class="sub" style="font-weight:400">· 每次保存后自动留一份，每天一份，保留最近 7 天</span></h3>
     ${/ShouxiApp/.test(navigator.userAgent)?`<p class="note">安卓：每次保存还会在手机「下载 / 收息佬备份」文件夹留一份（文件名「收息佬自动备份-日期」），卸载重装后点「从备份恢复」选它就能找回。</p>`:""}
     <div id="autobk"><div class="sub">读取中…</div></div></div>

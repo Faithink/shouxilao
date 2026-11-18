@@ -41,7 +41,7 @@
 
   /* ---- 添加到主屏幕:提醒条 + 图示指引(只在手机浏览器里、还没添加时出现) ---- */
   (()=>{
-    const ua=navigator.userAgent, isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1), isAnd=/Android/.test(ua);
+    const ua=navigator.userAgent, isAnd=/Android/.test(ua), isIOS=/iPhone|iPad|iPod/.test(ua)||(!isAnd&&navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
     const inApp=/MicroMessenger|\bQQ\/|DingTalk|AlipayClient|Weibo/i.test(ua);
     const standalone=()=>navigator.standalone===true||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
     const KEY="shouxi-a2hs-off";

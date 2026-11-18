@@ -153,7 +153,7 @@ A 股/港股/B 股红利股的研究工具:股票池 → 个股详情 → 持仓
 | `fetch_data.py` / `datasrc.py` | 采集与指标计算 / 数据源请求,输出到 `data/` |
 | `paths.py` | 路径集中管理:开发时用项目目录,打包后用 `~/Library/Application Support/收息佬/` |
 | `packaging/` | 打包:Mac(菜单栏小程序、`build.sh`)、Windows(`build_win.ps1`)、图标和 logo 生成(`make_brand.py`) |
-| `tools/` | 开发辅助:后端冒烟测试 `smoke_test.py`、网页版生成 `build_pwa.py`(静态后端 `demo/pwa.js`、离线缓存 `demo/sw.js`)、同步到公开仓库 `sync_public.py` |
+| `tools/` | 开发辅助:后端冒烟测试 `smoke_test.py`、网页版生成 `build_pwa.py`(静态后端 `pwa/pwa.js`、离线缓存 `pwa/sw.js`)、同步到公开仓库 `sync_public.py` |
 | `android-standalone/` | 安卓独立版(手机里自己跑服务) |
 | `skills/deploy-shouxi/` | 「部署收息佬」Skill(`SKILL.md`):让 Agent 帮用户在本机装好并启动收息佬 |
 | `app.py` | 本地服务(局域网可访问),持仓存到 `holdings.json`(你的私人数据,注意备份),访问密码存 `access.json` |

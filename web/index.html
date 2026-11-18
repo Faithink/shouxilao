@@ -1987,7 +1987,7 @@ function renderSettings(){
     <div class="abver"><span>当前版本 <b id="curver">v?</b></span><button class="btn sm" id="chkupd" type="button">检查更新</button><span class="sub" id="updmsg"></span></div>
     <div class="abupd"><span class="sub">自动检查更新</span><div class="seg" id="updseg">${UPD_OPTS.map(([v,t])=>`<button type="button" data-ue="${v}" class="${String(updEvery())===v?"on":""}">${t}</button>`).join("")}</div></div>
     <ul class="contact">
-      <li><span>开发者微信</span><b>wind126</b><button class="btn sm cpy" type="button" data-copy="wind126">复制</button></li>
+      ${window.SHOUXI_STATIC?`<li><span>下载电脑版 / 安卓版</span><a href="https://pan.quark.cn/s/b833157f00d8" target="_blank" rel="noopener">夸克网盘</a><em>提取码 wVhN</em><button class="btn sm cpy" type="button" data-copy="wVhN">复制提取码</button></li>`:`<li><span>开发者微信</span><b>wind126</b><button class="btn sm cpy" type="button" data-copy="wind126">复制</button></li>`}
       <li><span>微信公众号</span><b>快乐收息佬</b><em>happyshouxilao</em><button class="btn sm cpy" type="button" data-copy="happyshouxilao">复制 ID</button></li>
       <li><span>小红书</span><b>收息佬</b><em>happyshouxilao</em><button class="btn sm cpy" type="button" data-copy="happyshouxilao">复制 ID</button></li>
       <li><span>邮件</span><a href="mailto:shouxilao@foxmail.com">shouxilao@foxmail.com</a></li>

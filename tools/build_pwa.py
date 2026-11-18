@@ -28,8 +28,8 @@ for f in (d / "stocks").glob("*.json"):
 ver = (ROOT / "VERSION").read_text().strip()
 (data / "version.json").write_text(json.dumps({"version": ver, "updated": pool.get("updated", "")}), encoding="utf-8")
 
-shutil.copy(ROOT / "tools/demo/pwa.js", out / "pwa.js")
-(out / "sw.js").write_text((ROOT / "tools/demo/sw.js").read_text(encoding="utf-8").replace("__VER__", ver + "-" + (pool.get("updated") or "").replace(" ", "").replace(":", "").replace("-", "")), encoding="utf-8")
+shutil.copy(ROOT / "tools/pwa/pwa.js", out / "pwa.js")
+(out / "sw.js").write_text((ROOT / "tools/pwa/sw.js").read_text(encoding="utf-8").replace("__VER__", ver + "-" + (pool.get("updated") or "").replace(" ", "").replace(":", "").replace("-", "")), encoding="utf-8")
 
 html = (out / "index.html").read_text(encoding="utf-8")
 html = re.sub(r'(href|src)="/(?!/)', r'\1="./', html)

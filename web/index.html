@@ -147,11 +147,11 @@ tbody tr.row td:first-child b{font-size:14.5px}
 .warn{color:var(--high);font-size:12px}table.pool td.vtd{white-space:normal;max-width:300px}table.pool td.vtd .warn{white-space:normal;line-height:1.45;margin-top:3px}
 details.card>summary,details>summary{cursor:pointer;font-weight:600;font-size:14px}
 @media(max-width:900px){.g4,.g3{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}main{padding:16px 14px 30px}header{padding:10px 14px;gap:10px}.foot{padding:6px 14px 28px}.nodes{grid-template-columns:1fr 1fr!important}}
-@media(max-width:560px){.brand small,#updated{display:none}.brand b{font-size:15px}header .btn{padding:5px 9px;font-size:12px}.ph h2{font-size:19px}.verdict .vt{font-size:21px}.hc[style*="span 2"]{grid-column:auto!important}}
+@media(max-width:560px){.brand img{width:34px;height:34px;border-radius:9px}.brand{gap:8px}.brand small,#updated{display:none}.brand b{font-size:15px}header .btn{padding:5px 9px;font-size:12px}.ph h2{font-size:19px}.verdict .vt{font-size:21px}.hc[style*="span 2"]{grid-column:auto!important}}
 .tabbar,.msort,.mind,.mprice{display:none}
 @media(max-width:620px){
  header nav{display:none}
- header{padding:8px 14px}
+ header{padding:5px 12px}
  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--hdr);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-top:1px solid var(--line);padding:4px 6px calc(4px + env(safe-area-inset-bottom))}
  .tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:none;color:var(--mute);font-size:11px;font-weight:500;padding:6px 0;min-height:50px;font-family:inherit;cursor:pointer}
  .tabbar button svg{width:23px;height:23px}
@@ -546,6 +546,11 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 html.static .stonly{display:block}
 html.static #refresh,html.static #refreshfull,html.static #autoref,html.static label:has(>#autoref),html.static .nostat,html.static #addstk,html.static #mgstk{display:none!important}
 .localnote{margin:0 0 12px;padding:10px 14px;border-radius:12px;background:var(--seg);font-size:12.5px;line-height:1.7;color:var(--mute)}.localnote b{color:var(--ink)}.localnote.warn{background:color-mix(in srgb,var(--bad) 9%,transparent)}
+.dlg.guide{min-height:min(460px,86vh)}.guide .acts{margin-top:auto}
+.guide .gscale{gap:5px}.guide .gscale .badge{padding:4px 0;font-size:12.5px}.guide .gscale2{font-size:11.5px}
+.guide .gcmp{gap:6px}.guide .gcmp .chip{padding:2px 11px;font-size:12px;box-shadow:none;border-width:1px}.guide .gcmp em,.guide .gdots5 em{font-size:12px}
+.guide .gdots5{font-size:12.5px}.guide .gdots5 i{width:11px;height:11px}
+.guide .glayers{gap:6px}.guide .glayers .lay b{display:inline;margin-right:6px}.guide .glayers .lay{padding:7px 10px;font-size:13px}.guide .greq{transform:scale(.92);transform-origin:left center}
 /* 统一控件高度:桌面 按钮/输入/下拉 34,小按钮 26;手机 42/34 */
 button.btn,.btn,input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]),select{min-height:34px;box-sizing:border-box}
 button.btn.sm{min-height:26px}
@@ -853,10 +858,9 @@ const GUIDE=[
     <button class="gtile" data-go="rf"><span class="gic">${GUIDE_ICON.set}</span><b>设置</b><em>调整你的<br>买入要求</em></button></div>
     <div class="gnote">点上面的卡片可以直接去看看。数据都保存在你自己的设备上，不上传。</div>`},
  {t:"价格越便宜，越靠左",h:()=>`<div class="gscale"><span class="badge s-重仓区">低位</span><span class="badge s-买入区">偏低</span><span class="badge s-持有区">适中</span><span class="badge s-偏高">偏高</span><span class="badge s-止盈区">高位</span></div>
-    <div class="gscale2"><span>← 便宜：股息率高于你的要求</span><span>贵：股息率低 →</span></div>
-    <div class="gcmp"><div><span class="chip focus on">★ 重点关注</span><em>你自己点 ☆ 加的，加上持仓</em></div><div><span class="chip focus on">精选</span><em>系统按价格和体检筛的，只是筛选，不是推荐</em></div></div>
-    <div class="gdots5">体检五个灯 <i style="background:#2f9e6b"></i><i style="background:#2f9e6b"></i><i style="background:#e0b02f"></i><i style="background:#2f9e6b"></i><i style="background:#d4574a"></i> <em>分红·盈利·稳定·安全·估值，红灯先看明白</em></div>
-    <div class="gact"><button class="btn sm" data-go="pool">去股票池看看 →</button></div>`},
+    <div class="gscale2"><span>← 便宜（股息率高）</span><span>贵（股息率低）→</span></div>
+    <div class="gcmp"><div><span class="chip focus on">★ 重点关注</span><em>你自己点 ☆ 加的，加上持仓</em></div><div><span class="chip focus on">精选</span><em>系统筛的，不是推荐</em></div></div>
+    <div class="gdots5">体检五个灯 <i style="background:#2f9e6b"></i><i style="background:#2f9e6b"></i><i style="background:#e0b02f"></i><i style="background:#2f9e6b"></i><i style="background:#d4574a"></i> <em>红灯先看明白</em></div>`},
  {t:"持仓：价格到了，提醒你",h:()=>`<div class="gladder">
     <div class="r sell"><span>止盈二档</span><i></i><em>高于高位线 15%：再减 1/3</em></div>
     <div class="r sell"><span>止盈一档</span><i></i><em>进入高位：减 1/3</em></div>
@@ -865,14 +869,13 @@ const GUIDE=[
     <div class="r buy"><span>加仓二档</span><i></i><em>低位线或成本 −10%：再加 1/3</em></div></div>
     <div class="gnote">触发的节点会出现在股票池顶部的「今日提醒」里。A 股和港股分开显示；港股用港元，不算红利税。</div>
     <div class="gact"><button class="btn sm" data-go="hold">去录入持仓 →</button></div>`},
-  {t:"重点：自定义你的股息率要求",h:()=>`<div class="gform"><b>要求股息率 = 国债 + 行业溢价 + 个股追加</b><em>股票的股息率达到这个数，才算价格合适；要求越高，越难触发</em></div>
-    <div class="lhint" style="margin:2px 0 6px">以消费类股票为例（个股追加大多数股票是 0）：</div>
+  {t:"重点：自定义你的股息率要求",h:()=>`<div class="gform"><b>要求股息率 = 国债 + 行业溢价 + 个股追加</b><em>股息率达到这个数，价格才算合适</em></div>
     ${reqStatic()}
     <div class="glayers">
-      <button class="lay" data-go="rf"><em>①</em><span><b>国债收益率</b>几乎没有风险的收益，是所有股票的起点</span><i>去改 →</i></button>
-      <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>风险越高的行业，要求在国债之上多要一些</span><i>去改 →</i></button>
-      <button class="lay" data-go="ov"><em>③</em><span><b>个股追加 / 单独设定</b>对某一只股票单独调整，优先级最高；越有把握，要求可以越低</span><i>去看 →</i></button></div>
-    <div class="gnote">个别股票默认带「个股追加」（比如分红率在快速上升），详情页会写明原因。更多讲解在「红利课堂」。仅供研究，不构成投资建议。</div>`},
+      <button class="lay" data-go="rf"><em>①</em><span><b>国债收益率</b>所有股票的起点</span><i>去改 →</i></button>
+      <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>风险越高，要得越多</span><i>去改 →</i></button>
+      <button class="lay" data-go="ov"><em>③</em><span><b>个股单独设定</b>对某只股票单独调整，优先级最高</span><i>去看 →</i></button></div>
+    <div class="gnote">更多讲解在「红利课堂」，仅供研究。</div>`},
  {t:"加入交流群，一起聊聊",last:1,h:()=>`${commCard()}<div class="gnote">收息佬是一个人在做的小工具，你的反馈会直接影响下一个版本。不方便加微信也没关系，设置页「关于」里还有公众号、小红书和邮箱。</div>`}
 ];
 /* 「复制」按钮:data-copy 里的文字写入剪贴板(设置页和使用指引共用) */
@@ -1198,6 +1201,11 @@ function showUpd(info,manual){
 /* ---------- 持仓 ---------- */
 const localNote=()=>{if(!window.SHOUXI_STATIC) return ""; const S=state.holdings.settings, n=state.holdings.lots?.length||0, le=S.lastExport, d=le?Math.floor((Date.now()-new Date(le+"T00:00:00").getTime())/864e5):null, stale=n>0&&(d===null||d>=14);
   return `<div class="localnote${stale?" warn":""}"><b>数据只存在这个浏览器里</b>：持仓、关注和设置保存在你这台设备的浏览器中，不会上传，也没人能看到。清理浏览器数据、删除主屏幕图标都会让它们丢失。${stale?`<br><b>${le?`已经 ${d} 天没有导出备份了`:"还没有导出过备份"}</b>，建议现在到「设置 → 备份与恢复」导出一份。`:le?`<br>上次导出备份：${le}。`:""}<br>iPhone 请先点 Safari 的分享按钮「添加到主屏幕」，再从桌面图标里打开录入，这样数据才保存在图标里。</div>`};
+async function importBackupFile(f,after){ let j;
+  try{ j=JSON.parse(await f.text()); if(!j||!Array.isArray(j.lots)) throw 0 }catch(x){ return notice("这不是有效的收息佬持仓备份文件") }
+  if(!(await askConfirm(`用备份覆盖当前数据？备份里有 ${j.lots.length} 笔买入、${(j.sells||[]).length} 笔卖出。`,"覆盖"))) return;
+  try{ const r=await fetch("/api/holdings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(j)}); if(!r.ok) throw 0; await load(); after&&after(); notice("已恢复") }catch(x){ notice("恢复失败，请稍后再试") } }
+function pickBackup(after){const i=document.createElement("input"); i.type="file"; i.accept=".json,application/json"; i.onchange=()=>{const f=i.files[0]; if(f) importBackupFile(f,after)}; i.click()}
 async function renderHold(){
   const H=state.holdings, S=H.settings, P=state.pool?.stocks||[];
   H.sells=H.sells||[]; H.divs=H.divs||[];
@@ -1252,7 +1260,6 @@ async function renderHold(){
   const pre=P.find(s=>s.code===state.prefill);
   $("#main").innerHTML=`
   <div class="ph hasbtn"><h2>我的持仓</h2><span class="sub">一只一行，点开看加仓/止盈节点、买入批次和分红细节</span>${allG.length?`<button class="privbtn ${state.privacy?"on":""}" id="privbtn" aria-label="${state.privacy?"显示数据":"隐私模式：隐藏金额、份额、收益和个股名称"}" title="${state.privacy?"点击显示数据":"隐私模式：隐藏金额、份额、收益和个股名称"}">${state.privacy?EYE_OFF:EYE_ON}</button>`:""}</div>
-  ${localNote()}
   ${ovAll}
   ${gH.length?`<h3 class="mksec">A 股 / B 股 <span class="sub">人民币</span></h3>`:""}
   ${groups.length?`
@@ -1264,7 +1271,7 @@ async function renderHold(){
   <div class="sub kpinote">成本 ${cny(T.cost)} · 浮盈 <span class="${sgn(T.mv-T.cost)}">${cny(T.mv-T.cost)}（${pct(T.cost?T.mv/T.cost-1:0,1)}）</span> · 税后分红约 ${cny(T.gross-T.tax)}${cap?` · 仓位 ${pct(T.mv/cap,0)}`:""}<br>含息收益 ${cny(T.gain+T.recv-T.rtax)} = 价差 ${cny(T.gain)} + 已收分红 ${cny(T.recv)}${T.rtax?` − 补税 ${cny(T.rtax)}`:""}</div>
   ${holdTable(groups,T,cap,maxPct)}
   ${fold(allocCard(groups,T),"",true)}
-  ${fold(divCal(cal),`<b>${cny(cal.reduce((a,m)=>a+m.v,0))}</b>`,true)}`:`<div class="card empty">${gH.length?"目前没有 A 股持仓。":realRows.length||realH.length?"目前没有持仓（已全部卖出）。":"还没有持仓。先在下面「持仓录入」里录入一笔买入。"}</div>`}
+  ${fold(divCal(cal),`<b>${cny(cal.reduce((a,m)=>a+m.v,0))}</b>`,true)}`:`<div class="card empty">${gH.length?"目前没有 A 股持仓。":realRows.length||realH.length?"目前没有持仓（已全部卖出）。":"还没有持仓。先在下面「持仓录入」里录入一笔买入。"}${!(H.lots||[]).length?`<div style="margin-top:10px"><button class="btn" type="button" id="hold-import">导入备份</button><div class="sub" style="margin-top:6px">换了设备或清理过数据？可以导入之前导出的备份文件。</div></div>`:""}</div>`}
   ${realRows.length?fold(sellCard(realRows,RT),`<b class="${sgn(RT.total)}">${cny(RT.total)}</b>`):""}
   ${gH.length||realH.length?hkSection(gH,realH):""}
   <details class="card fold" id="entry" ${(!groups.length||state.prefill)?"open":""}><summary><h2>持仓录入</h2><span class="sumv sub">买入、卖出都在这里录</span><i class="hchev">›</i></summary><div class="foldbody"><div class="form" style="margin-top:12px">
@@ -1275,7 +1282,8 @@ async function renderHold(){
     <p class="note">每次买入作为一个批次记录（用于按批次计算持股期限与红利税）。每一行用「方向」选买入或卖出；卖出按先买先卖冲减批次，并算出已实现盈亏。录错了可以在下方改或删。${window.SHOUXI_STATIC?"数据只保存在这个浏览器里。股票不在列表里？网页版的股票池是固定的，想添加请用电脑版或安卓版。":"数据保存在本机 holdings.json。股票不在列表里？到「设置 → 添加个股」输入代码加入即可（港股 5 位代码如 00941，B 股 6 位代码如 900948、200596）。"}</p>
   ${(()=>{const fl=groups.filter(g=>g.d.fx_orig);return fl.length?`<p class="note">B 股：价格和分红按美元/港元计算，这里按当前汇率折合人民币（${[...new Map(fl.map(g=>[g.d.ccy,g.d.fx_orig.fx])).entries()].map(([c,f])=>`1 ${CU[c]} ≈ ${f.toFixed(3)} 元`).join("，")}），成本也按当前汇率折算，所以不含买入后汇率变动的盈亏。红利税按 10% 估算（没有持股期优惠），以券商实际扣税为准。</p>`:""})()}
   ${divRecCard(H,codes,stockName0)}
-  <p class="note pub">红利税：A 股持股 ≤1个月 20%、1个月~1年 10%、>1年免税，按「持有到分红日」估算，以券商清算为准。仅供研究，不构成投资建议。</p></div></details>`;
+  <p class="note pub">红利税：A 股持股 ≤1个月 20%、1个月~1年 10%、>1年免税，按「持有到分红日」估算，以券商清算为准。仅供研究，不构成投资建议。</p></div></details>
+  ${localNote()}`;
 
   // 股票:输入代码、名称或拼音缩写匹配
   const lcq=$("#lcq"), lc=$("#lc"), sugg=$("#sugg");
@@ -1296,6 +1304,7 @@ async function renderHold(){
   rowsEl.onclick=e=>{if(e.target.classList.contains("rx")&&rowsEl.querySelectorAll(".lotrow:not(.lothead)").length>1) e.target.closest(".lotrow").remove()};
   rowsEl.onkeydown=e=>{if(e.key==="Enter"&&e.target.classList.contains("rs")){e.preventDefault(); const last=rowsEl.lastElementChild; if(e.target.closest(".lotrow")===last) addRow(true,e.target.closest(".lotrow").querySelector(".rk").value); else e.target.closest(".lotrow").nextElementSibling.querySelector(".rp").focus()}};
   $("#addrow").onclick=()=>addRow(true);
+  $("#hold-import")&&($("#hold-import").onclick=()=>pickBackup(()=>renderHold()));
   document.querySelectorAll("[data-sell]").forEach(b=>b.onclick=()=>{state.prefillDir="sell"; state.prefill=b.dataset.sell; renderHold().then(()=>$("#entry").scrollIntoView({behavior:"smooth",block:"center"}))});
   $("#dv-add")&&($("#dv-add").onclick=async()=>{const code=$("#dv-code").value, date=$("#dv-date").value, amt=+$("#dv-amt").value; if(!(amt>0&&date)) return notice("请填写到账日期和实收金额");
     H.divs.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),code,date,amount:amt,note:$("#dv-note").value.trim()}); await saveHoldings(); renderHold()});
@@ -1921,13 +1930,13 @@ function renderSettings(){
   const ovn=()=>Object.keys(S.overrides||{}).length, th=getTheme();
   $("#main").innerHTML=`
   <div class="ph"><h2>设置</h2><span class="sub">外观 · 数据刷新 · 买入要求 · 个股单独设定</span></div>
-  <div class="card"><h2>使用指引</h2><div class="form"><button class="btn" id="guidebtn">再看一遍</button><span class="sub">主要功能，以及怎么自定义股息率要求</span></div></div>
+  <div class="card"><h2>使用指引</h2><div class="form"><button class="btn" id="guidebtn">再看一遍</button><span class="sub">主要功能，以及怎么自定义股息率要求</span>${window.SHOUXI_STATIC&&window.showA2HS?`<button class="btn" type="button" onclick="showA2HS()">添加到主屏幕</button>`:""}</div></div>
   <div class="card"><h2>外观</h2>
     <div class="seg" id="themeseg">${[["auto","跟随系统"],["light","浅色"],["dark","深色"]].map(([k,t])=>`<button data-th="${k}" class="${th===k?"on":""}">${t}</button>`).join("")}</div>
     <p class="note">只影响当前浏览器。「跟随系统」会随设备的深浅色自动切换。</p></div>
   <div class="card"><h2>数据</h2>
     <div class="form"><button class="btn primary" id="refresh">更新价格</button><button class="btn" id="refreshfull">完整刷新</button><span class="sub">${P.updated?"数据更新于 "+P.updated:"尚无数据"} · 共 ${P.stocks.length} 只</span></div>
-    <p class="note stonly">网页版的数据由云端每天收盘后自动更新一次，打开时会取最新的一份；添加个股、手动刷新请用电脑版或安卓版。 <button class="btn sm" type="button" onclick="window.showA2HS&&showA2HS()">添加到主屏幕的方法</button></p>
+    <p class="note stonly">网页版的数据由云端每天收盘后自动更新一次，打开时会取最新的一份；添加个股、手动刷新请用电脑版或安卓版。</p>
     <label class="sub" style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="autoref" ${state.holdings.settings.autoRefresh===false?"":"checked"}> 打开时如果数据已经一天以上没更新，自动更新一次价格</label>
     ${(()=>{const ds=P.stocks.map(s=>s.date).filter(Boolean).sort(), last=ds[ds.length-1]; if(!last) return ""; const old=P.stocks.filter(s=>s.date&&dayDiff(s.date,last)>3); return old.length?`<p class="note" style="color:var(--warn,var(--mute))">有 ${old.length} 只股票的报价停在 ${last} 之前（数据源临时失败或停牌），再点一次「更新价格」通常能补上。</p>`:""})()}
     <div id="as-miss"></div>

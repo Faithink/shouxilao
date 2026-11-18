@@ -1930,7 +1930,7 @@ function renderSettings(){
   const ovn=()=>Object.keys(S.overrides||{}).length, th=getTheme();
   $("#main").innerHTML=`
   <div class="ph"><h2>设置</h2><span class="sub">外观 · 数据刷新 · 买入要求 · 个股单独设定</span></div>
-  <div class="card"><h2>使用指引</h2><div class="form"><button class="btn" id="guidebtn">再看一遍</button><span class="sub">主要功能，以及怎么自定义股息率要求</span>${window.SHOUXI_STATIC&&window.showA2HS?`<button class="btn" type="button" onclick="showA2HS()">添加到主屏幕</button>`:""}</div></div>
+  <div class="card"><h2>使用指引</h2><p class="note" style="margin:0 0 10px">主要功能，以及怎么自定义股息率要求。</p><div class="form"><button class="btn" id="guidebtn">再看一遍</button>${window.SHOUXI_STATIC&&window.showA2HS?`<button class="btn" type="button" onclick="showA2HS()">添加到主屏幕</button>`:""}</div></div>
   <div class="card"><h2>外观</h2>
     <div class="seg" id="themeseg">${[["auto","跟随系统"],["light","浅色"],["dark","深色"]].map(([k,t])=>`<button data-th="${k}" class="${th===k?"on":""}">${t}</button>`).join("")}</div>
     <p class="note">只影响当前浏览器。「跟随系统」会随设备的深浅色自动切换。</p></div>

@@ -71,7 +71,7 @@
       m.innerHTML=`<div class="a2box"><h3>添加到主屏幕</h3><p class="sub">${isIOS||!isAnd?"iPhone / iPad（Safari）":"安卓（Chrome）"}，三步完成，之后像 App 一样从桌面图标打开</p>
       <div class="a2steps">${S.map((s,i)=>`<div class="a2s">${s}<b>${i+1}. ${C[i][0]}</b><em>${C[i][1]}</em></div>`).join("")}</div>
       ${inApp?`<div class="a2tip"><b>你现在在微信 / QQ 等 App 里打开的，这里不能添加。</b>请点右上角「···」，选「在浏览器中打开」（iPhone 选 Safari），再按上面的步骤操作。</div>`:""}
-      <div class="a2tip"><b>一定要先添加，再从桌面图标里打开并录入持仓。</b>在浏览器里录的数据，和桌面图标里的数据是分开的，不会自动带过去。<br>如果在 iOS 26 的 Safari 里找不到「分享」，点右下角「⋯」，再找「分享」。</div>
+      <div class="a2tip"><b>一定要先添加，再从桌面图标里打开并录入持仓。</b>在浏览器里录的数据，和桌面图标里的数据是分开的，不会自动带过去。${useI?"<br>如果在 iOS 26 的 Safari 里找不到「分享」，点右下角「⋯」，再找「分享」。":""}</div>
       <button class="ok" type="button">知道了</button></div>`;
       m.onclick=e=>{if(e.target===m||e.target.classList.contains("ok")) m.remove()};
       document.body.appendChild(m);

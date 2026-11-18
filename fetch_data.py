@@ -17,7 +17,7 @@ import math
 import os
 import sys
 import time
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from statistics import fmean, median
 
 import datasrc
@@ -603,10 +603,10 @@ def run(only=None, log=print, mode="full"):
                     errors[r["code"]] = str(e)[:120]
     order = [r["code"] for r in rows]
     stocks = [result[c] for c in order if c in result]
-    pool_file.write_text(json.dumps({"updated": datetime.now().strftime("%Y-%m-%d %H:%M"), "stocks": stocks},
+    pool_file.write_text(json.dumps({"updated": datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M"), "stocks": stocks},
                                     ensure_ascii=False, default=float), encoding="utf-8")
     write_status(running=False, done=len(todo), total=len(todo), current="", errors=errors,
-                 finished=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                 finished=datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S"))
     return errors
 
 

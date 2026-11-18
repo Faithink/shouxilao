@@ -1,5 +1,5 @@
 name: pages
-# 演示站(根目录)+ 网页版(/app/)。网页版的数据每个工作日收盘后自动刷新一次,打包成静态快照发布。
+# 网页版(shouxilao.app,托管在 EdgeOne,读 pwa-dist 分支);GitHub Pages 只放一个跳转页。网页版的数据每个工作日收盘后自动刷新一次,打包成静态快照发布。
 on:
   push:
     branches: [main]
@@ -44,11 +44,15 @@ jobs:
           errs = fetch_data.run(log=lambda s: None, mode=mode)
           print("errors:", len(errs or {}))
           PY
-      - run: python tools/build_demo.py site
-      - run: python tools/build_pwa.py site/app
+      - run: python tools/build_pwa.py site-app
+      - name: GitHub Pages only redirects to the web app (shouxilao.app)
+        run: |
+          mkdir -p site
+          printf '%s\n' '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=https://shouxilao.app/"><link rel="canonical" href="https://shouxilao.app/"><title>收息佬</title><p>网页版已迁移到 <a href="https://shouxilao.app/">shouxilao.app</a></p>' > site/index.html
+          touch site/.nojekyll
       - name: Publish the web app to the pwa-dist branch (for other static hosts)
         run: |
-          cd site/app
+          cd site-app
           git init -q -b pwa-dist
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"

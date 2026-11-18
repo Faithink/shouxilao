@@ -1927,7 +1927,7 @@ function renderSettings(){
     <p class="note">只影响当前浏览器。「跟随系统」会随电脑的深浅色自动切换。</p></div>
   <div class="card"><h2>数据</h2>
     <div class="form"><button class="btn primary" id="refresh">更新价格</button><button class="btn" id="refreshfull">完整刷新</button><span class="sub">${P.updated?"数据更新于 "+P.updated:"尚无数据"} · 共 ${P.stocks.length} 只</span></div>
-    <p class="note stonly">网页版的数据由云端每天收盘后自动更新一次，打开时会取最新的一份；添加个股、手动刷新请用电脑版或安卓版。</p>
+    <p class="note stonly">网页版的数据由云端每天收盘后自动更新一次，打开时会取最新的一份；添加个股、手动刷新请用电脑版或安卓版。 <button class="btn sm" type="button" onclick="window.showA2HS&&showA2HS()">添加到主屏幕的方法</button></p>
     <label class="sub" style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="autoref" ${state.holdings.settings.autoRefresh===false?"":"checked"}> 打开时如果数据已经一天以上没更新，自动更新一次价格</label>
     ${(()=>{const ds=P.stocks.map(s=>s.date).filter(Boolean).sort(), last=ds[ds.length-1]; if(!last) return ""; const old=P.stocks.filter(s=>s.date&&dayDiff(s.date,last)>3); return old.length?`<p class="note" style="color:var(--warn,var(--mute))">有 ${old.length} 只股票的报价停在 ${last} 之前（数据源临时失败或停牌），再点一次「更新价格」通常能补上。</p>`:""})()}
     <div id="as-miss"></div>

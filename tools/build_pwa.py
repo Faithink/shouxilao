@@ -38,5 +38,9 @@ html = html.replace("<head>", '<head>\n<script src="./pwa.js"></script>', 1)
 (out / "index.html").write_text(html, encoding="utf-8")
 m = out / "manifest.webmanifest"
 m.write_text(m.read_text(encoding="utf-8").replace('"start_url": "/"', '"start_url": "./"').replace('"scope": "/"', '"scope": "./"').replace('"/icon-', '"./icon-'), encoding="utf-8")
+# EdgeOne Pages 配置:全站加 HSTS(浏览器之后只走 https),manifest 用正确的类型
+(out / "edgeone.json").write_text(json.dumps({"headers": [
+    {"source": "/*", "headers": [{"key": "Strict-Transport-Security", "value": "max-age=31536000"}]},
+    {"source": "/manifest.webmanifest", "headers": [{"key": "Content-Type", "value": "application/manifest+json"}]}]}, ensure_ascii=False, indent=1), encoding="utf-8")
 (out / ".nojekyll").write_text("")
 print("网页版已生成:", out, f"({len(pool['stocks'])} 只股票, 数据截至 {pool.get('updated')})")

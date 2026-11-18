@@ -89,5 +89,17 @@
       document.body.prepend(b);
     });
   })();
-  if("serviceWorker" in navigator) addEventListener("load",()=>navigator.serviceWorker.register(base+"sw.js").catch(()=>{}));
+  if("serviceWorker" in navigator){
+    // 打开时用的是缓存里的旧页面;后台发现新版后,右下角提示刷新(第一次安装不提示)
+    const had=!!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener("controllerchange",()=>{
+      if(!had||document.getElementById("newver")) return;
+      const b=document.createElement("div"); b.id="newver";
+      b.style.cssText="position:fixed;right:16px;bottom:16px;z-index:9999;max-width:calc(100vw - 32px);display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--card,#fff);color:var(--ink,#1f2430);border:1px solid var(--line,#ebe8e1);border-radius:12px;box-shadow:var(--shadow-lg,0 12px 32px rgba(16,24,40,.16));font-size:14px";
+      b.innerHTML='<span>有新版本或新数据</span><button type="button" class="btn primary sm" style="min-height:34px">点此刷新</button><button type="button" aria-label="关闭" style="border:0;background:none;color:var(--mute,#7e8493);font-size:16px;cursor:pointer;padding:4px">✕</button>';
+      const [go,x]=b.querySelectorAll("button"); go.onclick=()=>location.reload(); x.onclick=()=>b.remove();
+      document.body.appendChild(b);
+    });
+    addEventListener("load",()=>navigator.serviceWorker.register(base+"sw.js").catch(()=>{}));
+  }
 })();

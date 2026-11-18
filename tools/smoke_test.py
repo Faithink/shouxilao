@@ -13,9 +13,29 @@ import threading
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 
-BASE = (sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8890").rstrip("/")
+if len(sys.argv) < 2:
+    sys.exit("必须显式给出测试服务地址(例如 http://127.0.0.1:8897),不再默认连 8890。见文件头用法。")
+BASE = sys.argv[1].rstrip("/")
 U = urllib.parse.urlparse(BASE)
 fails, passed = [], 0
+
+
+def _guard():
+    """本测试会覆盖持仓并改访问密码:只允许对用 SHOUXI_HOME 指向独立目录起的服务运行,否则直接退出,什么都不写。"""
+    if U.port == 8890:
+        sys.exit("拒绝:8890 是开发服务,可能连着你的真实数据。请用独立目录和端口起测试服务。")
+    try:
+        c = http.client.HTTPConnection(U.hostname, U.port, timeout=10)
+        c.request("GET", "/api/version")
+        ok = json.loads(c.getresponse().read().decode("utf-8")).get("sandbox") is True
+        c.close()
+    except Exception as e:
+        sys.exit(f"拒绝:连不上测试服务({e})")
+    if not ok:
+        sys.exit("拒绝:该服务不是用独立 SHOUXI_HOME 起的(或是旧版本,没有 sandbox 标记)。什么都没有写入。")
+
+
+_guard()
 
 
 def req(method, path, body=None, headers=None, raw=False):

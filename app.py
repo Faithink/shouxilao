@@ -10,6 +10,7 @@ import ipaddress
 import json
 import mimetypes
 import os
+from pathlib import Path
 import re
 import secrets
 import shutil
@@ -315,7 +316,7 @@ class Handler(BaseHTTPRequestHandler):
             s["running"] = bool(t and t.is_alive())
             return self._json(s)
         if path == "/api/version":
-            return self._json({"version": VERSION})
+            return self._json({"version": VERSION, "sandbox": bool(os.environ.get("SHOUXI_HOME")) and Path(HOME).resolve() != Path(__file__).resolve().parent})
         if path == "/api/update":
             force = "force" in urllib.parse.parse_qs(url.query)
             return self._json(check_update(force))

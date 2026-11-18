@@ -542,6 +542,9 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
 .tbar .td{background:var(--c2)}.ms.hot{background:color-mix(in srgb,var(--c1) 14%,transparent)}.navbar u{background:var(--c2);color:#fff}
 .tbar .tp,.navbar i{background:var(--c1)}.tbar .tpn{background:var(--bad)}
 @media(max-width:620px){.lad4 .ltrack,.lad4 .ltrack i{height:28px;line-height:28px}}
+.stonly{display:none}
+html.static .stonly{display:block}
+html.static #refresh,html.static #refreshfull,html.static #autoref,html.static label:has(>#autoref),html.static .nostat,html.static #addstk,html.static #mgstk{display:none!important}
 /* 统一控件高度:桌面 按钮/输入/下拉 34,小按钮 26;手机 42/34 */
 button.btn,.btn,input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]),select{min-height:34px;box-sizing:border-box}
 button.btn.sm{min-height:26px}
@@ -591,16 +594,16 @@ async function api(path, opt){ const r = await fetch(path,opt); if(r.status===40
 /* 买入要求 = 国债收益率 + 行业风险溢价（个股可单独覆盖）；买入价 = 取「自身历史分位价」与「要求股息率价」中更严格者 */
 const RF_DEF=1.65; // 10年期国债收益率参考值（2026-10中旬约1.64%~1.66%），可在设置里改
 /* 默认行业溢价(百分点)。2026-11 按「要求股息率 = β×风险溢价 − 增长」重新核定(研究报告:红利要求率研究),消费/医药/保险/券商/汽车/传媒/制造/电力上调;其中 EMPIRICAL 里的行业样本少、依据弱,是经验值 */
-const DEF_PREM={"煤炭":4.5,"油气":4.0,"航运":5.0,"建材":4.0,"电力":2.5,"公用事业":2.5,"消费":2.85,"交通":2.8,"通信":3.0,"银行":3.3,"保险":3.35,"券商":4.85,"汽车":3.85,"医药":2.85,"ETF":2.5,"有色金属":4.5,"建筑":3.0,"制造":3.35,"传媒":3.85};
+const DEF_PREM={"煤炭":4.5,"油气":4.0,"航运":5.0,"建材":4.0,"电力":2.5,"公用事业":2.5,"消费":2.85,"交通":2.8,"通信":3.0,"银行":3.3,"保险":3.35,"券商":4.85,"汽车":3.85,"医药":2.85,"ETF":2.5,"有色金属":4.5,"建筑":3.0,"制造":3.35,"传媒":3.85,"化工":4.5,"地产":5.0,"互联网":3.85};
 const EMPIRICAL=new Set(["公用事业","汽车","建筑","传媒","航运","制造","建材"]);
 /* 个股追加(百分点):分红率快速上升/超过100%的按可持续分红折算,净利大幅下滑、现金流覆盖不足各加一点。只给默认值,可在「个股单独设定」覆盖 */
 const DEF_ADD={"601225":[0.3,"利润下滑"],"600188":[0.3,"利润下滑"],"600028":[0.3,"利润下滑"],"600941":[0.16,"分红率快速上升"],"601006":[0.3,"利润下滑"],"600519":[1.8,"分红率快速上升、现金流覆盖<1"],"000858":[1.8,"分红率快速上升、分红率>100%、利润下滑"],"000333":[0.98,"分红率快速上升"],"601919":[0.3,"利润下滑"],"600285":[0.3,"现金流覆盖<1"],"600066":[0.3,"现金流覆盖<1"],"601668":[0.3,"利润下滑"],"002027":[1.8,"分红率快速上升、分红率>100%、利润下滑"],"601169":[0.3,"利润下滑"],"000423":[0.02,"分红率>100%"],"01898":[0.3,"利润下滑"],"01171":[0.3,"利润下滑"],"00386":[0.3,"利润下滑"],"00006":[0.57,"分红率>100%、现金流覆盖<1"],"00135":[0.76,"分红率快速上升"],"01038":[0.3,"现金流覆盖<1"],"01919":[0.45,"分红率快速上升、利润下滑"],"00144":[0.3,"利润下滑"],"00688":[0.3,"利润下滑"],"200596":[0.6,"利润下滑、现金流覆盖<1"],"600795":[1.8,"分红率快速上升、利润下滑"],"600674":[0.3,"现金流覆盖<1"],"600863":[0.3,"利润下滑"],"601107":[0.22,"分红率快速上升"],"601390":[0.3,"利润下滑"],"601186":[0.6,"利润下滑、现金流覆盖<1"],"000568":[0.6,"利润下滑、现金流覆盖<1"],"002557":[2.1,"分红率快速上升、分红率>100%、利润下滑、现金流覆盖<1"],"600177":[0.3,"现金流覆盖<1"],"002508":[1.8,"分红率快速上升、利润下滑"],"002867":[0.3,"现金流覆盖<1"],"600329":[1.8,"分红率快速上升、分红率>100%、现金流覆盖<1"],"600566":[2.1,"分红率快速上升、利润下滑、现金流覆盖<1"],"000408":[1.8,"分红率>100%、现金流覆盖<1"],"601098":[0.3,"现金流覆盖<1"],"603288":[1.43,"分红率快速上升"],"02319":[1.5,"分红率>100%"],"00220":[0.71,"分红率>100%"],"00322":[0.69,"分红率>100%"]};
 const addOf=s=>(DEF_ADD[s.code]||[0])[0];
 const INDS_ALL=()=>Object.keys(DEF_PREM);
-const CYCLICAL=new Set(["煤炭","油气","航运","建材","有色金属","建筑"]); // 分红随景气波动，用近3年平均分红
+const CYCLICAL=new Set(["煤炭","油气","航运","建材","有色金属","建筑","化工","地产"]); // 分红随景气波动，用近3年平均分红
 const cfg=()=>{const S=state.holdings.settings; return {rf:S.rf??RF_DEF, prem:S.premiums||{}, ov:S.overrides||{}}};
 // 一级大类(列表筛选、设置分组用);二级行业仍是 stocks.csv 里的 industry,买入价溢价按二级行业设
-const IND_GROUPS=[["金融",["银行","券商","保险"]],["能源资源",["煤炭","油气","有色金属"]],["公用事业",["电力","公用事业","通信"]],["交通运输",["交通","航运"]],["消费医药",["消费","医药","传媒"]],["制造建筑",["汽车","制造","建筑","建材"]],["ETF",["ETF"]]];
+const IND_GROUPS=[["金融",["银行","券商","保险"]],["能源资源",["煤炭","油气","有色金属","化工"]],["公用事业",["电力","公用事业","通信"]],["交通运输",["交通","航运"]],["消费医药",["消费","医药"]],["科技传媒",["传媒","互联网"]],["制造建筑",["汽车","制造","建筑","建材","地产"]],["ETF",["ETF"]]];
 const grpOf=ind=>(IND_GROUPS.find(([,l])=>l.includes(ind))||["其他"])[0];
 const premOf=(ind,c=cfg())=>c.prem[ind]??DEF_PREM[ind]??3.0;
 const floorOf=s=>{const c=cfg(); return (c.ov[s.code]??(c.rf+premOf(s.industry,c)+addOf(s)))/100};
@@ -1347,8 +1350,8 @@ function recvDiv(d,lots,t0){
 const STYLES={
   def:{name:"防御型",c:"var(--st-def)",role:"压舱石",inds:["电力","公用事业","通信","交通"],desc:"收费、公用事业类：需求刚性、现金流稳，股价波动小。分红稳，但增长慢，股息率一般不高。",m:[5,2,1]},
   fin:{name:"金融型",c:"var(--st-fin)",role:"稳健底仓",inds:["银行","券商","保险"],desc:"银行、券商、保险：分红率稳定，估值常低于净资产。风险在资产质量和利率周期。",m:[4,2,3]},
-  gro:{name:"成长型",c:"var(--st-gro)",role:"长期增厚",inds:["消费","医药","传媒"],desc:"消费、医药：股息率不算高，但分红随利润一起长大，要为成长付更高的估值。",m:[4,5,3]},
-  cyc:{name:"周期型",c:"var(--st-cyc)",role:"高息弹性",inds:["煤炭","油气","航运","建材","汽车","有色金属","建筑","制造"],desc:"资源、航运、建材、汽车：景气好时分红丰厚，景气差时分红大减。高股息是对不确定性的补偿。",m:[2,3,5]},
+  gro:{name:"成长型",c:"var(--st-gro)",role:"长期增厚",inds:["消费","医药","传媒","互联网"],desc:"消费、医药：股息率不算高，但分红随利润一起长大，要为成长付更高的估值。",m:[4,5,3]},
+  cyc:{name:"周期型",c:"var(--st-cyc)",role:"高息弹性",inds:["煤炭","油气","航运","建材","汽车","有色金属","建筑","制造","化工","地产"],desc:"资源、航运、建材、汽车：景气好时分红丰厚，景气差时分红大减。高股息是对不确定性的补偿。",m:[2,3,5]},
   oth:{name:"未分类",c:"var(--mute)",role:"",inds:[],desc:"",m:[0,0,0]}
 };
 const styleKey=ind=>Object.keys(STYLES).find(k=>STYLES[k].inds.includes(ind))||"oth";
@@ -1391,7 +1394,7 @@ function allocCard(groups,T){
     <details style="margin-top:10px"><summary class="sub">设置我的配置目标（可选，设了就会显示偏离）</summary>
       <div class="form" style="margin-top:10px">${keys.filter(k=>k!=="oth").map(k=>`<label>${STYLES[k].name} %<input type="number" min="0" max="100" step="5" data-tg="${k}" value="${tg[k]??""}" placeholder="—"></label>`).join("")}<span class="sub" id="tgsum">${hasT?"合计 "+tsum+"%":""}</span></div>
       <p class="note">目标比例没有标准答案，取决于你收入的稳定性、投资期限和能承受的波动。可以先看「红利课堂」里的示意。</p></details>
-    <p class="note pub">分类依据：防御型（电力、公用事业、通信、交通）、金融型（银行、券商、保险）、成长型（消费、医药、传媒）、周期型（煤炭、油气、航运、建材、汽车、有色金属、建筑、制造）。这是按行业的粗略归类，同一行业里个股的风险也会不同。仅供研究，不构成投资建议。</p></div>`;
+    <p class="note pub">分类依据：防御型（电力、公用事业、通信、交通）、金融型（银行、券商、保险）、成长型（消费、医药、传媒、互联网）、周期型（煤炭、油气、航运、建材、汽车、有色金属、建筑、制造、化工、地产）。这是按行业的粗略归类，同一行业里个股的风险也会不同。仅供研究，不构成投资建议。</p></div>`;
 }
 function bindAlloc(){
   document.querySelectorAll("[data-tg]").forEach(i=>i.onchange=async()=>{const S=state.holdings.settings; S.targets={...(S.targets||{})}; const v=i.value===""?null:Math.max(0,Math.min(100,+i.value)); v===null?delete S.targets[i.dataset.tg]:S.targets[i.dataset.tg]=v; await saveHoldings(); renderHold()});
@@ -1886,6 +1889,20 @@ function paintRefresh(){
   if(b){b.disabled=!!state.refreshing; b.textContent=state.refreshing&&m==="quick"?(state.refreshTxt||"更新中…"):"更新价格"}
   if(f){f.disabled=!!state.refreshing; f.textContent=state.refreshing&&m==="full"?(state.refreshTxt||"刷新中…"):"完整刷新"}
 }
+// 打开时数据太旧就自动更新一次价格(一天以上没更新;周末休市不催;6 小时内最多试一次;设置里可关)
+function autoRefreshStale(){
+  try{
+    if(window.SHOUXI_STATIC) return;
+    if(state.holdings.settings.autoRefresh===false||state.refreshing) return;
+    const u=state.pool&&state.pool.updated; if(!u) return;
+    const age=(Date.now()-new Date(u.replace(" ","T")).getTime())/36e5, wd=new Date().getDay();
+    if(!(age>=24)||((wd===0||wd===6)&&age<72)) return;
+    let last=0; try{last=+localStorage.getItem("autoRefTry")||0}catch(e){}
+    if(Date.now()-last<6*36e5) return;
+    try{localStorage.setItem("autoRefTry",String(Date.now()))}catch(e){}
+    startRefresh("quick");
+  }catch(e){}
+}
 async function startRefresh(mode){ state.refreshMode=mode||"quick"; await api("/api/refresh",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mode:state.refreshMode})}); poll(); }
 async function poll(){
   state.refreshing=true; paintRefresh();
@@ -1906,9 +1923,11 @@ function renderSettings(){
     <p class="note">只影响当前浏览器。「跟随系统」会随电脑的深浅色自动切换。</p></div>
   <div class="card"><h2>数据</h2>
     <div class="form"><button class="btn primary" id="refresh">更新价格</button><button class="btn" id="refreshfull">完整刷新</button><span class="sub">${P.updated?"数据更新于 "+P.updated:"尚无数据"} · 共 ${P.stocks.length} 只</span></div>
+    <p class="note stonly">网页版的数据由云端每天收盘后自动更新一次，打开时会取最新的一份；添加个股、手动刷新请用电脑版或安卓版。</p>
+    <label class="sub" style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="autoref" ${state.holdings.settings.autoRefresh===false?"":"checked"}> 打开时如果数据已经一天以上没更新，自动更新一次价格</label>
     ${(()=>{const ds=P.stocks.map(s=>s.date).filter(Boolean).sort(), last=ds[ds.length-1]; if(!last) return ""; const old=P.stocks.filter(s=>s.date&&dayDiff(s.date,last)>3); return old.length?`<p class="note" style="color:var(--warn,var(--mute))">有 ${old.length} 只股票的报价停在 ${last} 之前（数据源临时失败或停牌），再点一次「更新价格」通常能补上。</p>`:""})()}
     <div id="as-miss"></div>
-    <p class="note"><b>更新价格</b>：只联网更新最新股价，分红和财务数据用 7 天内的本地缓存，几分钟就好，平时用这个；<b>完整刷新</b>：重新采集全部股票的分红、价格与财务数据，通常 10~30 分钟（数据源限流时更久），建议每周或公告季用一次。两种刷新期间都可以继续使用，刷完会自动把价格落后的股票补刷一轮。价格是日线收盘，可能晚一个交易日；分红来自东方财富，日线和财务数据来自新浪财经（腾讯作备用）。日线只在第一次完整下载，之后每次只补最近几天，所以很快。增加股票用下面的「添加个股」，移出在个股详情页。</p></div>
+    <p class="note nostat"><b>更新价格</b>：只联网更新最新股价，分红和财务数据用 7 天内的本地缓存，几分钟就好，平时用这个；<b>完整刷新</b>：重新采集全部股票的分红、价格与财务数据，通常 10~30 分钟（数据源限流时更久），建议每周或公告季用一次。两种刷新期间都可以继续使用，刷完会自动把价格落后的股票补刷一轮。价格是日线收盘，可能晚一个交易日；分红来自东方财富，日线和财务数据来自新浪财经（腾讯作备用）。日线只在第一次完整下载，之后每次只补最近几天，所以很快。增加股票用下面的「添加个股」，移出在个股详情页。</p></div>
   <div class="card" id="addstk"><h2>添加个股</h2>
     <div class="form"><input id="as-code" placeholder="股票代码" inputmode="numeric" maxlength="6" autocomplete="off" style="width:150px"><button class="btn" id="as-look">查询</button><span class="sub" id="as-msg">A 股、B 股、ETF 填 6 位，港股填 5 位（如 00941）</span></div>
     <div class="form" id="as-res" hidden style="margin-top:10px"><span id="as-info" class="sub"></span><input id="as-name" maxlength="20" placeholder="名称" style="width:140px"><select id="as-ind" aria-label="行业"><option value="">选择行业…</option>${IND_GROUPS.map(([g,l])=>`<optgroup label="${g}">${l.filter(i=>INDS_ALL().includes(i)).map(i=>`<option value="${i}">${i}</option>`).join("")}</optgroup>`).join("")}</select><button class="btn primary" id="as-add">加入股票池</button></div>
@@ -1922,8 +1941,9 @@ function renderSettings(){
     <div class="form"><button class="btn" id="bk-out">导出持仓备份</button><button class="btn" id="bk-in">从备份恢复</button><input type="file" id="bk-file" aria-label="选择备份文件" accept=".json,application/json" hidden><span class="sub" id="bk-msg"></span></div>
     <p class="note">备份包含持仓、卖出记录、关注和设置，是一个 JSON 文件，只保存在你选的位置。恢复会覆盖当前的持仓与设置。每次保存前，程序也会在数据目录留一份 holdings.json.bak。</p>
     <h3 style="margin:14px 0 4px;font-size:14px">自动备份 <span class="sub" style="font-weight:400">· 每次保存后自动留一份，每天一份，保留最近 7 天</span></h3>
+    ${/ShouxiApp/.test(navigator.userAgent)?`<p class="note">安卓：每次保存还会在手机「下载 / 收息佬备份」文件夹留一份（文件名「收息佬自动备份-日期」），卸载重装后点「从备份恢复」选它就能找回。</p>`:""}
     <div id="autobk"><div class="sub">读取中…</div></div></div>
-  ${/ShouxiApp/.test(navigator.userAgent)?"":`
+  ${/ShouxiApp/.test(navigator.userAgent)||window.SHOUXI_STATIC?"":`
   <div class="card"><h2>手机使用</h2>
     <div class="mu"><div class="mu-steps"><ol>
       <li>手机和电脑连<b>同一个 WiFi</b>，电脑上的收息佬保持打开。</li>
@@ -1967,7 +1987,7 @@ function renderSettings(){
   [["管理股票池","mg",`共 ${P.stocks.length} 只${(S.removed||[]).length?` · 已移出 ${S.removed.length}`:""}`],["买入要求","prem",`国债 ${c.rf}% + 行业溢价`],["个股单独设定","ov",Object.keys(S.overrides||{}).length?`已单独设定 ${Object.keys(S.overrides).length} 只`:"默认"]].forEach(([title,key,right])=>{
     const card=[...document.querySelectorAll("#main > .card")].find(x=>(x.querySelector("h2")?.textContent||"").startsWith(title)); if(!card) return;
     const h=card.querySelector("h2"), d=document.createElement("details"), sum=document.createElement("summary"), body=document.createElement("div");
-    d.className="card fold"; body.className="foldbody"; sum.appendChild(h); sum.insertAdjacentHTML("beforeend",`<span class="sumv sub">${right}</span><i class="hchev">›</i>`);
+    d.className="card fold"; if(card.id) d.id=card.id; body.className="foldbody"; sum.appendChild(h); sum.insertAdjacentHTML("beforeend",`<span class="sumv sub">${right}</span><i class="hchev">›</i>`);
     while(card.firstChild) body.appendChild(card.firstChild);
     d.append(sum,body); d.open=!!state.openFolds[key]; d.addEventListener("toggle",()=>{state.openFolds[key]=d.open}); card.replaceWith(d)});
 
@@ -1994,7 +2014,7 @@ function renderSettings(){
   // 外观
   document.querySelectorAll("#themeseg button").forEach(b=>b.onclick=()=>{setTheme(b.dataset.th); document.querySelectorAll("#themeseg button").forEach(x=>x.classList.toggle("on",x===b))});
   // 刷新
-  $("#refresh").onclick=()=>startRefresh("quick"); $("#refreshfull").onclick=()=>startRefresh("full"); paintRefresh(); $("#guidebtn").onclick=()=>showGuide(0);
+  $("#autoref").onchange=async e=>{state.holdings.settings.autoRefresh=e.target.checked; await saveHoldings()}; $("#refresh").onclick=()=>startRefresh("quick"); $("#refreshfull").onclick=()=>startRefresh("full"); paintRefresh(); $("#guidebtn").onclick=()=>showGuide(0);
   let found=null; const asMsg=(t,bad)=>{const m=$("#as-msg"); m.textContent=t; m.style.color=bad?"var(--bad)":""};
   const look=async()=>{ const code=$("#as-code").value.trim(); found=null; $("#as-res").hidden=true;
     if(!/^\d{5,6}$/.test(code)) return asMsg("代码格式不对：A 股、B 股、ETF 填 6 位，港股填 5 位",1);
@@ -2083,7 +2103,7 @@ async function load(){
   if(!state.viewInit){state.f.st=defaultView(); state.viewInit=true}
   $("#updated").textContent=state.pool.updated?"数据更新于 "+state.pool.updated:"尚无数据，请到「设置」刷新";
 }
-load().then(async()=>{route(); autoCheckUpdate(); setInterval(()=>autoCheckUpdate(true),30*60e3); if(!state.holdings.settings.guideHide&&!state.guideShown){state.guideShown=true; showGuide()} const s=await api("/api/status"); if(s.running)poll()});
+load().then(async()=>{route(); autoCheckUpdate(); autoRefreshStale(); setInterval(()=>autoCheckUpdate(true),30*60e3); if(!state.holdings.settings.guideHide&&!state.guideShown){state.guideShown=true; showGuide()} const s=await api("/api/status"); if(s.running)poll()});
 </script>
 </body>
 </html>

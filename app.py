@@ -158,6 +158,7 @@ def lookup_name(code):
 BACKUP_DIR = HOME / "backups"
 BACKUP_KEEP = 7                      # 保留最近 7 天(每天一份,当天多次保存只留最后一份)
 _BK_NAME = re.compile(r"^holdings-\d{8}\.json$")
+EXTRA_BACKUP = None                  # 安卓独立版会设成「同时写一份到下载文件夹」的函数:f(文件名, 字节)
 
 
 def rolling_backup():
@@ -169,6 +170,11 @@ def rolling_backup():
             f.unlink()
     except OSError:
         pass
+    if EXTRA_BACKUP:
+        try:
+            EXTRA_BACKUP(time.strftime("收息佬自动备份-%Y%m%d.json"), HOLDINGS.read_bytes())
+        except Exception as e:           # 额外备份失败不能影响正常保存
+            print("extra backup failed:", e)
 
 
 def list_backups():

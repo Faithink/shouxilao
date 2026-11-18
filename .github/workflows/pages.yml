@@ -1,18 +1,22 @@
 name: pages
+# 演示站(根目录)+ 网页版(/app/)。网页版的数据每个工作日收盘后自动刷新一次,打包成静态快照发布。
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "30 9 * * 1-5"      # 北京时间 17:30,A 股、港股都已收盘
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write      # 要把网页版静态文件推到 pwa-dist 分支
   pages: write
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -22,7 +26,35 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pypinyin
+      - name: Restore slow-data cache (dividends / financials)
+        uses: actions/cache@v4
+        with:
+          path: data/cache
+          key: shouxi-cache-${{ github.run_id }}
+          restore-keys: shouxi-cache-
+      - name: Refresh data (price-only on weekdays; full refresh on Fridays and on manual runs)
+        if: github.event_name != 'push'
+        continue-on-error: true      # 数据源临时失败时,退回仓库里已有的快照,不让发布失败
+        run: |
+          python - <<'PY'
+          import datetime, os
+          import fetch_data
+          mode = "full" if (os.environ.get("GITHUB_EVENT_NAME") != "schedule" or datetime.date.today().weekday() == 4) else "quick"
+          print("mode", mode)
+          errs = fetch_data.run(log=lambda s: None, mode=mode)
+          print("errors:", len(errs or {}))
+          PY
       - run: python tools/build_demo.py site
+      - run: python tools/build_pwa.py site/app
+      - name: Publish the web app to the pwa-dist branch (for other static hosts)
+        run: |
+          cd site/app
+          git init -q -b pwa-dist
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A
+          git commit -qm "web app build $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" pwa-dist
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

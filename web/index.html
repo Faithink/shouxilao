@@ -107,7 +107,7 @@ tbody tr.row td:first-child b{font-size:14.5px}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 15px;border-radius:99px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;box-shadow:var(--shadow)}
 .chip:hover{transform:translateY(-1px)}
-.chip.on{box-shadow:0 0 0 2px var(--accent)}
+.chip.on{box-shadow:0 0 0 2px var(--accent);border-color:var(--accent);font-weight:700}
 .toprow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.toprow #fq{flex:1;min-width:180px;max-width:360px}
 .seg .mkn{margin-left:5px;font-size:11.5px;opacity:.55;font-weight:400}
 .indstrip{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin:-4px 0 14px;padding:2px 28px 6px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)}
@@ -473,7 +473,7 @@ tr.row.favrow td:first-child{box-shadow:inset 3px 0 0 #f0a800}
  #mkseg{display:flex;width:100%}#mkseg button{flex:1;padding:7px 4px;font-size:14px;white-space:nowrap}#mkseg .mkn{display:inline;margin-left:3px;font-size:11px}
  .chips{flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:0 -12px 8px;padding:2px 12px 4px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
  .chips .chip{flex:none;padding:6px 12px;font-size:13px;box-shadow:none}
- .chips .chip.focus.on{box-shadow:0 0 0 2px var(--accent)}
+ .chips .chip.on{box-shadow:0 0 0 2px var(--accent);border-color:var(--accent);font-weight:700}
 }
 .mfav{display:none}.kpinote{display:none}
 @media(max-width:620px){
@@ -914,7 +914,7 @@ function renderPool(){
   const P={...state.pool, stocks:state.pool.stocks.filter(s=>!mkSel||mkOf(s)===mkSel||(state.f.q||"").trim())};
   const inds=[...new Set(P.stocks.map(s=>s.industry))];
   const hasMk=mkCnt("b")>0||mkCnt("hk")>0;
-  const {q,ind,st}=state.f, grp=GROUPS[st];
+  let {q,ind,st}=state.f, grp=GROUPS[st];
   const held=new Set(applySells(state.holdings).active.map(l=>l.code)), fav=favSet();
   const mine=s=>fav.has(s.code)||held.has(s.code);
   const dg=digest(), posBy=new Map(dg.pos.map(x=>[x.s.code,x.n])), watchSet=new Set(dg.watch.map(x=>x.code));
@@ -929,19 +929,20 @@ function renderPool(){
     return r;
   };
   let rows=calc(); const {dir}=state.sort;
-  const indList=[...new Set(P.stocks.map(x=>grpOf(x.industry)))].map(g=>[g,P.stocks.filter(x=>grpOf(x.industry)===g&&inGroup(x)).length]).filter(([g,n])=>n>0||g===ind).sort((a,b)=>b[1]-a[1]);
+  const indList=()=>[...new Set(P.stocks.map(x=>grpOf(x.industry)))].map(g=>[g,P.stocks.filter(x=>grpOf(x.industry)===g&&inGroup(x)).length]).filter(([g,n])=>n>0||g===ind).sort((a,b)=>b[1]-a[1]);
+  const indInner=()=>`<button class="chip ${ind===""?"on":""}" data-ind="">全部</button>${indList().map(([i,n])=>`<button class="chip ${ind===i?"on":""}" data-ind="${i}">${i} ${n}</button>`).join("")}`;
   const cnt=g=>P.stocks.filter(s=>GROUPS[g].sts.includes(s.status)).length;
-  const emptyMsg=st==="focus"?"还没有关注的股票。点「精选」或「全部」挑选，再点列表左侧的 ☆ 加进来；有持仓的也会自动出现在这里。":"没有符合条件的股票。";
-  const rowsHtml=rows=>!rows.length?`<tr><td colspan="7" class="empty">${emptyMsg}</td></tr>`:rows.map(s=>{const z=s.zones,gap=z?(s.price/z.buy-1)*100:0,on=fav.has(s.code);return `<tr class="row${on?" favrow":""}" data-code="${s.code}">
+  const emptyMsg=()=>st==="focus"?"还没有关注的股票。点「精选」或「全部」挑选，再点列表左侧的 ☆ 加进来；有持仓的也会自动出现在这里。":"没有符合条件的股票。";
+  const rowsHtml=rows=>!rows.length?`<tr><td colspan="7" class="empty">${emptyMsg()}</td></tr>`:rows.map(s=>{const z=s.zones,gap=z?(s.price/z.buy-1)*100:0,on=fav.has(s.code);return `<tr class="row${on?" favrow":""}" data-code="${s.code}">
         <td class="favtd"><button class="fav${on?" on":""}" data-fav="${s.code}" title="${on?"取消关注":"加入我的关注"}" aria-label="${on?"取消关注":"加入我的关注"}">${on?"★":"☆"}</button></td>
         <td class="l${posBy.has(s.code)||watchSet.has(s.code)?" hasn":""}"><button class="fav mfav${on?" on":""}" data-fav="${s.code}" aria-label="${on?"取消关注":"加入我的关注"}">${on?"★":"☆"}</button><b>${s.name}</b>${held.has(s.code)?' <span class="badge held">已持仓</span>':""}${posBy.has(s.code)?`<span class="ntag ${posBy.get(s.code)[1]}">${posBy.get(s.code)[0]}</span>`:watchSet.has(s.code)?'<span class="ntag buy">可建仓</span>':""}${isFocus(s)?'<span class="pick" title="系统精选：价格偏低或低位、体检无质量红灯">精选</span>':""}<div class="sub">${s.code} · ${s.industry}${s.market&&s.market!=="a"?` · ${mkt(s)}（${cu(s)}）`:""}<span class="mprice"> · ${px(s.price)}</span>${staleOf(s)?`<span class="stale" title="这只股票的价格停在 ${s.date}，比其他股票旧（数据源临时失败或停牌）">价格 ${s.date.slice(5)}</span>`:""}</div></td>
         <td>${px(s.price)}</td><td><b>${pct(s.yield)}</b></td>
         <td class="vtd"><span class="badge s-${s.status}" style="font-size:13px;padding:3px 12px">${lab(s)}</span>${distrust(s)?'<div class="warn">⚠ 股价已大跌，先看盈利</div>':""}${isRich(s)?'<div class="warn">⚠ 低于自身历史中位</div>':""}${unconf(s).length?`<div class="warn" title="低位的三重确认：①股息率比国债高 2.75 个点以上 ②股息率在自身近5年的较高水平 ③分红质量没红旗">⚠ 低位待确认：${unconf(s).join("、")}</div>`:""}${ORDER[s.status]<=1&&fakeDiv(s)?`<div class="warn">⚠ 分红率 ${Math.round(poOf(s)*100)}%，高股息难持续</div>`:""}${ORDER[s.status]<=1&&qRedShow(s).length?`<div class="warn">⚠ 体检红灯：${qRedShow(s).join("、")}</div>`:""}${priceBar(s,true)}</td>
         <td>${dotsOf(s)}</td>
         <td>${z?`≤ <b>${px(z.buy)}</b><div class="sub">${gap<=0?"已低于买入价":"还需跌 "+(100-z.buy/s.price*100).toFixed(0)+"%"}</div>`:"–"}</td></tr>`}).join("");
-  const sub={focus:"★ 是你关注的，加上持仓（持仓排在前面）。看中的股票点列表左侧的 ☆ 加进来",pick:"系统筛的：价格偏低或低位、体检无质量红灯、区间可信。只是筛选结果，不是推荐，看中的点 ☆ 加进来"}[st]||`共 ${P.stocks.length} 只 · ★ 是你的关注，「精选」是系统筛的`;
+  const subOf=()=>({focus:"★ 是你关注的，加上持仓（持仓排在前面）。看中的股票点列表左侧的 ☆ 加进来",pick:"系统筛的：价格偏低或低位、体检无质量红灯、区间可信。只是筛选结果，不是推荐，看中的点 ☆ 加进来"}[st]||`共 ${P.stocks.length} 只 · ★ 是你的关注，「精选」是系统筛的`);
   $("#main").innerHTML=`
-  <div class="ph"><h2>股票池</h2><span class="sub">${sub}</span></div>
+  <div class="ph"><h2>股票池</h2><span class="sub" id="psub">${subOf()}</span></div>
   <div class="toprow">${hasMk?`<div class="seg" id="mkseg">${[["a","A 股"],["b","B 股"],["hk","港股"],["","全部"]].filter(([k])=>k==="a"||k===""||mkCnt(k)).map(([k,t])=>`<button data-mk="${k}" class="${mkSel===k?"on":""}">${t}<span class="mkn">${mkCnt(k)}</span></button>`).join("")}</div>`:""}<input id="fq" placeholder="搜索 名称 / 代码 / 拼音（如 zgsh）" value="${q}"></div>
   <div class="chips">
     <button class="chip focus ${st==="focus"?"on":""}" data-st="focus">★ 重点关注 ${P.stocks.filter(mine).length}</button>
@@ -949,7 +950,7 @@ function renderPool(){
     <button class="chip ${st===""?"on":""}" data-st="">全部 ${P.stocks.length}</button>
     ${Object.entries(GROUPS).map(([k,g])=>`<button class="chip ${g.cls} ${st===k?"on":""}" data-st="${k}">${g.label} ${cnt(k)}</button>`).join("")}
   </div>
-  <div class="indstrip" id="indstrip"><button class="chip ${ind===""?"on":""}" data-ind="">全部</button>${indList.map(([i,n])=>`<button class="chip ${ind===i?"on":""}" data-ind="${i}">${i} ${n}</button>`).join("")}</div>
+  <div class="indstrip" id="indstrip">${indInner()}</div>
   <div class="card">
     <div class="filters">
       <select class="msort" id="msort" aria-label="排序方式">${[["verdict","排序：建议优先"],["yield","排序：股息率 高→低"],["health","排序：体检 好→差"],["name","排序：名称"]].map(([k,t])=>`<option value="${k}" ${state.sort.key===k?"selected":""}>${t}</option>`).join("")}</select>
@@ -976,9 +977,12 @@ function renderPool(){
   document.querySelectorAll("#mkseg [data-mk]").forEach(c=>c.onclick=()=>{state.f.mk=c.dataset.mk; try{localStorage.setItem("mk",c.dataset.mk)}catch(e){} state.f.ind=""; renderPool()});
   const strip=$("#indstrip"), on=strip&&strip.querySelector(".chip.on"); if(on&&on.dataset.ind) strip.scrollLeft=on.offsetLeft-strip.clientWidth/2+on.offsetWidth/2;
   if(!state.nudged&&innerWidth<=620){state.nudged=1; const cs=document.querySelector(".chips"); if(cs&&cs.scrollWidth>cs.clientWidth+20) setTimeout(()=>{cs.scrollTo({left:70,behavior:"smooth"}); setTimeout(()=>cs.scrollTo({left:0,behavior:"smooth"}),600)},500)}
-  document.querySelectorAll(".chip[data-st]").forEach(c=>c.onclick=()=>{state.f.st=c.dataset.st;renderPool()});
+  // 点状态/行业标签:只换列表和高亮,不重建标签栏(不跳回最左边)
+  const syncList=()=>{rows=calc(); $("#tb").innerHTML=rowsHtml(rows); $("#cnt").textContent=rows.length; $("#psub").innerHTML=subOf(); bindRows()};
+  const bindInd=()=>document.querySelectorAll(".chip[data-ind]").forEach(c=>c.onclick=()=>{state.f.ind=ind=c.dataset.ind; document.querySelectorAll(".chip[data-ind]").forEach(x=>x.classList.toggle("on",x.dataset.ind===ind)); syncList()});
+  document.querySelectorAll(".chip[data-st]").forEach(c=>c.onclick=()=>{state.f.st=st=c.dataset.st; grp=GROUPS[st]; document.querySelectorAll(".chip[data-st]").forEach(x=>x.classList.toggle("on",x.dataset.st===st)); const sp=$("#indstrip"), sl=sp.scrollLeft; sp.innerHTML=indInner(); sp.scrollLeft=sl; bindInd(); syncList()});
 
-  document.querySelectorAll(".chip[data-ind]").forEach(c=>c.onclick=()=>{state.f.ind=c.dataset.ind;renderPool()});
+  bindInd();
   document.querySelectorAll("th[data-k]").forEach(th=>th.onclick=()=>{const k=th.dataset.k; state.sort=state.sort.key===k?{key:k,dir:-state.sort.dir}:{key:k,dir:["name","verdict","health","buy"].includes(k)?1:-1};renderPool()});
   bindRows();
 }

@@ -103,12 +103,11 @@ def lan_urls(port):
         s.close()
     except OSError:
         pass
-    try:
-        for ip in socket.gethostbyname_ex(socket.gethostname())[2]:
-            if ip not in ips and not ip.startswith("127."):
-                ips.append(ip)
-    except OSError:
-        pass
+    if not ips:   # 取不到出口网卡时才退回按主机名解析(虚拟机/容器的虚拟网卡地址手机访问不到,不再列出)
+        try:
+            ips += [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1]
+        except OSError:
+            pass
     urls = [f"http://{ip}:{port}" for ip in ips if not ip.startswith("127.")]
     host = socket.gethostname()
     if host.endswith(".local"):

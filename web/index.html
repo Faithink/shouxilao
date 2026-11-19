@@ -876,7 +876,7 @@ const GUIDE=[
       <button class="lay" data-go="rf"><em>①</em><span><b>国债收益率</b>所有股票的起点</span><i>去改 →</i></button>
       <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>风险越高，要得越多</span><i>去改 →</i></button>
       <button class="lay" data-go="ov"><em>③</em><span><b>个股单独设定</b>对某只股票单独调整，优先级最高</span><i>去看 →</i></button></div>
-    <div class="gnote">更多讲解在「红利课堂」，仅供研究。</div>`},
+    <div class="gnote">公司太多，没法每家都盯，每个人的判断也不一样，所以这里的初始要求只供参考。你对某家公司有研究，就按自己的判断改。</div>`},
  {t:"加入交流群，一起聊聊",last:1,h:()=>`${commCard()}<div class="gnote">收息佬是一个人在做的小工具，你的反馈会直接影响下一个版本。不方便加微信也没关系，设置页「关于」里还有公众号、小红书和邮箱。</div>`}
 ];
 /* 「复制」按钮:data-copy 里的文字写入剪贴板(设置页和使用指引共用) */
@@ -1989,6 +1989,7 @@ function renderSettings(){
     </div>
     <div class="form" style="margin-top:12px"><button class="btn" id="resetcfg">恢复默认</button></div>
     <p class="note">参考：2026 年 10 月中旬 10 年期国债活跃券约 1.64%~1.66%（财联社、Trading Economics）。该值不会自动更新，利率明显变动时请手动改。</p>
+    <p class="note"><b>初始值只供参考。</b>公司太多，没法每家都盯，每个人对不同公司的要求也不一样，有研究的可以自己改：这里改行业溢价，个别公司在「个股单独设定」里改。</p>
     <p class="note">每行右边是「要求股息率」= 国债收益率 + 该行业溢价。买入价 = 每股分红 ÷ 要求股息率；溢价越高，要求越严，买入价越低。自身近 5 年历史只做 ⚠ 提示，不影响买入价。</p></div>
   <div class="card"><h2>个股单独设定</h2>
     <p class="note" style="margin:0 0 10px">给某只股票设一个自己的「要求股息率」，覆盖上面的国债+行业溢价。留空 = 用默认。已单独设定 <b id="ovcnt">${ovn()}</b> 只。</p>

@@ -168,6 +168,17 @@ def compute_health(industry, px_dates, px_vals, price, fy_dps, fy_done, consec, 
         streak = streak + 1 if y < 0 else 0; mx = max(mx, streak)  # 连续下滑年数
     crash = bool(yoys) and last5[-1]["np_yoy"] is not None and last5[-1]["np_yoy"] < -0.30
     ccs = [r["cash_conv"] for r in last5 if r["cash_conv"] is not None]
+    # 最新一期(季报/半年报)的滚动盈利:年报要等到次年 4 月,中间企业可能已经转弱。
+    # np_ 是年内累计值:滚动12个月 = 本期累计 + 上年全年 - 上年同期累计;同比 = 与一年前的滚动12个月比。
+    latest = None
+    qs = sorted(p_ for p_ in np_ if p_.month in (3, 6, 9) and p_ >= today.replace(year=today.year - 1, month=1, day=1))
+    if qs:
+        q = qs[-1]; q1, f1, f2, q2 = add_years(q, -1), date(q.year - 1, 12, 31), date(q.year - 2, 12, 31), add_years(q, -2)
+        ytd = (np_[q] / np_[q1] - 1) if q1 in np_ and np_[q1] and np_[q1] > 0 else None
+        ttm_n = (np_[q] + np_[f1] - np_[q1]) if f1 in np_ and q1 in np_ else None
+        ttm_p = (np_[q1] + np_[f2] - np_[q2]) if None not in (ttm_n,) and f2 in np_ and q2 in np_ and q1 in np_ else None
+        ttm_y = (ttm_n / ttm_p - 1) if ttm_n is not None and ttm_p and ttm_p > 0 else None
+        latest = {"period": q.isoformat(), "ytd_yoy": ytd, "ttm_np": ttm_n, "ttm_yoy": ttm_y}
     ls, tx = [], []
     if roes:
         av = fmean(roes); g = 9 if is_fin else 10
@@ -178,8 +189,19 @@ def compute_health(industry, px_dates, px_vals, price, fy_dps, fy_done, consec, 
         tx.append(f"净利润明显下滑(降超10%){k} 次" + (f",连续下滑 {mx} 年" if mx >= 2 else "") + (f";最近一年骤降 {last5[-1]['np_yoy']:.0%}" if crash else ""))
     if not is_fin and ccs:
         cc = fmean(ccs); ls.append("g" if cc >= 0.8 else "y" if cc >= 0.5 else "r"); tx.append(f"经营现金流/净利润 {cc:.1f}")
+    if latest:
+        lg = latest["ttm_yoy"] if latest["ttm_yoy"] is not None else latest["ytd_yoy"]
+        lab = f"{latest['period'][:4]}年{ {'03': '一季报', '06': '半年报', '09': '三季报'}[latest['period'][5:7]] }"
+        parts = []
+        if latest["ytd_yoy"] is not None: parts.append(f"累计净利润同比 {latest['ytd_yoy']:+.1%}")
+        if latest["ttm_yoy"] is not None: parts.append(f"滚动12个月同比 {latest['ttm_yoy']:+.1%}")
+        if latest["ttm_np"] is not None and latest["ttm_np"] <= 0: parts.append("滚动12个月净利润为负"); lg = -1
+        if parts:
+            tx.append(f"最新一期({lab}){','.join(parts)}")
+        if lg is not None:
+            ls.append("r" if lg < -0.40 else "y" if lg < -0.15 else "g")
     lights["earn"] = {"lv": worst(ls), "head": f"ROE {fmean(roes):.1f}%" if roes else "数据不足",
-                      "text": ";".join(tx) + ("。ROE ≥10%、利润少下滑、现金流能兑现利润为佳。" if tx else "缺少盈利数据。")}
+                      "text": ";".join(tx) + ("。ROE ≥10%、利润少下滑、现金流能兑现利润为佳;最新一期滚动净利润同比降超15%判黄、超40%判红。" if tx else "缺少盈利数据。")}
 
     # ③ 分红稳定:近5年分红是否被砍、连续年数、是否含特别分红
     pairs = [(r["dps"], r["payout"]) for r in fin if r["dps"] is not None][-6:]
@@ -236,8 +258,42 @@ def compute_health(industry, px_dates, px_vals, price, fy_dps, fy_done, consec, 
         lights["val"] = {"lv": "g" if pc <= 0.4 else "y" if pc <= 0.75 else "r", "head": f"{nm} {m['now']:.1f}",
                          "text": f"{nm} {m['now']:.2f} 倍,高于自身近5年 {pc:.0%} 的时间(越低越便宜)"
                                  + ("。周期/金融股用 PB,避免景气高点 PE 虚低。" if use_pb else "。")}
-    return {"fin": fin, "pe": pe, "pb": pb, "ttm_eps": ttm_now, "bvps": bv_now, "lights": lights,
+    return {"fin": fin, "pe": pe, "pb": pb, "ttm_eps": ttm_now, "bvps": bv_now, "lights": lights, "latest": latest,
             "basis": "PB" if use_pb else "PE", "is_fin": is_fin}
+
+
+def _tech_frame(vals, n=20, k=2.0, ma_n=60):
+    """一个周期(日/周/月)的技术位置:BOLL(20,2)、60 周期均线、带宽是否收窄。vals 为该周期收盘序列(总回报口径,等价前复权)。"""
+    if len(vals) < n:
+        return None
+    w = vals[-n:]; m = sum(w) / n
+    sd = math.sqrt(sum((x - m) ** 2 for x in w) / n)
+    up, low, c = m + k * sd, m - k * sd, vals[-1]
+    out = {"close": c, "mid": m, "up": up, "low": low,
+           "pos": (c - low) / (up - low) if up > low else None,          # 在布林带内的位置:0=下轨 1=上轨
+           "to_low": c / low - 1 if low > 0 else None,                    # 高于下轨多少
+           "to_mid": c / m - 1}
+    out["ma60"] = sum(vals[-ma_n:]) / ma_n if len(vals) >= ma_n else None
+    out["to_ma60"] = c / out["ma60"] - 1 if out["ma60"] else None
+    # 带宽收窄:当前带宽处在自身近 120 个周期的最低 20% 以内
+    bws = []
+    for i in range(n, len(vals) + 1):
+        ww = vals[i - n:i]; mm = sum(ww) / n; ss = math.sqrt(sum((x - mm) ** 2 for x in ww) / n)
+        bws.append(2 * k * ss / mm if mm else None)
+    bws = [b for b in bws[-120:] if b is not None]
+    out["squeeze"] = bool(len(bws) >= 40 and bws[-1] <= sorted(bws)[int(len(bws) * 0.2)])
+    return out
+
+
+def compute_tech(dates, vals):
+    """技术指标参考(只读,不参与档位、精选、提醒):日/周/月三个周期的布林线与 60 周期均线位置。"""
+    if len(vals) < 60:
+        return None
+    wk, mo = {}, {}
+    for d, v in zip(dates, vals):
+        y, w, _ = d.isocalendar(); wk[(y, w)] = v; mo[(d.year, d.month)] = v
+    fr = {"d": _tech_frame(list(vals)), "w": _tech_frame([wk[k] for k in sorted(wk)]), "m": _tech_frame([mo[k] for k in sorted(mo)])}
+    return {k: ({a: (round(float(b), 5) if isinstance(b, float) else b) for a, b in v.items()} if v else None) for k, v in fr.items()}
 
 
 # ------------------------------------------------------------------ 日线缓存(不复权收盘价历史不会变,只需增量补最近几天)
@@ -532,8 +588,12 @@ def compute(code, name, industry, today):
             print("  health FAIL", code, str(e)[:80], flush=True)
             health = None
 
+    try:
+        tech = compute_tech(px_dates, hfq)
+    except Exception as e:
+        print("  tech FAIL", code, str(e)[:80], flush=True); tech = None
     detail = {
-        "health": health, "code": code, "name": name, "industry": industry,
+        "health": health, "tech": tech, "code": code, "name": name, "industry": industry,
         "market": mk, "ccy": ccy, "fx": datasrc.fx_rate(ccy),
         "price": price, "date": last_date.isoformat(),
         "ttm_dps": ttm_now, "yield": y_now, "zones": zones, "status": status,

@@ -356,6 +356,7 @@ details>p.note{margin:6px 0 10px}details{padding:4px 0}
 .navbar i{background:var(--c1)}.navbar u{background:var(--c2);color:#4a3300}
 table.cmp td,table.cmp th{text-align:center}table.cmp td.l,table.cmp th.l{text-align:left}
 .chkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.techl{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-direction:column;gap:8px}.techl li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--mute);line-height:1.5}.techl li i{flex:none;width:20px;height:20px;border-radius:50%;background:var(--none-bg);display:grid;place-items:center;font-style:normal;font-size:12px}.techl li.ok{color:var(--ink)}.techl li.ok i{background:var(--buy-bg);color:var(--buy);font-weight:700}
 .chk{background:var(--none-bg);border-radius:12px;padding:10px 14px}.chk b{font-size:14px}.chk p{margin:4px 0 0;font-size:12.5px;color:var(--mute);line-height:1.55}
 @media(max-width:620px){.navbar u{font-size:0}.etfgrid,.chkgrid{grid-template-columns:1fr}.trow.slimr{grid-template-columns:70px 1fr 96px}}
 .lbase,.lprem{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11.5px;white-space:nowrap;overflow:hidden;color:#fff}
@@ -876,7 +877,7 @@ const GUIDE=[
       <button class="lay" data-go="rf"><em>①</em><span><b>国债收益率</b>所有股票的起点</span><i>去改 →</i></button>
       <button class="lay" data-go="prem"><em>②</em><span><b>行业溢价</b>风险越高，要得越多</span><i>去改 →</i></button>
       <button class="lay" data-go="ov"><em>③</em><span><b>个股单独设定</b>对某只股票单独调整，优先级最高</span><i>去看 →</i></button></div>
-    <div class="gnote">公司太多，没法每家都盯，每个人的判断也不一样，所以这里的初始要求只供参考。你对某家公司有研究，就按自己的判断改。</div>`},
+    <div class="gnote">初始要求是按行业给的通用参考。每家公司情况不同，若你有自己的研究判断，建议按需调整。</div>`},
  {t:"加入交流群，一起聊聊",last:1,h:()=>`${commCard()}<div class="gnote">收息佬是一个人在做的小工具，你的反馈会直接影响下一个版本。不方便加微信也没关系，设置页「关于」里还有公众号、小红书和邮箱。</div>`}
 ];
 /* 「复制」按钮:data-copy 里的文字写入剪贴板(设置页和使用指引共用) */
@@ -1024,6 +1025,23 @@ function ahCard(d){
     </div>
     <p class="note">H 股折价越多，同样的分红对应的股息率越高，买点可能比 A 股先到。但要注意：港股通个人分红通常扣 20% 税，A 股持满一年免税，到手要自己折算；H 股还有汇率波动，两边的股息率口径也各按各自的规则算。</p></div>`;
 }
+/* ---------- 技术位置(参考):布林线、60 周期均线;只读,不参与档位、精选、提醒 ---------- */
+function techCard(d){
+  const t=d.tech; if(!t||!t.d) return "";
+  const P=v=>v==null?"–":(v>=0?"+":"")+(v*100).toFixed(1)+"%", D=t.d, W=t.w, M=t.m, items=[];
+  const add=(ok,txt)=>items.push(`<li class="${ok?"ok":""}"><i>${ok?"✓":"·"}</i><span>${txt}</span></li>`);
+  add(D.to_low!=null&&D.to_low<=.05, D.to_low<0?`日线跌破 BOLL 下轨（${P(D.to_low)}）`:`日线高于 BOLL 下轨 ${P(D.to_low)}${D.to_low<=.05?"，在下轨上方 5% 的临近区内":"，不在下轨上方 5% 的临近区内"}`);
+  const near=[["日",D],["周",W],["月",M]].filter(([,x])=>x&&x.to_ma60!=null&&Math.abs(x.to_ma60)<=.03).map(([n])=>`60 ${n}`);
+  add(near.length, near.length?`靠近${near.join("、")}均线（上下 3% 以内）`:`不靠近 60 日、60 周、60 月均线（日 ${P(D.to_ma60)}，周 ${P(W&&W.to_ma60)}，月 ${P(M&&M.to_ma60)}）`);
+  if(W) add(W.pos!=null&&W.pos<=.5, W.pos!=null&&W.pos<=.5?"周线在 BOLL 中轨以下":`周线在 BOLL 中轨上方 ${P(W.to_mid)}`);
+  if(M) add(M.to_mid!=null&&M.to_mid<=.06, M.to_mid<=.06?`月线距月 BOLL 中轨（20 月线）不超过 6%（${P(M.to_mid)}）`:`月线高于月 BOLL 中轨（20 月线）${P(M.to_mid)}，超过 6%`);
+  const sq=[["日",D],["周",W],["月",M]].filter(([,x])=>x&&x.squeeze).map(([n])=>n);
+  add(sq.length, sq.length?`${sq.join("、")}线 BOLL 带宽收窄（处在自身近期最窄的一档）`:"BOLL 带宽没有收窄");
+  const sum=D.to_low<0?"日线在下轨下方":`日线高于下轨 ${P(D.to_low)}`;
+  return fold(`<div class="card"><h2>技术位置（参考）</h2>
+    <ul class="techl">${items.join("")}</ul>
+    <p class="note">布林线（BOLL，20 周期、2 倍标准差）和 60 周期均线，只描述价格在近期区间里的位置，用含分红再投的价格计算。它们<b>不影响价格档位、精选和提醒</b>，也不是买卖建议；红利股以分红和估值为主，技术位置只作参考。</p></div>`,sum);
+}
 function healthCard(d){
   const h=d.health; if(!h) return "";
   const L=h.lights, G="var(--c1)",Y="var(--c1)",R="var(--bad)",A="var(--c1)";
@@ -1093,6 +1111,7 @@ function renderDetail(d){
   </div>
   ${ahCard(d)}
   ${healthCard(d)}
+  ${techCard(d)}
   <div class="grid g2">
     <div class="card"><h2>股价 vs 含分红再投 (10年，起点=100)</h2>
       ${lineChart([{name:"股价（送转调整）",color:"var(--c1)",data:d.monthly.map(m=>m[1])},{name:"含分红再投总回报",color:"var(--c2)",data:d.monthly.map(m=>m[2])}],labels)}
@@ -1989,7 +2008,7 @@ function renderSettings(){
     </div>
     <div class="form" style="margin-top:12px"><button class="btn" id="resetcfg">恢复默认</button></div>
     <p class="note">参考：2026 年 10 月中旬 10 年期国债活跃券约 1.64%~1.66%（财联社、Trading Economics）。该值不会自动更新，利率明显变动时请手动改。</p>
-    <p class="note"><b>初始值只供参考。</b>公司太多，没法每家都盯，每个人对不同公司的要求也不一样，有研究的可以自己改：这里改行业溢价，个别公司在「个股单独设定」里改。</p>
+    <p class="note"><b>初始值仅供参考。</b>行业溢价是通用的基准，难以覆盖每家公司的差异。如有自己的判断，可在此调整行业溢价，个别公司在「个股单独设定」中单独调整。</p>
     <p class="note">每行右边是「要求股息率」= 国债收益率 + 该行业溢价。买入价 = 每股分红 ÷ 要求股息率；溢价越高，要求越严，买入价越低。自身近 5 年历史只做 ⚠ 提示，不影响买入价。</p></div>
   <div class="card"><h2>个股单独设定</h2>
     <p class="note" style="margin:0 0 10px">给某只股票设一个自己的「要求股息率」，覆盖上面的国债+行业溢价。留空 = 用默认。已单独设定 <b id="ovcnt">${ovn()}</b> 只。</p>

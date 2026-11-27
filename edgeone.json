@@ -1,0 +1,22 @@
+{
+ "headers": [
+  {
+   "source": "/*",
+   "headers": [
+    {
+     "key": "Strict-Transport-Security",
+     "value": "max-age=31536000"
+    }
+   ]
+  },
+  {
+   "source": "/manifest.webmanifest",
+   "headers": [
+    {
+     "key": "Content-Type",
+     "value": "application/manifest+json"
+    }
+   ]
+  }
+ ]
+}
